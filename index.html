@@ -1,271 +1,210 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Клон Google Таблицы — визуал</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Владислав Геккель — визуал из Google Таблицы</title>
   <style>
-    :root{
-      --bg:#f6f7f9;
-      --card:#ffffff;
-      --accent:#1a73e8;
-      --grid:#e0e0e0;
-      --header-bg:#f1f3f4;
-      --text:#202124;
-      --muted:#5f6368;
-      --radius:8px;
-      --shadow: 0 6px 18px rgba(32,33,36,0.08);
-      font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
-    body{
-      margin:0;
-      background:linear-gradient(180deg,var(--bg),#fff 60%);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:28px;
+    body {
+      font-family: Inter, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f6f7;
+      color: #202124;
+      user-select: none;           /* 🚫 запрет выделения текста */
+      -webkit-user-select: none;
+      -ms-user-select: none;
     }
 
-    .container{
-      max-width:1100px;
-      margin:0 auto;
+    h1 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      font-weight: 600;
     }
 
-    header{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-bottom:18px;
-    }
-    header h1{
-      margin:0;
-      font-size:20px;
-      font-weight:600;
-    }
-    header p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
     }
 
-    .sheet-card{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:10px;
-      overflow:hidden;
-    }
-
-    /* table container with scroll */
-    .sheet-wrap{
-      width:100%;
-      overflow:auto;
-      max-height:72vh;
-      border-top-left-radius:8px;
-      border-top-right-radius:8px;
-      border:1px solid var(--grid);
-      background:linear-gradient(#fff,#fbfdff);
-    }
-
-    table.sheet{
-      border-collapse:collapse;
-      width:100%;
-      min-width:700px;
-      table-layout:auto;
-      font-size:13px;
-    }
-
-    /* header */
-    table.sheet thead th{
-      position:sticky;
-      top:0;
-      background:var(--header-bg);
-      text-align:left;
-      padding:10px 12px;
-      border-bottom:1px solid var(--grid);
-      font-weight:600;
-      color:var(--muted);
-      font-size:13px;
-      z-index:5;
-    }
-
-    /* cells */
-    table.sheet td{
-      padding:10px 12px;
-      border-bottom:1px solid #eef0f2;
-      border-right:1px solid #f3f4f6;
-      vertical-align:middle;
-      white-space:pre-wrap;
-    }
-    table.sheet tr:nth-child(even) td{
-      background: #ffffff;
-    }
-    table.sheet tr:nth-child(odd) td{
-      background: #fcfdff;
-    }
-
-    /* small footer area with controls */
-    .controls{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      padding:10px;
-      border-top:1px solid #eee;
-      background:#fff;
-      justify-content:space-between;
-    }
-    .controls .left, .controls .right { display:flex; gap:8px; align-items:center; }
     button {
-      background:var(--accent);
-      color:#fff;
-      border:none;
-      padding:8px 12px;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:600;
-      box-shadow:0 2px 6px rgba(26,115,232,0.15);
+      background: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    button.secondary{
-      background:#f1f3f4;
-      color:var(--text);
-      box-shadow:none;
-      border:1px solid #e2e2e2;
+    button:hover {
+      background: #1558b0;
     }
-    .status { color:var(--muted); font-size:13px; }
 
-    /* responsive adjustments */
-    @media (max-width:720px){
-      table.sheet { font-size:12px; min-width:500px; }
-      header h1 { font-size:16px; }
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .status {
+      color: #5f6368;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #e0e0e0;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f1f3f4;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background: #fafafa;
+    }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      user-select: none;
+    }
+
+    @media(max-width:600px) {
+      table, th, td { font-size: 12px; }
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Клон Google Таблицы</h1>
-        <p>Подключено к указанной Google Таблице — данные загружаются автоматически.</p>
-      </div>
-    </header>
+<body oncontextmenu="return false">
+  <h1>Таблица Владислава Геккеля</h1>
 
-    <div class="sheet-card">
-      <div id="sheetWrap" class="sheet-wrap">
-        <table id="sheetTable" class="sheet" aria-label="Данные из Google Sheets">
-          <thead id="thead"></thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
-
-      <div class="controls">
-        <div class="left">
-          <button id="refreshBtn">Обновить</button>
-          <button id="openSource" class="secondary">Открыть в Google Sheets</button>
-        </div>
-        <div class="right">
-          <div class="status" id="status">Статус: ожидаю загрузки…</div>
-        </div>
-      </div>
-    </div>
-
-    <p style="font-size:13px;color:var(--muted);margin-top:12px;">
-      Подсказка: если таблица не загружается, убедитесь, что доступ к ней открыт для просмотра по ссылке.
-    </p>
+  <div class="controls">
+    <button id="refreshBtn" onclick="loadSheet(true)">
+      <div class="spinner" id="spinner"></div>
+      🔄 Обновить данные
+    </button>
+    <div class="status" id="status">Данные не загружены</div>
   </div>
 
+  <table id="table">
+    <thead id="thead"></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <footer>
+    Источник данных: Google Таблица Владислава Геккеля
+  </footer>
+
   <script>
-    // === ВНИМАНИЕ ===
-    // Вставлен ID твоей таблицы из ссылки:
     const SHEET_ID = "1YGGuHtDIqNHK1TJgqlE3Rk2F6lJoymAj9jDDUUyVX7Q";
-    // По умолчанию мы запрашиваем первый лист. Можно добавить &sheet=ИмяЛиста к URL, если нужно.
     const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    const statusEl = document.getElementById('status');
-    const thead = document.getElementById('thead');
-    const tbody = document.getElementById('tbody');
-    const refreshBtn = document.getElementById('refreshBtn');
-    const openSourceBtn = document.getElementById('openSource');
+    const statusEl = document.getElementById("status");
+    const spinner = document.getElementById("spinner");
+    const thead = document.getElementById("thead");
+    const tbody = document.getElementById("tbody");
 
-    openSourceBtn.addEventListener('click', () => {
-      window.open(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`, '_blank');
-    });
+    async function loadSheet(manual = false) {
+      statusEl.textContent = manual ? "🔁 Обновляем данные..." : "⏳ Загружаем таблицу...";
+      spinner.style.display = "inline-block";
+      thead.innerHTML = "";
+      tbody.innerHTML = "";
 
-    refreshBtn.addEventListener('click', () => fetchAndRender(true));
-
-    async function fetchAndRender(userTriggered = false){
-      statusEl.textContent = userTriggered ? 'Обновление...' : 'Загрузка...';
       try {
-        const res = await fetch(GVIZ_URL, {cache: "no-store"});
-        const txt = await res.text();
+        const res = await fetch(GVIZ_URL + "&cacheBust=" + Date.now());
+        const text = await res.text();
 
-        // Ответ приходит как: /*O_o*/\ngoogle.visualization.Query.setResponse({...});
-        const jsonText = txt.replace(/^[^\\{]*/, '').replace(/;?\\s*$/, '');
-        const data = JSON.parse(jsonText);
-
-        // Проверка структуры
-        const table = data.table;
-        if(!table || !table.cols){
-          statusEl.textContent = 'Ошибка: не найдено содержимого таблицы. Проверьте доступность документа.';
-          return;
+        if (!text.includes("google.visualization")) {
+          throw new Error("Ответ Google не содержит данных. Проверь публикацию таблицы.");
         }
 
-        // Заголовки
-        const cols = table.cols; // массив колонок
-        const rows = table.rows || [];
+        const json = JSON.parse(text.substr(text.indexOf("{")));
+        const table = json.table;
 
-        renderHeader(cols);
-        renderBody(cols, rows);
+        if (!table || !table.cols) {
+          throw new Error("Формат данных не распознан.");
+        }
 
-        statusEl.textContent = `Загружено: ${rows.length} строк × ${cols.length} колонок. Последняя загрузка: ${new Date().toLocaleTimeString()}`;
+        renderTable(table);
+        const now = new Date().toLocaleTimeString("ru-RU", {hour: '2-digit', minute: '2-digit'});
+        statusEl.textContent = `✅ Обновлено в ${now} — ${table.rows.length} строк`;
       } catch (err) {
         console.error(err);
-        statusEl.textContent = 'Ошибка загрузки таблицы. Убедитесь, что таблица доступна для просмотра.';
+        statusEl.textContent = "❌ Не удалось загрузить данные. Проверь доступность таблицы.";
+      } finally {
+        spinner.style.display = "none";
       }
     }
 
-    function renderHeader(cols){
-      thead.innerHTML = '';
-      const tr = document.createElement('tr');
-      cols.forEach((c, i) => {
-        const th = document.createElement('th');
-        // если в Google Sheets указано имя столбца — берем его, иначе "Колонка N"
-        th.textContent = (c && c.label) ? c.label : `Колонка ${i+1}`;
-        tr.appendChild(th);
+    function renderTable(table) {
+      const headerRow = document.createElement("tr");
+      table.cols.forEach(col => {
+        const th = document.createElement("th");
+        th.textContent = col.label || "";
+        headerRow.appendChild(th);
       });
-      thead.appendChild(tr);
-    }
+      thead.appendChild(headerRow);
 
-    // Форматирование ячейки: используем formattedValue если есть, иначе value
-    function cellToHTML(cell){
-      if(!cell) return '';
-      const v = cell.f ?? (cell.v !== undefined && cell.v !== null ? String(cell.v) : '');
-      // v может уже содержать HTML (например, ссылки) — не экранируем намеренно, но ограничим риск
-      // Поскольку данные приходят из Google Sheets, риск XSS низок для публичного документа,
-      // но на продакшн нужно дополнительно фильтровать.
-      return v;
-    }
-
-    function renderBody(cols, rows){
-      tbody.innerHTML = '';
-      rows.forEach((r, ri) => {
-        const tr = document.createElement('tr');
-        // если row.c может быть короче cols — дополним пустыми
-        for(let ci = 0; ci < cols.length; ci++){
-          const td = document.createElement('td');
-          const cell = (r.c && r.c[ci]) ? r.c[ci] : null;
-          // вставляем HTML-safe-ish: allow basic markup
-          td.innerHTML = cellToHTML(cell);
+      table.rows.forEach(row => {
+        const tr = document.createElement("tr");
+        table.cols.forEach((_, i) => {
+          const cell = row.c[i];
+          const td = document.createElement("td");
+          td.textContent = cell ? (cell.f || cell.v || "") : "";
           tr.appendChild(td);
-        }
+        });
         tbody.appendChild(tr);
       });
     }
 
-    // Авозагрузка
-    fetchAndRender();
+    // 🔐 Блокировка клавиш копирования и исходного кода
+    document.addEventListener("keydown", (e) => {
+      if (
+        (e.ctrlKey && ["c", "s", "u", "p"].includes(e.key.toLowerCase())) ||
+        (e.metaKey && ["c", "s", "u", "p"].includes(e.key.toLowerCase())) ||
+        e.key === "F12"
+      ) {
+        e.preventDefault();
+        alert("Копирование и просмотр кода запрещены 🔒");
+      }
+    });
 
-    // (опционально) можно настроить автоматическое периодическое обновление:
-    // setInterval(fetchAndRender, 1000 * 60 * 2); // каждую 2 минуты
+    // Автозагрузка и автообновление
+    window.addEventListener("load", loadSheet);
+    setInterval(() => loadSheet(), 300000); // 5 минут
   </script>
 </body>
 </html>
