@@ -1,41 +1,57 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gekkel Vladislav Aleksandovich</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.2, maximum-scale=5.0" />
+  <title>Газета Владислава Геккеля</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
-      background: #ffffff;
+      height: 100%;
+      background: #f5f5f5;
+      overflow: hidden;
     }
 
     iframe {
       width: 100vw;
       height: 100vh;
       border: none;
-      display: block;
+      background: white;
       transform-origin: top left;
-      transform: scale(1);
+      transition: transform 0.2s ease;
     }
 
-    /* Масштаб адаптивный */
-    @media (max-width: 1200px) {
-      iframe { transform: scale(0.8); height: 125vh; }
-    }
-
-    @media (max-width: 800px) {
-      iframe { transform: scale(0.6); height: 160vh; }
-    }
-
-    @media (max-width: 500px) {
-      iframe { transform: scale(0.45); height: 220vh; }
+    /* Для мобильных устройств */
+    @media (max-width: 768px) {
+      iframe {
+        width: 100vw;
+        height: 100vh;
+      }
     }
   </style>
 </head>
 <body>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"></iframe>
+  <iframe id="sheetFrame"
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
+    allowfullscreen
+    loading="lazy">
+  </iframe>
+
+  <script>
+    function fitToScreen() {
+      const iframe = document.getElementById("sheetFrame");
+      const baseWidth = 1920; // ширина твоей таблицы (примерная)
+      const scale = window.innerWidth / baseWidth;
+
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.width = `${baseWidth}px`;
+      iframe.style.height = `${window.innerHeight / scale}px`;
+    }
+
+    window.addEventListener("load", fitToScreen);
+    window.addEventListener("resize", fitToScreen);
+    window.addEventListener("orientationchange", fitToScreen);
+  </script>
 </body>
 </html>
