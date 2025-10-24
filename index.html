@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=10, minimum-scale=0.01"
-    />
-    <title>Таблица Владислава Геккеля</title>
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background: #fff;
-        overflow: hidden;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-      }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=1350, initial-scale=1, minimum-scale=0.2, maximum-scale=5, user-scalable=yes">
+  <title>Таблица Владислава Геккеля</title>
 
-      .table-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        width: 100%;
-        height: 100vh;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-      }
+  <style>
+    body {
+      margin: 0;
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      overflow-x: auto;
+      zoom: 1;
+    }
 
+    iframe {
+      border: none;
+      width: 1350px;
+      height: 100vh;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Для мобильных — центрируем и даём горизонтальную прокрутку */
+    @media (max-width: 1350px) {
       iframe {
-        border: none;
-        width: 1000px; /* ширина твоей таблицы (можно подогнать, если нужно) */
-        height: 100vh;
+        width: 1350px;
+        max-width: none;
       }
-    </style>
-  </head>
+    }
+  </style>
+</head>
   <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div class="table-wrapper">
       <iframe
@@ -45,3 +40,4 @@
     </div>
   </body>
 </html>
+
