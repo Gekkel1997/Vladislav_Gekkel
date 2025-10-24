@@ -1,210 +1,119 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Владислав Геккель — визуал из Google Таблицы</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таблица Владислава Геккеля</title>
   <style>
     body {
-      font-family: Inter, Arial, sans-serif;
+      font-family: "Segoe UI", sans-serif;
+      background: #f7f9fb;
+      color: #222;
+      text-align: center;
       margin: 0;
-      padding: 20px;
-      background: #f5f6f7;
-      color: #202124;
-      user-select: none;           /* 🚫 запрет выделения текста */
-      -webkit-user-select: none;
-      -ms-user-select: none;
+      padding: 2rem;
     }
-
     h1 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      font-weight: 600;
+      margin-bottom: 1rem;
     }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    th {
+      background: #4285f4;
+      color: white;
+    }
+    #status {
+      margin-top: 20px;
+      color: #888;
+    }
     button {
-      background: #1a73e8;
+      background: #4285f4;
       color: white;
       border: none;
+      padding: 10px 20px;
       border-radius: 6px;
-      padding: 8px 14px;
-      font-size: 14px;
       cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 15px;
     }
     button:hover {
-      background: #1558b0;
-    }
-
-    .spinner {
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(255,255,255,0.4);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      display: none;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .status {
-      color: #5f6368;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    th, td {
-      border: 1px solid #e0e0e0;
-      padding: 8px 12px;
-      text-align: left;
-      font-size: 14px;
-    }
-
-    th {
-      background: #f1f3f4;
-      font-weight: 600;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    tr:nth-child(even) td {
-      background: #fafafa;
-    }
-
-    footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 13px;
-      color: #777;
-      user-select: none;
-    }
-
-    @media(max-width:600px) {
-      table, th, td { font-size: 12px; }
+      background: #3367d6;
     }
   </style>
 </head>
-<body oncontextmenu="return false">
+<body>
   <h1>Таблица Владислава Геккеля</h1>
+  <button id="refreshBtn">🔄 Обновить данные</button>
+  <div id="status">⏳ Загружаем таблицу...</div>
 
-  <div class="controls">
-    <button id="refreshBtn" onclick="loadSheet(true)">
-      <div class="spinner" id="spinner"></div>
-      🔄 Обновить данные
-    </button>
-    <div class="status" id="status">Данные не загружены</div>
-  </div>
-
-  <table id="table">
+  <table id="dataTable">
     <thead id="thead"></thead>
     <tbody id="tbody"></tbody>
   </table>
 
-  <footer>
+  <p style="margin-top: 20px; font-size: 14px; color: #777;">
     Источник данных: Google Таблица Владислава Геккеля
-  </footer>
+  </p>
 
   <script>
     const SHEET_ID = "1YGGuHtDIqNHK1TJgqlE3Rk2F6lJoymAj9jDDUUyVX7Q";
     const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
     const statusEl = document.getElementById("status");
-    const spinner = document.getElementById("spinner");
     const thead = document.getElementById("thead");
     const tbody = document.getElementById("tbody");
 
-    async function loadSheet(manual = false) {
-      statusEl.textContent = manual ? "🔁 Обновляем данные..." : "⏳ Загружаем таблицу...";
-      spinner.style.display = "inline-block";
-      thead.innerHTML = "";
-      tbody.innerHTML = "";
-
+    async function loadSheet() {
+      statusEl.textContent = "⏳ Загружаем таблицу...";
       try {
-        const res = await fetch(GVIZ_URL + "&cacheBust=" + Date.now());
-        const text = await res.text();
-
-        if (!text.includes("google.visualization")) {
-          throw new Error("Ответ Google не содержит данных. Проверь публикацию таблицы.");
-        }
-
-        const json = JSON.parse(text.substr(text.indexOf("{")));
+        const response = await fetch(GVIZ_URL);
+        const text = await response.text();
+        const json = JSON.parse(text.substr(47).slice(0, -2));
         const table = json.table;
 
-        if (!table || !table.cols) {
-          throw new Error("Формат данных не распознан.");
-        }
+        // Очистка старых данных
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
 
-        renderTable(table);
-        const now = new Date().toLocaleTimeString("ru-RU", {hour: '2-digit', minute: '2-digit'});
-        statusEl.textContent = `✅ Обновлено в ${now} — ${table.rows.length} строк`;
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = "❌ Не удалось загрузить данные. Проверь доступность таблицы.";
-      } finally {
-        spinner.style.display = "none";
-      }
-    }
-
-    function renderTable(table) {
-      const headerRow = document.createElement("tr");
-      table.cols.forEach(col => {
-        const th = document.createElement("th");
-        th.textContent = col.label || "";
-        headerRow.appendChild(th);
-      });
-      thead.appendChild(headerRow);
-
-      table.rows.forEach(row => {
-        const tr = document.createElement("tr");
-        table.cols.forEach((_, i) => {
-          const cell = row.c[i];
-          const td = document.createElement("td");
-          td.textContent = cell ? (cell.f || cell.v || "") : "";
-          tr.appendChild(td);
+        // Заголовки
+        const headerRow = document.createElement("tr");
+        table.cols.forEach(col => {
+          const th = document.createElement("th");
+          th.textContent = col.label;
+          headerRow.appendChild(th);
         });
-        tbody.appendChild(tr);
-      });
+        thead.appendChild(headerRow);
+
+        // Данные
+        table.rows.forEach(row => {
+          const tr = document.createElement("tr");
+          row.c.forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell?.v ?? "";
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+
+        statusEl.textContent = "✅ Данные успешно загружены";
+      } catch (error) {
+        console.error(error);
+        statusEl.textContent = "❌ Не удалось загрузить данные. Проверь доступность таблицы.";
+      }
     }
 
-    // 🔐 Блокировка клавиш копирования и исходного кода
-    document.addEventListener("keydown", (e) => {
-      if (
-        (e.ctrlKey && ["c", "s", "u", "p"].includes(e.key.toLowerCase())) ||
-        (e.metaKey && ["c", "s", "u", "p"].includes(e.key.toLowerCase())) ||
-        e.key === "F12"
-      ) {
-        e.preventDefault();
-        alert("Копирование и просмотр кода запрещены 🔒");
-      }
-    });
-
-    // Автозагрузка и автообновление
-    window.addEventListener("load", loadSheet);
-    setInterval(() => loadSheet(), 300000); // 5 минут
+    document.getElementById("refreshBtn").addEventListener("click", loadSheet);
+    loadSheet();
   </script>
 </body>
 </html>
