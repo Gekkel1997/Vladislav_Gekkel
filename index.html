@@ -2,9 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <!-- Разрешаем масштабирование -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.2, maximum-scale=5.0, user-scalable=yes">
-  
+  <!-- разрешаем масштабирование -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=5.0, user-scalable=yes">
   <title>Портфолио Владислава Геккеля</title>
 
   <style>
@@ -12,26 +11,44 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      width: 100%;
       background: #f5f5f5;
-      touch-action: pan-x pan-y; /* разрешаем зум и скролл */
+      overflow: hidden;
+      touch-action: pinch-zoom pan-x pan-y;
     }
 
     .iframe-wrapper {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f5f5;
     }
 
     iframe {
       border: none;
       width: 100%;
       height: 100%;
-      transform-origin: top left;
-      transition: transform 0.2s ease-in-out;
+      background: white;
+    }
+
+    @media (max-width: 768px) {
+      iframe {
+        width: 100vw;
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 769px) {
+      iframe {
+        width: 90vw;
+        height: 90vh;
+      }
     }
   </style>
 </head>
@@ -39,23 +56,10 @@
   <div class="iframe-wrapper">
     <iframe
       id="sheet"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
+      allowfullscreen
+      loading="lazy">
     </iframe>
   </div>
-
-  <script>
-    function fitSheetToScreen() {
-      const iframe = document.getElementById('sheet');
-      const baseWidth = 1920; // ширина Google Таблицы
-      const scale = window.innerWidth / baseWidth;
-      iframe.style.transform = `scale(${scale})`;
-      iframe.style.width = `${baseWidth}px`;
-      iframe.style.height = `${window.innerHeight / scale}px`;
-    }
-
-    window.addEventListener('load', fitSheetToScreen);
-    window.addEventListener('resize', fitSheetToScreen);
-    window.addEventListener('orientationchange', fitSheetToScreen);
-  </script>
 </body>
 </html>
