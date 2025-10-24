@@ -2,44 +2,38 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
   <meta name="viewport"
-        content="width=1150, initial-scale=1, minimum-scale=0.1, maximum-scale=8, user-scalable=yes">
-
+        content="width=device-width, initial-scale=1, minimum-scale=0.1, maximum-scale=8, user-scalable=yes">
   <title>Портфолио Владислава Геккеля</title>
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
-      font-family: Arial, sans-serif;
-      overflow-x: auto;
-      overflow-y: auto;
       height: 100%;
+      background: #f5f5f5;
+      overflow: auto;
     }
 
     iframe {
-      display: block;
-      width: 1150px;
-      height: 160vh;
-      margin: 0 auto;
+      width: 100vw;           /* ширина на весь экран устройства */
+      height: 180vh;          /* увеличенная высота */
       border: none;
+      display: block;
       background: white;
+      box-shadow: 0 0 25px rgba(0,0,0,0.15);
     }
 
-    @media (max-width: 1150px) {
+    @media (max-width: 768px) {
       iframe {
-        width: 1150px;
-        height: 170vh;
+        height: 250vh;        /* больше высоты для телефона */
       }
     }
   </style>
 </head>
 
 <body>
-  <iframe 
+  <iframe
     src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml"
     allowfullscreen>
   </iframe>
