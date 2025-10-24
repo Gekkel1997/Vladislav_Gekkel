@@ -32,7 +32,7 @@
       background: white;
       transform-origin: top left;
       transition: transform 0.3s ease;
-      width: 1800px; /* 👈 немного больше для iPhone */
+      width: 2000px; /* 👈 базовая ширина таблицы */
       height: 100vh;
     }
   </style>
@@ -50,16 +50,19 @@
   <script>
     function scaleToFit() {
       const iframe = document.getElementById('sheet');
-      const baseWidth = 1800; // ширина таблицы
+      const baseWidth = 2000; // ширина таблицы
       const screenWidth = window.innerWidth;
-      const scale = screenWidth / baseWidth;
 
-      // Safari фикс: иногда window.innerWidth меньше нужного
-      const safariFix = navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
-      const realScale = safariFix ? (screenWidth / baseWidth) * 1.12 : scale;
+      // Рассчитываем масштаб
+      let scale = screenWidth / baseWidth;
 
-      iframe.style.transform = `scale(${realScale})`;
-      iframe.style.height = `${window.innerHeight / realScale}px`;
+      // Safari фикс (делаем чуть меньше, чтобы больше влезло)
+      if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
+        scale *= 0.9;
+      }
+
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.height = `${window.innerHeight / scale}px`;
     }
 
     window.addEventListener('load', scaleToFit);
