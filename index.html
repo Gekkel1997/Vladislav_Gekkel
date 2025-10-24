@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Портфолио Владислава Геккеля</title>
-
+  <meta charset="UTF-8" />
+  <meta 
+    name="viewport" 
+    content="width=device-width, initial-scale=1.0, minimum-scale=0.3, maximum-scale=3.0, user-scalable=yes" 
+  />
+  <title>Gekkel Vladislav Aleksandovich</title>
   <style>
     html, body {
       margin: 0;
@@ -32,8 +34,32 @@
       background: white;
       transform-origin: top left;
       transition: transform 0.3s ease;
-      width: 2000px; /* 👈 базовая ширина таблицы */
-      height: 100vh;
+      width: 2400px; /* ширина листа Google Sheets */
+      height: 1500px; /* можно увеличить, если страница длиннее */
+    }
+
+    /* маленькая кнопка для ручного масштабирования */
+    .zoom-controls {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+    }
+
+    .zoom-controls button {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .zoom-controls button:active {
+      background: #eee;
     }
   </style>
 </head>
@@ -43,31 +69,38 @@
       id="sheet"
       src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
       allowfullscreen
-      loading="lazy">
-    </iframe>
+      loading="lazy"
+    ></iframe>
+  </div>
+
+  <!-- кнопки + и - -->
+  <div class="zoom-controls">
+    <button onclick="changeZoom(-0.1)">−</button>
+    <button onclick="changeZoom(0.1)">+</button>
   </div>
 
   <script>
-    function scaleToFit() {
+    let baseWidth = 2400;
+    let scale = 0.45; // соответствует ~50% в Google Sheets и 90% в браузере
+
+    function applyScale() {
       const iframe = document.getElementById('sheet');
-      const baseWidth = 2000; // ширина таблицы
       const screenWidth = window.innerWidth;
-
-      // Рассчитываем масштаб
-      let scale = screenWidth / baseWidth;
-
-      // Safari фикс (делаем чуть меньше, чтобы больше влезло)
-      if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
-        scale *= 0.9;
-      }
-
-      iframe.style.transform = `scale(${scale})`;
-      iframe.style.height = `${window.innerHeight / scale}px`;
+      const autoScale = screenWidth / baseWidth;
+      const finalScale = Math.min(scale, autoScale * 1.2);
+      
+      iframe.style.transform = `scale(${finalScale})`;
+      iframe.style.height = `${window.innerHeight / finalScale}px`;
     }
 
-    window.addEventListener('load', scaleToFit);
-    window.addEventListener('resize', scaleToFit);
-    window.addEventListener('orientationchange', scaleToFit);
+    function changeZoom(delta) {
+      scale = Math.min(Math.max(scale + delta, 0.2), 2.5);
+      applyScale();
+    }
+
+    window.addEventListener('load', applyScale);
+    window.addEventListener('resize', applyScale);
+    window.addEventListener('orientationchange', applyScale);
   </script>
 </body>
 </html>
