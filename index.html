@@ -3,98 +3,84 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Визуал из Google Sheets — подгонка по ширине</title>
+  <title>Портфолио Владислава Геккеля</title>
+
   <style>
-    html,body {
-      height:100%;
-      margin:0;
-      padding:0;
-      background:#f5f5f5;
-      overflow:hidden;
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      overflow-x: hidden;
     }
 
-    .wrap {
-      position:relative;
-      width:100vw;
-      height:100vh;
-      overflow:hidden;
-      display:block;
+    /* Контейнер таблицы */
+    .table-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #fff;
     }
 
-    iframe {
-      position:absolute;
-      top:0;
-      left:0;
-      border:0;
-      transform-origin: top left;
-      /* width задаётся скриптом (baseWidth) */
-      background:white;
+    /* Адаптивный iframe */
+    iframe.responsive-table {
+      border: 0;
       box-shadow: 0 0 12px rgba(0,0,0,0.08);
+      width: 100%;
+      height: 100%;
+      transform-origin: top left;
+      background: white;
+    }
+
+    /* 📱 Мобильная версия */
+    @media (max-width: 768px) {
+      iframe.responsive-table {
+        width: 100vw;
+        height: 100vh;
+        transform: scale(1);
+      }
+    }
+
+    /* 💻 Десктопная версия */
+    @media (min-width: 769px) {
+      iframe.responsive-table {
+        width: 90%;
+        height: 90vh;
+        transform: scale(1);
+      }
     }
   </style>
 </head>
+
 <body>
- <div class="table-container">
-  <iframe
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6.../pubhtml?widget=true&amp;headers=false"
-    class="responsive-table"
-    allowfullscreen
-  ></iframe>
-</div>
+  <div class="table-container">
+    <iframe
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
+      class="responsive-table"
+      allowfullscreen
+    ></iframe>
+  </div>
 
-<style>
-  /* Контейнер для центрирования и адаптива */
-  .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    overflow-x: hidden;
-    padding: 0;
-    margin: 0 auto;
-  }
+  <script>
+    function adjustTableScale() {
+      const iframe = document.querySelector('.responsive-table');
+      if (!iframe) return;
 
-  /* Таблица занимает всю ширину контейнера */
-  .responsive-table {
-    border: none;
-    width: 100%;
-    height: 80vh; /* можно подрегулировать */
-    transform-origin: top left;
-  }
+      // Проверяем тип устройства
+      const isMobile = window.innerWidth <= 768;
 
-  /* --- 📱 Адаптация под мобильные --- */
-  @media (max-width: 768px) {
-    .responsive-table {
-      width: 100vw;
-      height: 100vh;
-      transform: scale(1); /* никакого сжатия */
+      // Масштаб 1, т.к. Google Sheets сам адаптируется по ширине
+      iframe.style.transform = 'scale(1)';
+
+      // Убираем горизонтальный скролл
+      document.body.style.overflowX = 'hidden';
     }
-  }
 
-  /* --- 💻 Адаптация под компьютеры --- */
-  @media (min-width: 769px) {
-    .responsive-table {
-      width: 90%;
-      height: 80vh;
-    }
-  }
-</style>
-
-<script>
-  // Автоматическая подгонка масштаба Google Sheets
-  function adjustTableScale() {
-    const iframe = document.querySelector('.responsive-table');
-    if (!iframe) return;
-
-    const isMobile = window.innerWidth <= 768;
-    iframe.style.transform = isMobile ? 'scale(1)' : 'scale(1)';
-
-    // Убираем горизонтальный скролл
-    document.body.style.overflowX = 'hidden';
-  }
-
-  window.addEventListener('resize', adjustTableScale);
-  window.addEventListener('load', adjustTableScale);
-</script>
+    window.addEventListener('resize', adjustTableScale);
+    window.addEventListener('load', adjustTableScale);
+  </script>
 </body>
 </html>
