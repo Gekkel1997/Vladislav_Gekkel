@@ -2,41 +2,56 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <!-- Разрешаем пользователю масштабировать и отдалять -->
-  <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.25, maximum-scale=5.0, user-scalable=yes">
-  <title>Портфолио</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Портфолио Владислава Геккеля</title>
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #f0f0f0;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .iframe-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       overflow: hidden;
     }
+
     iframe {
+      border: none;
       width: 100%;
       height: 100%;
-      border: none;
-      display: block;
       transform-origin: top left;
-      /* делаем авто-масштаб, чтобы таблица полностью помещалась */
-      transform: scale(0.9);
-    }
-    @media (max-width: 768px) {
-      iframe {
-        transform: scale(0.6);
-      }
-    }
-    @media (max-width: 480px) {
-      iframe {
-        transform: scale(0.45);
-      }
     }
   </style>
 </head>
 <body>
-  <iframe
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
-  </iframe>
+  <div class="iframe-wrapper">
+    <iframe
+      id="sheet"
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
+    </iframe>
+  </div>
+
+  <script>
+    function fitSheetToScreen() {
+      const iframe = document.getElementById('sheet');
+      const baseWidth = 1920; // реальная ширина таблицы
+      const scale = window.innerWidth / baseWidth;
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.width = `${baseWidth}px`;
+      iframe.style.height = `${window.innerHeight / scale}px`;
+    }
+
+    window.addEventListener('load', fitSheetToScreen);
+    window.addEventListener('resize', fitSheetToScreen);
+    window.addEventListener('orientationchange', fitSheetToScreen);
+  </script>
 </body>
 </html>
