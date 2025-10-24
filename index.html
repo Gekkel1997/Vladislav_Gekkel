@@ -2,27 +2,40 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <!-- Разрешаем пользователю масштабировать и отдалять -->
+  <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.25, maximum-scale=5.0, user-scalable=yes">
   <title>Портфолио</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #f5f5f5;
-      overflow: auto;
+      background-color: #f0f0f0;
+      overflow: hidden;
     }
     iframe {
-      width: 100vw;      /* ширина равна ширине экрана */
-      height: 100vh;     /* высота равна высоте окна */
+      width: 100%;
+      height: 100%;
       border: none;
       display: block;
       transform-origin: top left;
+      /* делаем авто-масштаб, чтобы таблица полностью помещалась */
+      transform: scale(0.9);
+    }
+    @media (max-width: 768px) {
+      iframe {
+        transform: scale(0.6);
+      }
+    }
+    @media (max-width: 480px) {
+      iframe {
+        transform: scale(0.45);
+      }
     }
   </style>
 </head>
 <body>
-  <iframe 
+  <iframe
     src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
   </iframe>
 </body>
