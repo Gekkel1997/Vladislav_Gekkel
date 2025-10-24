@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes">
   <title>Портфолио Владислава Геккеля</title>
 
   <style>
@@ -42,8 +43,10 @@
   <script>
     function fitSheetToScreen() {
       const iframe = document.getElementById('sheet');
-      const baseWidth = 1920; // реальная ширина таблицы
-      const scale = window.innerWidth / baseWidth;
+      const baseWidth = 1920; // ширина таблицы Google Sheets в пикселях
+      // Сильно уменьшаем масштаб, чтобы таблица целиком влезала
+      let scale = window.innerWidth / baseWidth * 0.55; 
+
       iframe.style.transform = `scale(${scale})`;
       iframe.style.width = `${baseWidth}px`;
       iframe.style.height = `${window.innerHeight / scale}px`;
