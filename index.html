@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Портфолио Владислава Геккеля</title>
+  <title>Gekkel Vladislav Aleksandovich : привет</title>
 
   <style>
     html, body {
@@ -14,7 +14,6 @@
       overflow-x: hidden;
     }
 
-    /* Контейнер таблицы */
     .table-container {
       display: flex;
       justify-content: center;
@@ -25,31 +24,29 @@
       background: #fff;
     }
 
-    /* Адаптивный iframe */
     iframe.responsive-table {
       border: 0;
-      box-shadow: 0 0 12px rgba(0,0,0,0.08);
+      background: white;
+      transform-origin: top left;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
       width: 100%;
       height: 100%;
-      transform-origin: top left;
-      background: white;
+      transition: transform 0.3s ease;
     }
 
-    /* 📱 Мобильная версия */
+    /* 📱 Телефоны */
     @media (max-width: 768px) {
       iframe.responsive-table {
         width: 100vw;
         height: 100vh;
-        transform: scale(1);
       }
     }
 
-    /* 💻 Десктопная версия */
+    /* 💻 Компьютеры */
     @media (min-width: 769px) {
       iframe.responsive-table {
         width: 90%;
         height: 90vh;
-        transform: scale(1);
       }
     }
   </style>
@@ -58,6 +55,7 @@
 <body>
   <div class="table-container">
     <iframe
+      id="sheetFrame"
       src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
       class="responsive-table"
       allowfullscreen
@@ -65,22 +63,24 @@
   </div>
 
   <script>
-    function adjustTableScale() {
-      const iframe = document.querySelector('.responsive-table');
+    // 🔄 Подгоняет Google Sheets под ширину экрана
+    function fitGoogleSheet() {
+      const iframe = document.getElementById('sheetFrame');
       if (!iframe) return;
 
-      // Проверяем тип устройства
-      const isMobile = window.innerWidth <= 768;
+      const containerWidth = document.body.clientWidth;
+      const baseWidth = 1600; // примерная ширина оригинальной таблицы в Google Sheets
+      const scale = containerWidth / baseWidth;
 
-      // Масштаб 1, т.к. Google Sheets сам адаптируется по ширине
-      iframe.style.transform = 'scale(1)';
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.width = `${baseWidth}px`;
+      iframe.style.height = `${window.innerHeight / scale}px`;
 
-      // Убираем горизонтальный скролл
       document.body.style.overflowX = 'hidden';
     }
 
-    window.addEventListener('resize', adjustTableScale);
-    window.addEventListener('load', adjustTableScale);
+    window.addEventListener('load', fitGoogleSheet);
+    window.addEventListener('resize', fitGoogleSheet);
   </script>
 </body>
 </html>
