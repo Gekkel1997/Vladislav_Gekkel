@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=10, minimum-scale=0.01"
     />
     <title>Таблица Владислава Геккеля</title>
     <style>
@@ -12,7 +12,7 @@
         margin: 0;
         padding: 0;
         height: 100%;
-        background: #000; /* фон страницы */
+        background: #fff;
         overflow: hidden;
         user-select: none;
         -webkit-user-select: none;
@@ -21,6 +21,9 @@
       }
 
       .table-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
         width: 100%;
         height: 100vh;
         overflow: auto;
@@ -28,24 +31,15 @@
       }
 
       iframe {
-        width: 1000px; /* ширина твоей таблицы, можно потом скорректировать */
-        height: 100vh;
         border: none;
-        transform-origin: top left;
-      }
-
-      /* адаптив для мобильных устройств */
-      @media (max-width: 1000px) {
-        iframe {
-          transform: scale(calc(100vw / 1000));
-          height: calc(100vh / (100vw / 1000));
-        }
+        width: 1000px; /* ширина твоей таблицы (можно подогнать, если нужно) */
+        height: 100vh;
       }
     </style>
   </head>
   <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div class="table-wrapper">
-      <iframe 
+      <iframe
         src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
       </iframe>
     </div>
