@@ -8,64 +8,34 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: #fff;
       overflow-x: hidden;
-      font-family: sans-serif;
-    }
-
-    .sheet-wrapper {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: start;
-      overflow-y: auto;
-      background: #fff;
-    }
-
-    .sheet-container {
-      position: relative;
-      width: 90vw;
-      max-width: 1400px;
-      transform-origin: top center;
-      transition: transform 0.3s ease;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background: #ffffff;
     }
 
     iframe {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       border: none;
+      display: block;
+      transform-origin: top left;
+      transform: scale(1);
+    }
+
+    /* Масштаб адаптивный */
+    @media (max-width: 1200px) {
+      iframe { transform: scale(0.8); height: 125vh; }
+    }
+
+    @media (max-width: 800px) {
+      iframe { transform: scale(0.6); height: 160vh; }
+    }
+
+    @media (max-width: 500px) {
+      iframe { transform: scale(0.45); height: 220vh; }
     }
   </style>
 </head>
 <body>
-
-  <div class="sheet-wrapper">
-    <div class="sheet-container" id="sheetContainer">
-      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"></iframe>
-    </div>
-  </div>
-
-  <script>
-    // Масштаб под экран
-    function adjustScale() {
-      const container = document.getElementById('sheetContainer');
-      const screenWidth = window.innerWidth;
-
-      let scale = 1;
-
-      if (screenWidth < 500) scale = 0.5;
-      else if (screenWidth < 900) scale = 0.7;
-      else if (screenWidth < 1300) scale = 0.85;
-      else scale = 1;
-
-      container.style.transform = `scale(${scale})`;
-    }
-
-    window.addEventListener('resize', adjustScale);
-    window.addEventListener('load', adjustScale);
-  </script>
-
+  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"></iframe>
 </body>
 </html>
