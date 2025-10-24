@@ -2,8 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <!-- ✅ Разрешаем масштабирование, но с корректным масштабом -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.3, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Портфолио Владислава Геккеля</title>
 
   <style>
@@ -12,29 +11,28 @@
       padding: 0;
       height: 100%;
       width: 100%;
-      background: #f5f5f5;
+      background: #f2f2f2;
       overflow: hidden;
-      touch-action: pinch-zoom pan-x pan-y;
       -webkit-overflow-scrolling: touch;
     }
 
     .iframe-wrapper {
       position: relative;
       width: 100%;
-      height: 100%;
-      overflow: auto;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      background: #f5f5f5;
+      background: #f2f2f2;
+      overflow: auto;
     }
 
     iframe {
       border: none;
       background: white;
       transform-origin: top left;
-      transition: transform 0.2s ease;
-      width: 1920px; /* базовая ширина таблицы */
+      transition: transform 0.3s ease;
+      width: 1800px; /* 👈 немного больше для iPhone */
       height: 100vh;
     }
   </style>
@@ -52,11 +50,16 @@
   <script>
     function scaleToFit() {
       const iframe = document.getElementById('sheet');
-      const baseWidth = 1920; // ширина Google Таблицы
+      const baseWidth = 1800; // ширина таблицы
       const screenWidth = window.innerWidth;
       const scale = screenWidth / baseWidth;
-      iframe.style.transform = `scale(${scale})`;
-      iframe.style.height = `${window.innerHeight / scale}px`;
+
+      // Safari фикс: иногда window.innerWidth меньше нужного
+      const safariFix = navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
+      const realScale = safariFix ? (screenWidth / baseWidth) * 1.12 : scale;
+
+      iframe.style.transform = `scale(${realScale})`;
+      iframe.style.height = `${window.innerHeight / realScale}px`;
     }
 
     window.addEventListener('load', scaleToFit);
