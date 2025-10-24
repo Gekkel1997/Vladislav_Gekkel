@@ -2,88 +2,57 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Gekkel Vladislav Aleksandovich : привет</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Gekkel Vladislav Aleksandovich</title>
   <style>
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
+      height: 100%;
+      background: #f2f2f2;
     }
 
     .table-container {
+      width: 100vw;
+      height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      width: 100%;
-      height: 100vh;
-      overflow-x: auto;
-      overflow-y: hidden;
-      background: #f5f5f5;
+      align-items: center;
+      overflow: hidden;
     }
 
-    iframe.responsive-table {
+    iframe {
       border: none;
-      background: white;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
-      transform-origin: top left;
-      transition: transform 0.3s ease;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
     }
 
-    /* 📱 Мобильные устройства: без масштабирования */
+    /* --- 📱 Адаптация под мобильные устройства --- */
     @media (max-width: 768px) {
-      .responsive-table {
-        width: 1200px; /* фиксированная ширина, можно увеличить */
+      iframe {
+        width: 100vw;
         height: 100vh;
-        transform: none;
       }
     }
 
-    /* 💻 Десктопы: адаптивный масштаб */
+    /* --- 💻 Адаптация под компьютеры --- */
     @media (min-width: 769px) {
-      .responsive-table {
-        width: 1600px;
+      iframe {
+        width: 90vw;
         height: 90vh;
       }
     }
   </style>
 </head>
-
 <body>
   <div class="table-container">
     <iframe
-      id="sheetFrame"
       src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
-      class="responsive-table"
       allowfullscreen
+      loading="lazy"
     ></iframe>
   </div>
-
-  <script>
-    // 💻 Масштабируем только на компьютерах
-    function fitGoogleSheet() {
-      const iframe = document.getElementById('sheetFrame');
-      if (!iframe) return;
-
-      const isMobile = window.innerWidth <= 768;
-      if (isMobile) {
-        iframe.style.transform = 'none';
-        return;
-      }
-
-      const containerWidth = document.body.clientWidth;
-      const baseWidth = 1600; // ширина таблицы в пикселях
-      const scale = containerWidth / baseWidth;
-
-      iframe.style.transform = `scale(${scale})`;
-      iframe.style.width = `${baseWidth}px`;
-      iframe.style.height = `${window.innerHeight / scale}px`;
-    }
-
-    window.addEventListener('load', fitGoogleSheet);
-    window.addEventListener('resize', fitGoogleSheet);
-  </script>
 </body>
 </html>
