@@ -1,57 +1,24 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.2, maximum-scale=5.0" />
-  <title>Газета Владислава Геккеля</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Газета</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #f5f5f5;
-      overflow: hidden;
+      background: #f2f2f2;
     }
-
     iframe {
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       border: none;
-      background: white;
-      transform-origin: top left;
-      transition: transform 0.2s ease;
-    }
-
-    /* Для мобильных устройств */
-    @media (max-width: 768px) {
-      iframe {
-        width: 100vw;
-        height: 100vh;
-      }
     }
   </style>
 </head>
 <body>
-  <iframe id="sheetFrame"
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
-    allowfullscreen
-    loading="lazy">
-  </iframe>
-
-  <script>
-    function fitToScreen() {
-      const iframe = document.getElementById("sheetFrame");
-      const baseWidth = 1920; // ширина твоей таблицы (примерная)
-      const scale = window.innerWidth / baseWidth;
-
-      iframe.style.transform = `scale(${scale})`;
-      iframe.style.width = `${baseWidth}px`;
-      iframe.style.height = `${window.innerHeight / scale}px`;
-    }
-
-    window.addEventListener("load", fitToScreen);
-    window.addEventListener("resize", fitToScreen);
-    window.addEventListener("orientationchange", fitToScreen);
-  </script>
+  <iframe src="https://script.google.com/macros/s/AKfycbwSToCRmb3lsMMLzKXVy69sImN4TJ9bdOLhaS1bkUCbXeCQCpwavxTw3G6xa-MOjYD47w/exec" allowfullscreen></iframe>
 </body>
 </html>
