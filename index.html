@@ -30,22 +30,20 @@
   </iframe>
 
   <script>
-    function adjustIframe() {
-      const iframe = document.getElementById('sheet');
-      const baseWidth = 1920; // оригинальная ширина таблицы
-      const scale = window.innerWidth / baseWidth;
-      
-      iframe.style.transform = `scale(${scale})`;
-      iframe.style.width = `${baseWidth}px`;
-      iframe.style.height = `${window.innerHeight / scale}px`;
+  function fitSheetToScreen() {
+    const iframe = document.getElementById('sheet');
+    const baseWidth = 1920; // ширина исходной таблицы
+    const scale = (window.innerWidth / baseWidth) * 0.85; // уменьшаем масштаб примерно на 15%
+    iframe.style.transform = `scale(${scale})`;
+    iframe.style.width = `${baseWidth}px`;
+    iframe.style.height = `${window.innerHeight / scale}px`;
+  }
 
-      // Центрируем таблицу горизонтально
-      iframe.style.transformOrigin = 'top left';
-    }
+  window.addEventListener('load', fitSheetToScreen);
+  window.addEventListener('resize', fitSheetToScreen);
+  window.addEventListener('orientationchange', fitSheetToScreen);
+</script>
 
-    window.addEventListener('load', adjustIframe);
-    window.addEventListener('resize', adjustIframe);
-    window.addEventListener('orientationchange', adjustIframe);
-  </script>
 </body>
 </html>
+
