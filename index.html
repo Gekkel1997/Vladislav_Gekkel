@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
+<head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=1350, initial-scale=1, minimum-scale=0.2, maximum-scale=5, user-scalable=yes">
-  <title>Таблица Владислава Геккеля</title>
+
+  <!-- Масштаб и адаптация под Google Таблицу -->
+  <meta name="viewport"
+        content="width=1150, initial-scale=1, minimum-scale=0.1, maximum-scale=8, user-scalable=yes">
+
+  <title>Портфолио Владислава Геккеля</title>
 
   <style>
-    body {
+    html, body {
       margin: 0;
-      background-color: #f9f9f9;
+      padding: 0;
+      background: #f5f5f5;
       font-family: Arial, sans-serif;
       overflow-x: auto;
-      zoom: 1;
+      overflow-y: auto;
+      height: 100%;
     }
 
     iframe {
-      border: none;
-      width: 1350px;
-      height: 100vh;
       display: block;
+      width: 1150px; /* ширина под твою таблицу */
+      height: 160vh; /* увеличенная длина */
       margin: 0 auto;
+      border: none;
+      background: white;
     }
 
-    /* Для мобильных — центрируем и даём горизонтальную прокрутку */
-    @media (max-width: 1350px) {
+    /* Для мобильных — всё сохраняется в масштабе */
+    @media (max-width: 1150px) {
       iframe {
-        width: 1350px;
-        max-width: none;
+        width: 1150px;
+        height: 170vh;
       }
     }
   </style>
 </head>
-  <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-    <div class="table-wrapper">
-      <iframe
-        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
-      </iframe>
-    </div>
-  </body>
-</html>
 
+<body>
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/1YGGuHtDIqNHK1TJggIE3Rk2F6IJoymAj9jDDUUyVvX7Q/preview" 
+    allowfullscreen>
+  </i
