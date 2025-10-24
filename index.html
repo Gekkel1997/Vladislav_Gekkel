@@ -1,106 +1,55 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta 
-    name="viewport" 
-    content="width=device-width, initial-scale=1.0, minimum-scale=0.3, maximum-scale=3.0, user-scalable=yes" 
-  />
-  <title>Gekkel Vladislav Aleksandovich</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Gekkel Portfolio</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      width: 100%;
-      background: #f2f2f2;
-      overflow: hidden;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .iframe-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100vh;
+      background-color: #f3f3f3;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      background: #f2f2f2;
-      overflow: auto;
+      height: 100%;
+      min-height: 100vh;
+      overflow-x: auto;
+      overflow-y: auto;
     }
 
     iframe {
       border: none;
+      width: 100%;
+      max-width: 1800px; /* примерно как твоя таблица при 50% */
+      height: 100vh;
+      transform-origin: top center;
       background: white;
-      transform-origin: top left;
-      transition: transform 0.3s ease;
-      width: 2400px; /* ширина листа Google Sheets */
-      height: 1500px; /* можно увеличить, если страница длиннее */
     }
 
-    /* маленькая кнопка для ручного масштабирования */
-    .zoom-controls {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 10;
-      display: flex;
-      gap: 8px;
+    @media (max-width: 1024px) {
+      iframe {
+        max-width: 1200px;
+      }
     }
 
-    .zoom-controls button {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 6px 10px;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    @media (max-width: 768px) {
+      iframe {
+        max-width: 900px;
+      }
     }
 
-    .zoom-controls button:active {
-      background: #eee;
+    @media (max-width: 480px) {
+      iframe {
+        max-width: 700px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="iframe-wrapper">
-    <iframe
-      id="sheet"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
-      allowfullscreen
-      loading="lazy"
-    ></iframe>
-  </div>
-
-  <!-- кнопки + и - -->
-  <div class="zoom-controls">
-    <button onclick="changeZoom(-0.1)">−</button>
-    <button onclick="changeZoom(0.1)">+</button>
-  </div>
-
-  <script>
-    let baseWidth = 2400;
-    let scale = 0.45; // соответствует ~50% в Google Sheets и 90% в браузере
-
-    function applyScale() {
-      const iframe = document.getElementById('sheet');
-      const screenWidth = window.innerWidth;
-      const autoScale = screenWidth / baseWidth;
-      const finalScale = Math.min(scale, autoScale * 1.2);
-      
-      iframe.style.transform = `scale(${finalScale})`;
-      iframe.style.height = `${window.innerHeight / finalScale}px`;
-    }
-
-    function changeZoom(delta) {
-      scale = Math.min(Math.max(scale + delta, 0.2), 2.5);
-      applyScale();
-    }
-
-    window.addEventListener('load', applyScale);
-    window.addEventListener('resize', applyScale);
-    window.addEventListener('orientationchange', applyScale);
-  </script>
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
+  </iframe>
 </body>
 </html>
