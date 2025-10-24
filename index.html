@@ -1,92 +1,62 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Визуал из Google Sheets — подгонка по ширине</title>
-  <style>
-    html,body {
-      height:100%;
-      margin:0;
-      padding:0;
-      background:#f5f5f5;
-      overflow:hidden;
+<div class="table-container">
+  <iframe
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6.../pubhtml?widget=true&amp;headers=false"
+    class="responsive-table"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<style>
+  /* Контейнер для центрирования и адаптива */
+  .table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  /* Таблица занимает всю ширину контейнера */
+  .responsive-table {
+    border: none;
+    width: 100%;
+    height: 80vh; /* можно подрегулировать */
+    transform-origin: top left;
+  }
+
+  /* --- 📱 Адаптация под мобильные --- */
+  @media (max-width: 768px) {
+    .responsive-table {
+      width: 100vw;
+      height: 100vh;
+      transform: scale(1); /* никакого сжатия */
     }
+  }
 
-    .wrap {
-      position:relative;
-      width:100vw;
-      height:100vh;
-      overflow:hidden;
-      display:block;
+  /* --- 💻 Адаптация под компьютеры --- */
+  @media (min-width: 769px) {
+    .responsive-table {
+      width: 90%;
+      height: 80vh;
     }
+  }
+</style>
 
-    iframe {
-      position:absolute;
-      top:0;
-      left:0;
-      border:0;
-      transform-origin: top left;
-      /* width задаётся скриптом (baseWidth) */
-      background:white;
-      box-shadow: 0 0 12px rgba(0,0,0,0.08);
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <iframe id="sheet"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&headers=false"
-      allowfullscreen
-    ></iframe>
-  </div>
+<script>
+  // Автоматическая подгонка масштаба Google Sheets
+  function adjustTableScale() {
+    const iframe = document.querySelector('.responsive-table');
+    if (!iframe) return;
 
-  <script>
-    (function(){
-      const iframe = document.getElementById('sheet');
+    const isMobile = window.innerWidth <= 768;
+    iframe.style.transform = isMobile ? 'scale(1)' : 'scale(1)';
 
-      // Подбери baseWidth под свою таблицу. Начни с 1600/1800/1920 и подгоняй.
-      const baseWidth = 1920;
+    // Убираем горизонтальный скролл
+    document.body.style.overflowX = 'hidden';
+  }
 
-      function fit() {
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-
-        // масштаб (не больше 1 — чтобы не растягивать на десктопе)
-        let scale = vw / baseWidth;
-        if (scale > 1) scale = 1;
-
-        // задаём реальную (не масштабированную) ширину iframe
-        iframe.style.width = baseWidth + 'px';
-
-        // позиционирование: вычисляем left в координатах iframe (нужно делить на scale)
-        // чтобы центрировать визуально: left_unscaled = (vw - baseWidth*scale)/2 / scale
-        const leftUnscaled = (vw - baseWidth * scale) / 2 / (scale || 1);
-
-        // верх оставим 0 (если нужно центрировать по высоте — можно аналогично)
-        const topUnscaled = 0;
-
-        iframe.style.left = `${leftUnscaled}px`;
-        iframe.style.top = `${topUnscaled}px`;
-
-        // применяем масштаб и высоту в не масштабированных координатах
-        iframe.style.transform = `scale(${scale})`;
-
-        // высота iframe в не масштабированном состоянии — чтобы при scale контент был видим
-        // вычисляем так: требуемая не масштабированная высота = vh / scale
-        iframe.style.height = `${Math.ceil(vh / (scale || 1))}px`;
-      }
-
-      window.addEventListener('load', fit);
-      window.addEventListener('resize', fit);
-      window.addEventListener('orientationchange', function(){
-        // даём телефону чуть времени при смене ориентации
-        setTimeout(fit, 200);
-      });
-
-      // удобство: можно изменить baseWidth динамически из консоли, если надо.
-      window.__fitSheet = fit;
-    })();
-  </script>
-</body>
-</html>
+  window.addEventListener('resize', adjustTableScale);
+  window.addEventListener('load', adjustTableScale);
+</script>
