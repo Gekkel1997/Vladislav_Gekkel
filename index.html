@@ -14,36 +14,44 @@
       background: #f5f5f5;
     }
 
+    .iframe-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
     iframe {
       border: none;
-      width: 100vw; /* ширина под экран */
-      height: 100vh; /* высота под экран */
       transform-origin: top left;
-      transform: scale(1); /* без уменьшения */
-    }
-
-    /* адаптация под маленькие экраны */
-    @media (max-width: 768px) {
-      iframe {
-        transform: scale(0.85);
-        transform-origin: top left;
-        width: calc(100vw / 0.85);
-        height: calc(100vh / 0.85);
-      }
-    }
-
-    @media (max-width: 480px) {
-      iframe {
-        transform: scale(0.75);
-        width: calc(100vw / 0.75);
-        height: calc(100vh / 0.75);
-      }
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   </style>
 </head>
 <body>
-  <iframe
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
-  </iframe>
+  <div class="iframe-wrapper">
+    <iframe
+      id="sheet"
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
+    </iframe>
+  </div>
+
+  <script>
+    function resizeIframe() {
+      const iframe = document.getElementById('sheet');
+      const baseWidth = 1920; // примерная ширина таблицы
+      const scale = window.innerWidth / baseWidth;
+
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.width = `${baseWidth}px`;
+      iframe.style.height = `${window.innerHeight / scale}px`;
+    }
+
+    window.addEventListener('load', resizeIframe);
+    window.addEventListener('resize', resizeIframe);
+    window.addEventListener('orientationchange', resizeIframe);
+  </script>
 </body>
 </html>
