@@ -1,55 +1,48 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" 
-        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Gekkel Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gekkel Vladislav Aleksandovich</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background-color: #f3f3f3;
+      height: 100%;
+      background: #f2f2f2;
+      overflow: hidden;
+    }
+
+    .table-container {
+      width: 100vw;
+      height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      height: 100%;
-      min-height: 100vh;
-      overflow-x: auto;
-      overflow-y: auto;
+      align-items: center;
     }
 
     iframe {
       border: none;
-      width: 100%;
-      max-width: 1800px; /* примерно как твоя таблица при 50% */
-      height: 100vh;
-      transform-origin: top center;
+      width: 90vw;
+      height: 90vh;
       background: white;
-    }
-
-    @media (max-width: 1024px) {
-      iframe {
-        max-width: 1200px;
-      }
     }
 
     @media (max-width: 768px) {
       iframe {
-        max-width: 900px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      iframe {
-        max-width: 700px;
+        width: 100vw;
+        height: 100vh;
       }
     }
   </style>
 </head>
 <body>
-  <iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
-  </iframe>
+  <div class="table-container">
+    <iframe
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
+      allowfullscreen
+      loading="lazy"
+    ></iframe>
+  </div>
 </body>
 </html>
