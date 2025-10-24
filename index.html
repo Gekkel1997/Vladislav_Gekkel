@@ -2,8 +2,11 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Открываем страницу уменьшенной и разрешаем сильное отдаление -->
   <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=0.1, maximum-scale=8, user-scalable=yes">
+        content="width=device-width, initial-scale=0.5, minimum-scale=0.1, maximum-scale=10, user-scalable=yes">
+
   <title>Портфолио Владислава Геккеля</title>
 
   <style>
@@ -16,17 +19,16 @@
     }
 
     iframe {
-      width: 100vw;           /* ширина на весь экран устройства */
-      height: 180vh;          /* увеличенная высота */
+      width: 100vw;          /* ширина на весь экран */
+      height: 200vh;         /* увеличенная высота */
       border: none;
       display: block;
       background: white;
-      box-shadow: 0 0 25px rgba(0,0,0,0.15);
     }
 
     @media (max-width: 768px) {
       iframe {
-        height: 250vh;        /* больше высоты для телефона */
+        height: 280vh;       /* больше высоты на телефонах */
       }
     }
   </style>
