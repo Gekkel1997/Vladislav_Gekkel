@@ -6,9 +6,9 @@
   <title>Gekkel Vladislav Aleksandovich</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    /* Базовые настройки — телефон как главный ориентир */
+    /* База — телефон */
     html {
-      font-size: 100%; /* 1rem = 16px (мобильная база) */
+      font-size: 100%; /* 1rem = 16px */
     }
 
     body {
@@ -20,7 +20,7 @@
     /* 1 */
     .header {
       font-family: 'Oswald', sans-serif;
-      font-size: 0.44rem; /* ~7px */
+      font-size: 0.44rem; /* ≈7px */
       color: #000;
       margin-left: 30px;
       margin-top: 15px;
@@ -35,7 +35,7 @@
     /* 2 */
     .text-2 {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.06rem; /* ~17px */
+      font-size: 1.06rem; /* ≈17px */
       font-style: italic;
       color: #000;
       margin-left: 30px;
@@ -54,24 +54,24 @@
       line-height: 1;
     }
 
-    /* Адаптация под планшеты (до 1024px) */
+    /* Планшеты (шире 768px) — немного увеличиваем масштаб */
     @media (min-width: 768px) {
       html {
-        font-size: 120%; /* немного крупнее, масштабируется вся страница */
+        font-size: 160%; /* было 120% → стало крупнее */
       }
     }
 
-    /* Адаптация под ПК (широкие экраны) */
+    /* ПК (шире 1025px) — увеличиваем ещё больше */
     @media (min-width: 1025px) {
       html {
-        font-size: 140%; /* плавное увеличение всей страницы */
+        font-size: 220%; /* было 140% → теперь идеально масштабируется */
       }
       body {
         display: flex;
-        justify-content: center; /* центрируем всё по горизонтали */
+        justify-content: flex-start; /* оставляем всё у левого края, как на телефоне */
       }
       .content {
-        width: 420px; /* фиксированная ширина контента как на телефоне */
+        margin-left: 15vw; /* лёгкий отступ от левого края, чтобы не прилипало */
       }
     }
   </style>
