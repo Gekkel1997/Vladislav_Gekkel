@@ -52,15 +52,20 @@
       color: #888;
     }
 
-    /* 🔹 Контент поверх сетки */
+    /* 🔹 Контент */
     #content {
       position: relative;
       z-index: 1;
     }
 
-    h1, h2, p, img {
-      position: relative;
-      z-index: 1;
+    #cellC3 {
+      position: absolute;
+      top: -50px; /* над первой линией */
+      left: 100px;
+      font-size: 20px;
+      color: #222;
+      font-weight: 500;
+      text-transform: uppercase;
     }
 
     h1 {
@@ -103,6 +108,8 @@
   <div class="page">
     <div class="grid-lines" id="grid"></div>
 
+    <div id="cellC3">⏳ Загрузка ячейки C3...</div>
+
     <div id="content">
       <h1>Газета Владислава Геккеля</h1>
       <p>⏳ Загрузка данных из Google Sheets...</p>
@@ -110,10 +117,10 @@
   </div>
 
   <script>
-    // 🔹 Генерация линий и нумерации строк
+    // 🔹 Сетка линий
     const grid = document.getElementById('grid');
-    const totalLines = 100; // можно увеличить при необходимости
-    const lineHeight = 40; // px — расстояние между строками
+    const totalLines = 100;
+    const lineHeight = 40;
 
     for (let i = 1; i <= totalLines; i++) {
       const y = i * lineHeight;
@@ -128,7 +135,7 @@
       grid.appendChild(num);
     }
 
-    // 🔹 Загрузка данных из Google Sheets
+    // 🔹 Подключение Google Sheets
     const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
 
     fetch(sheetCSV)
@@ -138,6 +145,11 @@
         const container = document.getElementById('content');
         container.innerHTML = '';
 
+        // 🔹 Получаем конкретную ячейку C3
+        const cellC3 = rows[2][2]; // 3-я строка (индекс 2), 3-й столбец (индекс 2)
+        document.getElementById('cellC3').textContent = cellC3 || '(пусто)';
+
+        // 🔹 Основной контент
         rows.slice(1).forEach(row => {
           const [title, description, image] = row;
           const section = document.createElement('section');
@@ -150,7 +162,7 @@
         });
       })
       .catch(err => {
-        document.getElementById('content').innerHTML = `<p>⚠️ Ошибка загрузки данных: ${err}</p>`;
+        document.getElementById('cellC3').textContent = `⚠️ Ошибка: ${err}`;
       });
   </script>
 </body>
