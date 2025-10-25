@@ -2,15 +2,16 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Портфолио Владислава Геккеля</title>
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #f5f5f5;
       overflow: hidden;
+      background-color: #f5f5f5;
     }
 
     .iframe-wrapper {
@@ -18,15 +19,16 @@
       height: 100vh;
       overflow: hidden;
       position: relative;
-      touch-action: pinch-zoom; /* важно для телефонов */
     }
 
     iframe {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px; /* базовая ширина таблицы (как в Google Sheets на десктопе) */
+      height: 1080px;
       border: none;
-      transform-origin: center center;
-      transition: transform 0.2s ease;
+      transform-origin: top left;
     }
   </style>
 </head>
@@ -34,50 +36,21 @@
   <div class="iframe-wrapper">
     <iframe
       id="sheet"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false">
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml">
     </iframe>
   </div>
 
   <script>
-    const iframe = document.getElementById('sheet');
-    let scale = 1;
+    function resizeSheet() {
+      const iframe = document.getElementById('sheet');
+      const scale = window.innerWidth / 1920; // пропорциональное масштабирование
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.height = `${window.innerHeight / scale}px`;
+    }
 
-    // Масштабирование колесиком мыши
-    window.addEventListener('wheel', e => {
-      if (e.ctrlKey) { // Ctrl + колесо
-        e.preventDefault();
-        scale += e.deltaY * -0.001;
-        scale = Math.min(Math.max(0.5, scale), 2.5); // ограничения зума
-        iframe.style.transform = `scale(${scale})`;
-      }
-    }, { passive: false });
-
-    // Для телефонов (пинч-жест)
-    let initialDistance = null;
-    let lastScale = 1;
-
-    window.addEventListener('touchmove', e => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        const dist = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        if (initialDistance === null) initialDistance = dist;
-        else {
-          const pinchScale = dist / initialDistance;
-          scale = Math.min(Math.max(0.5, lastScale * pinchScale), 2.5);
-          iframe.style.transform = `scale(${scale})`;
-        }
-      }
-    }, { passive: false });
-
-    window.addEventListener('touchend', e => {
-      if (e.touches.length < 2) {
-        lastScale = scale;
-        initialDistance = null;
-      }
-    });
+    window.addEventListener('resize', resizeSheet);
+    window.addEventListener('orientationchange', resizeSheet);
+    window.addEventListener('load', resizeSheet);
   </script>
 </body>
 </html>
