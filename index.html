@@ -12,7 +12,7 @@
       height: 100%;
       overflow: hidden;
       background-color: #f5f5f5;
-      touch-action: none; /* чтобы разрешить жесты зума */
+      touch-action: none; /* отключаем стандартные жесты браузера */
     }
 
     .iframe-wrapper {
@@ -20,6 +20,11 @@
       height: 100vh;
       overflow: hidden;
       position: relative;
+      cursor: grab;
+    }
+
+    .iframe-wrapper:active {
+      cursor: grabbing;
     }
 
     iframe {
@@ -35,7 +40,7 @@
   </style>
 </head>
 <body>
-  <div class="iframe-wrapper">
+  <div class="iframe-wrapper" id="wrapper">
     <iframe
       id="sheet"
       src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml">
@@ -44,31 +49,37 @@
 
   <script>
     const iframe = document.getElementById('sheet');
+    const wrapper = document.getElementById('wrapper');
+
     let baseScale = window.innerWidth / 1920;
     let userZoom = 1;
+    let offsetX = 0;
+    let offsetY = 0;
+    let startX, startY;
+    let isDragging = false;
 
-    function applyScale() {
+    function applyTransform() {
       const totalScale = baseScale * userZoom;
-      iframe.style.transform = `scale(${totalScale})`;
+      iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${totalScale})`;
       iframe.style.height = `${window.innerHeight / totalScale}px`;
     }
 
     function resizeSheet() {
       baseScale = window.innerWidth / 1920;
-      applyScale();
+      applyTransform();
     }
 
-    // Зум колесиком мыши
+    // --- Масштабирование колесиком ---
     window.addEventListener('wheel', e => {
       if (e.ctrlKey || e.metaKey) {
         e.preventDefault();
         userZoom += e.deltaY * -0.001;
-        userZoom = Math.min(Math.max(0.3, userZoom), 3); // диапазон зума
-        applyScale();
+        userZoom = Math.min(Math.max(0.3, userZoom), 3);
+        applyTransform();
       }
     }, { passive: false });
 
-    // Зум жестом (пальцами)
+    // --- Масштабирование пальцами ---
     let initialDistance = 0;
     let initialZoom = 1;
 
@@ -79,6 +90,10 @@
           e.touches[0].clientY - e.touches[1].clientY
         );
         initialZoom = userZoom;
+      } else if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX - offsetX;
+        startY = e.touches[0].clientY - offsetY;
       }
     });
 
@@ -91,9 +106,33 @@
         );
         const scaleChange = newDistance / initialDistance;
         userZoom = Math.min(Math.max(0.3, initialZoom * scaleChange), 3);
-        applyScale();
+        applyTransform();
+      } else if (isDragging && e.touches.length === 1) {
+        offsetX = e.touches[0].clientX - startX;
+        offsetY = e.touches[0].clientY - startY;
+        applyTransform();
       }
     }, { passive: false });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // --- Перемещение мышью ---
+    wrapper.addEventListener('mousedown', e => {
+      isDragging = true;
+      startX = e.clientX - offsetX;
+      startY = e.clientY - offsetY;
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      offsetX = e.clientX - startX;
+      offsetY = e.clientY - startY;
+      applyTransform();
+    });
+
+    window.addEventListener('mouseup', () => isDragging = false);
 
     window.addEventListener('resize', resizeSheet);
     window.addEventListener('orientationchange', resizeSheet);
