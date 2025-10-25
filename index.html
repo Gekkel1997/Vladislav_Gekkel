@@ -1,236 +1,345 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Портфолио Владислава Геккеля</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
+<title>Вариант A — гибрид (A + зум/пан без перезагрузок)</title>
+<style>
+  :root{ --bg:#f5f5f5; --frame-border:#ddd; }
+  html,body{height:100%;margin:0;background:var(--bg);-webkit-font-smoothing:antialiased;}
+  .wrap {
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:0;
+  }
+  .frame-box{
+    width:100%;
+    max-width:1200px; /* визуально как A — центр и ограничение */
+    height:100vh;
+    background:#fff;
+    border:1px solid var(--frame-border);
+    box-sizing:border-box;
+    position:relative;
+    overflow:hidden;
+    touch-action:none; /* мы сами обрабатываем жесты */
+  }
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      background-color: #f5f5f5;
-      touch-action: none;
-    }
+  /* iframe имеет фиксированную базовую "нативную" размерность */
+  iframe {
+    position:absolute;
+    top:0;
+    left:0;
+    width:1920px;   /* базовая ширина Google Sheets на десктопе */
+    height:1080px;  /* базовая высота (можно менять если у тебя другой) */
+    border:0;
+    transform-origin: top left;
+    will-change: transform;
+    background:#fff;
+  }
 
-    .iframe-wrapper {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-      cursor: grab;
-    }
+  /* UI (контролы) */
+  .controls {
+    position:fixed;
+    right:16px;
+    bottom:16px;
+    display:flex;
+    gap:8px;
+    z-index:2000;
+  }
+  .btn {
+    background:#fff;border:1px solid #ccc;padding:8px 10px;border-radius:6px;cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,0.06);font-weight:600;
+  }
+  .zoomLabel {
+    position:fixed; left:16px; bottom:16px; background:rgba(255,255,255,0.9);
+    border-radius:6px;padding:8px 10px;border:1px solid #eee;font-size:13px;
+  }
 
-    .iframe-wrapper:active {
-      cursor: grabbing;
-    }
-
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 1920px;
-      height: 1080px;
-      border: none;
-      transform-origin: top left;
-      transition: transform 0.1s ease-out;
-    }
-  </style>
+  /* мобильные: уменьшаем визуальный max-width чтобы больше помещалось */
+  @media (max-width:900px){
+    .frame-box{ max-width:100%; }
+  }
+</style>
 </head>
 <body>
-  <div class="iframe-wrapper" id="wrapper">
-    <iframe
-      id="sheet"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml">
-    </iframe>
+  <div class="wrap">
+    <div class="frame-box" id="box">
+      <iframe id="sheet" 
+        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
+        sandbox="allow-scripts allow-same-origin allow-forms">
+      </iframe>
+    </div>
   </div>
 
-  <script>
-    const iframe = document.getElementById('sheet');
-    const wrapper = document.getElementById('wrapper');
+  <div class="controls" aria-hidden>
+    <button id="zoomOut" class="btn">−</button>
+    <button id="zoomReset" class="btn">Reset</button>
+    <button id="zoomIn" class="btn">+</button>
+  </div>
+  <div class="zoomLabel" id="zoomLabel">Масштаб: —</div>
 
-    let baseScale = window.innerWidth / 1920;
-    let userZoom = 1;
-    let offsetX = 0;
-    let offsetY = 0;
-    let startX, startY;
-    let isDragging = false;
-    let velocityX = 0;
-    let velocityY = 0;
-    let lastMoveTime = 0;
-    let lastX = 0;
-    let lastY = 0;
-    let momentumFrame;
+<script>
+(function(){
+  const BASE_W = 1920;      // базовая (нативная) ширина iframe
+  const BASE_H = 1080;      // базовая высота iframe
+  const MIN_Z = 0.4;        // минимальный множитель userZoom
+  const MAX_Z = 3;          // максимальный множитель userZoom
 
-    function getBoundaries() {
-      const totalScale = baseScale * userZoom;
-      const iframeWidth = 1920 * totalScale;
-      const iframeHeight = 1080 * totalScale;
-      const maxX = Math.max(0, (iframeWidth - window.innerWidth) / 2);
-      const maxY = Math.max(0, (iframeHeight - window.innerHeight) / 2);
-      return { minX: -maxX, maxX: maxX, minY: -maxY, maxY: maxY };
-    }
+  const box = document.getElementById('box');
+  const iframe = document.getElementById('sheet');
+  const zoomLabel = document.getElementById('zoomLabel');
 
-    function clamp(v, min, max) {
-      return Math.min(Math.max(v, min), max);
-    }
+  // масштаб, чтобы вписать BASE_W в текущую ширину контейнера — как вариант A
+  let baseScale = box.clientWidth / BASE_W;
+  // отдельный пользовательский множитель зума
+  let userZoom = 1;
+  // итоговый трансформ: translate(offsetX, offsetY) scale(baseScale * userZoom)
+  let offsetX = 0, offsetY = 0;
 
-    function applyTransform() {
-      const totalScale = baseScale * userZoom;
-      const bounds = getBoundaries();
-      offsetX = clamp(offsetX, bounds.minX, bounds.maxX);
-      offsetY = clamp(offsetY, bounds.minY, bounds.maxY);
-      iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${totalScale})`;
-    }
+  // пан/инерция
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let lastX = 0, lastY = 0;
+  let lastTime = 0;
+  let velocityX = 0, velocityY = 0;
+  let momentumId = null;
 
-    function resizeSheet() {
-      baseScale = window.innerWidth / 1920;
-      applyTransform();
-    }
+  // pinch
+  let pinchStartDist = 0;
+  let pinchStartZoom = 1;
 
-    // Масштаб колесиком
-    window.addEventListener('wheel', e => {
-      if (e.ctrlKey || e.metaKey) {
-        e.preventDefault();
-        userZoom += e.deltaY * -0.001;
-        userZoom = Math.min(Math.max(0.3, userZoom), 3);
-        applyTransform();
-      }
-    }, { passive: false });
+  function clamp(v, a, b){ return Math.min(Math.max(v,a),b); }
 
-    // Пинч-масштаб (два пальца)
-    let initialDistance = 0;
-    let initialZoom = 1;
+  function updateLabel(){
+    const perc = Math.round(baseScale * userZoom * 100);
+    zoomLabel.textContent = `Масштаб: ${perc}%`;
+  }
 
-    window.addEventListener('touchstart', e => {
-      cancelMomentum();
-      if (e.touches.length === 2) {
-        initialDistance = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        initialZoom = userZoom;
-      } else if (e.touches.length === 1) {
-        isDragging = true;
-        startX = e.touches[0].clientX - offsetX;
-        startY = e.touches[0].clientY - offsetY;
-        lastX = e.touches[0].clientX;
-        lastY = e.touches[0].clientY;
-        lastMoveTime = Date.now();
-      }
-    });
+  function getBounds(totalScale){
+    // iframe размер в px после масштаба
+    const w = BASE_W * totalScale;
+    const h = BASE_H * totalScale;
+    // container viewport (box) размер
+    const vw = box.clientWidth;
+    const vh = box.clientHeight;
+    // вычисляем границы смещения: iframe должен покрывать viewport, поэтому offsets ограничены
+    // хотим, чтобы при больших iframe можно панить до краёв, при маленьком — центрировать
+    const maxOffsetX = Math.max(0, (w - vw) / 2);
+    const maxOffsetY = Math.max(0, (h - vh) / 2);
+    return { minX: -maxOffsetX, maxX: maxOffsetX, minY: -maxOffsetY, maxY: maxOffsetY };
+  }
 
-    window.addEventListener('touchmove', e => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        const newDist = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        const scaleChange = newDist / initialDistance;
-        userZoom = Math.min(Math.max(0.3, initialZoom * scaleChange), 3);
-        applyTransform();
-      } else if (isDragging && e.touches.length === 1) {
-        const now = Date.now();
-        const dx = e.touches[0].clientX - lastX;
-        const dy = e.touches[0].clientY - lastY;
-        const dt = now - lastMoveTime;
+  function applyTransform() {
+    const totalScale = baseScale * userZoom;
+    const b = getBounds(totalScale);
+    offsetX = clamp(offsetX, b.minX, b.maxX);
+    offsetY = clamp(offsetY, b.minY, b.maxY);
+    // не меняем iframe.height — используем только transform (это предотвращает перезагрузки)
+    iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${totalScale})`;
+    updateLabel();
+  }
 
-        velocityX = dx / dt * 16;
-        velocityY = dy / dt * 16;
-        offsetX = e.touches[0].clientX - startX;
-        offsetY = e.touches[0].clientY - startY;
-        applyTransform();
+  // recalc baseScale on resize (keeps visual match with variant A)
+  function recalcBase(){
+    baseScale = box.clientWidth / BASE_W;
+    // when baseScale changes we should also adjust offsets proportionally to keep visual place
+    // (optional: recalc to keep center)
+    applyTransform();
+  }
 
-        lastX = e.touches[0].clientX;
-        lastY = e.touches[0].clientY;
-        lastMoveTime = now;
-      }
-    }, { passive: false });
+  // --- wheel zoom (PC) WITH ctrl/meta required (avoids accidental zoom)
+  window.addEventListener('wheel', (e) => {
+    if (!e.ctrlKey && !e.metaKey) return; // require ctrl/meta
+    e.preventDefault();
+    const delta = - e.deltaY * 0.0015; // tweak sensitivity
+    const prevZoom = userZoom;
+    userZoom = clamp(userZoom * (1 + delta), MIN_Z, MAX_Z);
 
-    window.addEventListener('touchend', () => {
-      isDragging = false;
-      startMomentum();
-    });
+    // zoom to mouse position: compute focal point in iframe coordinates, adjust offset so that point remains under cursor
+    const rect = box.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+    const totalPrev = baseScale * prevZoom;
+    const totalNow  = baseScale * userZoom;
 
-    // Перетаскивание мышью
-    wrapper.addEventListener('mousedown', e => {
-      cancelMomentum();
+    // position in iframe logical coords (before scale)
+    const fx = (cx - offsetX) / totalPrev;
+    const fy = (cy - offsetY) / totalPrev;
+
+    // new offsets so that fx,fy remains under cx,cy
+    offsetX = cx - fx * totalNow;
+    offsetY = cy - fy * totalNow;
+
+    applyTransform();
+  }, { passive: false });
+
+  // --- touch pinch & pan ---
+  box.addEventListener('touchstart', (e) => {
+    cancelMomentum();
+    if (e.touches.length === 2) {
+      pinchStartDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      pinchStartZoom = userZoom;
+    } else if (e.touches.length === 1) {
       isDragging = true;
-      startX = e.clientX - offsetX;
-      startY = e.clientY - offsetY;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      lastMoveTime = Date.now();
-    });
+      startX = e.touches[0].clientX - offsetX;
+      startY = e.touches[0].clientY - offsetY;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+      lastTime = Date.now();
+      velocityX = velocityY = 0;
+    }
+  }, { passive: false });
 
-    window.addEventListener('mousemove', e => {
-      if (!isDragging) return;
+  box.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const d = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const ratio = d / pinchStartDist;
+      userZoom = clamp(pinchStartZoom * ratio, MIN_Z, MAX_Z);
+      applyTransform();
+    } else if (isDragging && e.touches.length === 1) {
+      e.preventDefault();
       const now = Date.now();
-      const dx = e.clientX - lastX;
-      const dy = e.clientY - lastY;
-      const dt = now - lastMoveTime;
+      const dx = e.touches[0].clientX - lastX;
+      const dy = e.touches[0].clientY - lastY;
+      const dt = Math.max(1, now - lastTime);
 
       velocityX = dx / dt * 16;
       velocityY = dy / dt * 16;
-      offsetX = e.clientX - startX;
-      offsetY = e.clientY - startY;
+
+      offsetX = e.touches[0].clientX - startX;
+      offsetY = e.touches[0].clientY - startY;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+      lastTime = now;
       applyTransform();
+    }
+  }, { passive: false });
 
-      lastX = e.clientX;
-      lastY = e.clientY;
-      lastMoveTime = now;
-    });
-
-    window.addEventListener('mouseup', () => {
+  box.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0) {
       isDragging = false;
       startMomentum();
-    });
-
-    // === Инерция + границы ===
-    function startMomentum() {
-      cancelMomentum();
-      const decay = 0.95;
-      function step() {
-        offsetX += velocityX;
-        offsetY += velocityY;
-
-        const bounds = getBoundaries();
-        if (offsetX < bounds.minX || offsetX > bounds.maxX) velocityX *= -0.3;
-        if (offsetY < bounds.minY || offsetY > bounds.maxY) velocityY *= -0.3;
-
-        velocityX *= decay;
-        velocityY *= decay;
-        applyTransform();
-
-        if (Math.abs(velocityX) > 0.2 || Math.abs(velocityY) > 0.2) {
-          momentumFrame = requestAnimationFrame(step);
-        }
-      }
-      momentumFrame = requestAnimationFrame(step);
     }
+  });
 
-    function cancelMomentum() {
-      cancelAnimationFrame(momentumFrame);
-      velocityX = velocityY = 0;
+  // --- mouse pan (desktop) ---
+  box.addEventListener('mousedown', (e) => {
+    cancelMomentum();
+    isDragging = true;
+    startX = e.clientX - offsetX;
+    startY = e.clientY - offsetY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    lastTime = Date.now();
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const now = Date.now();
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    const dt = Math.max(1, now - lastTime);
+
+    velocityX = dx / dt * 16;
+    velocityY = dy / dt * 16;
+
+    offsetX = e.clientX - startX;
+    offsetY = e.clientY - startY;
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+    lastTime = now;
+
+    applyTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (isDragging) {
+      isDragging = false;
+      startMomentum();
     }
+  });
 
-    // === Двойной клик / тап для зума ===
-    let lastTapTime = 0;
-    wrapper.addEventListener('click', e => {
-      const now = Date.now();
-      if (now - lastTapTime < 300) { // двойной клик
-        userZoom = userZoom < 1.5 ? 2 : 1;
-        applyTransform();
+  // --- momentum (inertia) ---
+  function startMomentum(){
+    cancelMomentum();
+    const decay = 0.92;
+    function step(){
+      offsetX += velocityX;
+      offsetY += velocityY;
+
+      // bounce / clamp
+      const b = getBounds(baseScale * userZoom);
+      if (offsetX < b.minX || offsetX > b.maxX) velocityX *= -0.35;
+      if (offsetY < b.minY || offsetY > b.maxY) velocityY *= -0.35;
+
+      velocityX *= decay;
+      velocityY *= decay;
+
+      applyTransform();
+      if (Math.abs(velocityX) > 0.3 || Math.abs(velocityY) > 0.3) {
+        momentumId = requestAnimationFrame(step);
       }
-      lastTapTime = now;
-    });
+    }
+    momentumId = requestAnimationFrame(step);
+  }
+  function cancelMomentum(){
+    if (momentumId) cancelAnimationFrame(momentumId);
+    momentumId = null;
+    velocityX = velocityY = 0;
+  }
 
-    window.addEventListener('resize', resizeSheet);
-    window.addEventListener('orientationchange', resizeSheet);
-    window.addEventListener('load', resizeSheet);
-  </script>
+  // --- controls ---
+  document.getElementById('zoomIn').addEventListener('click', ()=> {
+    userZoom = clamp(userZoom * 1.12, MIN_Z, MAX_Z);
+    applyTransform();
+  });
+  document.getElementById('zoomOut').addEventListener('click', ()=> {
+    userZoom = clamp(userZoom / 1.12, MIN_Z, MAX_Z);
+    applyTransform();
+  });
+  document.getElementById('zoomReset').addEventListener('click', ()=> {
+    userZoom = 1;
+    offsetX = 0; offsetY = 0;
+    applyTransform();
+  });
+
+  // double-tap / double-click to toggle zoom
+  let lastTap = 0;
+  box.addEventListener('click', (e) => {
+    const now = Date.now();
+    if (now - lastTap < 320) {
+      // double click/tap
+      userZoom = (userZoom < 1.6) ? 2 : 1;
+      applyTransform();
+    }
+    lastTap = now;
+  });
+
+  // keep layout when resizing
+  window.addEventListener('resize', () => {
+    recalcBase();
+  });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(recalcBase, 120);
+  });
+
+  // init
+  recalcBase();
+  updateLabel();
+
+})();
+</script>
 </body>
 </html>
