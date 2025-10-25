@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       background-color: #fff;
-      border: 4px solid #cccccc80; /* ✅ Тонкая полупрозрачная рамка */
+      border: 4px solid #cccccc80;
       box-sizing: border-box;
     }
 
@@ -79,6 +79,21 @@
       display: block;
     }
 
+    /* 4 и 5 */
+    .info {
+      margin-top: 15px;
+      margin-left: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px; /* расстояние между "Родился" и "Родители" */
+    }
+
+    .info-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      color: #000;
+    }
+
     /* Адаптация под телефон */
     @media (max-width: 768px) {
       .section {
@@ -122,6 +137,12 @@
   <!-- Изображение A -->
   <div class="image-container">
     <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
+  </div>
+
+  <!-- 4 и 5 -->
+  <div class="info">
+    <div class="info-text">Родился:</div>
+    <div class="info-text">Родители:</div>
   </div>
 
 </body>
