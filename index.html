@@ -1,72 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Газета — Gekkel Vladislav Aleksandovich</title>
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #111;
-      color: white;
-      font-family: system-ui, sans-serif;
-      overflow-x: hidden;
-    }
-
-    .pdf-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      padding: 20px 0 80px 0;
-    }
-
-    iframe {
-      width: 90vw;
-      height: 120vh;
-      border: none;
-      background: white;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      border-radius: 6px;
-      transition: transform 0.2s ease;
-    }
-
-    iframe:hover {
-      transform: scale(1.02);
-    }
-
-    @media (max-width: 768px) {
-      iframe {
-        width: 100vw;
-        height: 140vh;
-        border-radius: 0;
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Газета</title>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+        background: #000;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="pdf-container" id="pdfContainer"></div>
-
-  <script>
-    // 🔗 Твой Apps Script, который генерирует PDF
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbw2XUUx1_t8WaIlia1RMv3bES0GORQxZuO2OZkBrp9b7EM8QlATVqKVc11JaOg7lOF6hg/exec";
-
-    // Если несколько листов (например, несколько выпусков)
-    // можно добавить их все в массив:
-    const pdfLinks = [
-      scriptUrl, // первый PDF
-      // "https://script.google.com/macros/s/AKfycXYZ.../exec", // ← сюда добавляешь второй, третий и т.д.
-    ];
-
-    const container = document.getElementById("pdfContainer");
-    pdfLinks.forEach((link) => {
-      const iframe = document.createElement("iframe");
-      iframe.src = link;
-      container.appendChild(iframe);
-    });
-  </script>
-</body>
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe src="https://script.google.com/macros/s/AKfycbwqtfimcQnNtJjhPj3BEqsBjtr5BCtq4PvKYUDtKcbSjmvUsfKQJSODKSAnJ7WtEzvZXw/exec"></iframe>
+  </body>
 </html>
