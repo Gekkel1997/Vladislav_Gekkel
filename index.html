@@ -1,48 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Газета Владислава Геккеля</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Портфолио</title>
   <style>
     body {
-      background-color: #dcdcdc;
       margin: 0;
-      padding: 5vh 0;
+      padding: 0;
+      background-color: #fff;
+      color: #000;
+      font-family: "Helvetica Neue", Arial, sans-serif;
       display: flex;
-      justify-content: center;
-      font-family: "Oswald", sans-serif;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
 
-    .page {
-      background-color: white;
-      width: 92%;
+    header {
+      text-align: center;
+      margin-top: 80px;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    p.subtitle {
+      font-size: 18px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 90%;
       max-width: 1200px;
-      border: 1px solid #bfbfbf;
-      padding: 5vh 4vw;
-      box-sizing: border-box;
-      position: relative;
-      overflow: hidden;
-      min-height: 4000px;
+      margin-bottom: 80px;
     }
 
-    /* --- Разлиновка --- */
-    .grid-line {
-      position: absolute;
-      left: 60px;
-      width: calc(100% - 120px);
-      height: 1px;
-      background-color: #e6e6e6;
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
     }
+  </style>
+</head>
+<body>
 
-    .grid-line.first {
-      background-color: #555;
-    }
+  <header>
+    <h1>Моё портфолио</h1>
+    <p class="subtitle">Коллекция моих работ</p>
+  </header>
 
-    .line-number {
-      position: absolute;
-      left: 35px;
-      font-size: clamp(9px, 1.3vw, 13px);
-      color: #888;
-      us
+  <div class="gallery">
+    <!-- сюда я вставлю твои изображения -->
+  </div>
+
+</body>
+</html>
