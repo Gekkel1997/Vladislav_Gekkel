@@ -1,154 +1,102 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Газета Владислава Геккеля</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #dcdcdc;
       margin: 0;
-      padding: 5vh 0;
+      padding: 40px 0;
       display: flex;
       justify-content: center;
       font-family: "Oswald", sans-serif;
     }
 
     .page {
-      background-color: white;
-      width: 92%;
-      max-width: 1200px;
+      background: #fff;
       border: 1px solid #bfbfbf;
-      padding: 6vh 6vw;
-      box-sizing: border-box;
+      width: 90%;
+      max-width: 1200px;
+      padding: 40px 90px;
       position: relative;
-      overflow: hidden;
-      min-height: 8000px;
+      box-sizing: border-box;
     }
 
-    /* --- Разлиновка --- */
-    .grid-line {
+    /* Линии разметки */
+    .line {
       position: absolute;
       left: 90px;
-      width: calc(100% - 180px);
+      right: 90px;
       height: 1px;
-      background-color: #e6e6e6;
+      background-color: #ccc;
     }
 
-    .grid-line.first {
+    .line.dark {
       background-color: #555;
     }
 
-    .line-number {
+    /* Ячейки */
+    .cell {
       position: absolute;
-      left: 60px;
-      font-size: clamp(10px, 1.4vw, 14px);
-      color: #888;
-      user-select: none;
-    }
-
-    /* --- Контент (ячейка C3) --- */
-    .cell-content {
-      position: absolute;
-      left: 90px;
-      top: 30px; /* опустили на 30 пикселей ниже первой линии */
-      font-size: 7px;
-      font-weight: 500;
+      font-size: clamp(6px, 1vw, 10px);
       color: #111;
-      max-width: calc(100% - 180px);
-      word-wrap: break-word;
+      line-height: 1.4;
+      white-space: nowrap;
     }
 
-    /* --- Адаптация под экраны --- */
+    /* Смещение ячейки C3 */
+    .cell.c3 {
+      top: 90px; /* смещено на 30px ниже первой линии */
+      left: 90px;
+      font-size: 7px;
+    }
+
     @media (max-width: 768px) {
       .page {
-        padding: 4vh 5vw;
+        padding: 20px 40px;
       }
-
-      .grid-line {
-        left: 60px;
-        width: calc(100% - 120px);
-      }
-
-      .line-number {
-        left: 35px;
-      }
-
-      .cell-content {
-        left: 60px;
-        max-width: calc(100% - 120px);
-        font-size: 6px;
-        top: 30px; /* адаптировано под планшеты */
-      }
-    }
-
-    @media (max-width: 480px) {
-      .page {
-        padding: 3vh 4vw;
-        width: 96%;
-      }
-
-      .grid-line {
-        left: 40px;
-        width: calc(100% - 80px);
-      }
-
-      .line-number {
-        left: 15px;
-        font-size: clamp(9px, 3vw, 12px);
-      }
-
-      .cell-content {
-        left: 40px;
-        max-width: calc(100% - 80px);
-        font-size: 5.5px;
-        top: 30px; /* адаптировано под телефон */
+      .cell {
+        font-size: clamp(6px, 2vw, 9px);
       }
     }
   </style>
 </head>
 <body>
   <div class="page" id="page">
-    <div id="grid"></div>
-    <div id="cellC3" class="cell-content">⏳ Загрузка ячейки C3...</div>
+    <!-- Линии -->
+    <script>
+      const page = document.getElementById('page');
+      const totalLines = 200;
+      const spacing = 25; // расстояние между линиями
+
+      for (let i = 0; i < totalLines; i++) {
+        const line = document.createElement('div');
+        line.className = 'line' + (i === 0 ? ' dark' : '');
+        line.style.top = `${i * spacing}px`;
+        page.appendChild(line);
+      }
+    </script>
+
+    <!-- Контент -->
+    <div class="cell c3" id="cellC3">⏳ Загрузка ячейки C3...</div>
+
+    <script>
+      const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
+
+      fetch(sheetCSV)
+        .then(response => response.text())
+        .then(csv => {
+          const rows = csv.split('\n').map(r => r.split(','));
+          const c3 = rows[2][2]; // C3 → 3-я строка, 3-й столбец (индексы 2)
+          document.getElementById('cellC3').textContent = c3;
+        })
+        .catch(err => {
+          document.getElementById('cellC3').textContent = `Ошибка загрузки: ${err}`;
+        });
+    </script>
   </div>
-
-  <script>
-    // === Разлиновка ===
-    const grid = document.getElementById('grid');
-    const totalLines = 200;
-    const lineHeight = 28;
-
-    for (let i = 1; i <= totalLines; i++) {
-      const y = i * lineHeight;
-      const line = document.createElement('div');
-      line.className = 'grid-line' + (i === 1 ? ' first' : '');
-      line.style.top = `${y}px`;
-
-      const num = document.createElement('div');
-      num.className = 'line-number';
-      num.style.top = `${y - 8}px`;
-      num.textContent = i;
-
-      grid.appendChild(line);
-      grid.appendChild(num);
-    }
-
-    // === Загрузка данных из Google Sheets ===
-    const sheetCSV =
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
-
-    fetch(sheetCSV)
-      .then(response => response.text())
-      .then(csvText => {
-        const rows = csvText.split('\n').map(r => r.split(','));
-        const cellC3 = rows[2] && rows[2][2] ? rows[2][2].trim() : '(ячейка C3 пуста)';
-        document.getElementById('cellC3').textContent = cellC3;
-      })
-      .catch(err => {
-        document.getElementById('cellC3').textContent = `⚠️ Ошибка загрузки: ${err}`;
-      });
-  </script>
 </body>
 </html>
