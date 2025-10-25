@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #dcdcdc;
+      background-color: #dcdcdc; /* фон вокруг страницы */
       margin: 0;
       padding: 60px 0;
       display: flex;
@@ -16,25 +16,15 @@
     }
 
     .page {
-      position: relative;
       background-color: white;
       width: 90%;
       max-width: 1200px;
-      border: 1px solid #bfbfbf;
-      padding: 80px 100px;
+      border: 1px solid #bfbfbf; /* тонкая рамка */
+      padding: 60px 100px;
       box-sizing: border-box;
+      position: relative;
       line-height: 1.6;
       overflow: hidden;
-    }
-
-    /* 🔹 Разметка строк */
-    .grid-lines {
-      position: absolute;
-      top: 0;
-      left: 60px;
-      right: 0;
-      bottom: 0;
-      z-index: 0;
     }
 
     .grid-line {
@@ -42,127 +32,70 @@
       left: 0;
       width: 100%;
       height: 1px;
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: #e6e6e6;
     }
 
     .line-number {
       position: absolute;
-      left: -40px;
-      font-size: 12px;
+      left: 10px;
+      font-size: 14px;
       color: #888;
     }
 
-    /* 🔹 Контент */
-    #content {
-      position: relative;
-      z-index: 1;
-    }
-
-    #cellC3 {
+    .cell-content {
       position: absolute;
-      top: -50px; /* над первой линией */
-      left: 100px;
-      font-size: 20px;
-      color: #222;
+      top: 10px;
+      left: 60px;
+      font-size: 16px;
       font-weight: 500;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: 56px;
-      font-weight: 600;
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    h2 {
-      font-size: 36px;
-      font-weight: 500;
-      margin-top: 60px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
-    p {
-      font-size: 20px;
-      font-weight: 300;
       color: #111;
-      max-width: 750px;
-      text-align: left;
-      margin-bottom: 30px;
     }
 
-    img {
-      width: 100%;
-      margin-top: 40px;
-      margin-bottom: 60px;
-    }
-
-    section {
-      margin-bottom: 80px;
-    }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="grid-lines" id="grid"></div>
-
-    <div id="cellC3">⏳ Загрузка ячейки C3...</div>
-
-    <div id="content">
-      <h1>Газета Владислава Геккеля</h1>
-      <p>⏳ Загрузка данных из Google Sheets...</p>
-    </div>
+  <div class="page" id="page">
+    <div id="cellC3" class="cell-content">⏳ Загрузка ячейки C3...</div>
+    <div id="grid"></div>
   </div>
 
   <script>
-    // 🔹 Сетка линий
     const grid = document.getElementById('grid');
     const totalLines = 100;
     const lineHeight = 40;
 
+    // Разлиновка
     for (let i = 1; i <= totalLines; i++) {
       const y = i * lineHeight;
       const line = document.createElement('div');
       line.className = 'grid-line';
       line.style.top = `${y}px`;
+
       const num = document.createElement('div');
       num.className = 'line-number';
-      num.style.top = `${y - 6}px`;
+      num.style.top = `${y - 8}px`;
       num.textContent = i;
+
       grid.appendChild(line);
       grid.appendChild(num);
     }
 
-    // 🔹 Подключение Google Sheets
+    // 📊 Подключение Google Sheets
     const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
 
     fetch(sheetCSV)
       .then(response => response.text())
       .then(csvText => {
         const rows = csvText.split('\n').map(r => r.split(','));
-        const container = document.getElementById('content');
-        container.innerHTML = '';
 
-        // 🔹 Получаем конкретную ячейку C3
-        const cellC3 = rows[2][2]; // 3-я строка (индекс 2), 3-й столбец (индекс 2)
-        document.getElementById('cellC3').textContent = cellC3 || '(пусто)';
+        // Получаем конкретную ячейку C3 (строка 3, колонка 3)
+        const cellC3 = rows[2] && rows[2][2] ? rows[2][2].trim() : '(ячейка C3 пуста)';
+        document.getElementById('cellC3').textContent = cellC3;
 
-        // 🔹 Основной контент
-        rows.slice(1).forEach(row => {
-          const [title, description, image] = row;
-          const section = document.createElement('section');
-          section.innerHTML = `
-            ${title ? `<h2>${title}</h2>` : ''}
-            ${description ? `<p>${description}</p>` : ''}
-            ${image ? `<img src="${image}" alt="${title}">` : ''}
-          `;
-          container.appendChild(section);
-        });
+        console.log('✅ Значение C3:', cellC3);
       })
       .catch(err => {
-        document.getElementById('cellC3').textContent = `⚠️ Ошибка: ${err}`;
+        document.getElementById('cellC3').textContent = `⚠️ Ошибка загрузки: ${err}`;
       });
   </script>
 </body>
