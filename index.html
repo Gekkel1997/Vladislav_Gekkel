@@ -70,6 +70,7 @@
 
     /* Изображение A */
     .image-container {
+      position: relative;
       margin: 15px 30px 0 30px;
     }
 
@@ -79,15 +80,16 @@
       display: block;
     }
 
-    /* Изображение Б — уменьшено в 5 раз */
+    /* Изображение Б — уменьшено и расположено справа */
     .image-container-b {
-      margin: 26px 30px 0 30px; /* 7 мм ≈ 26 px */
-      display: flex;
-      justify-content: center;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 6.6%;
     }
 
     .image-container-b img {
-      width: 20%; /* уменьшено в 5 раз */
+      width: 100%;
       height: auto;
       display: block;
     }
@@ -140,8 +142,10 @@
         font-size: 28px;
       }
 
-      .image-container-b img {
-        width: 35%; /* немного крупнее на телефонах */
+      .image-container-b {
+        width: 10%;
+        bottom: 8px;
+        right: 8px;
       }
     }
   </style>
@@ -165,9 +169,12 @@
     </div>
   </div>
 
-  <!-- Изображение A -->
+  <!-- Изображение A + Б -->
   <div class="image-container">
     <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
+    <div class="image-container-b">
+      <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
+    </div>
   </div>
 
   <!-- Информация -->
@@ -180,11 +187,6 @@
       <div class="info-text">Родители:</div>
       <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
     </div>
-  </div>
-
-  <!-- Изображение Б -->
-  <div class="image-container-b">
-    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
 
 </body>
