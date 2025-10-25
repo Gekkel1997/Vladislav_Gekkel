@@ -6,11 +6,6 @@
   <title>Gekkel Vladislav Aleksandovich</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    /* База — телефон */
-    html {
-      font-size: 100%; /* 1rem = 16px */
-    }
-
     body {
       margin: 0;
       padding: 0;
@@ -20,7 +15,7 @@
     /* 1 */
     .header {
       font-family: 'Oswald', sans-serif;
-      font-size: 0.44rem; /* ≈7px */
+      font-size: 7px;
       color: #000;
       margin-left: 30px;
       margin-top: 15px;
@@ -32,61 +27,77 @@
       margin: 5px 30px 0 30px;
     }
 
-    /* 2 */
-    .text-2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.06rem; /* ≈17px */
-      font-style: italic;
-      color: #000;
+    /* Контейнер под секцию с текстами 2 и 3 */
+    .section {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin-top: 15px; /* отступ от линии */
       margin-left: 30px;
-      margin-top: 15px;
-      line-height: 1;
+      margin-right: 30px;
+      gap: 20px; /* расстояние между левым и правым текстом */
     }
 
-    /* 3 */
+    /* Левая колонка (2 и 3) */
+    .left-texts {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .text-2,
     .text-3 {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.06rem;
+      font-size: 25px;
       font-style: italic;
       color: #000;
-      margin-left: 30px;
-      margin-top: 5px;
       line-height: 1;
     }
 
-    /* Планшеты (шире 768px) — немного увеличиваем масштаб */
-    @media (min-width: 768px) {
-      html {
-        font-size: 160%; /* было 120% → стало крупнее */
-      }
+    .text-3 {
+      margin-top: 5px;
     }
 
-    /* ПК (шире 1025px) — увеличиваем ещё больше */
-    @media (min-width: 1025px) {
-      html {
-        font-size: 220%; /* было 140% → теперь идеально масштабируется */
+    /* Правая колонка (3 — описание) */
+    .description {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      color: #000;
+      text-align: justify;
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        gap: 10px;
       }
-      body {
-        display: flex;
-        justify-content: flex-start; /* оставляем всё у левого края, как на телефоне */
-      }
-      .content {
-        margin-left: 15vw; /* лёгкий отступ от левого края, чтобы не прилипало */
+
+      .description {
+        margin-left: 0;
+        margin-top: 10px;
+        text-align: left;
       }
     }
   </style>
 </head>
 <body>
-  <div class="content">
-    <!-- 1 -->
-    <div class="header">Gekkel Vladislav Aleksandovich</div>
-    <div class="line"></div>
 
-    <!-- 2 -->
-    <div class="text-2">КТО ТАКОЙ</div>
+  <!-- 1 -->
+  <div class="header">Gekkel Vladislav Aleksandovich</div>
+  <div class="line"></div>
 
-    <!-- 3 -->
-    <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
+  <!-- 2 + 3 -->
+  <div class="section">
+    <div class="left-texts">
+      <div class="text-2">КТО ТАКОЙ</div>
+      <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
+    </div>
+
+    <div class="description">
+      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески. Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад. Несмотря на то, что узоры сами по себе очень резкие, они могут сделать фигуру размытой или нечеткой. Яркое и абстрактное контрастирует с расплывчатым и образным.
+      Вариации этой техники существуют уже сотни лет, но, несмотря на это, его работы часто принимают за цифровое искусство. Говорят, что мраморная графика берет своё начало в Японии 12-го века как «Суминагаси», а спустя столетия пришла в Европу через Османскую империю и метод «Эбру».
+    </div>
   </div>
+
 </body>
 </html>
