@@ -82,13 +82,13 @@
 <body>
   <div class="page" id="page">
     <div id="grid"></div>
-    <div id="cellD3" class="cell-content" style="font-size: 10px; top: 5px;">
-      ⏳ Загрузка ячейки D3...
+    <div id="cellC3" class="cell-content" style="font-size: 10px; top: 5px;">
+      ⏳ Загрузка ячейки C3...
     </div>
   </div>
 
   <script>
-    // === Создание линий ===
+    // === Разлиновка ===
     const grid = document.getElementById('grid');
     const totalLines = 200;
     const lineHeight = 28;
@@ -109,19 +109,20 @@
     }
 
     // === Загрузка данных из Google Sheets ===
-    const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
+    const sheetCSV =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
 
     fetch(sheetCSV)
       .then(response => response.text())
       .then(csvText => {
         const rows = csvText.split('\n').map(r => r.split(','));
 
-        // Ячейка D3 — это 4-й столбец (индекс 3) в 3-й строке (индекс 2)
-        const cellD3 = rows[2] && rows[2][3] ? rows[2][3].trim() : '(ячейка D3 пуста)';
-        document.getElementById('cellD3').textContent = cellD3;
+        // C3 = 3-я строка (index 2), 3-й столбец (index 2)
+        const cellC3 = rows[2] && rows[2][2] ? rows[2][2].trim() : '(ячейка C3 пуста)';
+        document.getElementById('cellC3').textContent = cellC3;
       })
       .catch(err => {
-        document.getElementById('cellD3').textContent = `⚠️ Ошибка загрузки: ${err}`;
+        document.getElementById('cellC3').textContent = `⚠️ Ошибка загрузки: ${err}`;
       });
   </script>
 </body>
