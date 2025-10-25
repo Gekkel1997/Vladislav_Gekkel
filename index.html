@@ -85,17 +85,20 @@
       margin-left: 30px;
       display: flex;
       gap: 30px;
+      align-items: flex-start;
     }
 
     .info-column {
       display: flex;
       flex-direction: column;
+      line-height: 1.1; /* 🔹 уменьшили межстрочный интервал */
     }
 
     .info-text {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
       color: #000;
+      margin-bottom: 2px; /* 🔹 минимальный зазор между строками */
     }
 
     .info-bold {
@@ -103,7 +106,7 @@
       font-size: 7px;
       font-weight: 600;
       color: #000;
-      margin-top: 2px;
+      margin-top: 0; /* 🔹 убрали отступ сверху */
     }
 
     /* Адаптация под телефон */
@@ -123,6 +126,11 @@
       .text-2,
       .text-3 {
         font-size: 28px;
+      }
+
+      .info {
+        flex-direction: column;
+        gap: 5px;
       }
     }
   </style>
