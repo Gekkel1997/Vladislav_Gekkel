@@ -6,10 +6,11 @@
   <title>Газета Владислава Геккеля</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* === Базовые стили === */
     body {
-      background-color: #dcdcdc; /* фон вокруг страницы */
+      background-color: #dcdcdc;
       margin: 0;
-      padding: 60px 0;
+      padding: 5vh 0;
       display: flex;
       justify-content: center;
       font-family: "Oswald", sans-serif;
@@ -17,16 +18,18 @@
 
     .page {
       background-color: white;
-      width: 90%;
+      width: 92%;
       max-width: 1200px;
-      border: 1px solid #bfbfbf; /* тонкая рамка */
-      padding: 60px 100px;
+      border: 1px solid #bfbfbf;
+      padding: 6vh 6vw;
       box-sizing: border-box;
       position: relative;
-      line-height: 1.6;
+      line-height: 1.4;
       overflow: hidden;
+      min-height: 8000px;
     }
 
+    /* === Разлиновка === */
     .grid-line {
       position: absolute;
       left: 0;
@@ -38,19 +41,54 @@
     .line-number {
       position: absolute;
       left: 10px;
-      font-size: 14px;
+      font-size: clamp(10px, 1.4vw, 14px);
       color: #888;
+      user-select: none;
     }
 
+    /* === Контент === */
     .cell-content {
       position: absolute;
-      top: 10px;
-      left: 60px;
-      font-size: 16px;
+      top: 5px;
+      left: clamp(50px, 8vw, 80px);
+      font-size: clamp(14px, 2vw, 18px);
       font-weight: 500;
       color: #111;
+      max-width: 90%;
+      word-wrap: break-word;
     }
 
+    /* === Адаптация под маленькие экраны === */
+    @media (max-width: 768px) {
+      .page {
+        padding: 4vh 5vw;
+      }
+
+      .cell-content {
+        left: 50px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 2vh 0;
+      }
+
+      .page {
+        padding: 3vh 4vw;
+        width: 96%;
+      }
+
+      .cell-content {
+        font-size: clamp(12px, 4vw, 16px);
+        left: 40px;
+      }
+
+      .line-number {
+        font-size: clamp(9px, 3vw, 12px);
+        left: 8px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -61,8 +99,8 @@
 
   <script>
     const grid = document.getElementById('grid');
-    const totalLines = 100;
-    const lineHeight = 40;
+    const totalLines = 200;
+    const lineHeight = 28; // немного уменьшили расстояние
 
     // Разлиновка
     for (let i = 1; i <= totalLines; i++) {
@@ -80,7 +118,7 @@
       grid.appendChild(num);
     }
 
-    // 📊 Подключение Google Sheets
+    // === Подключение Google Sheets ===
     const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
 
     fetch(sheetCSV)
@@ -88,11 +126,8 @@
       .then(csvText => {
         const rows = csvText.split('\n').map(r => r.split(','));
 
-        // Получаем конкретную ячейку C3 (строка 3, колонка 3)
         const cellC3 = rows[2] && rows[2][2] ? rows[2][2].trim() : '(ячейка C3 пуста)';
         document.getElementById('cellC3').textContent = cellC3;
-
-        console.log('✅ Значение C3:', cellC3);
       })
       .catch(err => {
         document.getElementById('cellC3').textContent = `⚠️ Ошибка загрузки: ${err}`;
