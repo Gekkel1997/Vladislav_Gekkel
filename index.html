@@ -64,7 +64,7 @@
       color: #000;
       text-align: justify;
       flex: 1;
-      max-width: 300px; /* ограничение ширины */
+      max-width: 300px;
     }
 
     /* Адаптация под мобильные устройства */
@@ -78,7 +78,14 @@
         margin-left: 0;
         margin-top: 10px;
         text-align: left;
-        max-width: 100%; /* на телефоне ширина во весь экран */
+        max-width: 100%;
+      }
+    }
+
+    /* Доп. адаптация для горизонтальной ориентации телефонов */
+    @media (orientation: landscape) and (max-width: 1024px) {
+      .description {
+        margin-right: 30px; /* такой же отступ, как у линии */
       }
     }
   </style>
