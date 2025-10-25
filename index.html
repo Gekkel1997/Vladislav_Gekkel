@@ -4,50 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Газета Владислава Геккеля</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #dcdcdc; /* фон вокруг страницы — серый, как на скрине */
+      background-color: #dcdcdc; /* фон вокруг страницы */
       margin: 0;
-      padding: 40px 0;
+      padding: 60px 0;
       display: flex;
       justify-content: center;
-      font-family: "Oswald", Arial, sans-serif;
+      font-family: "Oswald", sans-serif;
     }
 
     .page {
       background-color: white;
       width: 90%;
-      max-width: 1400px;
-      border: 1.5px solid #bfbfbf; /* тонкая рамка */
-      padding: 60px 80px; /* поля как в Google Sheets */
+      max-width: 1200px;
+      border: 1px solid #bfbfbf; /* тонкая рамка */
+      padding: 80px 100px;
       box-sizing: border-box;
+      line-height: 1.6;
     }
 
     h1 {
-      font-size: 48px;
-      font-weight: 700;
+      font-size: 56px;
+      font-weight: 600;
+      margin-bottom: 40px;
       text-transform: uppercase;
-      margin-bottom: 20px;
       letter-spacing: 1px;
     }
 
     h2 {
-      font-size: 28px;
+      font-size: 36px;
       font-weight: 500;
-      margin-top: 40px;
-      margin-bottom: 10px;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
     }
 
     p {
-      font-size: 18px;
-      line-height: 1.5;
-      color: #222;
-      max-width: 800px;
+      font-size: 20px;
+      font-weight: 300;
+      color: #111;
+      max-width: 750px;
+      text-align: left;
+      margin-bottom: 30px;
     }
 
     img {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 40px;
+      margin-bottom: 60px;
+    }
+
+    section {
+      margin-bottom: 80px;
     }
   </style>
 </head>
@@ -71,7 +81,7 @@
           const [title, description, image] = row;
           const section = document.createElement('section');
           section.innerHTML = `
-            ${title ? `<h1>${title}</h1>` : ''}
+            ${title ? `<h2>${title}</h2>` : ''}
             ${description ? `<p>${description}</p>` : ''}
             ${image ? `<img src="${image}" alt="${title}">` : ''}
           `;
