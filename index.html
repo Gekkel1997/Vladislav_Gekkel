@@ -3,91 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Газета — Таблица</title>
+  <title>Мраморный Гранник</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial,-sans-serif;
-      background: #f5f5f5;
-      color: #333;
+      font-family: "Georgia", serif;
+      background: #f9f7f1;
+      color: #222;
+      line-height: 1.6;
     }
-    .table-wrapper {
-      width: 95%;
-      margin: 20px auto;
-      overflow-x: auto;
+
+    header {
+      text-align: center;
+      padding: 40px 10px 20px;
+      border-bottom: 3px double #333;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
+
+    .content {
+      width: 90%;
+      max-width: 1200px;
+      margin: 30px auto;
+      column-count: 3;
+      column-gap: 40px;
     }
-    th {
-      background: #eee;
+
+    article {
+      break-inside: avoid;
+      margin-bottom: 30px;
+      background: #fff;
+      padding: 15px 20px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      border-radius: 5px;
     }
-    @media (max-width: 768px) {
-      .table-wrapper {
-        width: 100%;
-        margin: 10px auto;
+
+    article h2 {
+      margin-top: 0;
+      color: #222;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+      border-top: 1px solid #ccc;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        column-count: 2;
       }
-      table {
-        font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        column-count: 1;
       }
     }
   </style>
 </head>
 <body>
-  <div class="table-wrapper">
-    <table id="dataTable">
-      <thead id="tableHead"></thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
 
-  <script>
-    // ID таблицы из ссылки
-    const sheetId = '1YGGuHtDIqNHK1TJgqlE3Rk2F6lJoymAj9jDDUUyVX7Q';
-    const sheetGid = '0'; // если первая вкладка (можешь поменять если другая)
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=${sheetGid}`;
+<header>
+  <h1>Мраморный Гранник</h1>
+  <p>Газета, созданная из Google Таблицы</p>
+</header>
 
-    fetch(url)
-      .then(response => response.text())
-      .then(text => {
-        // Убираем лишнее, т.к. Google возвращает JSONP
-        const json = JSON.parse(text.substring(text.indexOf('({')+1, text.lastIndexOf('})')+1));
-        const cols = json.table.cols;
-        const rows = json.table.rows;
+<div class="content" id="content"></div>
 
-        // Заголовки
-        const thead = document.getElementById('tableHead');
-        const headerRow = document.createElement('tr');
-        cols.forEach(col => {
-          const th = document.createElement('th');
-          th.textContent = col.label || '';
-          headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
+<footer>
+  <p>© 2025 Мраморный Гранник | Автоматически сгенерировано из Google Sheets</p>
+</footer>
 
-        // Данные
-        const tbody = document.getElementById('tableBody');
-        rows.forEach(row => {
-          const tr = document.createElement('tr');
-          row.c.forEach(cell => {
-            const td = document.createElement('td');
-            td.textContent = cell ? (cell.v || '') : '';
-            tr.appendChild(td);
-          });
-          tbody.appendChild(tr);
-        });
+<script>
+  const sheetId = '1YGGuHtDIqNHK1TJgqlE3Rk2F6lJoymAj9jDDUUyVX7Q';
+  const sheetGid = '0';
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=${sheetGid}`;
 
-      })
-      .catch(err => {
-        console.error('Ошибка загрузки данных таблицы:', err);
+  fetch(url)
+    .then(res => res.text())
+    .then(txt => {
+      const json = JSON.parse(txt.substring(txt.indexOf('({') + 1, txt.lastIndexOf('})') + 1));
+      const rows = json.table.rows;
+
+      const container = document.getElementById('content');
+      container.innerHTML = '';
+
+      rows.forEach((r, i) => {
+        const cells = r.c.map(c => c ? c.v : '');
+        if (cells.join('').trim() === '') return; // пропускаем пустые строки
+
+        const article = document.createElement('article');
+        article.innerHTML = `
+          <h2>${cells[0] || 'Без заголовка'}</h2>
+          <p>${cells.slice(1).join(' ')}</p>
+        `;
+        container.appendChild(article);
       });
-  </script>
+    })
+    .catch(err => {
+      document.getElementById('content').innerHTML = '<p>Ошибка загрузки данных.</p>';
+      console.error(err);
+    });
+</script>
+
 </body>
 </html>
+
