@@ -1,121 +1,63 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мраморный Гранник</title>
+  <title>Газета Владислава Геккеля</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: "Georgia", serif;
-      background: #f9f7f1;
-      color: #222;
-      line-height: 1.6;
+      background-color: #f3f3f3;
+      font-family: 'Georgia', serif;
+      color: #111;
+      display: flex;
+      justify-content: center;
     }
 
-    header {
-      text-align: center;
-      padding: 40px 10px 20px;
-      border-bottom: 3px double #333;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 36px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .content {
-      width: 90%;
+    .page {
+      width: 90vw;
       max-width: 1200px;
-      margin: 30px auto;
-      column-count: 3;
-      column-gap: 40px;
+      background: white;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      border: 1px solid #ddd;
     }
 
-    article {
-      break-inside: avoid;
-      margin-bottom: 30px;
-      background: #fff;
-      padding: 15px 20px;
-      box-shadow: 0 0 6px rgba(0,0,0,0.1);
-      border-radius: 5px;
-    }
-
-    article h2 {
-      margin-top: 0;
-      color: #222;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 5px;
-    }
-
-    footer {
+    .cell {
+      border: 1px solid #ccc;
+      padding: 10px;
       text-align: center;
-      padding: 30px;
-      color: #777;
-      border-top: 1px solid #ccc;
+      transition: all 0.3s ease;
+      background-color: #fafafa;
     }
 
-    @media (max-width: 900px) {
-      .content {
-        column-count: 2;
-      }
+    .cell:hover {
+      transform: scale(1.05);
+      background-color: #fff5e6;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    @media (max-width: 600px) {
-      .content {
-        column-count: 1;
-      }
+    h1 {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #000;
     }
   </style>
 </head>
 <body>
+  <div class="page">
+    <h1>Газета Владислава Геккеля</h1>
 
-<header>
-  <h1>Мраморный Гранник</h1>
-  <p>Газета, созданная из Google Таблицы</p>
-</header>
+    <div class="cell">ПРО СЕБЯ</div>
+    <div class="cell">РАБОТЫ</div>
+    <div class="cell">ПРОЕКТЫ</div>
+    <div class="cell">КОНТАКТЫ</div>
 
-<div class="content" id="content"></div>
-
-<footer>
-  <p>© 2025 Мраморный Гранник | Автоматически сгенерировано из Google Sheets</p>
-</footer>
-
-<script>
-  const sheetId = '1YGGuHtDIqNHK1TJgqlE3Rk2F6lJoymAj9jDDUUyVX7Q';
-  const sheetGid = '0';
-  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=${sheetGid}`;
-
-  fetch(url)
-    .then(res => res.text())
-    .then(txt => {
-      const json = JSON.parse(txt.substring(txt.indexOf('({') + 1, txt.lastIndexOf('})') + 1));
-      const rows = json.table.rows;
-
-      const container = document.getElementById('content');
-      container.innerHTML = '';
-
-      rows.forEach((r, i) => {
-        const cells = r.c.map(c => c ? c.v : '');
-        if (cells.join('').trim() === '') return; // пропускаем пустые строки
-
-        const article = document.createElement('article');
-        article.innerHTML = `
-          <h2>${cells[0] || 'Без заголовка'}</h2>
-          <p>${cells.slice(1).join(' ')}</p>
-        `;
-        container.appendChild(article);
-      });
-    })
-    .catch(err => {
-      document.getElementById('content').innerHTML = '<p>Ошибка загрузки данных.</p>';
-      console.error(err);
-    });
-</script>
-
+  </div>
 </body>
 </html>
-
