@@ -1,491 +1,152 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=yes">
-<title>Canvas: Google Sheet → Visual</title>
-<style>
-  html,body{height:100%;margin:0;background:#efefef;}
-  #canvasWrap{
-    width:100vw;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    padding:10px 10px;
-    box-sizing:border-box;
-  }
-  canvas{
-    background:#fff;
-    box-shadow:0 6px 18px rgba(0,0,0,0.06);
-    touch-action:none; /* we'll handle gestures */
-    display:block;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Газета Владислава Геккеля</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #dcdcdc;
+      margin: 0;
+      padding: 5vh 0;
+      display: flex;
+      justify-content: center;
+      font-family: "Oswald", sans-serif;
+    }
+
+    .page {
+      background-color: white;
+      width: 92%;
+      max-width: 1200px;
+      border: 1px solid #bfbfbf;
+      padding: 6vh 6vw;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      min-height: 8000px;
+    }
+
+    /* --- Разлиновка --- */
+    .grid-line {
+      position: absolute;
+      left: 90px;
+      width: calc(100% - 180px);
+      height: 1px;
+      background-color: #e6e6e6;
+    }
+
+    .grid-line.first {
+      background-color: #555;
+    }
+
+    .line-number {
+      position: absolute;
+      left: 60px;
+      font-size: clamp(10px, 1.4vw, 14px);
+      color: #888;
+      user-select: none;
+    }
+
+    /* --- Контент (ячейка C3) --- */
+    .cell-content {
+      position: absolute;
+      left: 90px;
+      top: 2px; /* отступ от линии */
+      font-size: 7px;
+      font-weight: 500;
+      color: #111;
+      max-width: calc(100% - 180px);
+      word-wrap: break-word;
+    }
+
+    /* --- Адаптация под экраны --- */
+    @media (max-width: 768px) {
+      .page {
+        padding: 4vh 5vw;
+      }
+
+      .grid-line {
+        left: 60px;
+        width: calc(100% - 120px);
+      }
+
+      .line-number {
+        left: 35px;
+      }
+
+      .cell-content {
+        left: 60px;
+        max-width: calc(100% - 120px);
+        font-size: 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 3vh 4vw;
+        width: 96%;
+      }
+
+      .grid-line {
+        left: 40px;
+        width: calc(100% - 80px);
+      }
+
+      .line-number {
+        left: 15px;
+        font-size: clamp(9px, 3vw, 12px);
+      }
+
+      .cell-content {
+        left: 40px;
+        max-width: calc(100% - 80px);
+        font-size: 5.5px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div id="canvasWrap">
-    <canvas id="sheetCanvas"></canvas>
+  <div class="page" id="page">
+    <div id="grid"></div>
+    <div id="cellC3" class="cell-content">⏳ Загрузка ячейки C3...</div>
   </div>
 
-<script>
-/*
-  Canvas Sheet Renderer — renders CSV table to a canvas,
-  supports pinch zoom + pan, images (if cell contains image URL),
-  basic wrapping, gridlines, font sizing.
+  <script>
+    // === Разлиновка ===
+    const grid = document.getElementById('grid');
+    const totalLines = 200;
+    const lineHeight = 28;
 
-  Replace SHEET_CSV with your CSV URL (public).
-*/
+    for (let i = 1; i <= totalLines; i++) {
+      const y = i * lineHeight;
+      const line = document.createElement('div');
+      line.className = 'grid-line' + (i === 1 ? ' first' : '');
+      line.style.top = `${y}px`;
 
-const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
+      const num = document.createElement('div');
+      num.className = 'line-number';
+      num.style.top = `${y - 8}px`;
+      num.textContent = i;
 
-const canvas = document.getElementById('sheetCanvas');
-const ctx = canvas.getContext('2d');
-
-// Virtual sheet base dimensions (like desktop sheet)
-// We'll scale to fit viewport initially.
-const BASE_W = 1920;
-const BASE_H = 1080; // will grow with rows if needed
-
-// visual paddings inside cell
-const CELL_PAD_X = 14;
-const CELL_PAD_Y = 10;
-const LINE_COLOR = '#dcdcdc';
-const HEADER_BG = '#f7f7f7';
-
-let data = [];          // array of rows (array of cells)
-let colCount = 0;
-let rowCount = 0;
-let colWidths = [];     // in virtual px
-let rowHeights = [];    // in virtual px
-let totalWidth = BASE_W;
-let totalHeight = BASE_H;
-
-// view transform
-let scale = 1;          // zoom (user)
-let offsetX = 0;        // pan
-let offsetY = 0;
-let minScale = 0.2, maxScale = 4;
-
-// device pixel ratio for crispness
-const DPR = Math.max(1, window.devicePixelRatio || 1);
-
-// images cache
-const imageCache = new Map();
-
-// fonts
-const HEADER_FONT = '600 16px / 1 "Arial", "Helvetica", sans-serif';
-const CELL_FONT = '400 14px / 1 "Arial", "Helvetica", sans-serif';
-
-// ------------- CSV parsing (robust) -------------
-function parseCSV(text) {
-  const rows = [];
-  // basic state machine parse to handle quoted fields
-  let cur = '';
-  let row = [];
-  let inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    const next = text[i+1];
-    if (ch === '"' ) {
-      if (inQuotes && next === '"') { // escaped quote
-        cur += '"';
-        i++; // skip next
-      } else {
-        inQuotes = !inQuotes;
-      }
-    } else if (!inQuotes && (ch === ',')) {
-      row.push(cur);
-      cur = '';
-    } else if (!inQuotes && (ch === '\r')) {
-      // ignore, wait for \n
-    } else if (!inQuotes && ch === '\n') {
-      row.push(cur);
-      rows.push(row);
-      row = [];
-      cur = '';
-    } else {
-      cur += ch;
-    }
-  }
-  // push last
-  if (cur !== '' || row.length > 0) {
-    row.push(cur);
-    rows.push(row);
-  }
-  return rows;
-}
-
-// ------------- measure text helper -------------
-function measureTextWidth(text, font) {
-  ctx.save();
-  ctx.font = font;
-  const w = ctx.measureText(text).width;
-  ctx.restore();
-  return w;
-}
-
-// ------------- load images from URLs -------------
-function loadImage(url) {
-  if (!url) return Promise.resolve(null);
-  if (imageCache.has(url)) return Promise.resolve(imageCache.get(url));
-  return new Promise(resolve => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => { imageCache.set(url, img); resolve(img); };
-    img.onerror = () => { imageCache.set(url, null); resolve(null); };
-    img.src = url;
-  });
-}
-
-// ------------- layout calculation -------------
-async function computeLayout() {
-  rowCount = data.length;
-  colCount = Math.max(...data.map(r => r.length));
-
-  // initialize widths equally
-  colWidths = new Array(colCount).fill( Math.floor(BASE_W / Math.max(1, colCount)) );
-  rowHeights = new Array(rowCount).fill(28); // default row height
-
-  // measure: for each column, find max content width (text or image)
-  const ctxTmp = ctx;
-  ctxTmp.save();
-  ctxTmp.font = CELL_FONT;
-  const maxTextWidthPerCol = new Array(colCount).fill(0);
-  for (let r = 0; r < rowCount; r++) {
-    for (let c = 0; c < colCount; c++) {
-      const cell = (data[r][c] !== undefined) ? String(data[r][c]).trim() : '';
-      if (!cell) continue;
-      // if image URL
-      const imgMatch = cell.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i);
-      if (imgMatch) {
-        // assume image placeholder width ~ 200px if appears
-        maxTextWidthPerCol[c] = Math.max(maxTextWidthPerCol[c], 220);
-        // row height maybe larger
-        rowHeights[r] = Math.max(rowHeights[r], 180);
-      } else {
-        // measure by approximate longest token or full width
-        const lines = cell.split('\n');
-        for (const L of lines) {
-          const w = ctxTmp.measureText(L).width + CELL_PAD_X*2;
-          maxTextWidthPerCol[c] = Math.max(maxTextWidthPerCol[c], w);
-        }
-        // row height: based on lines count
-        const estimatedLines = Math.max(1, cell.split('\n').length);
-        const approxHeight = estimatedLines * 18 + CELL_PAD_Y*2;
-        rowHeights[r] = Math.max(rowHeights[r], approxHeight);
-      }
-    }
-  }
-  ctxTmp.restore();
-
-  // normalize column widths to fit BASE_W while preserving ratios
-  const totalDesired = maxTextWidthPerCol.reduce((a,b)=>a+b, 0) || (BASE_W);
-  // avoid zero
-  let factor = BASE_W / totalDesired;
-  for (let c = 0; c < colCount; c++) {
-    colWidths[c] = Math.max(60, Math.round((maxTextWidthPerCol[c] || 100) * factor));
-  }
-
-  // if totals don't add up due rounding, stretch last column
-  totalWidth = colWidths.reduce((a,b)=>a+b, 0);
-  if (totalWidth < BASE_W) {
-    colWidths[colCount-1] += (BASE_W - totalWidth);
-    totalWidth = BASE_W;
-  } else if (totalWidth > BASE_W) {
-    // scale down proportionally
-    const scaleDown = BASE_W / totalWidth;
-    for (let c=0;c<colCount;c++) colWidths[c] = Math.max(40, Math.round(colWidths[c]*scaleDown));
-    totalWidth = colWidths.reduce((a,b)=>a+b, 0);
-  }
-
-  // compute totalHeight as sum of rowHeights
-  totalHeight = rowHeights.reduce((a,b)=>a+b, 0);
-  if (totalHeight < BASE_H) totalHeight = BASE_H;
-
-  // pre-load images that are in cells
-  const imgPromises = [];
-  for (let r=0;r<rowCount;r++){
-    for (let c=0;c<colCount;c++){
-      const cell = (data[r][c]||'').trim();
-      if (/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i.test(cell)) {
-        imgPromises.push(loadImage(cell));
-      }
-    }
-  }
-  await Promise.all(imgPromises);
-}
-
-// ------------- drawing -------------
-function clearCanvasForDPR() {
-  // set canvas pixel size to viewport size * DPR
-  const wrap = document.getElementById('canvasWrap');
-  const availW = Math.max(300, wrap.clientWidth - 20);
-  const availH = Math.max(300, wrap.clientHeight - 20);
-  canvas.style.width = availW + 'px';
-  canvas.style.height = availH + 'px';
-  canvas.width = Math.round(availW * DPR);
-  canvas.height = Math.round(availH * DPR);
-  ctx.setTransform(DPR,0,0,DPR,0,0); // work in CSS pixels but high density
-}
-
-function drawSheet() {
-  clearCanvasForDPR();
-  ctx.save();
-  // clear viewport
-  ctx.clearRect(0,0,canvas.width/DPR, canvas.height/DPR);
-
-  // apply pan/zoom transform
-  ctx.translate(offsetX, offsetY);
-  ctx.scale(scale, scale);
-
-  // white sheet background
-  ctx.fillStyle = '#fff';
-  ctx.fillRect(0,0,totalWidth, totalHeight);
-
-  // draw header row background (first row)
-  if (rowCount > 0) {
-    // if first row exists, treat as header visually
-    let y = 0;
-    for (let r=0;r<1;r++){
-      const h = rowHeights[r];
-      ctx.fillStyle = HEADER_BG;
-      ctx.fillRect(0, y, totalWidth, h);
-      break;
-    }
-  }
-
-  // draw cells
-  let y = 0;
-  for (let r = 0; r < rowCount; r++) {
-    let x = 0;
-    const rowH = rowHeights[r];
-    for (let c = 0; c < colCount; c++) {
-      const w = colWidths[c];
-
-      // cell background already white (or header)
-      // draw content
-      const cell = (data[r][c] !== undefined) ? String(data[r][c]).trim() : '';
-
-      // draw images if URL
-      if (/^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i.test(cell)) {
-        const img = imageCache.get(cell) || null;
-        if (img) {
-          // fit image into cell padded area
-          const maxW = w - CELL_PAD_X*2;
-          const maxH = rowH - CELL_PAD_Y*2;
-          let iw = img.width, ih = img.height;
-          const ratio = Math.min(maxW/iw, maxH/ih, 1);
-          iw = iw * ratio; ih = ih * ratio;
-          const ix = x + CELL_PAD_X + (maxW - iw)/2;
-          const iy = y + CELL_PAD_Y + (maxH - ih)/2;
-          ctx.drawImage(img, ix, iy, iw, ih);
-        } else {
-          // placeholder text for missing image
-          ctx.fillStyle = '#888';
-          ctx.font = CELL_FONT;
-          ctx.fillText('[image]', x + CELL_PAD_X, y + CELL_PAD_Y + 12);
-        }
-      } else if (cell !== '') {
-        // draw wrapped text
-        ctx.fillStyle = '#111';
-        ctx.font = (r===0) ? HEADER_FONT : CELL_FONT;
-        const fontSize = parseInt((r===0) ? 16 : 14,10);
-        // wrap into lines to fit col width
-        const maxTextWidth = w - CELL_PAD_X*2;
-        const words = cell.split(/\s+/);
-        let line = '';
-        let lines = [];
-        for (let i=0;i<words.length;i++){
-          const test = (line === '') ? words[i] : (line + ' ' + words[i]);
-          const tw = ctx.measureText(test).width;
-          if (tw > maxTextWidth && line !== '') {
-            lines.push(line);
-            line = words[i];
-          } else {
-            line = test;
-          }
-        }
-        if (line !== '') lines.push(line);
-        // if cell contains explicit newline \n, respect it:
-        if (cell.indexOf('\n') !== -1) {
-          lines = [].concat(...cell.split('\n').map(part=>{
-            // wrap each paragraph
-            const parts = [];
-            let cur = '';
-            for (const token of part.split(/\s+/)) {
-              const t = cur ? (cur + ' ' + token) : token;
-              if (ctx.measureText(t).width > maxTextWidth && cur) {
-                parts.push(cur);
-                cur = token;
-              } else cur = t;
-            }
-            if (cur) parts.push(cur);
-            return parts;
-          }));
-        }
-        // draw lines with padding
-        ctx.fillStyle = '#111';
-        let ty = y + CELL_PAD_Y + fontSize;
-        for (let li = 0; li < lines.length; li++) {
-          ctx.fillText(lines[li], x + CELL_PAD_X, ty);
-          ty += fontSize + 4;
-          // do not overflow cell visually
-          if (ty > y + rowH - CELL_PAD_Y) break;
-        }
-      }
-
-      // draw vertical grid line
-      ctx.strokeStyle = LINE_COLOR;
-      ctx.lineWidth = 1 / scale; // keep thin
-      ctx.beginPath();
-      ctx.moveTo(x + w, y);
-      ctx.lineTo(x + w, y + rowH);
-      ctx.stroke();
-
-      x += w;
+      grid.appendChild(line);
+      grid.appendChild(num);
     }
 
-    // draw horizontal grid line
-    ctx.strokeStyle = LINE_COLOR;
-    ctx.lineWidth = 1 / scale;
-    ctx.beginPath();
-    ctx.moveTo(0, y + rowH);
-    ctx.lineTo(totalWidth, y + rowH);
-    ctx.stroke();
+    // === Загрузка данных из Google Sheets ===
+    const sheetCSV =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
 
-    y += rowH;
-  }
-
-  ctx.restore();
-}
-
-// ------------- gestures: pinch & pan & mouse support -------------
-let lastTouchDist = 0;
-let isTouchPanning = false;
-let touchPanStart = null;
-
-canvas.addEventListener('touchstart', (e) => {
-  if (e.touches.length === 2) {
-    lastTouchDist = distanceBetweenTouches(e.touches[0], e.touches[1]);
-    // compute focal point in viewport coords
-    e.preventDefault();
-  } else if (e.touches.length === 1) {
-    isTouchPanning = true;
-    touchPanStart = { x: e.touches[0].clientX - offsetX, y: e.touches[0].clientY - offsetY };
-  }
-});
-
-canvas.addEventListener('touchmove', (e) => {
-  if (e.touches.length === 2) {
-    e.preventDefault();
-    const dist = distanceBetweenTouches(e.touches[0], e.touches[1]);
-    const ratio = dist / lastTouchDist;
-    lastTouchDist = dist;
-    // zoom at midpoint
-    const rect = canvas.getBoundingClientRect();
-    const midX = (e.touches[0].clientX + e.touches[1].clientX)/2 - rect.left;
-    const midY = (e.touches[0].clientY + e.touches[1].clientY)/2 - rect.top;
-    zoomAtPoint(ratio, midX, midY);
-    drawSheet();
-  } else if (isTouchPanning && e.touches.length === 1) {
-    e.preventDefault();
-    offsetX = e.touches[0].clientX - touchPanStart.x;
-    offsetY = e.touches[0].clientY - touchPanStart.y;
-    drawSheet();
-  }
-});
-
-canvas.addEventListener('touchend', (e) => {
-  if (e.touches.length === 0) {
-    isTouchPanning = false;
-    lastTouchDist = 0;
-  }
-});
-
-// mouse wheel zoom (ctrl required to avoid interfering with scroll)
-canvas.addEventListener('wheel', (e) => {
-  if (e.ctrlKey || e.metaKey) {
-    e.preventDefault();
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const delta = (e.deltaY > 0) ? 0.95 : 1.05;
-    zoomAtPoint(delta, mx, my);
-    drawSheet();
-  }
-}, { passive: false });
-
-// mouse pan
-let isMouseDown = false;
-let mousePanStart = null;
-canvas.addEventListener('mousedown', (e) => {
-  isMouseDown = true;
-  mousePanStart = { x: e.clientX - offsetX, y: e.clientY - offsetY };
-});
-window.addEventListener('mousemove', (e) => {
-  if (!isMouseDown) return;
-  offsetX = e.clientX - mousePanStart.x;
-  offsetY = e.clientY - mousePanStart.y;
-  drawSheet();
-});
-window.addEventListener('mouseup', () => isMouseDown = false);
-
-function distanceBetweenTouches(t1, t2) {
-  const dx = t1.clientX - t2.clientX;
-  const dy = t1.clientY - t2.clientY;
-  return Math.hypot(dx, dy);
-}
-
-function zoomAtPoint(ratio, cx, cy) {
-  // ratio >1 zoom in, <1 zoom out
-  const prevScale = scale;
-  scale = Math.max(minScale, Math.min(maxScale, scale * ratio));
-  // adjust offset so that point (cx,cy) remains at same logical position
-  // transform: (logicalX * scale + offsetX) = screenX
-  // logicalX = (screenX - offsetX) / prevScale
-  const logicalX = (cx - offsetX) / prevScale;
-  const logicalY = (cy - offsetY) / prevScale;
-  offsetX = cx - logicalX * scale;
-  offsetY = cy - logicalY * scale;
-}
-
-// ------------- fetch and start -------------
-async function start() {
-  try {
-    const res = await fetch(SHEET_CSV);
-    const txt = await res.text();
-    data = parseCSV(txt);
-    if (!data || data.length === 0) {
-      ctx.fillStyle = '#000';
-      ctx.fillText('CSV пуст или недоступен', 20, 20);
-      return;
-    }
-    await computeLayout();
-    // initial fit: scale so that totalWidth fits available canvas wrap width
-    const wrap = document.getElementById('canvasWrap');
-    const availW = Math.max(300, wrap.clientWidth - 20);
-    const availH = Math.max(300, wrap.clientHeight - 20);
-    // compute initial scale to fit width
-    scale = Math.min( (availW / totalWidth), Math.max(0.4, availH / totalHeight) );
-    // center sheet
-    offsetX = (availW - totalWidth*scale) / 2;
-    offsetY = 10; // small top margin
-    drawSheet();
-    // handle resize
-    window.addEventListener('resize', () => {
-      // keep center approx
-      drawSheet();
-    });
-  } catch (err) {
-    console.error(err);
-    ctx.fillStyle = '#000';
-    ctx.fillText('Ошибка загрузки CSV: ' + err.message, 20, 20);
-  }
-}
-
-start();
-
-</script>
+    fetch(sheetCSV)
+      .then(response => response.text())
+      .then(csvText => {
+        const rows = csvText.split('\n').map(r => r.split(','));
+        const cellC3 = rows[2] && rows[2][2] ? rows[2][2].trim() : '(ячейка C3 пуста)';
+        document.getElementById('cellC3').textContent = cellC3;
+      })
+      .catch(err => {
+        document.getElementById('cellC3').textContent = `⚠️ Ошибка загрузки: ${err}`;
+      });
+  </script>
 </body>
 </html>
