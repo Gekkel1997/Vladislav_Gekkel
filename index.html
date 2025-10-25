@@ -12,7 +12,7 @@
       height: 100%;
       overflow: hidden;
       background-color: #f5f5f5;
-      touch-action: none; /* отключаем стандартные жесты браузера */
+      touch-action: none;
     }
 
     .iframe-wrapper {
@@ -35,7 +35,7 @@
       height: 1080px;
       border: none;
       transform-origin: top left;
-      transition: transform 0.1s ease;
+      transition: transform 0.08s ease-out;
     }
   </style>
 </head>
@@ -58,6 +58,14 @@
     let startX, startY;
     let isDragging = false;
 
+    // для инерции
+    let velocityX = 0;
+    let velocityY = 0;
+    let lastMoveTime = 0;
+    let lastX = 0;
+    let lastY = 0;
+    let momentumFrame;
+
     function applyTransform() {
       const totalScale = baseScale * userZoom;
       iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${totalScale})`;
@@ -69,7 +77,7 @@
       applyTransform();
     }
 
-    // --- Масштабирование колесиком ---
+    // === Масштабирование колесиком ===
     window.addEventListener('wheel', e => {
       if (e.ctrlKey || e.metaKey) {
         e.preventDefault();
@@ -79,11 +87,12 @@
       }
     }, { passive: false });
 
-    // --- Масштабирование пальцами ---
+    // === Масштабирование пальцами ===
     let initialDistance = 0;
     let initialZoom = 1;
 
     window.addEventListener('touchstart', e => {
+      cancelMomentum();
       if (e.touches.length === 2) {
         initialDistance = Math.hypot(
           e.touches[0].clientX - e.touches[1].clientX,
@@ -94,6 +103,9 @@
         isDragging = true;
         startX = e.touches[0].clientX - offsetX;
         startY = e.touches[0].clientY - offsetY;
+        lastX = e.touches[0].clientX;
+        lastY = e.touches[0].clientY;
+        lastMoveTime = Date.now();
       }
     });
 
@@ -108,31 +120,88 @@
         userZoom = Math.min(Math.max(0.3, initialZoom * scaleChange), 3);
         applyTransform();
       } else if (isDragging && e.touches.length === 1) {
+        const now = Date.now();
+        const dx = e.touches[0].clientX - lastX;
+        const dy = e.touches[0].clientY - lastY;
+        const dt = now - lastMoveTime;
+
+        velocityX = dx / dt * 16;
+        velocityY = dy / dt * 16;
+
         offsetX = e.touches[0].clientX - startX;
         offsetY = e.touches[0].clientY - startY;
         applyTransform();
+
+        lastX = e.touches[0].clientX;
+        lastY = e.touches[0].clientY;
+        lastMoveTime = now;
       }
     }, { passive: false });
 
     window.addEventListener('touchend', () => {
       isDragging = false;
+      startMomentum();
     });
 
-    // --- Перемещение мышью ---
+    // === Перемещение мышью ===
     wrapper.addEventListener('mousedown', e => {
+      cancelMomentum();
       isDragging = true;
       startX = e.clientX - offsetX;
       startY = e.clientY - offsetY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastMoveTime = Date.now();
     });
 
     window.addEventListener('mousemove', e => {
       if (!isDragging) return;
+      const now = Date.now();
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      const dt = now - lastMoveTime;
+
+      velocityX = dx / dt * 16;
+      velocityY = dy / dt * 16;
+
       offsetX = e.clientX - startX;
       offsetY = e.clientY - startY;
       applyTransform();
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastMoveTime = now;
     });
 
-    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      startMomentum();
+    });
+
+    // === Инерция ===
+    function startMomentum() {
+      cancelMomentum();
+      const decay = 0.95;
+
+      function step() {
+        offsetX += velocityX;
+        offsetY += velocityY;
+        velocityX *= decay;
+        velocityY *= decay;
+        applyTransform();
+
+        if (Math.abs(velocityX) > 0.2 || Math.abs(velocityY) > 0.2) {
+          momentumFrame = requestAnimationFrame(step);
+        }
+      }
+      momentumFrame = requestAnimationFrame(step);
+    }
+
+    function cancelMomentum() {
+      cancelAnimationFrame(momentumFrame);
+      velocityX = 0;
+      velocityY = 0;
+    }
 
     window.addEventListener('resize', resizeSheet);
     window.addEventListener('orientationchange', resizeSheet);
