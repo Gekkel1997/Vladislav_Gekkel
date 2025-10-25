@@ -6,7 +6,6 @@
   <title>Газета Владислава Геккеля</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* === Базовые стили === */
     body {
       background-color: #dcdcdc;
       margin: 0;
@@ -29,7 +28,7 @@
       min-height: 8000px;
     }
 
-    /* === Разлиновка === */
+    /* --- Разлиновка --- */
     .grid-line {
       position: absolute;
       left: 0;
@@ -46,26 +45,20 @@
       user-select: none;
     }
 
-    /* === Контент === */
+    /* --- Контент --- */
     .cell-content {
       position: absolute;
-      top: 5px;
       left: clamp(50px, 8vw, 80px);
-      font-size: clamp(14px, 2vw, 18px);
       font-weight: 500;
       color: #111;
       max-width: 90%;
       word-wrap: break-word;
     }
 
-    /* === Адаптация под маленькие экраны === */
+    /* --- Адаптация под экраны --- */
     @media (max-width: 768px) {
       .page {
         padding: 4vh 5vw;
-      }
-
-      .cell-content {
-        left: 50px;
       }
     }
 
@@ -79,11 +72,6 @@
         width: 96%;
       }
 
-      .cell-content {
-        font-size: clamp(12px, 4vw, 16px);
-        left: 40px;
-      }
-
       .line-number {
         font-size: clamp(9px, 3vw, 12px);
         left: 8px;
@@ -93,16 +81,18 @@
 </head>
 <body>
   <div class="page" id="page">
-    <div id="cellC3" class="cell-content">⏳ Загрузка ячейки C3...</div>
     <div id="grid"></div>
+    <div id="cellD3" class="cell-content" style="font-size: 10px; top: 5px;">
+      ⏳ Загрузка ячейки D3...
+    </div>
   </div>
 
   <script>
+    // === Создание линий ===
     const grid = document.getElementById('grid');
     const totalLines = 200;
-    const lineHeight = 28; // немного уменьшили расстояние
+    const lineHeight = 28;
 
-    // Разлиновка
     for (let i = 1; i <= totalLines; i++) {
       const y = i * lineHeight;
       const line = document.createElement('div');
@@ -118,7 +108,7 @@
       grid.appendChild(num);
     }
 
-    // === Подключение Google Sheets ===
+    // === Загрузка данных из Google Sheets ===
     const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
 
     fetch(sheetCSV)
@@ -126,11 +116,12 @@
       .then(csvText => {
         const rows = csvText.split('\n').map(r => r.split(','));
 
-        const cellC3 = rows[2] && rows[2][2] ? rows[2][2].trim() : '(ячейка C3 пуста)';
-        document.getElementById('cellC3').textContent = cellC3;
+        // Ячейка D3 — это 4-й столбец (индекс 3) в 3-й строке (индекс 2)
+        const cellD3 = rows[2] && rows[2][3] ? rows[2][3].trim() : '(ячейка D3 пуста)';
+        document.getElementById('cellD3').textContent = cellD3;
       })
       .catch(err => {
-        document.getElementById('cellC3').textContent = `⚠️ Ошибка загрузки: ${err}`;
+        document.getElementById('cellD3').textContent = `⚠️ Ошибка загрузки: ${err}`;
       });
   </script>
 </body>
