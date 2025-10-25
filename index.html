@@ -1,249 +1,56 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Портфолио — pinch zoom</title>
-<style>
-  :root{ --bg:#f5f5f5; --page:#fff; --frame-border:#d0d0d0; }
-  html,body{ height:100%; margin:0; background:var(--bg); -webkit-user-select:none; user-select:none; }
-  .center {
-    display:flex; justify-content:center; align-items:flex-start;
-    padding:24px 12px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио Владислава Геккеля</title>
 
-  .iframe-wrapper{
-    width:100%;
-    max-width:1200px;
-    height:calc(100vh - 48px);
-    background:var(--page);
-    border:1px solid var(--frame-border);
-    box-shadow:0 6px 18px rgba(0,0,0,0.06);
-    position:relative;
-    overflow:hidden;
-    touch-action: none; /* важно: перехватываем жесты для собственных обработчиков */
-  }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f5f5f5;
+    }
 
-  /* сам iframe — абсолютный, его мы масштабируем через transform */
-  iframe {
-    position:absolute;
-    top:0;
-    left:0;
-    width:1920px;   /* базовая ширина таблицы */
-    height:1080px;  /* базовая высота (можно увеличить при необходимости) */
-    border:0;
-    transform-origin: top left;
-    will-change: transform;
-    background:white;
-  }
+    .iframe-wrapper {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
 
-  /* панель управления (кнопки) */
-  .controls {
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    display:flex;
-    gap:8px;
-    z-index:1000;
-  }
-  .btn {
-    background:#fff;
-    border:1px solid #ccc;
-    padding:8px 10px;
-    border-radius:6px;
-    cursor:pointer;
-    box-shadow:0 3px 8px rgba(0,0,0,0.08);
-    font-weight:600;
-  }
-  .btn:active{ transform:translateY(1px); }
-  .info {
-    position:fixed;
-    left:18px;
-    bottom:18px;
-    background:rgba(255,255,255,0.9);
-    border-radius:6px;
-    padding:8px 10px;
-    font-size:13px;
-    border:1px solid #e0e0e0;
-  }
-
-  /* адаптация под маленькие экраны */
-  @media (max-width:480px){
-    .iframe-wrapper{ max-width:100%; height:calc(100vh - 48px); }
-    iframe{ width:1440px; height:900px; } /* опционально уменьшить базу для телефонов */
-  }
-</style>
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px; /* базовая ширина таблицы (как в Google Sheets на десктопе) */
+      height: 1080px;
+      border: none;
+      transform-origin: top left;
+    }
+  </style>
 </head>
 <body>
-  <div class="center">
-    <div class="iframe-wrapper" id="wrapper">
-      <iframe id="sheet"
-        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
-        allowfullscreen
-      ></iframe>
-    </div>
+  <div class="iframe-wrapper">
+    <iframe
+      id="sheet"
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml">
+    </iframe>
   </div>
 
-  <div class="controls" aria-hidden>
-    <button class="btn" id="zoomOut">−</button>
-    <button class="btn" id="zoomReset">Reset</button>
-    <button class="btn" id="zoomIn">+</button>
-  </div>
-
-  <div class="info" id="info">Масштаб: <span id="scaleLabel">—</span></div>
-
-<script>
-(function(){
-  const iframe = document.getElementById('sheet');
-  const wrapper = document.getElementById('wrapper');
-
-  // базовая ширина таблицы в px (подставь точную, если другая)
-  const BASE_WIDTH = 1920;
-  const BASE_HEIGHT = 1080;
-
-  // scale: реальное текущие масштабирование (начальное подгонка по ширине)
-  let baseFitScale = 1;    // масштаб, чтобы таблица поместилась в ширину окна
-  let gestureScale = 1;    // дополнительный масштаб от пинча/кнопок
-  let currentScale = 1;
-
-  // для жеста
-  let isPinching = false;
-  let startDistance = 0;
-  let startGestureScale = 1;
-  let origin = { x:0, y:0 }; // transform-origin в px
-
-  // рассчитать базовый масштаб под ширину контейнера
-  function calcBaseFitScale() {
-    const wrapperWidth = wrapper.clientWidth;
-    baseFitScale = wrapperWidth / BASE_WIDTH;
-    // не даём baseFitScale быть больше 1 (опционально)
-    // baseFitScale = Math.min(baseFitScale, 1);
-    updateTransform();
-  }
-
-  // применяем итоговый transform к iframe
-  function updateTransform() {
-    currentScale = baseFitScale * gestureScale;
-    // применяем transform
-    iframe.style.transformOrigin = `${origin.x}px ${origin.y}px`;
-    iframe.style.transform = `scale(${currentScale})`;
-    // после изменения масштаба корректируем высоту wrapper (чтобы скролл работал правильно)
-    // НО wrapper overflow:hidden — внутренняя прокрутка осуществляется iframe
-    document.getElementById('scaleLabel').textContent = (currentScale*100).toFixed(0) + '%';
-  }
-
-  // вспомог: расстояние между двумя касаниями
-  function touchDist(t1, t2){
-    const dx = t2.clientX - t1.clientX;
-    const dy = t2.clientY - t1.clientY;
-    return Math.hypot(dx, dy);
-  }
-  // центр двух касаний в координатах wrapper
-  function touchCenter(t1, t2){
-    const rect = wrapper.getBoundingClientRect();
-    const cx = (t1.clientX + t2.clientX) / 2 - rect.left; // x внутри wrapper
-    const cy = (t1.clientY + t2.clientY) / 2 - rect.top;  // y внутри wrapper
-    return { x: cx, y: cy };
-  }
-
-  // touchstart
-  wrapper.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 2) {
-      isPinching = true;
-      startDistance = touchDist(e.touches[0], e.touches[1]);
-      startGestureScale = gestureScale;
-      const c = touchCenter(e.touches[0], e.touches[1]);
-      // origin — в пикселях iframe (до масштабирования)
-      origin.x = c.x / baseFitScale; // преобразуем в координаты iframe по ширине
-      origin.y = c.y / baseFitScale;
-      // блокируем дефолтный системный pinch
-      e.preventDefault();
+  <script>
+    function resizeSheet() {
+      const iframe = document.getElementById('sheet');
+      const scale = window.innerWidth / 1920; // пропорциональное масштабирование
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.height = `${window.innerHeight / scale}px`;
     }
-  }, { passive: false });
 
-  // touchmove
-  wrapper.addEventListener('touchmove', (e) => {
-    if (isPinching && e.touches.length === 2) {
-      const d = touchDist(e.touches[0], e.touches[1]);
-      const ratio = d / startDistance;
-      gestureScale = Math.max(0.1, Math.min(10, startGestureScale * ratio)); // ограничение
-      updateTransform();
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  // touchend / touchcancel
-  wrapper.addEventListener('touchend', (e) => {
-    if (isPinching && e.touches.length < 2) {
-      isPinching = false;
-      // при завершении можно "зафиксировать" gestureScale
-      // при желании можно добавить мягкую анимацию или округление
-    }
-  });
-
-  // колёсико + Ctrl для десктопа (Ctrl+wheel — zoom)
-  window.addEventListener('wheel', (e) => {
-    if (e.ctrlKey) {
-      e.preventDefault();
-      const delta = - e.deltaY; // вверх => положительное
-      const factor = delta > 0 ? 1.06 : 1 / 1.06;
-      // обновим gestureScale
-      gestureScale = Math.max(0.1, Math.min(10, gestureScale * factor));
-      // set origin to mouse point relative to iframe
-      const rect = wrapper.getBoundingClientRect();
-      origin.x = (e.clientX - rect.left) / baseFitScale;
-      origin.y = (e.clientY - rect.top) / baseFitScale;
-      updateTransform();
-    }
-  }, { passive: false });
-
-  // управление кнопками
-  document.getElementById('zoomIn').addEventListener('click', ()=> {
-    gestureScale = Math.min(10, gestureScale * 1.12);
-    updateTransform();
-  });
-  document.getElementById('zoomOut').addEventListener('click', ()=> {
-    gestureScale = Math.max(0.1, gestureScale / 1.12);
-    updateTransform();
-  });
-  document.getElementById('zoomReset').addEventListener('click', ()=> {
-    gestureScale = 1;
-    origin = { x:0, y:0 };
-    // сброс origin на левый верх iframe
-    origin.x = 0;
-    origin.y = 0;
-    updateTransform();
-  });
-
-  // при ресайзе пересчитываем подгонку по ширине, но сохраняем gestureScale
-  window.addEventListener('resize', () => {
-    calcBaseFitScale();
-  });
-  window.addEventListener('orientationchange', () => {
-    // небольшая задержка — успеет смениться viewport
-    setTimeout(calcBaseFitScale, 120);
-  });
-
-  // инициализация: вычисляем базовый масштаб и ставим transform
-  function init(){
-    // выставим origin по умолчанию в левый верх (0,0)
-    origin = { x: 0, y: 0 };
-    calcBaseFitScale();
-  }
-
-  // старт
-  init();
-
-  // полезный метод: установить scale из внешнего кода (если нужно)
-  window.setSheetScale = function(newScale){
-    gestureScale = newScale;
-    updateTransform();
-  };
-
-  // по умолчанию — показать %
-  updateTransform();
-
-})();
-</script>
+    window.addEventListener('resize', resizeSheet);
+    window.addEventListener('orientationchange', resizeSheet);
+    window.addEventListener('load', resizeSheet);
+  </script>
 </body>
 </html>
