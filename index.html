@@ -1,102 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Газета Владислава Геккеля</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Галерея Владислава Геккеля</title>
   <style>
     body {
-      background-color: #dcdcdc;
       margin: 0;
-      padding: 40px 0;
+      background-color: #e0e0e0;
       display: flex;
       justify-content: center;
-      font-family: "Oswald", sans-serif;
+      align-items: center;
+      min-height: 100vh;
     }
 
-    .page {
-      background: #fff;
-      border: 1px solid #bfbfbf;
-      width: 90%;
-      max-width: 1200px;
-      padding: 40px 90px;
-      position: relative;
-      box-sizing: border-box;
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100vh;
+      background: white;
     }
 
-    /* Линии разметки */
-    .line {
-      position: absolute;
-      left: 90px;
-      right: 90px;
-      height: 1px;
-      background-color: #ccc;
-    }
-
-    .line.dark {
-      background-color: #555;
-    }
-
-    /* Ячейки */
-    .cell {
-      position: absolute;
-      font-size: clamp(6px, 1vw, 10px);
-      color: #111;
-      line-height: 1.4;
-      white-space: nowrap;
-    }
-
-    /* Смещение ячейки C3 */
-    .cell.c3 {
-      top: 90px; /* смещено на 30px ниже первой линии */
-      left: 90px;
-      font-size: 7px;
-    }
-
-    @media (max-width: 768px) {
-      .page {
-        padding: 20px 40px;
-      }
-      .cell {
-        font-size: clamp(6px, 2vw, 9px);
+    @media (min-width: 768px) {
+      iframe {
+        width: 90%;
+        height: 100vh;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page" id="page">
-    <!-- Линии -->
-    <script>
-      const page = document.getElementById('page');
-      const totalLines = 200;
-      const spacing = 25; // расстояние между линиями
-
-      for (let i = 0; i < totalLines; i++) {
-        const line = document.createElement('div');
-        line.className = 'line' + (i === 0 ? ' dark' : '');
-        line.style.top = `${i * spacing}px`;
-        page.appendChild(line);
-      }
-    </script>
-
-    <!-- Контент -->
-    <div class="cell c3" id="cellC3">⏳ Загрузка ячейки C3...</div>
-
-    <script>
-      const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
-
-      fetch(sheetCSV)
-        .then(response => response.text())
-        .then(csv => {
-          const rows = csv.split('\n').map(r => r.split(','));
-          const c3 = rows[2][2]; // C3 → 3-я строка, 3-й столбец (индексы 2)
-          document.getElementById('cellC3').textContent = c3;
-        })
-        .catch(err => {
-          document.getElementById('cellC3').textContent = `Ошибка загрузки: ${err}`;
-        });
-    </script>
-  </div>
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pubhtml?widget=true&amp;headers=false"
+    allowfullscreen>
+  </iframe>
 </body>
 </html>
