@@ -2,10 +2,15 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gekkel Vladislav Aleksandovich</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
+    /* Базовые настройки — телефон как главный ориентир */
+    html {
+      font-size: 100%; /* 1rem = 16px (мобильная база) */
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -15,53 +20,73 @@
     /* 1 */
     .header {
       font-family: 'Oswald', sans-serif;
-      font-size: 7px;
+      font-size: 0.44rem; /* ~7px */
       color: #000;
       margin-left: 30px;
-      margin-top: 15px; /* от верхнего края */
+      margin-top: 15px;
     }
 
     .line {
       height: 1px;
       background-color: #000;
-      margin: 5px 30px 0 30px; /* между именем и линией */
+      margin: 5px 30px 0 30px;
     }
 
     /* 2 */
     .text-2 {
       font-family: 'Oswald', sans-serif;
-      font-size: 17px;
+      font-size: 1.06rem; /* ~17px */
       font-style: italic;
       color: #000;
       margin-left: 30px;
-      margin-top: 15px; /* от линии */
+      margin-top: 15px;
       line-height: 1;
     }
 
     /* 3 */
     .text-3 {
       font-family: 'Oswald', sans-serif;
-      font-size: 17px;
+      font-size: 1.06rem;
       font-style: italic;
       color: #000;
       margin-left: 30px;
-      margin-top: 5px; /* между 2 и 3 */
+      margin-top: 5px;
       line-height: 1;
+    }
+
+    /* Адаптация под планшеты (до 1024px) */
+    @media (min-width: 768px) {
+      html {
+        font-size: 120%; /* немного крупнее, масштабируется вся страница */
+      }
+    }
+
+    /* Адаптация под ПК (широкие экраны) */
+    @media (min-width: 1025px) {
+      html {
+        font-size: 140%; /* плавное увеличение всей страницы */
+      }
+      body {
+        display: flex;
+        justify-content: center; /* центрируем всё по горизонтали */
+      }
+      .content {
+        width: 420px; /* фиксированная ширина контента как на телефоне */
+      }
     }
   </style>
 </head>
 <body>
+  <div class="content">
+    <!-- 1 -->
+    <div class="header">Gekkel Vladislav Aleksandovich</div>
+    <div class="line"></div>
 
-  <!-- 1 -->
-  <div class="header">Gekkel Vladislav Aleksandovich</div>
-  <div class="line"></div>
+    <!-- 2 -->
+    <div class="text-2">КТО ТАКОЙ</div>
 
-  <!-- 2 -->
-  <div class="text-2">КТО ТАКОЙ</div>
-
-  <!-- 3 -->
-  <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
-
+    <!-- 3 -->
+    <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
+  </div>
 </body>
 </html>
-
