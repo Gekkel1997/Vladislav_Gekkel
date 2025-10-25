@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #dcdcdc; /* фон вокруг страницы */
+      background-color: #dcdcdc;
       margin: 0;
       padding: 60px 0;
       display: flex;
@@ -16,13 +16,51 @@
     }
 
     .page {
+      position: relative;
       background-color: white;
       width: 90%;
       max-width: 1200px;
-      border: 1px solid #bfbfbf; /* тонкая рамка */
+      border: 1px solid #bfbfbf;
       padding: 80px 100px;
       box-sizing: border-box;
       line-height: 1.6;
+      overflow: hidden;
+    }
+
+    /* 🔹 Разметка строк */
+    .grid-lines {
+      position: absolute;
+      top: 0;
+      left: 60px;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+
+    .grid-line {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .line-number {
+      position: absolute;
+      left: -40px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* 🔹 Контент поверх сетки */
+    #content {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, p, img {
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
@@ -62,12 +100,35 @@
   </style>
 </head>
 <body>
-  <div class="page" id="content">
-    <h1>Газета Владислава Геккеля</h1>
-    <p>⏳ Загрузка данных из Google Sheets...</p>
+  <div class="page">
+    <div class="grid-lines" id="grid"></div>
+
+    <div id="content">
+      <h1>Газета Владислава Геккеля</h1>
+      <p>⏳ Загрузка данных из Google Sheets...</p>
+    </div>
   </div>
 
   <script>
+    // 🔹 Генерация линий и нумерации строк
+    const grid = document.getElementById('grid');
+    const totalLines = 100; // можно увеличить при необходимости
+    const lineHeight = 40; // px — расстояние между строками
+
+    for (let i = 1; i <= totalLines; i++) {
+      const y = i * lineHeight;
+      const line = document.createElement('div');
+      line.className = 'grid-line';
+      line.style.top = `${y}px`;
+      const num = document.createElement('div');
+      num.className = 'line-number';
+      num.style.top = `${y - 6}px`;
+      num.textContent = i;
+      grid.appendChild(line);
+      grid.appendChild(num);
+    }
+
+    // 🔹 Загрузка данных из Google Sheets
     const sheetCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
 
     fetch(sheetCSV)
