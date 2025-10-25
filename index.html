@@ -79,15 +79,16 @@
       display: block;
     }
 
-    /* Изображение Б */
+    /* Изображение Б — уменьшено в 5 раз */
     .image-container-b {
       margin: 26px 30px 0 30px; /* 7 мм ≈ 26 px */
+      display: flex;
+      justify-content: center;
     }
 
     .image-container-b img {
-      width: 100%;
-      height: 50%; /* половина высоты изображения A */
-      object-fit: cover;
+      width: 20%; /* уменьшено в 5 раз */
+      height: auto;
       display: block;
     }
 
@@ -137,6 +138,10 @@
       .text-2,
       .text-3 {
         font-size: 28px;
+      }
+
+      .image-container-b img {
+        width: 35%; /* немного крупнее на телефонах */
       }
     }
   </style>
