@@ -82,10 +82,17 @@
       }
     }
 
-    /* Доп. адаптация для горизонтальной ориентации телефонов */
+    /* Горизонтальная ориентация на телефонах */
     @media (orientation: landscape) and (max-width: 1024px) {
+      .section {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
       .description {
-        margin-right: 30px; /* такой же отступ, как у линии */
+        margin-right: 0;
+        max-width: calc(100vw - 60px); /* ограничение, чтобы текст заканчивался на уровне линии */
+        text-align: justify;
       }
     }
   </style>
