@@ -52,7 +52,7 @@
       font-size: 37px;
       font-style: italic;
       color: #000;
-      line-height: 1.05;
+      line-height: 1.1;
     }
 
     .text-3 {
@@ -66,7 +66,6 @@
       color: #000;
       text-align: justify;
       max-width: 50%;
-      line-height: 1.25;
     }
 
     /* Изображение A */
@@ -80,20 +79,30 @@
       display: block;
     }
 
-    /* Информация (Родился / Родители) */
+    /* Изображение Б */
+    .image-container-b {
+      margin: 26px 30px 0 30px; /* 7 мм ≈ 26 px */
+    }
+
+    .image-container-b img {
+      width: 100%;
+      height: 50%; /* половина высоты изображения A */
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Блок информации (4,5,7,8) */
     .info {
-      margin-top: 6px; /* ближе к изображению */
+      margin-top: 6px;
       margin-left: 30px;
       display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 30px; /* расстояние между столбцами */
+      gap: 30px;
     }
 
     .info-column {
       display: flex;
       flex-direction: column;
-      line-height: 1.05; /* плотнее строки */
+      line-height: 1.1;
     }
 
     .info-text {
@@ -108,6 +117,7 @@
       font-size: 7px;
       font-weight: 600;
       color: #000;
+      line-height: 1.05;
     }
 
     /* Адаптация под телефон */
@@ -127,11 +137,6 @@
       .text-2,
       .text-3 {
         font-size: 28px;
-      }
-
-      .info {
-        flex-wrap: nowrap;
-        gap: 25px;
       }
     }
   </style>
@@ -164,14 +169,17 @@
   <div class="info">
     <div class="info-column">
       <div class="info-text">Родился:</div>
-      <div class="info-bold">Россия /</div>
-      <div class="info-bold">Липецк</div>
+      <div class="info-bold">Россия /<br>Липецк</div>
     </div>
     <div class="info-column">
       <div class="info-text">Родители:</div>
-      <div class="info-bold">Фролов Александр /</div>
-      <div class="info-bold">Геккель Марина</div>
+      <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
     </div>
+  </div>
+
+  <!-- Изображение Б -->
+  <div class="image-container-b">
+    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
 
 </body>
