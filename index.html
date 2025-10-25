@@ -27,7 +27,6 @@
       min-height: 8000px;
     }
 
-    /* --- Разлиновка --- */
     .grid-line {
       position: absolute;
       left: 90px;
@@ -48,19 +47,45 @@
       user-select: none;
     }
 
-    /* --- Контент (ячейка C3) --- */
     .cell-content {
       position: absolute;
       left: 90px;
-      top: 2px; /* отступ от линии */
+      top: 2px;
       font-size: 7px;
       font-weight: 500;
       color: #111;
       max-width: calc(100% - 180px);
       word-wrap: break-word;
+      white-space: pre-wrap;
     }
 
-    /* --- Адаптация под экраны --- */
+    /* --- Панель управления --- */
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .controls button {
+      font-family: inherit;
+      background: #333;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+
+    .controls button:hover {
+      opacity: 1;
+      background: #000;
+    }
+
     @media (max-width: 768px) {
       .page {
         padding: 4vh 5vw;
@@ -81,35 +106,17 @@
         font-size: 6px;
       }
     }
-
-    @media (max-width: 480px) {
-      .page {
-        padding: 3vh 4vw;
-        width: 96%;
-      }
-
-      .grid-line {
-        left: 40px;
-        width: calc(100% - 80px);
-      }
-
-      .line-number {
-        left: 15px;
-        font-size: clamp(9px, 3vw, 12px);
-      }
-
-      .cell-content {
-        left: 40px;
-        max-width: calc(100% - 80px);
-        font-size: 5.5px;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="page" id="page">
     <div id="grid"></div>
-    <div id="cellC3" class="cell-content">⏳ Загрузка ячейки C3...</div>
+    <div id="cellC3" class="cell-content">⏳ Загрузка данных...</div>
+  </div>
+
+  <div class="controls">
+    <button id="prev">⬆️ Вверх</button>
+    <button id="next">⬇️ Вниз</button>
   </div>
 
   <script>
@@ -133,20 +140,45 @@
       grid.appendChild(num);
     }
 
-    // === Загрузка данных из Google Sheets ===
+    // === Загрузка CSV из новой таблицы ===
     const sheetCSV =
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDBDpcrFzmx1IdDbayS3dDoY4-f5BO5_guB9z5MHZD_3j_qEF5MmVMUJRD_QprNqdBwlSQyc7G85ty/pub?output=csv';
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vR_iq6SkUitn3QtV_jtyG6Z82G0VBD1ZyjvT4hxTDgrMere-3kXl9X_4DUprQACzKkpn5UB95ouuEoh/pub?output=csv';
+
+    let rows = [];
+    let currentRow = 2; // начинаем с третьей строки (индекс 2)
+
+    function updateCell() {
+      const cell = document.getElementById('cellC3');
+      if (rows[currentRow] && rows[currentRow][2]) {
+        cell.textContent = rows[currentRow][2];
+      } else {
+        cell.textContent = '📄 (данных нет или конец листа)';
+      }
+    }
 
     fetch(sheetCSV)
       .then(response => response.text())
       .then(csvText => {
-        const rows = csvText.split('\n').map(r => r.split(','));
-        const cellC3 = rows[2] && rows[2][2] ? rows[2][2].trim() : '(ячейка C3 пуста)';
-        document.getElementById('cellC3').textContent = cellC3;
+        rows = csvText
+          .split('\n')
+          .map(r => r.split(','))
+          .filter(r => r.some(c => c.trim().length > 0));
+        updateCell();
       })
       .catch(err => {
         document.getElementById('cellC3').textContent = `⚠️ Ошибка загрузки: ${err}`;
       });
+
+    // === Кнопки управления ===
+    document.getElementById('next').addEventListener('click', () => {
+      currentRow++;
+      updateCell();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      currentRow = Math.max(0, currentRow - 1);
+      updateCell();
+    });
   </script>
 </body>
 </html>
