@@ -1,49 +1,34 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Портфолио Владислава Геккеля</title>
-  <style>
-    body {
-      margin: 0;
-      background: #f3f3f3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    .sheet-container {
-      width: 95vw;
-      max-width: 1300px;
-      background: white;
-      border: 1px solid #ddd;
-      overflow: auto;
-      transform-origin: top left;
-    }
-    iframe, table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    table td, table th {
-      border: 1px solid #ddd;
-      padding: 4px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Портфолио Владислава Геккеля</title>
+<style>
+  body {
+    margin: 0;
+    background: #fafafa;
+    touch-action: none;
+  }
+  canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
 </head>
 <body>
-  <h1>Портфолио Владислава Геккеля</h1>
-  <div class="sheet-container" id="sheet"></div>
-
+  <canvas id="sheetCanvas" width="1600" height="900"></canvas>
   <script>
-    // Загружаем HTML Google Sheets, опубликованный в интернет
-    fetch('https://docs.google.com/spreadsheets/d/e/YOUR_EXPORT_LINK/pubhtml')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('sheet').innerHTML = html;
-      });
+    const canvas = document.getElementById('sheetCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#000';
+    ctx.font = '20px Arial';
+    ctx.fillText('КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?', 50, 100);
+    ctx.font = '14px Arial';
+    ctx.fillText('Владислав Геккель — мраморный гранник из Санкт-Петербурга...', 50, 140);
   </script>
 </body>
 </html>
