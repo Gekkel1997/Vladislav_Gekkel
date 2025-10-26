@@ -253,6 +253,22 @@
         margin-right: 30px;
       }
     }
+
+    /* 📱 Телефон (вертикальный): поднять текст 2 и 3 на 4px */
+    @media (max-width: 480px) and (orientation: portrait) {
+      .left-texts {
+        margin-top: -4px;
+      }
+    }
+
+    /* 💻 ПК: увеличить шрифт текстов 2 и 3 на 10px */
+    @media (min-width: 1024px) {
+      .text-2,
+      .text-3 {
+        font-size: 47px; /* было 37px +10px */
+      }
+    }
+
   </style>
 </head>
 <body>
