@@ -136,8 +136,8 @@
     /* Изображение В */
     .image-v {
       position: absolute;
-      top: -10px; /* чуть выше текста, примерно на уровне линии */
-      right: calc(100% + 10px); /* чтобы правая часть совпала с концом линии */
+      top: -10px;
+      right: calc(100% + 10px);
       width: 23%;
       border: 10px solid #cccccc;
       border-bottom: 20px solid #cccccc;
@@ -159,6 +159,7 @@
       font-style: italic;
     }
 
+    /* 📱 Вертикальный экран */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
@@ -181,16 +182,26 @@
         width: 20%;
       }
 
+      /* Блок 2 адаптив */
       .block-2 {
         width: 90%;
         margin: 0 auto;
+        position: relative;
       }
 
       .image-v {
-        position: static;
-        width: 40%;
-        margin: 0 auto 10px auto;
-        display: block;
+        position: absolute;
+        left: 0;
+        top: -15px; /* верх рамки примерно совпадает с линией */
+        width: 25%;
+        border: 10px solid #cccccc;
+        border-bottom: 20px solid #cccccc;
+        box-sizing: border-box;
+      }
+
+      .text-2-1 {
+        margin-top: 80px; /* чтобы текст оставался под линией, не выравнивался по изображению */
+        font-size: 7px;
       }
     }
   </style>
