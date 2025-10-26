@@ -6,7 +6,7 @@
   <title>Gekkel Vladislav Aleksandovich</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: "Arial", sans-serif;
       background-color: #f7f7f7;
       margin: 0;
       padding: 0;
@@ -23,26 +23,30 @@
       position: relative;
     }
 
-    /* --- БЛОК 1 --- */
+    /* ========== БЛОК 1 ========== */
     .block1 {
       margin-bottom: 60px;
     }
 
     .line {
       border-top: 2px solid #000;
-      width: 100%;
-      margin: 10px 0;
+      width: 33%;
+      margin-left: auto;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
 
-    .block1 h1 {
+    h1 {
       font-size: 36px;
       text-transform: uppercase;
       margin: 10px 0;
+      line-height: 1.1;
     }
 
-    .block1 p {
+    p {
       font-size: 14px;
       line-height: 1.6;
+      margin: 10px 0;
     }
 
     .info {
@@ -52,93 +56,78 @@
       margin-top: 20px;
     }
 
-    .image-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .image-container img {
+    .imageB {
+      display: block;
       width: 100%;
       max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      top: -15px;
     }
 
     .stamp {
       position: absolute;
       right: 40px;
-      bottom: 180px;
+      bottom: 160px;
       width: 120px;
       opacity: 0.8;
     }
 
-    /* --- БЛОК 2 --- */
+    /* ========== БЛОК 2 ========== */
     .block2 {
       margin-top: 60px;
       position: relative;
     }
 
-    .block2 img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 25%;
-      border: 10px solid #cccccc;
-      border-bottom: 20px solid #cccccc;
-      box-sizing: border-box;
-    }
-
-    .block2 .text {
+    .text2-1 {
       font-style: italic;
       font-size: 14px;
       line-height: 1.6;
-      max-width: 100%;
-      margin: 0 auto;
+      width: 33%;
+      margin-left: auto;
+      margin-top: 10px;
     }
 
-    /* --- Адаптив под вертикальный экран --- */
     @media (max-width: 768px) {
-      .block2 img {
-        position: relative;
-        display: block;
-        width: 45%;
-        margin: 0 auto 20px auto;
-      }
-      .block2 .text {
-        margin-top: 10px;
-        text-align: justify;
+      .text2-1 {
+        width: 90%;
+        margin: 10px auto 0 auto;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- ===== БЛОК 1 ===== -->
+
+    <!-- БЛОК 1 -->
     <div class="block1">
       <p>Gekkel Vladislav Aleksandovich</p>
       <div class="line"></div>
       <h1>КТО ТАКОЙ<br>МРАМОРНЫЙ ГРАННИК?</h1>
       <p><b>Владислав Геккель</b> — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески. Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами...</p>
+      
       <div class="info">
         <div><b>Родился:</b><br>Россия / Липецк</div>
         <div><b>Родители:</b><br>Фролов Александр / Геккель Марина</div>
       </div>
-      <div class="image-container">
-        <img src="https://i.postimg.cc/d1rfs2zF/IMG-4329.jpg" alt="Изображение Б">
-      </div>
+
+      <img src="https://i.postimg.cc/d1rfs2zF/IMG-4329.jpg" alt="Изображение Б" class="imageB">
       <img src="https://i.postimg.cc/XYT8hQ4v/stamp.png" alt="Печать" class="stamp">
       <div class="line"></div>
     </div>
 
-    <!-- ===== БЛОК 2 ===== -->
+    <!-- БЛОК 2 -->
     <div class="block2">
-      <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="Изображение В">
-      <div class="text">
-        <p><i>Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
+      <p class="text2-1">
+        Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
         Отец, в свою очередь, научил меня работать руками.
         Никогда не учился держать кисть в руках, даже не задумывался об этом — просто с рождения внутренний голос и мой путь вели меня своим чередом.
         Получил профессию архитектора, понял, что всё, связанное со строительством, не моё, и в поисках себя начал исследовать жизнь..
-        К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».</i></p>
-      </div>
+        К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! 
+        Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
+      </p>
     </div>
+
   </div>
 </body>
 </html>
