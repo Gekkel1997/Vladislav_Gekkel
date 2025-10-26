@@ -12,6 +12,7 @@
       background-color: #fff;
       border: 4px solid #cccccc80;
       box-sizing: border-box;
+      position: relative;
     }
 
     .header {
@@ -69,19 +70,6 @@
 
     .image-container img {
       width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Изображение Б */
-    .image-b {
-      display: flex;
-      justify-content: flex-end;
-      margin: -15px 10px 10px 10px;
-    }
-
-    .image-b img {
-      width: 10%;
       height: auto;
       display: block;
     }
@@ -144,33 +132,33 @@
       line-height: 1.4;
     }
 
-    /* 📱 Адаптив */
+    /* 🖼 Изображение В */
+    .image-b-frame {
+      position: absolute;
+      top: 410px;       /* отступ сверху */
+      left: 660px;      /* отступ слева */
+      border: 10px solid #cccccc; /* рамка */
+      padding-bottom: 20px;        /* нижний отступ рамки */
+      background-color: #cccccc;   /* подложка рамки */
+      box-sizing: content-box;
+    }
+
+    .image-b-frame img {
+      width: 24%;       /* чуть меньше 1/4 страницы */
+      height: auto;
+      display: block;
+    }
+
+    /* 📱 адаптив, чтобы не ломалось на телефонах */
     @media (max-width: 768px) {
-      .section {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 15px;
+      .image-b-frame {
+        position: static;
+        margin: 20px auto;
+        width: 60%;
+        padding-bottom: 10px;
       }
-
-      .description {
-        max-width: 100%;
-        margin-top: 10px;
-        text-align: left;
-      }
-
-      .text-2,
-      .text-3 {
-        font-size: 28px;
-      }
-
-      .image-b img {
-        width: 20%;
-      }
-
-      .block-2 {
-        width: 33.3%;
-        margin-left: auto;
-        margin-right: 30px;
+      .image-b-frame img {
+        width: 100%;
       }
     }
   </style>
@@ -208,7 +196,8 @@
     </div>
   </div>
 
-  <div class="image-b">
+  <!-- 🖼 ВСТАВЛЕНОЕ ИЗОБРАЖЕНИЕ В -->
+  <div class="image-b-frame">
     <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
 
