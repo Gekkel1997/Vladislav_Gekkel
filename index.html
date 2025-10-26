@@ -13,6 +13,7 @@
       border: 4px solid #cccccc80;
       box-sizing: border-box;
     }
+
     .header {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -20,11 +21,13 @@
       margin-left: 30px;
       margin-top: 15px;
     }
+
     .line {
       height: 1px;
       background-color: #000;
       margin: 5px 30px 0 30px;
     }
+
     .section {
       display: flex;
       justify-content: space-between;
@@ -32,11 +35,13 @@
       margin: 15px 30px 0 30px;
       gap: 20px;
     }
+
     .left-texts {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
     }
+
     .text-2,
     .text-3 {
       font-family: 'Oswald', sans-serif;
@@ -45,7 +50,11 @@
       color: #000;
       line-height: 1.1;
     }
-    .text-3 { margin-top: 5px; }
+
+    .text-3 {
+      margin-top: 5px;
+    }
+
     .description {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -53,26 +62,33 @@
       text-align: justify;
       max-width: 50%;
     }
+
     .image-container {
       margin: 15px 30px 0 30px;
     }
+
     .image-container img {
       width: 100%;
       height: auto;
       display: block;
     }
+
+    /* Изображение Б */
     .image-b {
       display: flex;
       justify-content: flex-end;
       margin: 25px 10px 0 10px;
       position: relative;
-      top: -15px; /* подняли ещё на 10 px */
+      top: -25px; /* ещё выше */
     }
+
     .image-b img {
       width: 10%;
       height: auto;
       display: block;
     }
+
+    /* Информация */
     .info {
       margin-top: 6px;
       margin-left: 30px;
@@ -81,17 +97,20 @@
       position: relative;
       z-index: 2;
     }
+
     .info-column {
       display: flex;
       flex-direction: column;
       line-height: 1.1;
     }
+
     .info-text {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
       color: #000;
       margin-bottom: 1px;
     }
+
     .info-bold {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -99,20 +118,28 @@
       color: #000;
       line-height: 1.05;
     }
+
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
         align-items: flex-start;
         margin-top: 15px;
       }
+
       .description {
         max-width: 100%;
         margin-top: 10px;
         text-align: left;
       }
+
       .text-2,
-      .text-3 { font-size: 28px; }
-      .image-b img { width: 20%; }
+      .text-3 {
+        font-size: 28px;
+      }
+
+      .image-b img {
+        width: 20%;
+      }
     }
   </style>
 </head>
