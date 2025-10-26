@@ -73,7 +73,6 @@
     .info-text { font-size:7px; color:#000; margin-bottom:1px; }
     .info-bold { font-size:7px; font-weight:600; color:#000; line-height:1.05; }
 
-    /* нижняя линия, зафиксированная (1/3 ширины, выровнена по правому краю с отступом 30px) */
     .bottom-line {
       height:1px;
       background:#000;
@@ -83,84 +82,77 @@
       margin-left:auto;
     }
 
-    /* ===== Блок 2 (новая верстка по твоему запросу) =====
-       Цель: изображение В слева, на уровне нижней линии;
-             текст 2.1 — ширина линии (33.3%) и выровнен по правому краю. */
+    /* ===== Блок 2 (исправлено) ===== */
     .block-2 {
-      /* контейнер занимает всю ширину контента */
       display:flex;
-      align-items:flex-end;    /* выравниваем элементы по нижнему краю контейнера */
       justify-content:flex-start;
-      gap: 20px;
-      width: 100%;
-      /* небольшой отрицательный отступ поднимает блок ближе к линии — можно скорректировать при необходимости */
-      margin-top: -2px;
+      align-items:flex-start; /* текст теперь не выравнивается по низу */
+      gap:20px;
+      width:100%;
+      margin-top:-2px;
     }
 
-    /* Изображение В — слева, фиксированная доля 33.3% ширины, отступ от левого края 30px */
     .image-v {
-      flex: 0 0 33.3%;
-      margin-left: 30px;      /* "небольшой отступ" от левого края, как просил */
-      background: #cccccc80;  /* серый фон (рамка) */
-      padding: 10px 10px 20px 10px; /* внутренние отступы вокруг изображения */
-      box-sizing: border-box;
-      display: flex;
-      align-items: flex-end;  /* чтобы изображение внутри контейнера прижалось к низу блока */
+      flex:0 0 33.3%;
+      margin-left:30px;
+      background:#cccccc80;
+      padding:10px 10px 20px 10px;
+      box-sizing:border-box;
     }
-    .image-v img { width:100%; height:auto; display:block; }
+    .image-v img {
+      width:100%;
+      height:auto;
+      display:block;
+    }
 
-    /* Текст 2.1 — ширина ровно как у линии, выровнен по правому краю (margin-left:auto) */
     .text-2-wrapper {
-      flex: 0 0 33.3%;        /* ровно 1/3 ширины */
-      margin-left: auto;      /* сдвигает текст к правому краю контента */
-      margin-right: 30px;     /* отступ справа как у линии */
+      flex:0 0 33.3%;
+      margin-left:auto;
+      margin-right:30px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
     }
+
     .text-2-1 {
       font-size:7px;
-      font-style: italic;
+      font-style:italic;
       color:#000;
       text-align:justify;
       line-height:1.4;
     }
 
-    /* ===== Адаптив (телефон) =====
-       - на мобильных блок-2 становится колонкой,
-       - изображение уменьшается до 25% ширины (как просил раньше),
-       - при этом текст остаётся визуально под линией: мы делаем wrapper 33.3% и центрируем блок,
-         но чтобы текст был читаем на узких экранах, добавил небольшой отступ сверху. */
+    /* ===== Адаптив ===== */
     @media (max-width: 768px) {
       .section { flex-direction: column; align-items:flex-start; margin-top:15px; }
       .description { max-width:100%; margin-top:10px; text-align:left; }
       .text-2, .text-3 { font-size:28px; }
 
-      /* Блок 2 — вертикально */
       .block-2 {
-        display:flex;
         flex-direction: column;
-        align-items: flex-start;
-        width: calc(100% - 60px); /* учитывать боковые отступы */
-        margin: 0 30px;
-        gap: 8px;
+        align-items:flex-start;
+        width:100%;
+        gap:8px;
+        margin-top:10px;
       }
 
       .image-v {
-        width: 25%;       /* уменьшено до 1/4 ширины на телефоне */
-        margin-left: 0;   /* выровнено по левому краю контентной области */
-        padding: 10px 10px 20px 10px;
-        align-self: flex-start; /* держим картинку слева */
+        width:25%;
+        margin-left:30px; /* фиксированный левый отступ, чтобы остаться выровненным по контенту */
+        padding:10px 10px 20px 10px;
+        align-self:flex-start;
       }
 
-      /* текст под линией: делаем wrapper тоже 33.3% ширины но с margin-left:auto не получается в колонке,
-         поэтому растягиваем текст до ширины линии визуально (используем max-width и выравнивание по правому краю) */
       .text-2-wrapper {
-        flex: none;
-        width: 33.3%;
-        margin-left: auto;    /* в колонке это сдвинет блок вправо, визуально под линию */
-        margin-right: 30px;
-        margin-top: 6px;      /* небольшой зазор от линии */
+        width:33.3%;
+        align-self:flex-end; /* теперь точно под линией */
+        margin-right:30px;
+        margin-top:6px;
       }
 
-      .text-2-1 { text-align:left; }
+      .text-2-1 {
+        text-align:left;
+      }
     }
   </style>
 </head>
@@ -203,12 +195,11 @@
 
   <div class="bottom-line"></div>
 
-  <!-- Блок 2: изображение В слева (на уровне линии), текст 2.1 — ширина линии -->
+  <!-- Блок 2 -->
   <div class="block-2">
     <div class="image-v">
       <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="V">
     </div>
-
     <div class="text-2-wrapper">
       <div class="text-2-1">
         Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
