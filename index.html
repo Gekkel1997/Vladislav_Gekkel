@@ -77,13 +77,23 @@
     .image-b {
       display: flex;
       justify-content: flex-end;
-      margin: -15px 10px 10px 10px; /* поднято и зафиксировано */
+      margin: 25px 10px 0 10px;
+      position: relative;
+      top: -35px;
     }
 
     .image-b img {
       width: 10%;
       height: auto;
       display: block;
+    }
+
+    /* Нижняя линия */
+    .bottom-line {
+      height: 1px;
+      background-color: #000;
+      width: 33%;
+      margin: 20px 30px 0 auto;
     }
 
     /* Информация */
@@ -117,14 +127,15 @@
       line-height: 1.05;
     }
 
-    /* Нижняя линия */
-    .bottom-line {
-      height: 1px;
-      background-color: #000;
-      width: 33.3%;
-      margin-right: 30px;
-      margin-top: 20px; /* опущена ниже */
-      margin-left: auto;
+    /* === Блок 2 === */
+    .block-2 {
+      margin: 10px 30px 0 auto;
+      width: 33%;
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      color: #000;
+      text-align: justify;
+      line-height: 1.3;
     }
 
     @media (max-width: 768px) {
@@ -148,10 +159,17 @@
       .image-b img {
         width: 20%;
       }
+
+      .bottom-line,
+      .block-2 {
+        width: 80%;
+        margin-right: 10%;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Блок 1 -->
   <div class="header">Gekkel Vladislav Aleksandovich</div>
   <div class="line"></div>
 
@@ -188,5 +206,14 @@
   </div>
 
   <div class="bottom-line"></div>
+
+  <!-- Блок 2 -->
+  <div class="block-2">
+    Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
+    Отец, в свою очередь, научил меня работать руками.
+    Никогда не учился держать кисть в руках, даже не задумывался об этом — просто с рождения внутренний голос и мой путь вели меня своим чередом.
+    Получил профессию архитектора, понял, что всё, связанное со строительством, не моё, и в поисках себя начал исследовать жизнь...
+    К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
+  </div>
 </body>
 </html>
