@@ -6,9 +6,9 @@
   <title>Gekkel Vladislav Aleksandovich</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    /* ===== Общие стили (Блок 1 зафиксирован) ===== */
+    /* ===== Блок 1 (зафиксирован) ===== */
     :root { box-sizing: border-box; }
-    *,*::before,*::after { box-sizing: inherit; }
+    *, *::before, *::after { box-sizing: inherit; }
 
     body {
       margin: 0;
@@ -39,125 +39,139 @@
       gap: 20px;
     }
 
-    .left-texts { display:flex; flex-direction:column; justify-content:flex-end; }
+    .left-texts { display: flex; flex-direction: column; justify-content: flex-end; }
     .text-2, .text-3 {
       font-size: 37px;
       font-style: italic;
       line-height: 1.1;
-      color:#000;
+      color: #000;
     }
-    .text-3 { margin-top:5px; }
+    .text-3 { margin-top: 5px; }
 
     .description {
-      font-size:7px;
-      color:#000;
-      text-align:justify;
-      max-width:50%;
+      font-size: 7px;
+      color: #000;
+      text-align: justify;
+      max-width: 50%;
     }
 
-    .image-container { margin:15px 30px 0 30px; }
-    .image-container img{ width:100%; height:auto; display:block; }
+    .image-container { margin: 15px 30px 0 30px; }
+    .image-container img { width: 100%; height: auto; display: block; }
 
-    .image-b { display:flex; justify-content:flex-end; margin:-15px 10px 10px 10px; }
-    .image-b img { width:10%; height:auto; display:block; }
+    .image-b { display: flex; justify-content: flex-end; margin: -15px 10px 10px 10px; }
+    .image-b img { width: 10%; height: auto; display: block; }
 
     .info {
-      margin-top:6px;
-      margin-left:30px;
-      display:flex;
-      gap:30px;
-      position:relative;
-      z-index:2;
+      margin-top: 6px;
+      margin-left: 30px;
+      display: flex;
+      gap: 30px;
+      position: relative;
+      z-index: 2;
     }
-    .info-column { display:flex; flex-direction:column; line-height:1.1; }
-    .info-text { font-size:7px; color:#000; margin-bottom:1px; }
-    .info-bold { font-size:7px; font-weight:600; color:#000; line-height:1.05; }
+
+    .info-column { display: flex; flex-direction: column; line-height: 1.1; }
+    .info-text { font-size: 7px; color: #000; margin-bottom: 1px; }
+    .info-bold { font-size: 7px; font-weight: 600; color: #000; line-height: 1.05; }
 
     .bottom-line {
-      height:1px;
-      background:#000;
-      width:33.3%;
-      margin-right:30px;
-      margin-top:20px;
-      margin-left:auto;
+      height: 1px;
+      background: #000;
+      width: 33.3%;
+      margin-right: 30px;
+      margin-top: 20px;
+      margin-left: auto;
     }
 
-    /* ===== Блок 2 (исправлено) ===== */
+    /* ===== Блок 2 ===== */
     .block-2 {
-      display:flex;
-      justify-content:flex-start;
-      align-items:flex-start; /* текст теперь не выравнивается по низу */
-      gap:20px;
-      width:100%;
-      margin-top:-2px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start; /* текст не выравнивается по низу */
+      gap: 20px;
+      width: 100%;
+      margin-top: -2px;
     }
 
     .image-v {
-      flex:0 0 33.3%;
-      margin-left:30px;
-      background:#cccccc80;
-      padding:10px 10px 20px 10px;
-      box-sizing:border-box;
+      flex: 0 0 33.3%;
+      margin-left: 30px;
+      background: #cccccc80;
+      padding: 10px 10px 20px 10px;
+      box-sizing: border-box;
     }
+
     .image-v img {
-      width:100%;
-      height:auto;
-      display:block;
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .text-2-wrapper {
-      flex:0 0 33.3%;
-      margin-left:auto;
-      margin-right:30px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
+      flex: 0 0 33.3%;
+      margin-left: auto;
+      margin-right: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     .text-2-1 {
-      font-size:7px;
-      font-style:italic;
-      color:#000;
-      text-align:justify;
-      line-height:1.4;
+      font-size: 7px;
+      font-style: italic;
+      color: #000;
+      text-align: justify;
+      line-height: 1.4;
     }
 
-    /* ===== Адаптив ===== */
+    /* ===== Адаптив: вертикальное положение (телефон) ===== */
     @media (max-width: 768px) {
-      .section { flex-direction: column; align-items:flex-start; margin-top:15px; }
-      .description { max-width:100%; margin-top:10px; text-align:left; }
-      .text-2, .text-3 { font-size:28px; }
+      .section { flex-direction: column; align-items: flex-start; margin-top: 15px; }
+      .description { max-width: 100%; margin-top: 10px; text-align: left; }
+      .text-2, .text-3 { font-size: 28px; }
 
       .block-2 {
         flex-direction: column;
-        align-items:flex-start;
-        width:100%;
-        gap:8px;
-        margin-top:10px;
+        align-items: flex-start;
+        width: 100%;
+        gap: 8px;
+        margin-top: 10px;
       }
 
       .image-v {
-        width:25%;
-        margin-left:30px; /* фиксированный левый отступ, чтобы остаться выровненным по контенту */
-        padding:10px 10px 20px 10px;
-        align-self:flex-start;
+        width: 25%;
+        margin-left: 30px;
+        padding: 10px 10px 20px 10px;
+        align-self: flex-start;
       }
 
       .text-2-wrapper {
-        width:33.3%;
-        align-self:flex-end; /* теперь точно под линией */
-        margin-right:30px;
-        margin-top:6px;
+        width: 33.3%;
+        align-self: flex-end;
+        margin-right: 30px;
+        margin-top: 6px;
       }
 
       .text-2-1 {
-        text-align:left;
+        text-align: left;
+        font-size: 7px; /* стандартный размер */
+      }
+    }
+
+    /* ===== Горизонтальный экран (широкие экраны) ===== */
+    @media (min-width: 769px) {
+      .text-2-wrapper {
+        margin-top: 10px; /* небольшой отступ сверху для текста */
+      }
+
+      .text-2-1 {
+        font-size: 10px; /* увеличен на 3px */
       }
     }
   </style>
 </head>
 <body>
-  <!-- Блок 1 (зафиксирован) -->
+  <!-- Блок 1 -->
   <div class="header">Gekkel Vladislav Aleksandovich</div>
   <div class="line"></div>
 
