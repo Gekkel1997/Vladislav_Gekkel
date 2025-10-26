@@ -75,7 +75,6 @@
       display: block;
     }
 
-    /* Изображение Б */
     .image-b {
       display: flex;
       justify-content: flex-end;
@@ -88,7 +87,6 @@
       display: block;
     }
 
-    /* Информация */
     .info {
       margin-top: 6px;
       margin-left: 30px;
@@ -119,7 +117,6 @@
       line-height: 1.05;
     }
 
-    /* Нижняя линия (конец Блока 1) */
     .bottom-line {
       height: 1px;
       background-color: #000;
@@ -129,7 +126,6 @@
       margin-left: auto;
     }
 
-    /* 🔸 Блок 2 */
     .block-2 {
       width: 33.3%;
       margin-top: 8px;
@@ -146,7 +142,6 @@
       line-height: 1.4;
     }
 
-    /* 📱 Адаптив */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
@@ -176,7 +171,7 @@
       }
     }
 
-    /* 🟩 Сетка (Grid Overlay) */
+    /* 🟩 Сетка с жирными линиями */
     .grid-overlay {
       position: fixed;
       top: 0;
@@ -185,14 +180,16 @@
       height: 100%;
       background-image: 
         linear-gradient(to right, #cccccc40 1px, transparent 1px),
-        linear-gradient(to bottom, #cccccc40 1px, transparent 1px);
-      background-size: 10px 10px;
+        linear-gradient(to bottom, #cccccc40 1px, transparent 1px),
+        linear-gradient(to right, transparent 99px, #99999960 100px),
+        linear-gradient(to bottom, transparent 99px, #99999960 100px);
+      background-size: 10px 10px, 10px 10px, 100px 100px, 100px 100px;
       pointer-events: none;
       z-index: 9999;
       display: none;
     }
 
-    /* Кнопка переключения сетки */
+    /* Кнопка */
     .toggle-grid-btn {
       position: fixed;
       bottom: 20px;
@@ -213,10 +210,23 @@
     .toggle-grid-btn:hover {
       opacity: 1;
     }
+
+    /* Координаты */
+    .coords {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: rgba(255,255,255,0.7);
+      border: 1px solid #ccc;
+      padding: 4px 8px;
+      font-family: monospace;
+      font-size: 12px;
+      z-index: 10000;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
-  <!-- 🟦 БЛОК 1 -->
   <div class="header">Gekkel Vladislav Aleksandovich</div>
   <div class="line"></div>
 
@@ -254,7 +264,6 @@
 
   <div class="bottom-line"></div>
 
-  <!-- 🟨 БЛОК 2 -->
   <div class="block-2">
     <div class="text-2-1">
       Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
@@ -265,15 +274,22 @@
     </div>
   </div>
 
-  <!-- 🟩 Сетка и кнопка -->
+  <!-- Сетка + координаты + кнопка -->
   <div class="grid-overlay" id="gridOverlay"></div>
+  <div class="coords" id="coords">x: 0, y: 0</div>
   <button class="toggle-grid-btn" onclick="toggleGrid()">GRID</button>
 
   <script>
+    const grid = document.getElementById('gridOverlay');
+    const coords = document.getElementById('coords');
+
     function toggleGrid() {
-      const grid = document.getElementById('gridOverlay');
       grid.style.display = grid.style.display === 'none' || grid.style.display === '' ? 'block' : 'none';
     }
+
+    document.addEventListener('mousemove', (e) => {
+      coords.textContent = `x: ${e.clientX}px, y: ${e.clientY}px`;
+    });
   </script>
 </body>
 </html>
