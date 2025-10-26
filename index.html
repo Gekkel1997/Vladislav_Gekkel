@@ -46,17 +46,54 @@
       pointer-events: none;
     }
 
+    /* 🔢 Отметки по осям */
+    .grid-labels {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      pointer-events: none;
+      color: #cccccc80;
+      font-family: monospace;
+      font-size: 10px;
+    }
+
+    .grid-labels .label {
+      position: absolute;
+    }
+
     /* Координаты */
     #coords {
       position: fixed;
-      bottom: 10px;
+      bottom: 45px;
       right: 15px;
-      color: #cccccc40;
+      color: #cccccc80;
       font-family: monospace;
       font-size: 12px;
       z-index: 9999;
     }
 
+    /* Кнопка управления сеткой */
+    #toggleGrid {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      background-color: #cccccc80;
+      color: #000;
+      border: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    #toggleGrid:hover {
+      background-color: #bfbfbf;
+    }
+
+    /* Основное содержимое */
     .header {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -194,7 +231,7 @@
       line-height: 1.4;
     }
 
-    /* 📱 Адаптив — текст 2.1 остаётся ровно под линией */
+    /* 📱 Адаптив */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
@@ -226,8 +263,10 @@
   </style>
 </head>
 <body>
-  <div class="grid"></div>
+  <div class="grid" id="grid"></div>
+  <div class="grid-labels" id="gridLabels"></div>
   <div id="coords">x: 0, y: 0</div>
+  <button id="toggleGrid">Сетка 🔲</button>
 
   <!-- 🟦 БЛОК 1 -->
   <div class="header">Gekkel Vladislav Aleksandovich</div>
@@ -283,6 +322,39 @@
     const coords = document.getElementById("coords");
     document.addEventListener("mousemove", (e) => {
       coords.textContent = `x: ${e.clientX}px, y: ${e.clientY}px`;
+    });
+
+    // Сетка и отметки
+    const grid = document.getElementById("grid");
+    const labels = document.getElementById("gridLabels");
+    const toggleBtn = document.getElementById("toggleGrid");
+
+    // Создание отметок каждые 100px
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    for (let x = 100; x < width; x += 100) {
+      const labelX = document.createElement("div");
+      labelX.classList.add("label");
+      labelX.style.left = `${x + 2}px`;
+      labelX.style.top = `2px`;
+      labelX.textContent = x;
+      labels.appendChild(labelX);
+    }
+    for (let y = 100; y < height; y += 100) {
+      const labelY = document.createElement("div");
+      labelY.classList.add("label");
+      labelY.style.left = `2px`;
+      labelY.style.top = `${y + 2}px`;
+      labelY.textContent = y;
+      labels.appendChild(labelY);
+    }
+
+    // Кнопка переключения сетки
+    toggleBtn.addEventListener("click", () => {
+      const visible = grid.style.display !== "none";
+      grid.style.display = visible ? "none" : "block";
+      labels.style.display = visible ? "none" : "block";
+      toggleBtn.textContent = visible ? "Показать сетку 🔲" : "Скрыть сетку ❌";
     });
   </script>
 </body>
