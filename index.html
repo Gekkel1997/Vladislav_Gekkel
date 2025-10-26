@@ -73,7 +73,6 @@
       display: block;
     }
 
-    /* Изображение Б */
     .image-b {
       display: flex;
       justify-content: flex-end;
@@ -86,7 +85,6 @@
       display: block;
     }
 
-    /* Информация */
     .info {
       margin-top: 6px;
       margin-left: 30px;
@@ -117,7 +115,6 @@
       line-height: 1.05;
     }
 
-    /* Нижняя линия (конец Блока 1) */
     .bottom-line {
       height: 1px;
       background-color: #000;
@@ -127,24 +124,41 @@
       margin-left: auto;
     }
 
-    /* 🔸 Блок 2 */
+    /* 🟨 Блок 2 */
     .block-2 {
       width: 33.3%;
       margin-top: 8px;
       margin-right: 30px;
       margin-left: auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px; /* небольшой отступ между изображением и текстом */
+    }
+
+    /* Изображение В */
+    .image-v {
+      flex: 0 0 25%;
+      border: 10px solid #cccccc;
+      border-bottom: 20px solid #cccccc;
+      box-sizing: border-box;
+      align-self: flex-start;
+    }
+
+    .image-v img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .text-2-1 {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
-      font-style: italic; /* добавлен курсив */
+      font-style: italic;
       color: #000;
       text-align: justify;
       line-height: 1.4;
     }
 
-    /* 📱 Адаптив — текст 2.1 остаётся ровно под линией! */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
@@ -167,11 +181,15 @@
         width: 20%;
       }
 
-      /* фиксируем текст 2.1 под линией */
       .block-2 {
-        width: 33.3%;
-        margin-left: auto;
-        margin-right: 30px;
+        flex-direction: column;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .image-v {
+        align-self: center;
+        width: 40%;
       }
     }
   </style>
@@ -217,6 +235,9 @@
 
   <!-- 🟨 БЛОК 2 -->
   <div class="block-2">
+    <div class="image-v">
+      <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="V">
+    </div>
     <div class="text-2-1">
       Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
       Отец, в свою очередь, научил меня работать руками.
