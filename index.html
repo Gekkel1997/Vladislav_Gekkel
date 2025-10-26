@@ -83,7 +83,9 @@
     .image-b {
       display: flex;
       justify-content: flex-end;
-      margin: 7px 10px 0 10px;
+      margin: 25px 10px 0 10px; /* увеличен верхний отступ, чтобы опустить изображение */
+      position: relative;
+      top: 15px; /* легкое смещение вниз, чтобы касалось блока текста */
     }
 
     .image-b img {
@@ -98,6 +100,8 @@
       margin-left: 30px;
       display: flex;
       gap: 30px;
+      position: relative;
+      z-index: 2; /* текст поверх изображения */
     }
 
     .info-column {
@@ -139,6 +143,10 @@
       .text-3 {
         font-size: 28px;
       }
+
+      .image-b img {
+        width: 20%;
+      }
     }
   </style>
 </head>
@@ -166,11 +174,6 @@
     <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
   </div>
 
-  <!-- Изображение Б -->
-  <div class="image-b">
-    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
-  </div>
-
   <!-- Информация -->
   <div class="info">
     <div class="info-column">
@@ -181,6 +184,11 @@
       <div class="info-text">Родители:</div>
       <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
     </div>
+  </div>
+
+  <!-- Изображение Б -->
+  <div class="image-b">
+    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
 
 </body>
