@@ -13,8 +13,6 @@
       border: 4px solid #cccccc80;
       box-sizing: border-box;
     }
-
-    /* 1 — Имя */
     .header {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -22,15 +20,11 @@
       margin-left: 30px;
       margin-top: 15px;
     }
-
-    /* Линия под именем */
     .line {
       height: 1px;
       background-color: #000;
       margin: 5px 30px 0 30px;
     }
-
-    /* Контейнер с левым и правым текстом */
     .section {
       display: flex;
       justify-content: space-between;
@@ -38,13 +32,11 @@
       margin: 15px 30px 0 30px;
       gap: 20px;
     }
-
     .left-texts {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
     }
-
     .text-2,
     .text-3 {
       font-family: 'Oswald', sans-serif;
@@ -53,11 +45,7 @@
       color: #000;
       line-height: 1.1;
     }
-
-    .text-3 {
-      margin-top: 5px;
-    }
-
+    .text-3 { margin-top: 5px; }
     .description {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -65,34 +53,26 @@
       text-align: justify;
       max-width: 50%;
     }
-
-    /* Изображение A */
     .image-container {
       margin: 15px 30px 0 30px;
     }
-
     .image-container img {
       width: 100%;
       height: auto;
       display: block;
     }
-
-    /* Изображение Б */
     .image-b {
       display: flex;
       justify-content: flex-end;
       margin: 25px 10px 0 10px;
       position: relative;
-      top: -5px; /* подняли выше */
+      top: -15px; /* подняли ещё на 10 px */
     }
-
     .image-b img {
       width: 10%;
       height: auto;
       display: block;
     }
-
-    /* Информация (4,5,7,8) */
     .info {
       margin-top: 6px;
       margin-left: 30px;
@@ -101,20 +81,17 @@
       position: relative;
       z-index: 2;
     }
-
     .info-column {
       display: flex;
       flex-direction: column;
       line-height: 1.1;
     }
-
     .info-text {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
       color: #000;
       margin-bottom: 1px;
     }
-
     .info-bold {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -122,34 +99,24 @@
       color: #000;
       line-height: 1.05;
     }
-
-    /* Адаптация под телефон */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
         align-items: flex-start;
         margin-top: 15px;
       }
-
       .description {
         max-width: 100%;
         margin-top: 10px;
         text-align: left;
       }
-
       .text-2,
-      .text-3 {
-        font-size: 28px;
-      }
-
-      .image-b img {
-        width: 20%;
-      }
+      .text-3 { font-size: 28px; }
+      .image-b img { width: 20%; }
     }
   </style>
 </head>
 <body>
-
   <div class="header">Gekkel Vladislav Aleksandovich</div>
   <div class="line"></div>
 
@@ -158,7 +125,6 @@
       <div class="text-2">КТО ТАКОЙ</div>
       <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
     </div>
-
     <div class="description">
       Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы 
       создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески. 
@@ -167,12 +133,10 @@
     </div>
   </div>
 
-  <!-- Изображение A -->
   <div class="image-container">
     <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
   </div>
 
-  <!-- Информация -->
   <div class="info">
     <div class="info-column">
       <div class="info-text">Родился:</div>
@@ -184,10 +148,8 @@
     </div>
   </div>
 
-  <!-- Изображение Б -->
   <div class="image-b">
     <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
-
 </body>
 </html>
