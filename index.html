@@ -135,13 +135,14 @@
     /* 🖼️ Изображение В */
     .image-v {
       position: absolute;
-      top: calc(15px + 7px + 1px); /* на уровне линии с учётом отступа сверху */
-      left: 30px; /* прижато к левому краю */
-      width: 33.3%;
+      top: calc(100% - 20px); /* верх совпадает со второй линией */
+      left: 30px;
+      width: 25%;
       border: 10px solid #cccccc;
       border-bottom-width: 20px;
       box-sizing: border-box;
       z-index: 1;
+      transform: translateY(-100%);
     }
 
     /* 🔸 Блок 2 */
@@ -206,9 +207,6 @@
   <div class="header">Gekkel Vladislav Aleksandovich</div>
   <div class="line"></div>
 
-  <!-- 🖼️ Изображение В -->
-  <img class="image-v" src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="V">
-
   <div class="section">
     <div class="left-texts">
       <div class="text-2">КТО ТАКОЙ</div>
@@ -242,6 +240,9 @@
   </div>
 
   <div class="bottom-line"></div>
+
+  <!-- 🖼️ Изображение В -->
+  <img class="image-v" src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="V">
 
   <!-- 🟨 БЛОК 2 -->
   <div class="block-2">
