@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gekkel Vladislav Aleksandovich</title>
+  <title>Gekkel Vladislav Aleksandrovich</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -31,7 +31,6 @@
       pointer-events: none;
     }
 
-    /* Каждые 100px жирные линии */
     .grid::after {
       content: "";
       position: absolute;
@@ -46,7 +45,6 @@
       pointer-events: none;
     }
 
-    /* 🔢 Отметки по осям */
     .grid-labels {
       position: fixed;
       top: 0;
@@ -62,7 +60,6 @@
       position: absolute;
     }
 
-    /* Координаты */
     #coords {
       position: fixed;
       bottom: 45px;
@@ -73,7 +70,6 @@
       z-index: 9999;
     }
 
-    /* Кнопка управления сеткой */
     #toggleGrid {
       position: fixed;
       bottom: 10px;
@@ -93,7 +89,7 @@
       background-color: #bfbfbf;
     }
 
-    /* Основное содержимое */
+    /* ───── Основное содержимое ───── */
     .header {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -102,25 +98,17 @@
       margin-top: 15px;
     }
 
-    /* 💻 ПК — увеличить шрифт заголовка */
+    /* 💻 ПК — увеличить шрифт заголовка (ещё +2px → 13px) */
     @media (min-width: 1024px) {
       .header {
-        font-size: 11px; /* Увеличено на 2 */
+        font-size: 13px;
       }
     }
 
-    /* 🟦 Первая линия */
     .line {
       height: 1px;
       background-color: #000;
-      margin: 3px 30px 0 30px; /* Поднята на 2px */
-    }
-
-    /* 💻 ПК — без изменений */
-    @media (min-width: 1024px) {
-      .line {
-        margin: 5px 30px 0 30px;
-      }
+      margin: 3px 30px 0 30px;
     }
 
     .section {
@@ -181,7 +169,6 @@
       display: block;
     }
 
-    /* Информация */
     .info {
       margin-top: 6px;
       margin-left: 30px;
@@ -212,7 +199,6 @@
       line-height: 1.05;
     }
 
-    /* Нижняя линия (конец Блока 1) */
     .bottom-line {
       height: 1px;
       background-color: #000;
@@ -222,7 +208,6 @@
       margin-left: auto;
     }
 
-    /* 🔸 Блок 2 */
     .block-2 {
       width: 33.3%;
       margin-top: 8px;
@@ -277,7 +262,7 @@
   <button id="toggleGrid">Сетка 🔲</button>
 
   <!-- 🟦 БЛОК 1 -->
-  <div class="header">Gekkel Vladislav Aleksandovich</div>
+  <div class="header">Gekkel Vladislav Aleksandrovich</div>
   <div class="line"></div>
 
   <div class="section">
@@ -326,18 +311,15 @@
   </div>
 
   <script>
-    // Координаты X/Y
     const coords = document.getElementById("coords");
     document.addEventListener("mousemove", (e) => {
       coords.textContent = `x: ${e.clientX}px, y: ${e.clientY}px`;
     });
 
-    // Сетка и отметки
     const grid = document.getElementById("grid");
     const labels = document.getElementById("gridLabels");
     const toggleBtn = document.getElementById("toggleGrid");
 
-    // Создание отметок каждые 100px
     const width = window.innerWidth;
     const height = window.innerHeight;
     for (let x = 100; x < width; x += 100) {
@@ -357,7 +339,6 @@
       labels.appendChild(labelY);
     }
 
-    // Кнопка переключения сетки
     toggleBtn.addEventListener("click", () => {
       const visible = grid.style.display !== "none";
       grid.style.display = visible ? "none" : "block";
