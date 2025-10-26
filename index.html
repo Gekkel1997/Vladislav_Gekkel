@@ -125,6 +125,18 @@
       margin-right: 30px;
       margin-top: 20px;
       margin-left: auto;
+      position: relative;
+    }
+
+    /* 🔸 Изображение В */
+    .image-v {
+      position: absolute;
+      left: calc(66.7% - 7px);
+      bottom: -10px;
+      width: 25%;
+      border: 10px solid #cccccc;
+      border-bottom-width: 20px;
+      box-sizing: border-box;
     }
 
     /* 🔸 Блок 2 */
@@ -138,13 +150,13 @@
     .text-2-1 {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
-      font-style: italic; /* добавлен курсив */
+      font-style: italic;
       color: #000;
       text-align: justify;
       line-height: 1.4;
     }
 
-    /* 📱 Адаптив — текст 2.1 остаётся ровно под линией! */
+    /* 📱 Адаптив */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
@@ -167,7 +179,13 @@
         width: 20%;
       }
 
-      /* фиксируем текст 2.1 под линией */
+      .image-v {
+        position: static;
+        width: 25%;
+        margin: 10px 0 0 30px;
+        display: block;
+      }
+
       .block-2 {
         width: 33.3%;
         margin-left: auto;
@@ -213,7 +231,9 @@
     <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
 
-  <div class="bottom-line"></div>
+  <div class="bottom-line">
+    <img class="image-v" src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="V">
+  </div>
 
   <!-- 🟨 БЛОК 2 -->
   <div class="block-2">
