@@ -92,17 +92,10 @@
     /* ───── Основное содержимое ───── */
     .header {
       font-family: 'Oswald', sans-serif;
-      font-size: 7px;
+      font-size: 13px; /* ПК: +2px */
       color: #000;
       margin-left: 30px;
       margin-top: 15px;
-    }
-
-    /* 💻 ПК — увеличить шрифт заголовка (ещё +2px → 13px) */
-    @media (min-width: 1024px) {
-      .header {
-        font-size: 13px;
-      }
     }
 
     .line {
@@ -123,6 +116,8 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      position: relative;
+      top: 0;
     }
 
     .text-2,
@@ -136,6 +131,21 @@
 
     .text-3 {
       margin-top: 5px;
+    }
+
+    /* 💻 ПК — увеличить размер шрифта text-2 и text-3 до 47px */
+    @media (min-width: 1024px) {
+      .text-2,
+      .text-3 {
+        font-size: 47px;
+      }
+    }
+
+    /* 📱 Телефон (вертикальный) — поднять текст-2 и 3 на 4px */
+    @media (max-width: 480px) {
+      .left-texts {
+        top: -4px;
+      }
     }
 
     .description {
