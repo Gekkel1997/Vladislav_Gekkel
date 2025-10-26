@@ -130,17 +130,17 @@
     /* 🔸 Блок 2 */
     .block-2 {
       display: flex;
-      align-items: flex-end;
       justify-content: space-between;
+      align-items: flex-start; /* теперь текст идёт естественно сверху */
       margin-top: 8px;
       gap: 15px;
     }
 
     .image-v {
       flex: 0 0 33.3%;
-      border: 1px solid #cccccc80;
+      background-color: #cccccc80; /* рамка теперь полностью серая */
       margin-left: 30px;
-      padding: 10px 10px 20px 10px; /* рамка вокруг изображения */
+      padding: 10px 10px 20px 10px;
       box-sizing: border-box;
     }
 
@@ -189,19 +189,21 @@
       .block-2 {
         flex-direction: column;
         align-items: flex-start;
-        width: 90%;
-        margin: 8px auto;
+        width: 33.3%;
+        margin-left: auto;
+        margin-right: 30px;
       }
 
       .image-v {
-        width: 25%; /* уменьшено до 1/4 ширины экрана */
-        margin-left: 0; /* выровнено по левому краю */
-        padding: 10px 10px 20px 10px; /* рамка та же */
+        width: 25%; /* уменьшено до 1/4 ширины */
+        margin-left: 0;
+        background-color: #cccccc80;
+        padding: 10px 10px 20px 10px;
       }
 
       .text-2-1 {
         max-width: 100%;
-        margin-right: 0;
+        margin-top: 10px; /* текст идёт под линией, не под картинкой */
         text-align: left;
       }
     }
