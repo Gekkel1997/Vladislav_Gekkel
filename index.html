@@ -133,6 +133,21 @@
       margin-top: 8px;
       margin-right: 30px;
       margin-left: auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px; /* отступ между изображением В и текстом */
+    }
+
+    .image-c {
+      flex-shrink: 0;
+      border: 1px solid #cccccc80;
+      padding: 2px;
+    }
+
+    .image-c img {
+      width: 70px;
+      height: auto;
+      display: block;
     }
 
     .text-2-1 {
@@ -141,9 +156,10 @@
       color: #000;
       text-align: justify;
       line-height: 1.4;
+      font-style: italic; /* курсив */
     }
 
-    /* 📱 Адаптив — текст 2.1 остаётся ровно под линией! */
+    /* 📱 Адаптив */
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
@@ -166,11 +182,17 @@
         width: 20%;
       }
 
-      /* фиксируем текст 2.1 под линией */
       .block-2 {
-        width: 33.3%;
+        width: 90%;
+        flex-direction: column;
         margin-left: auto;
-        margin-right: 30px;
+        margin-right: auto;
+        align-items: center;
+        text-align: justify;
+      }
+
+      .image-c img {
+        width: 60%;
       }
     }
   </style>
@@ -216,6 +238,9 @@
 
   <!-- 🟨 БЛОК 2 -->
   <div class="block-2">
+    <div class="image-c">
+      <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="C">
+    </div>
     <div class="text-2-1">
       Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
       Отец, в свою очередь, научил меня работать руками.
