@@ -3,32 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gekkel Vladislav Aleksandrovich</title>
+  <title>Gekkel Vladislav Aleksandrovich — V2.0</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    /* Базовые стили */
+    /* 🧱 БАЗОВЫЙ СТИЛЬ СТРАНИЦЫ */
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Oswald', sans-serif;
       background-color: #fff;
-      border: 0.4vw solid #cccccc80;
+      border: 4px solid #cccccc80;
       box-sizing: border-box;
       overflow-x: hidden;
-      position: relative;
+      font-family: 'Oswald', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
     }
 
-    /* ───── Сетка ───── */
+    /* ───── СЕТКА ДЛЯ МАКЕТА ───── */
     .grid {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       background-image:
         linear-gradient(to right, #cccccc40 1px, transparent 1px),
         linear-gradient(to bottom, #cccccc40 1px, transparent 1px);
-      background-size: 1vw 1vw;
+      background-size: 1vw 1vh;
       z-index: 0;
       pointer-events: none;
     }
@@ -36,114 +38,114 @@
     .grid::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       background-image:
         linear-gradient(to right, #cccccc80 1px, transparent 1px),
         linear-gradient(to bottom, #cccccc80 1px, transparent 1px);
-      background-size: 10vw 10vw;
+      background-size: 10vw 10vh;
     }
 
     .grid-labels {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      z-index: 1;
-      pointer-events: none;
       color: #cccccc80;
       font-family: monospace;
-      font-size: 0.6vw;
+      font-size: 0.6em;
+      z-index: 1;
+      pointer-events: none;
     }
 
     #coords {
       position: fixed;
-      bottom: 4vh;
-      right: 2vw;
+      bottom: 3.5vh;
+      right: 1.5vw;
       color: #cccccc80;
       font-family: monospace;
-      font-size: 0.8vw;
+      font-size: 0.8em;
       z-index: 1000;
     }
 
     #toggleGrid {
       position: fixed;
-      bottom: 1.5vh;
-      right: 2vw;
+      bottom: 1vh;
+      right: 1.5vw;
       background-color: #cccccc80;
       color: #000;
       border: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 1vw;
-      padding: 0.5em 1em;
-      border-radius: 0.6em;
+      font-size: 0.8em;
+      padding: 0.3em 0.6em;
+      border-radius: 6px;
       cursor: pointer;
       z-index: 1000;
-      transition: background 0.3s;
     }
 
     #toggleGrid:hover {
       background-color: #bfbfbf;
     }
 
-    /* ───── Контент сайта ───── */
-    main {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2vw;
-      position: relative;
-      z-index: 2;
-      padding: 2vw 5vw;
-    }
+    /* ───── БЛОК 1 ───── */
 
     .header {
-      font-size: clamp(10px, 2vw, 16px);
-      color: #000;
+      font-size: 2vw;
+      margin-left: 5vw;
+      margin-top: 2vh;
+      z-index: 2;
     }
 
     .line {
       height: 1px;
       background-color: #000;
-      width: 100%;
+      margin: 0.5vh 5vw;
     }
 
-    /* Блок 1 */
+    /* Основной контент (заголовок + описание) */
     .section {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3vw;
+      gap: 3vh;
+      margin: 2vh 5vw;
+      z-index: 2;
     }
 
     .left-texts {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      line-height: 1.1;
+      justify-content: flex-start;
     }
 
-    .text-2, .text-3 {
-      font-size: clamp(22px, 6vw, 70px);
+    .text-2,
+    .text-3 {
+      font-size: 8vw;
       font-style: italic;
-      color: #000;
+      line-height: 1.1;
+      margin: 0;
     }
 
     .description {
-      font-size: clamp(9px, 2.5vw, 16px);
-      color: #000;
+      font-size: 3.2vw;
       text-align: justify;
+      line-height: 1.5;
+    }
+
+    .image-container {
+      margin: 3vh 5vw;
+      z-index: 2;
     }
 
     .image-container img {
       width: 100%;
       height: auto;
-      border-radius: 0.5vw;
+      display: block;
     }
 
+    /* ───── ИНФО-БЛОК ───── */
     .info {
       display: flex;
       flex-wrap: wrap;
-      gap: 6vw;
+      gap: 5vw;
+      margin: 2vh 5vw;
     }
 
     .info-column {
@@ -153,26 +155,24 @@
     }
 
     .info-text {
-      font-size: clamp(8px, 2vw, 14px);
-      color: #000;
+      font-size: 3vw;
     }
 
     .info-bold {
-      font-size: clamp(8px, 2vw, 14px);
+      font-size: 3vw;
       font-weight: 600;
-      color: #000;
     }
 
+    /* ───── ИЗОБРАЖЕНИЕ B ───── */
     .image-b {
       display: flex;
       justify-content: flex-end;
-      margin-top: -3vw;
+      margin: 2vh 5vw;
     }
 
     .image-b img {
       width: 20%;
       min-width: 60px;
-      max-width: 100px;
       height: auto;
     }
 
@@ -180,149 +180,163 @@
       height: 1px;
       background-color: #000;
       width: 33%;
-      margin-left: auto;
+      margin: 3vh 5vw 0 auto;
     }
 
-    /* Блок 2 */
+    /* ───── БЛОК 2 ───── */
     .block-2 {
-      width: 100%;
-      display: grid;
-      justify-content: end;
+      width: 33%;
+      margin: 2vh 5vw 5vh auto;
     }
 
     .text-2-1 {
-      width: min(90%, 33%);
-      justify-self: end;
-      font-size: clamp(9px, 2vw, 16px);
+      font-size: 3vw;
       font-style: italic;
       text-align: justify;
       line-height: 1.5;
     }
 
+    /* ───── ИЗОБРАЖЕНИЕ B2 ───── */
     .image-b2 {
-      position: relative;
-      justify-self: end;
+      position: absolute;
       border: 1px solid #c0c0c0;
       background-color: #fff;
       padding: 2vw;
       box-sizing: border-box;
-      width: min(80%, 25%);
-      margin-top: 2vw;
+      z-index: 3;
+      width: 33%;
+      left: 55vw;
+      top: 70vh;
     }
 
     .image-b2 img {
       width: 100%;
       height: auto;
-      display: block;
     }
 
-    /* Отступ снизу */
-    .spacer {
-      height: 20vh;
-    }
-
-    /* 🔄 Адаптация под ширину */
-    @media (min-width: 768px) {
-      main {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-          "header header"
-          "section section"
-          "image image"
-          "info info"
-          "bottom bottom"
-          "block2 block2";
-      }
+    /* ───── МЕДИА: ТЕЛЕФОН ГОРИЗОНТАЛЬНЫЙ ───── */
+    @media (orientation: landscape) and (max-width: 768px) {
       .section {
         grid-template-columns: 1fr 1fr;
+        align-items: end;
       }
+
       .description {
-        align-self: center;
+        font-size: 2.3vw;
       }
-      .block-2 {
-        width: 60%;
+
+      .text-2, .text-3 {
+        font-size: 5vw;
       }
-      .text-2-1 {
-        width: 80%;
-      }
+
       .image-b2 {
-        width: 30%;
+        width: 33%;
+        left: 65vw;
+        top: 60vh;
       }
     }
 
-    @media (min-width: 1200px) {
+    /* ───── МЕДИА: ПЛАНШЕТЫ И ПК ───── */
+    @media (min-width: 769px) {
+      body {
+        border-width: 5vw;
+      }
+
+      .text-2, .text-3 {
+        font-size: 4vw;
+      }
+
+      .description {
+        font-size: 1.3vw;
+      }
+
+      .info-text, .info-bold {
+        font-size: 1vw;
+      }
+
       .block-2 {
-        width: 50%;
+        width: 30%;
       }
+
       .text-2-1 {
-        width: 60%;
+        font-size: 1vw;
       }
+
       .image-b2 {
         width: 25%;
+        left: 68vw;
+        top: 75vh;
       }
+    }
+
+    /* ───── ПРОСТРАНСТВО ДЛЯ СКРОЛЛА ───── */
+    .spacer {
+      height: 80vh;
+      background: transparent;
     }
   </style>
 </head>
 <body>
+  <!-- 🔲 ТЕХНИЧЕСКИЙ СЛОЙ -->
   <div class="grid" id="grid"></div>
   <div class="grid-labels" id="gridLabels"></div>
   <div id="coords">x: 0, y: 0</div>
   <button id="toggleGrid">Сетка 🔲</button>
 
-  <main>
-    <!-- 🟦 БЛОК 1 -->
-    <div class="header">Gekkel Vladislav Aleksandrovich</div>
-    <div class="line"></div>
+  <!-- 🟦 БЛОК 1 -->
+  <div class="header">Gekkel Vladislav Aleksandrovich</div>
+  <div class="line"></div>
 
-    <section class="section">
-      <div class="left-texts">
-        <div class="text-2">КТО ТАКОЙ</div>
-        <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
-      </div>
-      <div class="description">
-        Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.
-        Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад. Несмотря на то, что узоры сами по себе очень резкие, они могут сделать фигуру размытой или нечеткой. Яркое и абстрактное контрастирует с расплывчатым и образным.
-      </div>
-    </section>
-
-    <div class="image-container">
-      <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
+  <section class="section">
+    <div class="left-texts">
+      <div class="text-2">КТО ТАКОЙ</div>
+      <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
     </div>
-
-    <div class="info">
-      <div class="info-column">
-        <div class="info-text">Родился:</div>
-        <div class="info-bold">Россия /<br>Липецк</div>
-      </div>
-      <div class="info-column">
-        <div class="info-text">Родители:</div>
-        <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
-      </div>
+    <div class="description">
+      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.
+      Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад. Несмотря на то, что узоры сами по себе очень резкие, они могут сделать фигуру размытой или нечеткой. Яркое и абстрактное контрастирует с расплывчатым и образным.
     </div>
+  </section>
 
-    <div class="image-b">
-      <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
+  <div class="image-container">
+    <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
+  </div>
+
+  <div class="info">
+    <div class="info-column">
+      <div class="info-text">Родился:</div>
+      <div class="info-bold">Россия /<br>Липецк</div>
     </div>
-
-    <div class="bottom-line"></div>
-
-    <!-- 🟨 БЛОК 2 -->
-    <div class="block-2">
-      <div class="text-2-1">
-        Ещё с утробы матери я был заложником творческого мира, и, наверное, именно поэтому мой путь к себе был тернистым. Я долго искал способ говорить с миром — не словами, а формой, цветом и фактурой.  
-        Сегодня я называю себя «мраморным гранником» — человеком, который извлекает смысл из хаоса. Мои картины — это не просто отражение внутреннего состояния, это результат диалога с материалом.  
-        Я не рисую — я взаимодействую. Я позволяю краске течь, сопротивляться, формировать пространство сама. Моя задача — только направлять этот процесс, наблюдать, где абстракция рождает образ.
-      </div>
-      <div class="image-b2">
-        <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
-      </div>
+    <div class="info-column">
+      <div class="info-text">Родители:</div>
+      <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
     </div>
-  </main>
+  </div>
+
+  <div class="image-b">
+    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
+  </div>
+
+  <div class="bottom-line"></div>
+
+  <!-- 🟨 БЛОК 2 -->
+  <div class="block-2">
+    <div class="text-2-1">
+      Ещё с утробы матери я был заложником творческого мира, и, наверное, именно поэтому мой путь к себе был тернистым. Я долго искал способ говорить с миром — не словами, а формой, цветом и фактурой.  
+      Сегодня я называю себя «мраморным гранником» — человеком, который извлекает смысл из хаоса. Мои картины — это не просто отражение внутреннего состояния, это результат диалога с материалом.  
+      Я не рисую — я взаимодействую. Я позволяю краске течь, сопротивляться, формировать пространство сама. Моя задача — только направлять этот процесс, наблюдать, где абстракция рождает образ.
+    </div>
+  </div>
+
+  <!-- 🖼 Изображение B2 -->
+  <div class="image-b2">
+    <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
+  </div>
 
   <div class="spacer"></div>
 
+  <!-- 🔧 СКРИПТЫ -->
   <script>
-    // Координаты курсора
     const coords = document.getElementById("coords");
     document.addEventListener("mousemove", (e) => {
       const scrollX = window.scrollX;
@@ -330,35 +344,36 @@
       coords.textContent = `x: ${e.clientX + scrollX}px, y: ${e.clientY + scrollY}px`;
     });
 
-    // Сетка и подписи
     const grid = document.getElementById("grid");
     const labels = document.getElementById("gridLabels");
     const toggleBtn = document.getElementById("toggleGrid");
 
+    // Отрисовка числовых меток по сетке
     function drawLabels() {
       labels.innerHTML = "";
       const width = window.innerWidth;
       const height = window.innerHeight;
       for (let x = 100; x < width; x += 100) {
         const labelX = document.createElement("div");
-        labelX.textContent = x;
         labelX.style.position = "absolute";
         labelX.style.left = `${x + 2}px`;
-        labelX.style.top = `2px`;
+        labelX.style.top = "2px";
+        labelX.textContent = x;
         labels.appendChild(labelX);
       }
       for (let y = 100; y < height; y += 100) {
         const labelY = document.createElement("div");
-        labelY.textContent = y;
         labelY.style.position = "absolute";
-        labelY.style.left = `2px`;
+        labelY.style.left = "2px";
         labelY.style.top = `${y + 2}px`;
+        labelY.textContent = y;
         labels.appendChild(labelY);
       }
     }
 
     drawLabels();
 
+    // Переключение сетки
     toggleBtn.addEventListener("click", () => {
       const visible = grid.style.display !== "none";
       grid.style.display = visible ? "none" : "block";
