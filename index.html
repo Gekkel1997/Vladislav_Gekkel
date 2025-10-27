@@ -1,77 +1,282 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ваше имя | Художник</title>
-  <meta name="description" content="Короткое описание вашего творчества" />
-  <style>
-    body { margin:0; font-family: Arial, sans-serif; background:#fff; color:#111; }
-    header { background:#000; color:#fff; padding:20px; text-align:center; }
-    nav ul { list-style:none; padding:0; display:flex; justify-content:center; gap:20px; }
-    nav a { color:#fff; text-decoration:none; font-weight:bold; }
-    .hero { position: relative; text-align:center; color:#fff; }
-    .hero img { width:100%; height:auto; display:block; }
-    .hero .overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
-    .hero h1 { font-size:48px; margin:0; }
-    .hero p { font-size:20px; margin:10px 0 0; }
-    .content { padding:40px 20px; max-width:1000px; margin:0 auto; }
-    .footer { text-align:center; padding:20px; font-size:14px; color:#555; border-top:1px solid #eee; }
-    /* адаптив */
-    @media (max-width:600px) {
-      .hero h1 { font-size:32px; }
-      .hero p { font-size:16px; }
-      nav ul { flex-direction:column; gap:10px; }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Replica — Галерея</title>
+<style>
+  :root{
+    --bg:#0f0f10; --muted:#999; --card:#121214; --accent:#e6e6e6;
+    --glass: rgba(255,255,255,0.04);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%; margin:0; background:linear-gradient(180deg,#0b0b0c 0%, #0f0f10 100%); color:var(--accent);}
+  a{color:inherit; text-decoration:none;}
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 28px; position:sticky; top:0; z-index:100;
+    background:linear-gradient(0deg, rgba(15,15,16,0.35), rgba(15,15,16,0.35));
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+  }
+  .brand{font-weight:700; letter-spacing:1px;}
+  nav{display:flex; gap:18px; align-items:center;}
+  .menu-btn{background:transparent;border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:6px; cursor:pointer;}
+  .hero{
+    padding:60px 28px; display:grid; grid-template-columns:1fr 420px; gap:40px; align-items:center;
+    max-width:1200px; margin:0 auto;
+  }
+  .hero-left h1{font-size:48px; margin:0 0 18px; line-height:1.02;}
+  .lead{color:var(--muted); max-width:640px;}
+  .collections{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:28px;}
+  .card{background:var(--card); padding:14px; border-radius:12px; overflow:hidden; position:relative; border:1px solid rgba(255,255,255,0.03);}
+  .placeholder{
+    background:linear-gradient(90deg,#2b2b2b,#1f1f1f);
+    height:220px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted);
+  }
+  .meta{margin-top:10px; display:flex; justify-content:space-between; align-items:center;}
+  footer{padding:40px 28px; color:var(--muted); text-align:center; border-top:1px solid rgba(255,255,255,0.03); margin-top:60px;}
+  /* Simple page routing */
+  main > section{display:none; padding:30px 28px; max-width:1100px; margin:0 auto;}
+  main > section.active{display:block;}
+  /* Animations */
+  .fade-in{animation:fadeIn .8s ease both;}
+  .slide-up{animation:slideUp .6s cubic-bezier(.2,.9,.2,1) both;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  @keyframes slideUp{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
+  /* Responsive */
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr; text-align:center;}
+    nav{display:none;}
+    .mobile-nav{display:flex; gap:12px;}
+  }
+  /* Modal menu */
+  .overlay{position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:200;}
+  .overlay.open{display:flex;}
+  .menu-panel{background:linear-gradient(180deg,#0c0c0d,#0f0f10); border-radius:12px; padding:28px; width:90%; max-width:720px; box-shadow:0 10px 40px rgba(0,0,0,0.6);}
+  .menu-list{display:grid; gap:12px;}
+  .small{font-size:13px; color:var(--muted)}
+  .btn{display:inline-block; padding:10px 16px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.06); cursor:pointer;}
+  /* Fancy image hover */
+  .card .placeholder::after{
+    content:""; position:absolute; inset:0; mix-blend-mode:overlay; opacity:0; transition:opacity .4s;
+    background:linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  }
+  .card:hover .placeholder::after{opacity:1;}
+  /* grid for detail */
+  .detail-grid{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:start;}
+  @media (max-width:900px){ .detail-grid{grid-template-columns:1fr} }
+</style>
 </head>
-
 <body>
+<header>
+  <div class="brand">WER<span style="opacity:.6">NE</span>R</div>
+  <nav id="topNav">
+    <a href="#/" class="navlink">HOME</a>
+    <a href="#/canvas" class="navlink">THE WHOLE WORLD'S A CANVAS</a>
+    <a href="#/collections" class="navlink">COLLECTIONS</a>
+    <a href="#/about" class="navlink">ABOUT</a>
+  </nav>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <button class="menu-btn" id="openMenu">Menu</button>
+    <div class="mobile-nav" style="display:none;">
+      <button class="btn" id="openMenu2">☰</button>
+    </div>
+  </div>
+</header>
 
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#works">WORKS</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
-    </nav>
-  </header>
+<main>
+  <!-- HOME -->
+  <section id="home" class="active fade-in">
+    <div class="hero">
+      <div class="hero-left">
+        <h1>Коллекции & произведения</h1>
+        <p class="lead">Добро пожаловать — демонстрационный шаблон сайта-галереи. Все изображения заменены на серые плейсхолдеры. Навигация имитирует оригинальную структуру: коллекции, страницы и магазин.</p>
+        <div style="margin-top:18px;">
+          <a class="btn" href="#/collections">Просмотреть коллекции</a>
+        </div>
 
-  <section class="hero" id="home">
-    <img src="PATH_TO_YOUR_HERO_IMAGE.jpg" alt="Ваш образ или работа художника">
-    <div class="overlay">
-      <h1>Ваше Имя</h1>
-      <p>Короткий слоган / описание творчества</p>
+        <div class="collections slide-up" style="margin-top:24px;">
+          <div class="card">
+            <div class="placeholder">IMAGE</div>
+            <div class="meta"><strong>THE STROKES</strong><span class="small">Коллекция</span></div>
+          </div>
+          <div class="card">
+            <div class="placeholder">IMAGE</div>
+            <div class="meta"><strong>THE STREETS</strong><span class="small">Коллекция</span></div>
+          </div>
+          <div class="card">
+            <div class="placeholder">IMAGE</div>
+            <div class="meta"><strong>WHITE LINES</strong><span class="small">Коллекция</span></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="fade-in" style="text-align:center;">
+        <div style="background:var(--glass); padding:18px; border-radius:12px;">
+          <div style="font-weight:700; font-size:14px; margin-bottom:8px;">'CRACK' COLLECTION DROPPING EARLY 2026</div>
+          <div class="small" style="margin-bottom:10px;">Подпишитесь на рассылку, чтобы узнать первыми</div>
+          <input placeholder="Email" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--accent)"/>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <section class="content" id="about">
-    <h2>О мене</h2>
-    <p>Здесь будет ваш рассказ: «Я — художник из …, занимаюсь …». Опишите себя, стиль, опыт.</p>
-    <p>Дополнительные детали: выставки, коллекции, достижения.</p>
-  </section>
+  <!-- Canvas / Feature page -->
+  <section id="canvas">
+    <h2>THE WHOLE WORLD'S A CANVAS</h2>
+    <p class="small">Функциональная страница-обзор: описания, сетка работ, и детальные карточки.</p>
 
-  <section class="content" id="works">
-    <h2>Работы</h2>
-    <p>Ниже несколько примеров ваших произведений. Можно сделать сетку изображений.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-top:20px">
-      <div><img src="IMAGE1.jpg" alt="Название работы 1" style="width:100%;height:auto;"></div>
-      <div><img src="IMAGE2.jpg" alt="Название работы 2" style="width:100%;height:auto;"></div>
-      <div><img src="IMAGE3.jpg" alt="Название работы 3" style="width:100%;height:auto;"></div>
-      <!-- добавьте больше по желанию -->
+    <div style="margin-top:20px;" class="collections">
+      <!-- repeat cards -->
+      <div class="card fade-in">
+        <div class="placeholder" style="height:260px">IMAGE</div>
+        <div style="margin-top:10px"><strong>Work Title — 01</strong></div>
+        <div class="small">Небольшое описание работы.</div>
+      </div>
+      <div class="card fade-in">
+        <div class="placeholder" style="height:260px">IMAGE</div>
+        <div style="margin-top:10px"><strong>Work Title — 02</strong></div>
+        <div class="small">Небольшое описание работы.</div>
+      </div>
+      <div class="card fade-in">
+        <div class="placeholder" style="height:260px">IMAGE</div>
+        <div style="margin-top:10px"><strong>Work Title — 03</strong></div>
+        <div class="small">Небольшое описание работы.</div>
+      </div>
     </div>
   </section>
 
-  <section class="content" id="contact">
-    <h2>Контакты</h2>
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-    <p>Instagram / Facebook: @ваш_аккаунт</p>
+  <!-- Collections list -->
+  <section id="collections">
+    <h2>COLLECTIONS</h2>
+    <p class="small">Список коллекций — клик откроет страницу коллекции.</p>
+    <div style="margin-top:18px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+      <div class="card" data-collection="the-strokes"><div class="placeholder">IMAGE</div><div style="margin-top:10px"><strong>THE STROKES</strong></div></div>
+      <div class="card" data-collection="the-streets"><div class="placeholder">IMAGE</div><div style="margin-top:10px"><strong>THE STREETS</strong></div></div>
+      <div class="card" data-collection="white-lines"><div class="placeholder">IMAGE</div><div style="margin-top:10px"><strong>WHITE LINES</strong></div></div>
+      <div class="card" data-collection="forbidden-grass"><div class="placeholder">IMAGE</div><div style="margin-top:10px"><strong>FORBIDDEN GRASS</strong></div></div>
+    </div>
   </section>
 
-  <footer class="footer">
-    © 2025 Ваше Имя. Все права защищены.
-  </footer>
+  <!-- About -->
+  <section id="about">
+    <h2>ABOUT</h2>
+    <div class="detail-grid" style="margin-top:16px;">
+      <div>
+        <p class="small">Короткая биография / описание художника. Этот текст — заменитель оригинального контента. Здесь можно разместить информацию о художнике, контакты, пресс-материалы и ссылки на соцсети.</p>
+        <h3>Контакт</h3>
+        <p class="small">Email: example@example.com</p>
+        <h3>Социальные сети</h3>
+        <p class="small">Instagram • TikTok • YouTube</p>
+      </div>
+      <aside>
+        <div class="card">
+          <div class="placeholder" style="height:200px">PHOTO</div>
+          <div style="margin-top:8px"><strong>Press / Shop</strong></div>
+          <div class="small">Информация о покупках и условиях доставки.</div>
+        </div>
+      </aside>
+    </div>
+  </section>
 
+  <!-- Collection Detail (dynamic) -->
+  <section id="collection-detail">
+    <button class="btn" id="backToCollections">← Назад к коллекциям</button>
+    <div id="collectionContent" style="margin-top:18px;"></div>
+  </section>
+</main>
+
+<footer>
+  © <span id="year"></span> Replica Gallery — Demo. Все изображения — плейсхолдеры.
+</footer>
+
+<!-- Menu modal -->
+<div class="overlay" id="menuOverlay" aria-hidden="true">
+  <div class="menu-panel fade-in" role="dialog" aria-modal="true">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <strong>Menu</strong>
+      <button class="btn" id="closeMenu">Close</button>
+    </div>
+    <div class="menu-list">
+      <a href="#/" class="menu-link">HOME</a>
+      <a href="#/canvas" class="menu-link">THE WHOLE WORLD'S A CANVAS</a>
+      <a href="#/collections" class="menu-link">COLLECTIONS</a>
+      <a href="#/about" class="menu-link">ABOUT</a>
+      <a class="small" href="#">FAQ's</a>
+      <a class="small" href="#">Shipping Policy</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple client-side routing
+  const sections = {
+    '/': document.getElementById('home'),
+    '/canvas': document.getElementById('canvas'),
+    '/collections': document.getElementById('collections'),
+    '/about': document.getElementById('about'),
+    '/collection': document.getElementById('collection-detail'),
+  };
+  function showRoute(route){
+    Object.values(sections).forEach(s => s.classList.remove('active'));
+    const target = sections[route] || sections['/'];
+    target.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function parseHash(){
+    const h = location.hash.replace('#','') || '/';
+    if(h.startsWith('/collection/')){
+      const id = h.split('/')[2];
+      openCollection(id);
+      return;
+    }
+    showRoute(h);
+  }
+  window.addEventListener('hashchange', parseHash);
+  window.addEventListener('load', ()=>{
+    document.getElementById('year').textContent = new Date().getFullYear();
+    parseHash();
+  });
+
+  // Menu
+  const overlay = document.getElementById('menuOverlay');
+  document.getElementById('openMenu').addEventListener('click', ()=> overlay.classList.add('open'));
+  document.getElementById('closeMenu').addEventListener('click', ()=> overlay.classList.remove('open'));
+  overlay.addEventListener('click', (e)=>{ if(e.target===overlay) overlay.classList.remove('open') });
+
+  // Collection cards click to open detail
+  document.querySelectorAll('[data-collection]').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const id = card.getAttribute('data-collection');
+      location.hash = '/collection/' + id;
+    });
+  });
+
+  document.getElementById('backToCollections').addEventListener('click', ()=> { location.hash = '/collections'; });
+
+  function openCollection(id){
+    showRoute('/collection');
+    const content = document.getElementById('collectionContent');
+    // Build a simple detail view with placeholders
+    const title = id.split('-').map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join(' ');
+    content.innerHTML = `
+      <h2>${title}</h2>
+      <p class="small">Описание коллекции «${title}». Ниже — сетка работ (все изображения — плейсхолдеры).</p>
+      <div style="margin-top:18px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+        ${Array.from({length:8}).map((_,i)=>`
+          <div class="card">
+            <div class="placeholder" style="height:220px">IMAGE</div>
+            <div style="margin-top:10px"><strong>${title} — Work ${i+1}</strong></div>
+            <div class="small">Доп. информация о работе.</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // Accessibility: keyboard menu
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') overlay.classList.remove('open') });
+</script>
 </body>
 </html>
