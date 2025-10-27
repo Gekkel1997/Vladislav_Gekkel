@@ -23,15 +23,18 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image:
-        linear-gradient(to right, #cccccc40 1px, transparent 1px),
-        linear-gradient(to bottom, #cccccc40 1px, transparent 1px);
-      background-size: 10px 10px;
-      z-index: 0;
       pointer-events: none;
+      z-index: 0;
     }
 
-    .grid::after {
+    /* Телефон вертикальный — жёлтая */
+    .grid-phone-vertical {
+      background-image:
+        linear-gradient(to right, #ffeb3b40 1px, transparent 1px),
+        linear-gradient(to bottom, #ffeb3b40 1px, transparent 1px);
+      background-size: 10px 10px;
+    }
+    .grid-phone-vertical::after {
       content: "";
       position: absolute;
       top: 0;
@@ -39,19 +42,57 @@
       width: 100%;
       height: 100%;
       background-image:
-        linear-gradient(to right, #cccccc80 1px, transparent 1px),
-        linear-gradient(to bottom, #cccccc80 1px, transparent 1px);
+        linear-gradient(to right, #ffeb3b80 1px, transparent 1px),
+        linear-gradient(to bottom, #ffeb3b80 1px, transparent 1px);
       background-size: 100px 100px;
-      pointer-events: none;
+    }
+
+    /* Телефон горизонтальный — зелёная */
+    .grid-phone-horizontal {
+      background-image:
+        linear-gradient(to right, #00ff0040 1px, transparent 1px),
+        linear-gradient(to bottom, #00ff0040 1px, transparent 1px);
+      background-size: 10px 10px;
+    }
+    .grid-phone-horizontal::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, #00ff0080 1px, transparent 1px),
+        linear-gradient(to bottom, #00ff0080 1px, transparent 1px);
+      background-size: 100px 100px;
+    }
+
+    /* ПК — красная */
+    .grid-pc {
+      background-image:
+        linear-gradient(to right, #ff000040 1px, transparent 1px),
+        linear-gradient(to bottom, #ff000040 1px, transparent 1px);
+      background-size: 10px 10px;
+    }
+    .grid-pc::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, #ff000080 1px, transparent 1px),
+        linear-gradient(to bottom, #ff000080 1px, transparent 1px);
+      background-size: 100px 100px;
     }
 
     .grid-labels {
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
-      color: #cccccc80;
       font-family: monospace;
       font-size: 10px;
     }
@@ -64,7 +105,7 @@
       position: fixed;
       bottom: 45px;
       right: 15px;
-      color: #cccccc80;
+      color: #888;
       font-family: monospace;
       font-size: 12px;
       z-index: 10000;
@@ -90,7 +131,6 @@
     }
 
     /* ───── Контент сайта ───── */
-
     .header {
       font-family: 'Oswald', sans-serif;
       font-size: 7px;
@@ -98,13 +138,7 @@
       margin-left: 30px;
       margin-top: 15px;
       position: relative;
-      z-index: 2;
-    }
-
-    @media (min-width: 1024px) {
-      .header {
-        font-size: 13px;
-      }
+      z-index: 3;
     }
 
     .line {
@@ -112,7 +146,7 @@
       background-color: #000;
       margin: 3px 30px 0 30px;
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     .section {
@@ -122,17 +156,10 @@
       margin: 15px 30px 0 30px;
       gap: 20px;
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
-    .left-texts {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .text-2,
-    .text-3 {
+    .text-2, .text-3 {
       font-family: 'Oswald', sans-serif;
       font-size: 37px;
       font-style: italic;
@@ -140,9 +167,7 @@
       line-height: 1.1;
     }
 
-    .text-3 {
-      margin-top: 5px;
-    }
+    .text-3 { margin-top: 5px; }
 
     .description {
       font-family: 'Oswald', sans-serif;
@@ -152,80 +177,13 @@
       max-width: 50%;
     }
 
-    .image-container {
-      margin: 15px 30px 0 30px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .image-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .info {
-      margin-top: 6px;
-      margin-left: 30px;
-      display: flex;
-      gap: 30px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .info-column {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .info-text {
-      font-family: 'Oswald', sans-serif;
-      font-size: 7px;
-      color: #000;
-      margin-bottom: 1px;
-    }
-
-    .info-bold {
-      font-family: 'Oswald', sans-serif;
-      font-size: 7px;
-      font-weight: 600;
-      color: #000;
-      line-height: 1.05;
-    }
-
-    .image-b {
-      display: flex;
-      justify-content: flex-end;
-      margin: -15px 10px 10px 10px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .image-b img {
-      width: 10%;
-      height: auto;
-      display: block;
-    }
-
-    .bottom-line {
-      height: 1px;
-      background-color: #000;
-      width: 33.3%;
-      margin-right: 30px;
-      margin-top: 20px;
-      margin-left: auto;
-      position: relative;
-      z-index: 2;
-    }
-
     .block-2 {
       width: 33.3%;
       margin-top: 8px;
       margin-right: 30px;
       margin-left: auto;
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     .text-2-1 {
@@ -237,7 +195,6 @@
       line-height: 1.4;
     }
 
-    /* Изображение B (в блоке 2) */
     .image-b2 {
       position: absolute;
       border: 1px solid #c0c0c0;
@@ -247,88 +204,39 @@
       z-index: 3;
     }
 
-    .image-b2 img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .image-b2 img { width: 100%; height: auto; display: block; }
 
     /* 📱 Телефон (вертикальный) */
     @media (max-width: 480px) {
-      .section {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 15px;
-      }
-
-      .description {
-        margin-top: -10px;
-        font-size: 9px;
-        max-width: 100%;
-        text-align: left;
-      }
-
-      .text-2,
-      .text-3 {
-        font-size: 28px;
-      }
-
-      .image-b img {
-        width: 20%;
-      }
-
-      .image-b2 {
-        width: 33%;
-        left: 230px;
-        top: 450px;
-      }
+      .image-b2 { width: 33%; left: 230px; top: 450px; }
+      .grid-phone-vertical { display: block; }
+      .grid-phone-horizontal, .grid-pc { display: none; }
     }
 
     /* 📱 Телефон (горизонтальный) */
     @media (min-width: 481px) and (max-width: 768px) {
-      .description {
-        font-size: 10px;
-      }
-
-      .image-b2 {
-        width: 33%;
-        left: 485px;
-        top: 453px;
-      }
+      .image-b2 { width: 33%; left: 485px; top: 453px; }
+      .grid-phone-horizontal { display: block; }
+      .grid-phone-vertical, .grid-pc { display: none; }
     }
 
     /* 💻 ПК */
     @media (min-width: 1024px) {
-      .text-2,
-      .text-3 {
-        font-size: 70px;
-      }
-
-      .description {
-        font-size: 16px;
-      }
-
-      body {
-        border-width: 80px;
-      }
-
-      .image-b2 {
-        width: 25%;
-        left: 975px;
-        top: 815px;
-      }
+      .image-b2 { width: 25%; left: 975px; top: 815px; }
+      .grid-pc { display: block; }
+      .grid-phone-horizontal, .grid-phone-vertical { display: none; }
+      body { border-width: 80px; }
     }
 
-    /* 🔽 Дополнительное пространство */
-    .spacer {
-      height: 800px;
-      width: 100%;
-      background: transparent;
-    }
+    .spacer { height: 800px; }
   </style>
 </head>
 <body>
-  <div class="grid" id="grid"></div>
+  <!-- Три сетки -->
+  <div class="grid grid-phone-vertical" id="gridPhoneV"></div>
+  <div class="grid grid-phone-horizontal" id="gridPhoneH"></div>
+  <div class="grid grid-pc" id="gridPC"></div>
+
   <div class="grid-labels" id="gridLabels"></div>
   <div id="coords">x: 0, y: 0</div>
   <button id="toggleGrid">Сетка 🔲</button>
@@ -338,36 +246,14 @@
   <div class="line"></div>
 
   <div class="section">
-    <div class="left-texts">
+    <div>
       <div class="text-2">КТО ТАКОЙ</div>
       <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
     </div>
     <div class="description">
-      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.
-      Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад. Несмотря на то, что узоры сами по себе очень резкие, они могут сделать фигуру размытой или нечеткой. Яркое и абстрактное контрастирует с расплывчатым и образным.
+      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески. Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад. Несмотря на то, что узоры сами по себе очень резкие, они могут сделать фигуру размытой или нечеткой. Яркое и абстрактное контрастирует с расплывчатым и образным.
     </div>
   </div>
-
-  <div class="image-container">
-    <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
-  </div>
-
-  <div class="info">
-    <div class="info-column">
-      <div class="info-text">Родился:</div>
-      <div class="info-bold">Россия /<br>Липецк</div>
-    </div>
-    <div class="info-column">
-      <div class="info-text">Родители:</div>
-      <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
-    </div>
-  </div>
-
-  <div class="image-b">
-    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
-  </div>
-
-  <div class="bottom-line"></div>
 
   <!-- 🟨 БЛОК 2 -->
   <div class="block-2">
@@ -378,7 +264,7 @@
     </div>
   </div>
 
-  <!-- 🖼 Новое изображение B -->
+  <!-- 🖼 Изображение B -->
   <div class="image-b2">
     <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B">
   </div>
@@ -388,12 +274,10 @@
   <script>
     const coords = document.getElementById("coords");
     document.addEventListener("mousemove", (e) => {
-      const scrollX = window.scrollX;
-      const scrollY = window.scrollY;
-      coords.textContent = `x: ${e.clientX + scrollX}px, y: ${e.clientY + scrollY}px`;
+      coords.textContent = `x: ${e.clientX + window.scrollX}px, y: ${e.clientY + window.scrollY}px`;
     });
 
-    const grid = document.getElementById("grid");
+    const grids = [document.getElementById("gridPhoneV"), document.getElementById("gridPhoneH"), document.getElementById("gridPC")];
     const labels = document.getElementById("gridLabels");
     const toggleBtn = document.getElementById("toggleGrid");
 
@@ -422,8 +306,8 @@
     drawLabels();
 
     toggleBtn.addEventListener("click", () => {
-      const visible = grid.style.display !== "none";
-      grid.style.display = visible ? "none" : "block";
+      const visible = grids[0].style.display !== "none";
+      grids.forEach(g => g.style.display = visible ? "none" : "block");
       labels.style.display = visible ? "none" : "block";
       toggleBtn.textContent = visible ? "Показать сетку 🔲" : "Скрыть сетку ❌";
     });
