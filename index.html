@@ -1,291 +1,201 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gekkel Vladislav Aleksandrovich</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      border: 4px solid #cccccc80;
-      box-sizing: border-box;
-      position: relative;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gekkel Vladislav</title>
+<style>
+/* === ОСНОВНОЕ ОФОРМЛЕНИЕ СТРАНИЦЫ === */
+body {
+  margin: 0;
+  padding: 80px; /* базовая рамка для ПК */
+  background-color: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  border: 80px solid #000; /* рамка вокруг сайта */
+  box-sizing: border-box;
+  position: relative;
+}
 
-    /* 🔹 Сетка */
-    .grid {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(to right, #cccccc40 1px, transparent 1px),
-        linear-gradient(to bottom, #cccccc40 1px, transparent 1px);
-      background-size: 10px 10px;
-      z-index: 9998;
-      pointer-events: none;
-    }
+/* === СЕТКА === */
+.grid {
+  position: absolute; /* теперь движется вместе со страницей */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(to right, #cccccc40 1px, transparent 1px),
+    linear-gradient(to bottom, #cccccc40 1px, transparent 1px);
+  background-size: 10px 10px;
+  z-index: 1;
+  pointer-events: none;
+}
 
-    .grid::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(to right, #cccccc80 1px, transparent 1px),
-        linear-gradient(to bottom, #cccccc80 1px, transparent 1px);
-      background-size: 100px 100px;
-      pointer-events: none;
-    }
+.grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(to right, #cccccc80 1px, transparent 1px),
+    linear-gradient(to bottom, #cccccc80 1px, transparent 1px);
+  background-size: 100px 100px;
+  pointer-events: none;
+}
 
-    .grid-labels {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 9999;
-      pointer-events: none;
-      color: #cccccc80;
-      font-family: monospace;
-      font-size: 10px;
-    }
+.grid-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  color: #cccccc80;
+  font-family: monospace;
+  font-size: 10px;
+}
 
-    .grid-labels .label {
-      position: absolute;
-    }
+/* === КНОПКА И КООРДИНАТЫ === */
+#toggleGrid {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 999;
+  padding: 6px 10px;
+  background-color: #00000060;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
 
-    #coords {
-      position: fixed;
-      bottom: 45px;
-      right: 15px;
-      color: #cccccc80;
-      font-family: monospace;
-      font-size: 12px;
-      z-index: 9999;
-    }
+#coords {
+  position: fixed;
+  right: 15px;
+  bottom: 50px;
+  color: #000;
+  background-color: #ffffffb0;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  z-index: 999;
+}
 
-    #toggleGrid {
-      position: fixed;
-      bottom: 10px;
-      right: 15px;
-      background-color: #cccccc80;
-      color: #000;
-      border: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 10000;
-    }
+/* === БЛОК 1 === */
+.header {
+  position: relative;
+  z-index: 10;
+  font-size: 37px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 40px;
+}
 
-    #toggleGrid:hover {
-      background-color: #bfbfbf;
-    }
+/* === ТЕКСТ 2 И 3 === */
+.subtext {
+  font-size: 70px; /* увеличено до 70px на ПК */
+  font-weight: bold;
+  margin: 0;
+  line-height: 1;
+}
 
-    /* ───── Основное содержимое ───── */
-    .header {
-      font-family: 'Oswald', sans-serif;
-      font-size: 7px;
-      color: #000;
-      margin-left: 30px;
-      margin-top: 15px;
-    }
+.text-block {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 
-    @media (min-width: 1024px) {
-      .header {
-        font-size: 13px;
-      }
-    }
+/* === ТЕКСТ 4 (ОПИСАНИЕ СПРАВА) === */
+.description {
+  width: 45%;
+  font-size: 18px;
+  line-height: 1.4;
+  text-align: left;
+}
 
-    .line {
-      height: 1px;
-      background-color: #000;
-      margin: 3px 30px 0 30px;
-    }
+/* === АДАПТИВНОСТЬ === */
 
-    .section {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin: 15px 30px 0 30px;
-      gap: 20px;
-    }
+/* 📱 Телефон (вертикальный) */
+@media (max-width: 480px) {
+  body {
+    border-width: 20px;
+    padding: 20px;
+  }
 
-    .left-texts {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
+  .header {
+    font-size: 37px;
+  }
 
-    .text-2,
-    .text-3 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 37px;
-      font-style: italic;
-      color: #000;
-      line-height: 1.1;
-    }
+  .subtext {
+    font-size: 37px;
+  }
 
-    .text-3 {
-      margin-top: 5px;
-    }
+  .description {
+    font-size: 17px; /* уменьшено на 1px */
+  }
+}
 
-    .description {
-      font-family: 'Oswald', sans-serif;
-      font-size: 7px;
-      color: #000;
-      text-align: justify;
-      max-width: 50%;
-    }
+/* 📱 Телефон (горизонтальный) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  body {
+    border-width: 30px;
+    padding: 30px;
+  }
 
-    .image-container {
-      margin: 15px 30px 0 30px;
-    }
+  .header {
+    font-size: 37px;
+  }
 
-    .image-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+  .subtext {
+    font-size: 37px;
+  }
 
-    .image-b {
-      display: flex;
-      justify-content: flex-end;
-      margin: -15px 10px 10px 10px;
-    }
+  .description {
+    font-size: 23px; /* увеличено на 3px */
+  }
+}
 
-    .image-b img {
-      width: 10%;
-      height: auto;
-      display: block;
-    }
+/* 💻 ПК */
+@media (min-width: 1025px) {
+  body {
+    border-width: 80px; /* увеличено до 80 пикселей */
+    padding: 80px;
+  }
 
-    .info {
-      margin-top: 6px;
-      margin-left: 30px;
-      display: flex;
-      gap: 30px;
-      position: relative;
-      z-index: 2;
-    }
+  .header {
+    font-size: 41px; /* увеличено на 4 от базовых 37 */
+  }
 
-    .info-column {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
+  .subtext {
+    font-size: 70px; /* фиксированный размер 70px */
+  }
 
-    .info-text {
-      font-family: 'Oswald', sans-serif;
-      font-size: 7px;
-      color: #000;
-      margin-bottom: 1px;
-    }
-
-    .info-bold {
-      font-family: 'Oswald', sans-serif;
-      font-size: 7px;
-      font-weight: 600;
-      color: #000;
-      line-height: 1.05;
-    }
-
-    .bottom-line {
-      height: 1px;
-      background-color: #000;
-      width: 33.3%;
-      margin-right: 30px;
-      margin-top: 20px;
-      margin-left: auto;
-    }
-
-    .block-2 {
-      width: 33.3%;
-      margin-top: 8px;
-      margin-right: 30px;
-      margin-left: auto;
-    }
-
-    .text-2-1 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 7px;
-      font-style: italic;
-      color: #000;
-      text-align: justify;
-      line-height: 1.4;
-    }
-
-    /* 📱 Телефон (вертикальный) */
-    @media (max-width: 480px) {
-      .section {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 15px;
-      }
-
-      .description {
-        margin-top: -10px;
-        font-size: 9px; /* без изменений */
-        max-width: 100%;
-        text-align: left;
-      }
-
-      .text-2,
-      .text-3 {
-        font-size: 28px;
-      }
-
-      .image-b img {
-        width: 20%;
-      }
-    }
-
-    /* 📱 Телефон (горизонтальный) */
-    @media (min-width: 481px) and (max-width: 768px) {
-      .description {
-        font-size: 10px; /* увеличили на 3 пикселя */
-      }
-    }
-
-    /* 💻 ПК */
-    @media (min-width: 1024px) {
-      .text-2,
-      .text-3 {
-        font-size: 70px;
-      }
-
-      .description {
-        font-size: 16px; /* уменьшили на 1 пиксель */
-      }
-
-      body {
-        border-width: 80px;
-      }
-    }
-
-  </style>
+  .description {
+    font-size: 16px; /* уменьшено на 1 пиксель */
+  }
+}
+</style>
 </head>
+
 <body>
+  <!-- === СЕТКА И КНОПКА === -->
   <div class="grid" id="grid"></div>
   <div class="grid-labels" id="gridLabels"></div>
   <div id="coords">x: 0, y: 0</div>
   <button id="toggleGrid">Сетка 🔲</button>
 
-  <!-- 🟦 БЛОК 1 -->
+  <!-- === БЛОК 1 === -->
   <div class="header">Gekkel Vladislav Aleksandrovich</div>
-  <div class="line"></div>
 
-  <div class="section">
-    <div class="left-texts">
-      <div class="text-2">КТО ТАКОЙ</div>
-      <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
+  <!-- === БЛОК 2 === -->
+  <div class="text-block">
+    <div>
+      <p class="subtext">КТО ТАКОЙ</p>
+      <p class="subtext">МРАМОРНЫЙ ГРАННИК?</p>
     </div>
     <div class="description">
       Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.
@@ -293,73 +203,43 @@
     </div>
   </div>
 
-  <div class="image-container">
-    <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
-  </div>
+<script>
+/* === СЕТКА === */
+const grid = document.getElementById("grid");
+const gridLabels = document.getElementById("gridLabels");
+const coords = document.getElementById("coords");
+const toggleGridBtn = document.getElementById("toggleGrid");
 
-  <div class="info">
-    <div class="info-column">
-      <div class="info-text">Родился:</div>
-      <div class="info-bold">Россия /<br>Липецк</div>
-    </div>
-    <div class="info-column">
-      <div class="info-text">Родители:</div>
-      <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
-    </div>
-  </div>
+let gridVisible = true;
 
-  <div class="image-b">
-    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
-  </div>
+/* Переключатель сетки */
+toggleGridBtn.addEventListener("click", () => {
+  gridVisible = !gridVisible;
+  grid.style.display = gridVisible ? "block" : "none";
+  gridLabels.style.display = gridVisible ? "block" : "none";
+});
 
-  <div class="bottom-line"></div>
+/* Координаты курсора */
+document.addEventListener("mousemove", (e) => {
+  coords.textContent = `x: ${e.clientX}, y: ${e.clientY}`;
+});
 
-  <!-- 🟨 БЛОК 2 -->
-  <div class="block-2">
-    <div class="text-2-1">
-      Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов. 
-      Отец, в свою очередь, научил меня работать руками.
-      Никогда не учился держать кисть в руках, даже не задумывался об этом — просто с рождения внутренний голос и мой путь вели меня своим чередом.
-      Получил профессию архитектора, понял, что всё, связанное со строительством, не моё, и в поисках себя начал исследовать жизнь..
-      К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
-    </div>
-  </div>
+/* Разметка по 100 пикселей */
+function drawLabels() {
+  const width = document.body.scrollWidth;
+  const height = document.body.scrollHeight;
+  let labelsHTML = "";
 
-  <script>
-    const coords = document.getElementById("coords");
-    document.addEventListener("mousemove", (e) => {
-      coords.textContent = `x: ${e.clientX}px, y: ${e.clientY}px`;
-    });
+  for (let x = 0; x < width; x += 100) {
+    labelsHTML += `<div style="position:absolute;left:${x}px;top:0;">${x}</div>`;
+  }
+  for (let y = 0; y < height; y += 100) {
+    labelsHTML += `<div style="position:absolute;left:0;top:${y}px;">${y}</div>`;
+  }
 
-    const grid = document.getElementById("grid");
-    const labels = document.getElementById("gridLabels");
-    const toggleBtn = document.getElementById("toggleGrid");
-
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    for (let x = 100; x < width; x += 100) {
-      const labelX = document.createElement("div");
-      labelX.classList.add("label");
-      labelX.style.left = `${x + 2}px`;
-      labelX.style.top = `2px`;
-      labelX.textContent = x;
-      labels.appendChild(labelX);
-    }
-    for (let y = 100; y < height; y += 100) {
-      const labelY = document.createElement("div");
-      labelY.classList.add("label");
-      labelY.style.left = `2px`;
-      labelY.style.top = `${y + 2}px`;
-      labelY.textContent = y;
-      labels.appendChild(labelY);
-    }
-
-    toggleBtn.addEventListener("click", () => {
-      const visible = grid.style.display !== "none";
-      grid.style.display = visible ? "none" : "block";
-      labels.style.display = visible ? "none" : "block";
-      toggleBtn.textContent = visible ? "Показать сетку 🔲" : "Скрыть сетку ❌";
-    });
-  </script>
+  gridLabels.innerHTML = labelsHTML;
+}
+drawLabels();
+</script>
 </body>
 </html>
