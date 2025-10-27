@@ -1,317 +1,432 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gekkel Vladislav Aleksandrovich — V2.2 (Adaptive Clean)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gekkel Vladislav Aleksandrovich</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    /* ==========================
-       V2.2 — Adaptive Clean
-       Основа: V1.8 — сохранены тексты и изображения.
-       Flexbox + CSS Grid, относительные единицы.
-       ========================== */
-
-    :root{
-      --bg: #ffffff;
-      --accent-border: rgba(204,204,204,0.5);
-      --text: #000000;
-      --page-pad-h: 5vw;     /* горизонтальные отступы контейнера */
-      --gutter-v: 2.5vh;     /* вертикальные промежутки */
-      --max-content-width: 1200px;
-    }
-
-    /* ========= Базовая сброска ========= */
-    *{ box-sizing: border-box; }
-    html,body{ height:100%; margin:0; padding:0; background:var(--bg); color:var(--text); }
-    body{
-      font-family: 'Oswald', sans-serif;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      justify-content:flex-start;
-      align-items:stretch;
-      /* рамка как в оригинале, в относительных единицах */
-      border: 0.8vw solid var(--accent-border);
-    }
-
-    /* ========= Главный контейнер (центрирует контент) ========= */
-    .wrap{
-      width:100%;
-      max-width:var(--max-content-width);
-      margin: 0 auto;
-      padding: calc(var(--gutter-v)) var(--page-pad-h);
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: var(--gutter-v);
-    }
-
-    /* ========= Блок 1 — шапка и линия ========= */
-    .header{
-      font-size: clamp(10px, 1.9vw, 13px);
+    body {
       margin: 0;
-      align-self:start;
-    }
-    .line{
-      height:1px;
-      background:#000;
-      width:100%;
-      margin-top:0.6vh;
-    }
-
-    /* ========= Основная секция: заголовок + описание =========
-       - На мобильном вертикальном: одна колонка (друг под другом)
-       - На телефоне горизонтальном и выше: две колонки (заголовок слева, текст справа)
-    */
-    .section{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 1.6vh;
-      align-items:start;
+      padding: 0;
+      background-color: #fff;
+      border: 4px solid #cccccc80;
+      box-sizing: border-box;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    .left-texts{
-      display:flex;
-      flex-direction:column;
-      gap:0.4vh;
+    /* ───── Сетка ───── */
+    .grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, #cccccc40 1px, transparent 1px),
+        linear-gradient(to bottom, #cccccc40 1px, transparent 1px);
+      background-size: 10px 10px;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .text-2, .text-3{
-      margin:0;
-      line-height:1.05;
-      font-style:italic;
-      /* масштаб заголовков через clamp */
-      font-size: clamp(22px, 8.5vw, 70px);
+    .grid::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, #cccccc80 1px, transparent 1px),
+        linear-gradient(to bottom, #cccccc80 1px, transparent 1px);
+      background-size: 100px 100px;
+      pointer-events: none;
     }
 
-    .description{
-      font-size: clamp(12px, 3.2vw, 16px);
-      text-align:justify;
-      line-height:1.45;
+    .grid-labels {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+      color: #cccccc80;
+      font-family: monospace;
+      font-size: 10px;
     }
 
-    /* ========= Изображение A ========= */
-    .image-container{
-      margin-top: 1vh;
-    }
-    .image-container img{ width:100%; height:auto; display:block; border-radius:0.4vw; }
-
-    /* ========= Инфоблок ========= */
-    .info{
-      display:flex;
-      gap:4vw;
-      flex-wrap:wrap;
-      margin-top:0.6vh;
-    }
-    .info-column{ display:flex; flex-direction:column; line-height:1.1; }
-    .info-text{ font-size: clamp(10px, 3vw, 14px); }
-    .info-bold{ font-size: clamp(10px, 3vw, 14px); font-weight:600; }
-
-    /* ========= Маленькое изображение B ========= */
-    .image-b{ display:flex; justify-content:flex-end; margin-top:0.6vh; }
-    .image-b img{ width:20%; min-width:54px; height:auto; }
-
-    .bottom-line{ height:1px; background:#000; width:33.3%; margin-top:1.2vh; margin-left:auto; }
-
-    /* ========= Блок 2 (текст справа на больших экранах) ========= */
-    .block-2{
-      width:100%;
-      margin-top:0.8vh;
-    }
-    .text-2-1{
-      font-style:italic;
-      font-size: clamp(12px, 3vw, 16px);
-      line-height:1.45;
-      text-align:justify;
-      max-width:100%;
+    .grid-labels .label {
+      position: absolute;
     }
 
-    /* ========= Изображение B2 — адаптивно в потоке =========
-       - На мобильном: внутри потока (под блоком 2)
-       - На горизонтальном/ПК: можно разместить справа, но не абсолютным — используем Grid.
-    */
-    .image-b2{
-      border:1px solid #c0c0c0;
-      background:#fff;
-      padding:2vw;
-      box-sizing:border-box;
-      width:100%;
-      margin-top:1.6vh;
+    #coords {
+      position: fixed;
+      bottom: 45px;
+      right: 15px;
+      color: #cccccc80;
+      font-family: monospace;
+      font-size: 12px;
+      z-index: 10000;
     }
-    .image-b2 img{ width:100%; height:auto; display:block; }
 
-    /* ========= Spacing filler ========= */
-    .spacer{ height: 60vh; }
+    #toggleGrid {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      background-color: #cccccc80;
+      color: #000;
+      border: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10000;
+    }
 
-    /* ============================
-       Брейкпоинты: 3 макета
-       1) Телефон (вертикальный) — базовый (<=480px)
-       2) Телефон (горизонтальный) — 481–768px (как в твоём коде)
-       3) ПК (>=769px) — как в твоём ПК-виде
-       ============================ */
+    #toggleGrid:hover {
+      background-color: #bfbfbf;
+    }
 
-    /* --------------------------------
-       1) Телефон (вертикальный) — базовый
-       (по сути — мобильная верстка: одна колонка)
-       -------------------------------- */
-    @media (max-width: 480px){
-      :root{ --page-pad-h: 6vw; --gutter-v: 3vh; }
-      body{ border-width:4px; } /* рамка чуть тоньше на телефоне */
-      .wrap{
-        padding: calc(var(--gutter-v)) var(--page-pad-h);
-        grid-template-columns: 1fr;
+    /* ───── Контент сайта ───── */
+
+    .header {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      color: #000;
+      margin-left: 30px;
+      margin-top: 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (min-width: 1024px) {
+      .header {
+        font-size: 13px;
       }
-      .section{ grid-template-columns: 1fr; }
-      .text-2, .text-3{ font-size: 22vw; line-height:1; }
-      .description{ font-size: 4.2vw; }
-      .info-text, .info-bold{ font-size: 3.6vw; }
-      .image-b img{ width:20%; }
-      .image-b2{ width:82%; padding:4vw; margin-left:auto; margin-right:auto; }
-      .header{ font-size: 3.6vw; }
     }
 
-    /* --------------------------------
-       2) Телефон (горизонтальный) — 481–768px
-       (точно как в твоём коде: заголовок слева, текст справа)
-       -------------------------------- */
-    @media (min-width: 481px) and (max-width: 768px){
-      :root{ --page-pad-h:5vw; --gutter-v:2.2vh; }
-      .wrap{
-        padding: calc(var(--gutter-v)) var(--page-pad-h);
-        grid-template-columns: 1fr; /* основной поток остаётся один столбец,
-                                     внутри .section сделаем 2 колонки */
-      }
-
-      .section{
-        display:grid;
-        grid-template-columns: 1fr 1fr; /* заголовок (лево) | текст (право) */
-        gap: 2vw;
-        align-items:end;
-      }
-      .left-texts{ justify-self:start; }
-      .text-2, .text-3{ font-size: 5.2vw; }
-      .description{ font-size: clamp(12px, 2.5vw, 14px); justify-self:start; }
-      .image-container{ grid-column: 1 / -1; } /* картинка под секцией, как в коде */
-      /* адаптивное расположение image-b2: используем относительные проценты */
-      .image-b2{
-        width:33%;
-        margin-top:1.6vh;
-        margin-left:auto;
-        /* визуально — справа, но не абсолютное позиционирование */
-      }
-      .block-2{ width:40%; margin-right:4vw; }
-      .info-text, .info-bold{ font-size:1.8vw; }
+    .line {
+      height: 1px;
+      background-color: #000;
+      margin: 3px 30px 0 30px;
+      position: relative;
+      z-index: 2;
     }
 
-    /* --------------------------------
-       3) ПК (>=769px)
-       (широкая компоновка — как в твоём ПК-виде)
-       -------------------------------- */
-    @media (min-width: 769px){
-      :root{ --page-pad-h:7.5vw; --gutter-v:2vh; --max-content-width:1400px; }
-      body{ border-width:5vw; }
-      .wrap{
-        padding: calc(var(--gutter-v)) var(--page-pad-h);
-        /* двухколоночная компоновка: левый/правый визуальный поток */
-        grid-template-columns: 1fr 1fr;
-        align-items:start;
-        gap:3vh;
-      }
-
-      /* секция: заголовок слева (col1), описание справа (col2) */
-      .section{
-        grid-column: 1 / -1; /* занимает всю ширину сетки */
-        display:grid;
-        grid-template-columns: 1fr 1fr;
-        gap:4vw;
-        align-items:start;
-      }
-      .left-texts{ align-self:start; }
-      .text-2, .text-3{ font-size: 4.6vw; }
-      .description{ font-size: 1.3vw; max-width:60ch; }
-      .image-container{ grid-column: 1 / -1; margin-top:1.6vh; }
-      .info{ grid-column: 1 / -1; }
-      .image-b{ grid-column: 1 / -1; margin-top:0.8vh; }
-
-      /* image-b2 — размещаем "правее" с помощью grid-column и margin,
-         но сохраняем адаптивность (ширина в %) */
-      .image-b2{
-        width:25%;
-        margin-left:auto;
-        margin-top:2vh;
-        padding:2vw;
-      }
-
-      .block-2{
-        width:33.3%;
-        margin-left:auto;
-        margin-right:var(--page-pad-h);
-      }
-      .text-2-1{ font-size:1.05vw; }
-      .info-text, .info-bold{ font-size:0.95vw; }
+    .section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 15px 30px 0 30px;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
     }
 
+    .left-texts {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .text-2,
+    .text-3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 37px;
+      font-style: italic;
+      color: #000;
+      line-height: 1.1;
+    }
+
+    .text-3 {
+      margin-top: 5px;
+    }
+
+    .description {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      color: #000;
+      text-align: justify;
+      max-width: 50%;
+    }
+
+    .image-container {
+      margin: 15px 30px 0 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .info {
+      margin-top: 6px;
+      margin-left: 30px;
+      display: flex;
+      gap: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-column {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .info-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      color: #000;
+      margin-bottom: 1px;
+    }
+
+    .info-bold {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.05;
+    }
+
+    .image-b {
+      display: flex;
+      justify-content: flex-end;
+      margin: -15px 10px 10px 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .image-b img {
+      width: 10%;
+      height: auto;
+      display: block;
+    }
+
+    .bottom-line {
+      height: 1px;
+      background-color: #000;
+      width: 33.3%;
+      margin-right: 30px;
+      margin-top: 20px;
+      margin-left: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .block-2 {
+      width: 33.3%;
+      margin-top: 8px;
+      margin-right: 30px;
+      margin-left: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .text-2-1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7px;
+      font-style: italic;
+      color: #000;
+      text-align: justify;
+      line-height: 1.4;
+    }
+
+    /* Изображение B (в блоке 2) */
+    .image-b2 {
+      position: absolute;
+      border: 1px solid #c0c0c0;
+      background-color: #fff;
+      padding: 20px 20px 36px 20px;
+      box-sizing: border-box;
+      z-index: 3;
+    }
+
+    .image-b2 img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 📱 Телефон (вертикальный) */
+    @media (max-width: 480px) {
+      .section {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 15px;
+      }
+
+      .description {
+        margin-top: -10px;
+        font-size: 9px;
+        max-width: 100%;
+        text-align: left;
+      }
+
+      .text-2,
+      .text-3 {
+        font-size: 28px;
+      }
+
+      .image-b img {
+        width: 20%;
+      }
+
+      .image-b2 {
+        width: 33%;
+        left: 230px;
+        top: 450px;
+      }
+    }
+
+    /* 📱 Телефон (горизонтальный) */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .description {
+        font-size: 10px;
+      }
+
+      .image-b2 {
+        width: 33%;
+        left: 485px;
+        top: 453px;
+      }
+    }
+
+    /* 💻 ПК */
+    @media (min-width: 1024px) {
+      .text-2,
+      .text-3 {
+        font-size: 70px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+
+      body {
+        border-width: 80px;
+      }
+
+      .image-b2 {
+        width: 25%;
+        left: 975px;
+        top: 815px;
+      }
+    }
+
+    /* 🔽 Дополнительное пространство */
+    .spacer {
+      height: 800px;
+      width: 100%;
+      background: transparent;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap" role="main">
-    <!-- ===== Блок 1 ===== -->
-    <div class="header">Gekkel Vladislav Aleksandrovich</div>
-    <div class="line" aria-hidden="true"></div>
+  <div class="grid" id="grid"></div>
+  <div class="grid-labels" id="gridLabels"></div>
+  <div id="coords">x: 0, y: 0</div>
+  <button id="toggleGrid">Сетка 🔲</button>
 
-    <!-- ===== Секция: Заголовок + Описание ===== -->
-    <section class="section" aria-label="Введение">
-      <div class="left-texts">
-        <div class="text-2">КТО ТАКОЙ</div>
-        <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
-      </div>
+  <!-- 🟦 БЛОК 1 -->
+  <div class="header">Gekkel Vladislav Aleksandrovich</div>
+  <div class="line"></div>
 
-      <div class="description">
-        Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.
-        Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад. Несмотря на то, что узоры сами по себе очень резкие, они могут сделать фигуру размытой или нечеткой. Яркое и абстрактное контрастирует с расплывчатым и образным.
-      </div>
-    </section>
-
-    <!-- ===== Изображение A ===== -->
-    <div class="image-container" aria-hidden="false">
-      <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="Artwork A">
+  <div class="section">
+    <div class="left-texts">
+      <div class="text-2">КТО ТАКОЙ</div>
+      <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
     </div>
-
-    <!-- ===== Инфоблок ===== -->
-    <div class="info" aria-hidden="false">
-      <div class="info-column">
-        <div class="info-text">Родился:</div>
-        <div class="info-bold">Россия /<br>Липецк</div>
-      </div>
-      <div class="info-column">
-        <div class="info-text">Родители:</div>
-        <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
-      </div>
+    <div class="description">
+      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.
+      Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад. Несмотря на то, что узоры сами по себе очень резкие, они могут сделать фигуру размытой или нечеткой. Яркое и абстрактное контрастирует с расплывчатым и образным.
     </div>
-
-    <!-- ===== Маленькое изображение B ===== -->
-    <div class="image-b" aria-hidden="true">
-      <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="Small B">
-    </div>
-
-    <div class="bottom-line" aria-hidden="true"></div>
-
-    <!-- ===== Блок 2 (описание справа) ===== -->
-    <div class="block-2" aria-label="О художнике">
-      <div class="text-2-1">
-        Ещё с утробы матери я был заложником творческого мира, и, наверное, именно поэтому мой путь к себе был тернистым. Я долго искал способ говорить с миром — не словами, а формой, цветом и фактурой.
-        Сегодня я называю себя «мраморным гранником» — человеком, который извлекает смысл из хаоса. Мои картины — это не просто отражение внутреннего состояния, это результат диалога с материалом.
-        Я не рисую — я взаимодействую. Я позволяю краске течь, сопротивляться, формировать пространство сама. Моя задача — только направлять этот процесс, наблюдать, где абстракция рождает образ.
-      </div>
-    </div>
-
-    <!-- ===== Изображение B2 (адаптивное) ===== -->
-    <div class="image-b2" aria-hidden="false">
-      <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="Artwork B2">
-    </div>
-
   </div>
 
-  <div class="spacer" aria-hidden="true"></div>
+  <div class="image-container">
+    <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
+  </div>
+
+  <div class="info">
+    <div class="info-column">
+      <div class="info-text">Родился:</div>
+      <div class="info-bold">Россия /<br>Липецк</div>
+    </div>
+    <div class="info-column">
+      <div class="info-text">Родители:</div>
+      <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
+    </div>
+  </div>
+
+  <div class="image-b">
+    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
+  </div>
+
+  <div class="bottom-line"></div>
+
+  <!-- 🟨 БЛОК 2 -->
+  <div class="block-2">
+    <div class="text-2-1">
+      Ещё с утробы матери я был заложником творческого мира, и, наверное, именно поэтому мой путь к себе был тернистым. Я долго искал способ говорить с миром — не словами, а формой, цветом и фактурой.  
+      Сегодня я называю себя «мраморным гранником» — человеком, который извлекает смысл из хаоса. Мои картины — это не просто отражение внутреннего состояния, это результат диалога с материалом.  
+      Я не рисую — я взаимодействую. Я позволяю краске течь, сопротивляться, формировать пространство сама. Моя задача — только направлять этот процесс, наблюдать, где абстракция рождает образ.
+    </div>
+  </div>
+
+  <!-- 🖼 Новое изображение B -->
+  <div class="image-b2">
+    <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B">
+  </div>
+
+  <div class="spacer"></div>
+
+  <script>
+    const coords = document.getElementById("coords");
+    document.addEventListener("mousemove", (e) => {
+      const scrollX = window.scrollX;
+      const scrollY = window.scrollY;
+      coords.textContent = `x: ${e.clientX + scrollX}px, y: ${e.clientY + scrollY}px`;
+    });
+
+    const grid = document.getElementById("grid");
+    const labels = document.getElementById("gridLabels");
+    const toggleBtn = document.getElementById("toggleGrid");
+
+    function drawLabels() {
+      labels.innerHTML = "";
+      const width = document.body.scrollWidth;
+      const height = document.body.scrollHeight;
+      for (let x = 100; x < width; x += 100) {
+        const labelX = document.createElement("div");
+        labelX.classList.add("label");
+        labelX.style.left = `${x + 2}px`;
+        labelX.style.top = `2px`;
+        labelX.textContent = x;
+        labels.appendChild(labelX);
+      }
+      for (let y = 100; y < height; y += 100) {
+        const labelY = document.createElement("div");
+        labelY.classList.add("label");
+        labelY.style.left = `2px`;
+        labelY.style.top = `${y + 2}px`;
+        labelY.textContent = y;
+        labels.appendChild(labelY);
+      }
+    }
+
+    drawLabels();
+
+    toggleBtn.addEventListener("click", () => {
+      const visible = grid.style.display !== "none";
+      grid.style.display = visible ? "none" : "block";
+      labels.style.display = visible ? "none" : "block";
+      toggleBtn.textContent = visible ? "Показать сетку 🔲" : "Скрыть сетку ❌";
+    });
+  </script>
 </body>
 </html>
