@@ -93,18 +93,18 @@
 
     .header {
       font-family: 'Oswald', sans-serif;
-      font-size: 7px;
       color: #000;
-      margin-left: 30px;
-      margin-top: 15px;
       position: relative;
       z-index: 2;
-    }
 
-    @media (min-width: 1024px) {
-      .header {
-        font-size: 13px;
-      }
+      /* 🔹 Новые параметры */
+      width: 9.09%; /* 1/11 ширины страницы */
+      margin-left: 30px;
+      margin-top: 15px;
+
+      /* Размер текста масштабируется по ширине окна */
+      font-size: calc(100vw / 11 / 4.5);
+      line-height: 1.2;
     }
 
     .line {
@@ -237,7 +237,6 @@
       line-height: 1.4;
     }
 
-    /* Изображение B (в блоке 2) */
     .image-b2 {
       position: absolute;
       border: 1px solid #c0c0c0;
@@ -253,7 +252,6 @@
       display: block;
     }
 
-    /* 📱 Телефон (вертикальный) */
     @media (max-width: 480px) {
       .section {
         flex-direction: column;
@@ -284,7 +282,6 @@
       }
     }
 
-    /* 📱 Телефон (горизонтальный) */
     @media (min-width: 481px) and (max-width: 768px) {
       .description {
         font-size: 10px;
@@ -297,7 +294,6 @@
       }
     }
 
-    /* 💻 ПК */
     @media (min-width: 1024px) {
       .text-2,
       .text-3 {
@@ -319,7 +315,6 @@
       }
     }
 
-    /* 🔽 Дополнительное пространство */
     .spacer {
       height: 800px;
       width: 100%;
