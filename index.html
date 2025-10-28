@@ -237,8 +237,12 @@
       line-height: 1.4;
     }
 
+    /* 📸 Новое изображение B2 */
     .image-b2 {
       position: absolute;
+      width: 33%;
+      left: 30px;
+      top: 970px; /* совпадает с линией */
       border: 1px solid #c0c0c0;
       background-color: #fff;
       padding: 20px 20px 36px 20px;
@@ -252,6 +256,7 @@
       display: block;
     }
 
+    /* 📱 Телефон */
     @media (max-width: 480px) {
       .section {
         flex-direction: column;
@@ -277,11 +282,12 @@
 
       .image-b2 {
         width: 33%;
-        left: 230px;
-        top: 450px;
+        left: 30px;
+        top: 460px;
       }
     }
 
+    /* 📱 Планшет */
     @media (min-width: 481px) and (max-width: 768px) {
       .description {
         font-size: 10px;
@@ -289,11 +295,12 @@
 
       .image-b2 {
         width: 33%;
-        left: 485px;
-        top: 453px;
+        left: 30px;
+        top: 470px;
       }
     }
 
+    /* 💻 ПК */
     @media (min-width: 1024px) {
       .text-2,
       .text-3 {
@@ -309,9 +316,9 @@
       }
 
       .image-b2 {
-        width: 25%;
-        left: 975px;
-        top: 815px;
+        width: 33%;
+        left: 30px;
+        top: 970px;
       }
     }
 
@@ -328,6 +335,7 @@
   <div id="coords">x: 0, y: 0</div>
   <button id="toggleGrid">Сетка 🔲</button>
 
+  <!-- 🟦 БЛОК 1 -->
   <div class="header">Gekkel Vladislav Aleksandrovich</div>
   <div class="line"></div>
 
@@ -363,6 +371,7 @@
 
   <div class="bottom-line"></div>
 
+  <!-- 🟨 БЛОК 2 -->
   <div class="block-2">
     <div class="text-2-1">
       Ещё с утробы матери я был заложником творческого мира, и, наверное, именно поэтому мой путь к себе был тернистым. Я долго искал способ говорить с миром — не словами, а формой, цветом и фактурой.  
@@ -371,6 +380,7 @@
     </div>
   </div>
 
+  <!-- 🖼 Новое изображение B — продолжение линии -->
   <div class="image-b2">
     <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B">
   </div>
