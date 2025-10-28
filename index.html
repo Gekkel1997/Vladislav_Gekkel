@@ -103,8 +103,8 @@
     }
 
     .image-b img {
-      width: calc(10vw + 3vw);   /* увеличено на 3 vw */
-      transform: translateY(-6vw); /* поднято ещё на 3vw (итого 6vw вверх) */
+      width: calc(10vw + 3vw);
+      transform: translateY(-6vw);
       height: auto;
       display: block;
     }
@@ -115,7 +115,7 @@
       justify-content: flex-end;
       align-items: flex-start;
       gap: 3.5vw;
-      margin: 4vw 2vw 0 2vw;
+      margin: calc(4vw - 7vw) 2vw 0 2vw; /* Поднимаем вверх на 7vw */
     }
 
     .bottom-line {
@@ -145,7 +145,7 @@
       width: min(33.3%, 500px);
       margin-left: auto;
       margin-right: 2vw;
-      margin-top: 2vw;
+      margin-top: calc(2vw - 7vw); /* Поднимаем блок выше на 7vw */
     }
 
     .text-2-1 {
