@@ -115,7 +115,7 @@
       justify-content: flex-end;
       align-items: flex-start;
       gap: 3.5vw;
-      margin: calc(4vw - 7vw) 2vw 0 2vw; /* линия поднята на 7vw */
+      margin: calc(4vw - 7vw) 2vw 0 2vw; /* Поднимаем вверх на 7vw */
     }
 
     .bottom-line {
@@ -142,10 +142,10 @@
 
     /* ───── БЛОК 2 ───── */
     .block-2 {
-      width: 33.3%;
+      width: min(33.3%, 500px);
       margin-left: auto;
       margin-right: 2vw;
-      margin-top: 8px;
+      margin-top: calc(2vw - 7vw); /* Поднимаем блок выше на 7vw */
     }
 
     .text-2-1 {
@@ -160,23 +160,11 @@
     }
 
     /* ───── 📱 МЕДИА-ЗАПРОСЫ ───── */
-    @media (max-width: 480px) {
-      .section { flex-direction: column; }
-      .description { font-size: 0.9rem; }
-      .image-b img { width: 20vw; transform: translateY(-6vw); }
-    }
-
-    @media (min-width: 481px) and (max-width: 768px) {
-      .description { font-size: 1rem; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .description { font-size: 1.1rem; }
-    }
-
-    @media (min-width: 1025px) {
-      .description { font-size: 1rem; }
-    }
+    @media (max-width: 480px) {}
+    @media (min-width: 481px) and (max-width: 768px) {}
+    @media (min-width: 769px) and (max-width: 1024px) {}
+    @media (min-width: 1025px) and (max-width: 1440px) {}
+    @media (min-width: 1441px) {}
   </style>
 </head>
 
