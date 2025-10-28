@@ -142,13 +142,17 @@
 
     /* ───── БЛОК 2 ───── */
     .block-2 {
-      width: min(33.3%, 500px);
-      margin-left: auto;
-      margin-right: 2vw;
+      width: 100%;
       margin-top: calc(2vw - 7vw); /* Поднимаем блок выше на 7vw */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      box-sizing: border-box;
     }
 
     .text-2-1 {
+      width: min(33.3%, 500px);
+      margin-right: 2vw;
       font-size: clamp(0.6rem, 1.2vw, 1rem);
       font-style: italic;
       text-align: justify;
@@ -198,10 +202,6 @@
     </div>
   </div>
 
-  <div class="image-b">
-    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
-  </div>
-
   <div class="line-image-wrapper">
     <div class="image-b2">
       <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
@@ -209,7 +209,11 @@
     <div class="bottom-line"></div>
   </div>
 
+  <!-- Блок 2 на всю ширину, изображение B теперь внутри -->
   <div class="block-2">
+    <div class="image-b">
+      <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
+    </div>
     <div class="text-2-1">
       Ещё с утробы матери я был заложником творческого мира, и, наверное, именно поэтому мой путь к себе был тернистым. Я долго искал способ говорить с миром — не словами, а формой, цветом и фактурой.  
       Сегодня я называю себя «мраморным гранником» — человеком, который извлекает смысл из хаоса. Мои картины — это не просто отражение внутреннего состояния, это результат диалога с материалом.  
