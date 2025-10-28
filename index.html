@@ -156,6 +156,13 @@
     .spacer {
       height: 15vh;
     }
+
+    /* ───── Только для телефона (вертикально) ───── */
+    @media (max-width: 600px) and (orientation: portrait) {
+      .text-2-1 {
+        font-size: clamp(0.5rem, 2vw, 0.8rem);
+      }
+    }
   </style>
 </head>
 
