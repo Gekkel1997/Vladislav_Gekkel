@@ -95,6 +95,7 @@
       font-size: clamp(0.6rem, 1.5vw, 0.9rem);
     }
 
+    /* ───── Изображение B ───── */
     .image-b {
       display: flex;
       justify-content: flex-end;
@@ -102,8 +103,10 @@
     }
 
     .image-b img {
-      width: 10vw;
+      width: calc(10vw + 3vw);   /* увеличено на 3 vw */
+      transform: translateY(-3vw); /* сдвинуто вверх на 3 vw */
       height: auto;
+      display: block;
     }
 
     /* ───── Линия + изображение B2 ───── */
@@ -157,52 +160,15 @@
     }
 
     /* ───── 📱 МЕДИА-ЗАПРОСЫ ───── */
-
-    /* Телефон вертикальный (до 480px) */
-    @media (max-width: 480px) {
-      /* Пример:
-      .image-b2 { margin-top: 2vw; width: 80%; }
-      .text-3 { font-size: 6vw; }
-      */
-    }
-
-    /* Телефон горизонтальный (481–768px) */
-    @media (min-width: 481px) and (max-width: 768px) {
-      /* 🟦 Изображение B — адаптация */
-      .image-b img {
-        width: calc(10vw + 3vw); /* увеличено на 3vw */
-        transform: translateY(-3vw); /* сдвинуто вверх */
-      }
-    }
-
-    /* Планшет (769–1024px) */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      /* Пример:
-      .text-2 { font-size: 3vw; }
-      .image-b2 { width: 40%; }
-      */
-    }
-
-    /* Ноутбук (1025–1440px) */
-    @media (min-width: 1025px) and (max-width: 1440px) {
-      /* Пример:
-      .block-2 { width: 35%; }
-      .description { line-height: 1.5; }
-      */
-    }
-
-    /* Десктоп и крупные экраны (1441px и выше) */
-    @media (min-width: 1441px) {
-      /* Пример:
-      .section { gap: 4vw; }
-      .image-b2 { width: 30%; }
-      */
-    }
+    @media (max-width: 480px) {}
+    @media (min-width: 481px) and (max-width: 768px) {}
+    @media (min-width: 769px) and (max-width: 1024px) {}
+    @media (min-width: 1025px) and (max-width: 1440px) {}
+    @media (min-width: 1441px) {}
   </style>
 </head>
 
 <body>
-  <!-- 🟦 БЛОК 1 -->
   <div class="header">Gekkel Vladislav Aleksandrovich</div>
   <div class="line"></div>
 
@@ -224,11 +190,11 @@
   <div class="info">
     <div class="info-column">
       <div class="info-text">Родился:</div>
-      <div class="info-bold">Россия /<br>Липецк</div>
+      <div class="info-bold">Россия / <br>Липецк</div>
     </div>
     <div class="info-column">
       <div class="info-text">Родители:</div>
-      <div class="info-bold">Фролов Александр /<br>Геккель Марина</div>
+      <div class="info-bold">Фролов Александр / <br>Геккель Марина</div>
     </div>
   </div>
 
@@ -236,7 +202,6 @@
     <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
 
-  <!-- 🟨 Линия + изображение B2 -->
   <div class="line-image-wrapper">
     <div class="image-b2">
       <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
@@ -244,7 +209,6 @@
     <div class="bottom-line"></div>
   </div>
 
-  <!-- 🟩 БЛОК 2 -->
   <div class="block-2">
     <div class="text-2-1">
       Ещё с утробы матери я был заложником творческого мира, и, наверное, именно поэтому мой путь к себе был тернистым. Я долго искал способ говорить с миром — не словами, а формой, цветом и фактурой.  
