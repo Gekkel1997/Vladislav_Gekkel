@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
+    /* ───── Общий стиль ───── */
     body {
       margin: 0;
       padding: 0;
@@ -114,7 +115,7 @@
       justify-content: flex-end;
       align-items: flex-start;
       gap: 3.5vw;
-      margin: calc(4vw - 7vw) 2vw 0 2vw;
+      margin: calc(4vw - 7vw) 2vw 0 2vw; /* линия поднята на 7vw */
     }
 
     .bottom-line {
@@ -141,20 +142,17 @@
 
     /* ───── БЛОК 2 ───── */
     .block-2 {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
+      width: 33.3%;
+      margin-left: auto;
       margin-right: 2vw;
-      margin-top: 2vw;
+      margin-top: 8px;
     }
 
     .text-2-1 {
-      width: 33.3%;
       font-size: clamp(0.6rem, 1.2vw, 1rem);
       font-style: italic;
       text-align: justify;
       line-height: 1.4;
-      margin-top: -30vw; /* Поднимаем до уровня изображения B2 */
     }
 
     .spacer {
@@ -163,19 +161,21 @@
 
     /* ───── 📱 МЕДИА-ЗАПРОСЫ ───── */
     @media (max-width: 480px) {
-      .text-2-1 { margin-top: -45vw; }
+      .section { flex-direction: column; }
+      .description { font-size: 0.9rem; }
+      .image-b img { width: 20vw; transform: translateY(-6vw); }
     }
 
     @media (min-width: 481px) and (max-width: 768px) {
-      .text-2-1 { margin-top: -35vw; }
+      .description { font-size: 1rem; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
-      .text-2-1 { margin-top: -28vw; }
+      .description { font-size: 1.1rem; }
     }
 
     @media (min-width: 1025px) {
-      .text-2-1 { margin-top: -22vw; }
+      .description { font-size: 1rem; }
     }
   </style>
 </head>
