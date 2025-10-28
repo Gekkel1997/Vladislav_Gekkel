@@ -22,20 +22,20 @@
     .main-block {
       display: flex;
       flex-direction: column;
-      gap: 2vw;
+      gap: 0vw; /* Было 2vw → убрано */
     }
 
     /* ───── Блок 1 ───── */
     .header {
       font-size: clamp(0.5rem, 1vw, 1.3rem);
       margin-left: 2vw;
-      margin-top: 1vw;
+      margin-top: 0vw; /* Было 1vw → -1vw */
     }
 
     .line {
       height: 1px;
       background-color: #000;
-      margin: 0.5vw 2vw;
+      margin: 0.3vw 2vw; /* Было 0.5vw → меньше на 0.2vw */
     }
 
     .section {
@@ -44,14 +44,15 @@
       justify-content: space-between;
       align-items: flex-end;
       flex-wrap: wrap;
-      gap: 3vw;
-      margin: 2vw;
+      gap: 1vw; /* Было 3vw */
+      margin: 0vw 2vw; /* Было 2vw */
     }
 
     .left-texts {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      gap: 0.5vw; /* Добавлено чуть меньшее расстояние между строками */
     }
 
     .text-2,
@@ -68,10 +69,11 @@
       text-align: justify;
       flex: 1 1 45%;
       min-width: 250px;
+      margin-top: -1vw; /* немного ближе к заголовкам */
     }
 
     .image-container {
-      margin: 2vw;
+      margin: 0vw 2vw; /* Было 2vw */
     }
 
     .image-container img {
@@ -83,8 +85,8 @@
     .info {
       display: flex;
       flex-wrap: wrap;
-      gap: 4vw;
-      margin: 2vw;
+      gap: 2vw; /* Было 4vw */
+      margin: 0vw 2vw; /* Было 2vw */
     }
 
     .info-column {
@@ -106,12 +108,12 @@
     .image-b {
       display: flex;
       justify-content: flex-end;
-      margin: 1vw 2vw;
+      margin: 0vw 2vw; /* Было 1vw 2vw */
     }
 
     .image-b img {
       width: calc(10vw + 3vw);
-      transform: translateY(-6vw);
+      transform: translateY(-5vw); /* было -6vw, немного поднято */
       height: auto;
       display: block;
     }
@@ -121,8 +123,8 @@
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
-      gap: 3.5vw;
-      margin: calc(4vw - 7vw) 2vw 0 2vw;
+      gap: 1.5vw; /* Было 3.5vw */
+      margin: calc(2vw - 7vw) 2vw 0 2vw; /* Было (4vw - 7vw) */
     }
 
     .bottom-line {
@@ -137,7 +139,7 @@
       max-width: 500px;
       background-color: #fff;
       border: 1px solid #c0c0c0;
-      padding: 1.5vw;
+      padding: 1vw; /* Было 1.5vw */
       box-sizing: border-box;
     }
 
@@ -152,7 +154,7 @@
       width: min(33.3%, 500px);
       margin-left: auto;
       margin-right: 2vw;
-      margin-top: calc(2vw - 7vw);
+      margin-top: calc(1vw - 7vw); /* Было 2vw - 7vw */
     }
 
     .text-2-1 {
@@ -160,10 +162,11 @@
       font-style: italic;
       text-align: justify;
       line-height: 1.4;
+      margin-top: -1vw; /* Приближено к линии */
     }
 
     .spacer {
-      height: 15vh;
+      height: 10vh; /* Было 15vh */
     }
 
     /* ───── 📱 МЕДИА-ЗАПРОСЫ ───── */
@@ -176,10 +179,8 @@
 </head>
 
 <body>
-  <!-- ╔═══════════ ЕДИНЫЙ БЛОК ═══════════╗ -->
   <div class="main-block">
 
-    <!-- Блок 1 -->
     <div class="header">Gekkel Vladislav Aleksandrovich</div>
     <div class="line"></div>
 
@@ -213,7 +214,6 @@
       <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
     </div>
 
-    <!-- Блок 2 -->
     <div class="line-image-wrapper">
       <div class="image-b2">
         <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
@@ -230,7 +230,6 @@
     </div>
 
   </div>
-  <!-- ╚══════════════════════════════════╝ -->
 
   <div class="spacer"></div>
 </body>
