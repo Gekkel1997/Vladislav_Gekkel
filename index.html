@@ -15,24 +15,31 @@
       box-sizing: border-box;
       overflow-x: hidden;
       font-family: 'Oswald', sans-serif;
+      color: #000;
     }
 
-    /* ───── Заголовок ───── */
+    /* ───── ВЕРХНИЙ БЛОК ───── */
+    .top-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    /* Объединённый контейнер: Линия 1 + бегущая строка + Линия 2 */
+    .marquee-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
     .header {
       font-size: clamp(0.5rem, 1vw, 1.3rem);
       margin-left: 2vw;
-      margin-top: 3.5vh; /* опущен ниже */
+      margin-top: 1vw;
     }
 
-    /* ───── Контейнер верхнего блока ───── */
-    .marquee-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-
-    /* ───── Верхняя линия ───── */
     .top-line {
       height: 1px;
       background-color: #000;
@@ -41,12 +48,12 @@
       margin-right: 0;
     }
 
-    /* ───── Бегущая строка ───── */
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      margin-top: 1vh;
+      margin-top: 1vh; /* поднята ближе к верхней линии */
       width: 100%;
+      box-sizing: border-box;
     }
 
     .marquee-text {
@@ -55,42 +62,77 @@
       font-size: clamp(1rem, 2.5vw, 1.6rem);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      padding-left: 1rem;
     }
 
     @keyframes marquee {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .marquee-text span {
       padding-right: 2vw;
     }
 
-    /* ───── Нижняя линия под бегущей строкой ───── */
     .bottom-line-marquee {
       height: 1px;
       background-color: #000;
-      margin-top: 1vh;
+      margin-top: 1vh; /* аналогичный отступ */
       margin-left: 0;
       margin-right: 0;
     }
 
-    /* ───── Изображение A ───── */
-    .image-container {
-      margin: 0; 
-      padding: 0;
-      width: 100vw;
-      overflow: hidden;
+    /* ───── ОСНОВНОЙ БЛОК ───── */
+    .main-block {
+      width: 100%;
     }
 
-    .image-container img {
-      width: 100vw;
-      height: auto;
-      display: block;
+    .section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 3vw;
+      margin: 2vw;
+    }
+
+    .left-texts {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .text-2,
+    .text-3 {
+      font-size: clamp(1.5rem, 5vw, 4rem);
+      font-style: italic;
+      line-height: 1.1;
       margin: 0;
     }
 
-    /* ───── Информация ───── */
+    .description {
+      font-size: clamp(0.6rem, 1.5vw, 1rem);
+      color: #000;
+      text-align: justify;
+      flex: 1 1 45%;
+      min-width: 250px;
+    }
+
+    .image-container {
+      margin: 2vw;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .info {
       display: flex;
       flex-wrap: wrap;
@@ -113,7 +155,6 @@
       font-size: clamp(0.6rem, 1.5vw, 0.9rem);
     }
 
-    /* ───── Изображение B ───── */
     .image-b {
       display: flex;
       justify-content: flex-end;
@@ -127,7 +168,6 @@
       display: block;
     }
 
-    /* ───── Композиционный блок ───── */
     .composition-wrapper {
       display: flex;
       justify-content: flex-end;
@@ -162,7 +202,10 @@
       width: 100%;
     }
 
-    .text-below .left { text-align: left; }
+    .text-below .left {
+      text-align: left;
+    }
+
     .text-below .right {
       text-align: right;
       font-weight: 600;
@@ -189,9 +232,11 @@
       margin-top: 1vh;
     }
 
-    .spacer { height: 15vh; }
+    .spacer {
+      height: 15vh;
+    }
 
-    /* ───── Портреты ───── */
+    /* ───── БЛОК 3: ПОРТРЕТЫ ───── */
     .portraits-section {
       width: 100%;
       margin-top: 3vw;
@@ -238,23 +283,29 @@
       display: block;
     }
 
-    /* ───── Мобильная адаптация ───── */
+    /* ───── Только мобильная адаптация ───── */
     @media (max-width: 600px) and (orientation: portrait) {
-      .text-2-1 { font-size: clamp(0.45rem, 1.8vw, 0.7rem); }
+      .text-2-1 {
+        font-size: clamp(0.45rem, 1.8vw, 0.7rem);
+      }
 
       .image-b2 {
         transform: scale(1.25) translate(-2vw, 4vw);
         margin-right: 1.5vw;
       }
 
-      .spacer { height: 5vh; }
+      .spacer {
+        height: 5vh;
+      }
 
       .portraits-section {
         margin-top: 4vw;
         margin-bottom: 4vw;
       }
 
-      .portrait-texts { width: 95%; }
+      .portrait-texts {
+        width: 95%;
+      }
 
       .text-3-1 {
         font-size: clamp(1.4rem, 4.8vw, 2rem);
@@ -270,78 +321,96 @@
 </head>
 
 <body>
-  <div class="header">Gekkel Vladislav Aleksandrovich</div>
+  <!-- ВЕРХНИЙ БЛОК: заголовок + объединённый блок линий и бегущей строки -->
+  <section class="top-block">
+    <div class="header">Gekkel Vladislav Aleksandrovich</div>
 
-  <div class="marquee-block">
-    <div class="top-line"></div>
+    <div class="marquee-block">
+      <div class="top-line"></div>
 
-    <div class="marquee-container">
-      <div class="marquee-text">
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <div class="marquee-container">
+        <div class="marquee-text">
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        </div>
+      </div>
+
+      <div class="bottom-line-marquee"></div>
+    </div>
+  </section>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <section class="main-block">
+    <div class="section">
+      <div class="left-texts">
+        <!-- текст .text-2 и .text-3 удалены в V3.1 согласно задаче -->
+      </div>
+      <div class="description">
+        Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.  
+        Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
       </div>
     </div>
 
-    <div class="bottom-line-marquee"></div>
-  </div>
-
-  <div class="image-container">
-    <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
-  </div>
-
-  <div class="info">
-    <div class="info-column">
-      <div class="info-text">Родился:</div>
-      <div class="info-bold">Россия / <br>Липецк</div>
+    <div class="image-container">
+      <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
     </div>
-    <div class="info-column">
-      <div class="info-text">Родители:</div>
-      <div class="info-bold">Фролов Александр / <br>Геккель Марина</div>
-    </div>
-  </div>
 
-  <div class="image-b">
-    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
-  </div>
-
-  <div class="composition-wrapper">
-    <div class="image-b2">
-      <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
-      <div class="text-below">
-        <div class="left">Фролов Владислав Александрович</div>
-        <div class="right">02/02/1997</div>
+    <div class="info">
+      <div class="info-column">
+        <div class="info-text">Родился:</div>
+        <div class="info-bold">Россия / <br>Липецк</div>
+      </div>
+      <div class="info-column">
+        <div class="info-text">Родители:</div>
+        <div class="info-bold">Фролов Александр / <br>Геккель Марина</div>
       </div>
     </div>
 
-    <div class="text-block">
-      <div class="bottom-line"></div>
-      <div class="text-2-1">
-        Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов.  
-        Отец, в свою очередь, научил меня работать руками.  
-        Никогда не учился держать кисть в руках, даже не задумывался об этом — просто с рождения внутренний голос и мой путь вели меня своим чередом.  
-        Получил профессию архитектора, понял, что всё, связанное со строительством, не моё, и в поисках себя начал исследовать жизнь.  
-        К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
+    <div class="image-b">
+      <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
+    </div>
+
+    <div class="composition-wrapper">
+      <div class="image-b2">
+        <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
+        <div class="text-below">
+          <div class="left">Фролов Владислав Александрович</div>
+          <div class="right">02/02/1997</div>
+        </div>
+      </div>
+
+      <div class="text-block">
+        <div class="bottom-line"></div>
+        <div class="text-2-1">
+          Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов.  
+          Отец, в свою очередь, научил меня работать руками.  
+          Никогда не учился держать кисть в руках, даже не задумывался об этом — просто с рождения внутренний голос и мой путь вели меня своим чередом.  
+          Получил профессию архитектора, понял, что всё, связанное со строительством, не моё, и в поисках себя начал исследовать жизнь.  
+          К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="spacer"></div>
+    <div class="spacer"></div>
 
-  <div class="portraits-section">
-    <div class="portraits-line"></div>
-    <div class="portrait-texts">
-      <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
-      <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
+    <div class="portraits-section">
+      <div class="portraits-line"></div>
+      <div class="portrait-texts">
+        <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
+        <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
+      </div>
+      <div class="portrait-image">
+        <img src="https://i.postimg.cc/bYmV6c5K/IMG-4271-11zon.webp" alt="G">
+      </div>
     </div>
-    <div class="portrait-image">
-      <img src="https://i.postimg.cc/bYmV6c5K/IMG-4271-11zon.webp" alt="G">
-    </div>
-  </div>
+  </section>
 </body>
 </html>
