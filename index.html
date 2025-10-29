@@ -30,7 +30,7 @@
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      margin: 1vh 0; /* уменьшен отступ сверху и снизу */
+      margin-top: 1vh; /* поднята ближе к верхней линии */
       width: 100%;
     }
 
@@ -55,11 +55,11 @@
       padding-right: 2vw;
     }
 
-    /* ───── Новая нижняя линия под бегущей строкой ───── */
-    .under-marquee-line {
+    /* ───── Дополнительная линия под бегущей строкой ───── */
+    .bottom-line-marquee {
       height: 1px;
       background-color: #000;
-      margin-top: 1vh;
+      margin-top: 1vh; /* аналогичный отступ */
       margin-left: 0;
       margin-right: 0;
     }
@@ -329,7 +329,7 @@
     </div>
   </div>
 
-  <div class="under-marquee-line"></div>
+  <div class="bottom-line-marquee"></div>
 
   <div class="line"></div>
 
