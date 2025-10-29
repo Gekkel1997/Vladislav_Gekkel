@@ -2,235 +2,87 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gekkel Vladislav Aleksandrovich</title>
-  <link rel="icon" type="image/webp" href="https://i.postimg.cc/zXK5bFp2/IMG-4274-1-11zon.webp">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Владислав — Искусство</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="https://i.postimg.cc/P57BSL6r/IMG-4274-1.png">
   <style>
-    /* ───── Общий стиль ───── */
     body {
       margin: 0;
-      padding: 0;
       background-color: #fff;
-      border: clamp(4px, 1vw, 80px) solid #cccccc80;
-      box-sizing: border-box;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       overflow-x: hidden;
-      font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── БЛОК 1 ───── */
-    .header {
-      font-size: clamp(0.5rem, 1vw, 1.3rem);
-      margin-left: 2vw;
-      margin-top: 1vw;
-    }
-
-    .line {
-      height: 1px;
-      background-color: #000;
-      margin: 0.5vw 2vw;
-    }
-
-    .section {
+    /* --- Блок 1 --- */
+    .block-1 {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 3vw;
-      margin: 2vw;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: white;
     }
 
-    .left-texts {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+    iframe {
+      width: 90%;
+      height: 90%;
+      border: none;
+      border-radius: 10px;
     }
 
-    .text-2,
-    .text-3 {
-      font-size: clamp(1.5rem, 5vw, 4rem);
-      font-style: italic;
-      line-height: 1.1;
-      margin: 0;
-    }
-
-    .description {
-      font-size: clamp(0.6rem, 1.5vw, 1rem);
-      color: #000;
-      text-align: justify;
-      flex: 1 1 45%;
-      min-width: 250px;
-    }
-
-    .image-container {
-      margin: 2vw;
-    }
-
-    .image-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4vw;
-      margin: 2vw;
-    }
-
-    .info-column {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .info-text {
-      font-size: clamp(0.6rem, 1.5vw, 0.9rem);
-    }
-
-    .info-bold {
-      font-weight: 600;
-      font-size: clamp(0.6rem, 1.5vw, 0.9rem);
-    }
-
-    /* ───── Изображение B ───── */
-    .image-b {
-      display: flex;
-      justify-content: flex-end;
-      margin: 1vw 2vw;
-    }
-
-    .image-b img {
-      width: calc(10vw + 3vw);
-      transform: translateY(-6vw);
-      height: auto;
-      display: block;
-    }
-
-    /* ───── Композиция: линия 2 + текст 2.1 + изображение B2 ───── */
-    .composition-wrapper {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-      gap: 2vw;
-      margin: calc(4vw - 7vw) 2vw 0 2vw;
-      flex-wrap: wrap;
-    }
-
-    .image-b2 {
-      width: 33%;
-      max-width: 500px;
-      background-color: #fff;
-      border: 1px solid #c0c0c0;
-      padding: 1.5vw;
-      box-sizing: border-box;
-      transition: transform 0.3s ease, margin 0.3s ease;
-    }
-
-    .image-b2 img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .text-below {
-      margin-top: 0.5vw;
-      display: flex;
-      justify-content: space-between;
-      font-size: clamp(0.5rem, 1.3vw, 0.9rem);
-      color: #000;
-      width: 100%;
-    }
-
-    .text-below .left {
-      text-align: left;
-    }
-
-    .text-below .right {
-      text-align: right;
-      font-weight: 600;
-      font-size: clamp(0.6rem, 1.5vw, 1rem);
-    }
-
-    .text-block {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      width: 40%;
-    }
-
-    .bottom-line {
-      height: 1px;
-      background-color: #000;
-      width: 100%;
+    /* --- Блок 2 --- */
+    .block-2 {
+      text-align: center;
+      padding: 5vw 3vw;
     }
 
     .text-2-1 {
-      font-size: clamp(0.6rem, 1.5vw, 1rem);
-      text-align: justify;
-      color: #000;
-      margin-top: 1vh;
+      font-size: 1vw;
+      margin-bottom: 1vw;
+      letter-spacing: 0.1em;
+      font-weight: 300;
     }
 
-    .spacer {
-      height: 15vh;
+    .image-b2 {
+      width: 70vw;
+      max-width: 900px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
-    /* ───── БЛОК 3: ПОРТРЕТЫ ───── */
+    /* --- Блок Портреты --- */
     .portraits-section {
-      width: 100%;
-      margin-top: 3vw;
+      text-align: center;
+      margin-top: 5vw;
       margin-bottom: 5vw;
     }
 
-    .portraits-line {
-      height: 1px;
-      width: 60%;
-      background-color: #000;
-      margin-left: 2vw;
-    }
-
     .portrait-texts {
-      margin-left: 2vw;
-      margin-top: 1vw;
-      width: 60%;
+      width: 80%;
+      margin: 0 auto 2vw auto;
     }
 
     .text-3-1 {
-      font-family: 'Oswald', sans-serif;
-      font-style: italic;
-      font-size: clamp(1.6rem, 3.5vw, 3.5rem);
-      color: #000;
-      line-height: 1.1;
-      text-align: left;
-      margin: 0.5vw 0;
+      font-size: 2vw;
+      font-weight: 400;
+      white-space: nowrap;
     }
 
     .text-3-2 {
-      font-family: 'Oswald', sans-serif;
-      font-style: italic;
-      font-size: clamp(1rem, 2.5vw, 2rem);
-      color: #000;
-      line-height: 1.1;
-      text-align: left;
-      margin: 0.5vw 0;
+      font-size: 1.5vw;
+      font-weight: 300;
     }
 
-    .portrait-image {
-      width: calc(100% - 4vw);
-      margin: 2vw;
-    }
-
-    .portrait-image img {
-      width: 100%;
+    .image-g {
+      width: 90%;
+      max-width: 1600px;
       height: auto;
       display: block;
+      margin: 2vw auto;
+      border-radius: 10px;
     }
 
-    /* ───── Адаптивность ───── */
+    /* --- Мобильная адаптация (вертикальный телефон) --- */
     @media (max-width: 600px) and (orientation: portrait) {
       .text-2-1 {
         font-size: clamp(0.45rem, 1.8vw, 0.7rem);
@@ -266,74 +118,25 @@
     }
   </style>
 </head>
-
 <body>
-  <div class="header">Gekkel Vladislav Aleksandrovich</div>
-  <div class="line"></div>
-
-  <div class="section">
-    <div class="left-texts">
-      <div class="text-2">КТО ТАКОЙ</div>
-      <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
-    </div>
-    <div class="description">
-      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.  
-      Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
-    </div>
+  <!-- Блок 1 -->
+  <div class="block-1">
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR_h3QlWhDxQebEFywlmR02EOBqzQCCFovU2vElqO3xZMS1vRgTkVwUQh1nQL_XuQ/pubhtml?widget=true&amp;headers=false"></iframe>
   </div>
 
-  <div class="image-container">
-    <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
+  <!-- Блок 2 -->
+  <div class="block-2">
+    <div class="text-2-1">ХУДОЖНИК ВЛАДИСЛАВ</div>
+    <img class="image-b2" src="https://i.postimg.cc/JnJ5W2Q0/IMG-4308-1-11zon.webp" alt="Владислав">
   </div>
 
-  <div class="info">
-    <div class="info-column">
-      <div class="info-text">Родился:</div>
-      <div class="info-bold">Россия / <br>Липецк</div>
-    </div>
-    <div class="info-column">
-      <div class="info-text">Родители:</div>
-      <div class="info-bold">Фролов Александр / <br>Геккель Марина</div>
-    </div>
-  </div>
-
-  <div class="image-b">
-    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
-  </div>
-
-  <div class="composition-wrapper">
-    <div class="image-b2">
-      <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
-      <div class="text-below">
-        <div class="left">Фролов Владислав Александрович</div>
-        <div class="right">02/02/1997</div>
-      </div>
-    </div>
-
-    <div class="text-block">
-      <div class="bottom-line"></div>
-      <div class="text-2-1">
-        Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов.  
-        Отец, в свою очередь, научил меня работать руками.  
-        Никогда не учился держать кисть в руках, даже не задумывался об этом — просто с рождения внутренний голос и мой путь вели меня своим чередом.  
-        Получил профессию архитектора, понял, что всё, связанное со строительством, не моё, и в поисках себя начал исследовать жизнь.  
-        К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
-      </div>
-    </div>
-  </div>
-
-  <div class="spacer"></div>
-
-  <!-- ───── БЛОК 3: ПОРТРЕТЫ ───── -->
+  <!-- Блок Портреты -->
   <div class="portraits-section">
-    <div class="portraits-line"></div>
     <div class="portrait-texts">
       <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
       <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
     </div>
-    <div class="portrait-image">
-      <img src="https://i.postimg.cc/bYmV6c5K/IMG-4271-11zon.webp" alt="G">
-    </div>
+    <img class="image-g" src="https://i.postimg.cc/bYmV6c5K/IMG-4271-11zon.webp" alt="Изображение G">
   </div>
 </body>
 </html>
