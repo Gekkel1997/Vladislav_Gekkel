@@ -116,6 +116,7 @@
       align-items: flex-start;
       gap: 2vw;
       margin: calc(4vw - 7vw) 2vw 0 2vw;
+      flex-wrap: wrap;
     }
 
     .image-b2 {
@@ -126,15 +127,31 @@
       padding: 1.5vw;
       box-sizing: border-box;
       transition: transform 0.3s ease, margin 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     .image-b2 img {
       width: 100%;
       height: auto;
       display: block;
+    }
+
+    .text-below {
+      margin-top: 0.5vw;
+      display: flex;
+      justify-content: space-between;
+      font-size: clamp(0.5rem, 1.3vw, 0.9rem);
+      color: #000;
+      width: 100%;
+    }
+
+    .text-below .left {
+      text-align: left;
+    }
+
+    .text-below .right {
+      text-align: right;
+      font-weight: 600;
+      font-size: clamp(0.6rem, 1.5vw, 1rem);
     }
 
     .text-block {
@@ -157,33 +174,42 @@
       margin-top: 1vh;
     }
 
-    /* ───── Тексты 2.2 и 2.3 под изображением B2 ───── */
-    .image-b2-footer {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.8vw;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .text-2-2 {
-      font-size: clamp(0.5rem, 1.2vw, 0.8rem);
-      color: #000;
-      text-align: left;
-    }
-
-    .text-2-3 {
-      font-size: clamp(0.7rem, 1.8vw, 1.1rem);
-      font-weight: 600;
-      color: #000;
-      text-align: right;
-    }
-
     .spacer {
       height: 15vh;
     }
 
-    /* ───── Только для телефона (вертикально) ───── */
+    /* ───── БЛОК 3: ПОРТРЕТЫ ───── */
+    .portraits-section {
+      width: 100%;
+      margin-top: 5vw;
+      margin-bottom: 5vw;
+    }
+
+    .portraits-line {
+      height: 1px;
+      width: 60%;
+      background-color: #000;
+      margin-left: 2vw;
+    }
+
+    .portrait-texts {
+      margin-left: 2vw;
+      margin-top: 1vw;
+      width: 85%;
+    }
+
+    .text-3-1,
+    .text-3-2 {
+      font-family: 'Oswald', sans-serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 2rem);
+      color: #000;
+      line-height: 1.1;
+      text-align: left;
+      margin: 0.5vw 0;
+    }
+
+    /* ───── Адаптивность ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .text-2-1 {
         font-size: clamp(0.45rem, 1.8vw, 0.7rem);
@@ -235,11 +261,9 @@
   <div class="composition-wrapper">
     <div class="image-b2">
       <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
-
-      <!-- Тексты 2.2 и 2.3 теперь встроены прямо под изображением -->
-      <div class="image-b2-footer">
-        <div class="text-2-2">Фролов Владислав Александрович</div>
-        <div class="text-2-3">02/02/1997</div>
+      <div class="text-below">
+        <div class="left">Фролов Владислав Александрович</div>
+        <div class="right">02/02/1997</div>
       </div>
     </div>
 
@@ -256,5 +280,15 @@
   </div>
 
   <div class="spacer"></div>
+
+  <!-- ───── БЛОК 3: ПОРТРЕТЫ ───── -->
+  <div class="portraits-section">
+    <div class="portraits-line"></div>
+    <div class="portrait-texts">
+      <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
+      <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
+    </div>
+  </div>
+
 </body>
 </html>
