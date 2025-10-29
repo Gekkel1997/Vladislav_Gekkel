@@ -30,7 +30,7 @@
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      margin: 1vh 0;
+      margin: 1vh 0; /* уменьшен отступ сверху и снизу */
       width: 100%;
     }
 
@@ -39,7 +39,7 @@
       animation: marquee 40s linear infinite;
       font-size: clamp(1rem, 2.5vw, 1.6rem);
       text-transform: uppercase;
-      letter-spacing: 0.05em; /* уменьшен отступ между буквами */
+      letter-spacing: 0.05em;
     }
 
     @keyframes marquee {
@@ -52,7 +52,16 @@
     }
 
     .marquee-text span {
-      padding-right: 2vw; /* уменьшен отступ между повторяющимися текстами */
+      padding-right: 2vw;
+    }
+
+    /* ───── Новая нижняя линия под бегущей строкой ───── */
+    .under-marquee-line {
+      height: 1px;
+      background-color: #000;
+      margin-top: 1vh;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     /* ───── БЛОК 1 ───── */
@@ -319,6 +328,8 @@
       <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
     </div>
   </div>
+
+  <div class="under-marquee-line"></div>
 
   <div class="line"></div>
 
