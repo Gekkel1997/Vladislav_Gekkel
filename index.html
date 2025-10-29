@@ -89,6 +89,20 @@
       width: auto;
     }
 
+    /* ───── Тексты под изображением ───── */
+    .text-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10vw;
+      margin-left: 7vw;
+      margin-top: 3vh;
+      font-size: 4vh;
+      font-family: 'Oswald', sans-serif;
+      color: #000;
+    }
+
     /* ───── Адаптация для мобильных ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .marquee-text {
@@ -99,6 +113,14 @@
         left: 5vw;
         bottom: 8vh;
         height: 45%;
+      }
+
+      .text-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5vh;
+        margin-left: 7vw;
+        font-size: 3vh;
       }
     }
   </style>
@@ -131,6 +153,11 @@
   <div class="image-wrapper">
     <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
     <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
+  </div>
+
+  <div class="text-row">
+    <div class="text1">Родился:</div>
+    <div class="text2">Родители:</div>
   </div>
 </body>
 </html>
