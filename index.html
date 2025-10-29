@@ -15,9 +15,31 @@
       box-sizing: border-box;
       overflow-x: hidden;
       font-family: 'Oswald', sans-serif;
+      color: #000;
     }
 
-    /* ───── Верхняя дополнительная линия ───── */
+    /* ───── ВЕРХНИЙ БЛОК ───── */
+    .top-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    /* Объединённый контейнер: Линия 1 + бегущая строка + Линия 2 */
+    .marquee-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .header {
+      font-size: clamp(0.5rem, 1vw, 1.3rem);
+      margin-left: 2vw;
+      margin-top: 1vw;
+    }
+
     .top-line {
       height: 1px;
       background-color: #000;
@@ -26,12 +48,12 @@
       margin-right: 0;
     }
 
-    /* ───── Бегущая строка ───── */
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      margin-top: 1vh;
+      margin-top: 1vh; /* поднята ближе к верхней линии */
       width: 100%;
+      box-sizing: border-box;
     }
 
     .marquee-text {
@@ -40,6 +62,7 @@
       font-size: clamp(1rem, 2.5vw, 1.6rem);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      padding-left: 1rem;
     }
 
     @keyframes marquee {
@@ -55,23 +78,19 @@
       padding-right: 2vw;
     }
 
-    /* ───── Дополнительная линия под бегущей строкой ───── */
     .bottom-line-marquee {
       height: 1px;
       background-color: #000;
-      margin-top: 1vh;
+      margin-top: 1vh; /* аналогичный отступ */
       margin-left: 0;
       margin-right: 0;
     }
 
-    /* ───── БЛОК 1 ───── */
-    .header {
-      font-size: clamp(0.5rem, 1vw, 1.3rem);
-      margin-left: 2vw;
-      margin-top: 1vw;
+    /* ───── ОСНОВНОЙ БЛОК ───── */
+    .main-block {
+      width: 100%;
     }
 
-    /* ───── Основной контент ───── */
     .section {
       display: flex;
       flex-direction: row;
@@ -86,6 +105,14 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+    }
+
+    .text-2,
+    .text-3 {
+      font-size: clamp(1.5rem, 5vw, 4rem);
+      font-style: italic;
+      line-height: 1.1;
+      margin: 0;
     }
 
     .description {
@@ -294,28 +321,38 @@
 </head>
 
 <body>
+  <!-- ВЕРХНИЙ БЛОК: заголовок + объединённый блок линий и бегущей строки -->
   <section class="top-block">
     <div class="header">Gekkel Vladislav Aleksandrovich</div>
-    <div class="top-line"></div>
-    <div class="marquee-container">
-      <div class="marquee-text">
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+
+    <div class="marquee-block">
+      <div class="top-line"></div>
+
+      <div class="marquee-container">
+        <div class="marquee-text">
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        </div>
       </div>
+
+      <div class="bottom-line-marquee"></div>
     </div>
-    <div class="bottom-line-marquee"></div>
   </section>
 
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
   <section class="main-block">
     <div class="section">
+      <div class="left-texts">
+        <!-- текст .text-2 и .text-3 удалены в V3.1 согласно задаче -->
+      </div>
       <div class="description">
         Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.  
         Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
