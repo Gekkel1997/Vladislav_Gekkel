@@ -126,37 +126,12 @@
       padding: 1.5vw;
       box-sizing: border-box;
       transition: transform 0.3s ease, margin 0.3s ease;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
     }
 
     .image-b2 img {
       width: 100%;
       height: auto;
       display: block;
-    }
-
-    /* ───── Новые тексты под рамкой B2 ───── */
-    .image-b2-footer {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.8vw;
-      padding: 0 1.5vw; /* добавлено: выравнивание по внешним краям рамки */
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    .text-2-2 {
-      font-size: clamp(0.5rem, 1.2vw, 0.8rem);
-      color: #000;
-    }
-
-    .text-2-3 {
-      font-size: clamp(0.7rem, 1.8vw, 1.1rem);
-      font-weight: 600;
-      color: #000;
     }
 
     .text-block {
@@ -177,6 +152,31 @@
       text-align: justify;
       color: #000;
       margin-top: 1vh;
+    }
+
+    /* ───── Тексты под изображением B2 ───── */
+    .image-b2-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.8vw;
+      width: 33%; /* Совпадает с рамкой изображения */
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: 2vw; /* Выравнивание по композиции */
+      box-sizing: border-box;
+    }
+
+    .text-2-2 {
+      font-size: clamp(0.5rem, 1.2vw, 0.8rem);
+      color: #000;
+      text-align: left;
+    }
+
+    .text-2-3 {
+      font-size: clamp(0.7rem, 1.8vw, 1.1rem);
+      font-weight: 600;
+      color: #000;
+      text-align: right;
     }
 
     .spacer {
@@ -249,7 +249,7 @@
     </div>
   </div>
 
-  <!-- Подписи под рамкой -->
+  <!-- ───── Тексты под рамкой изображения B2 ───── -->
   <div class="image-b2-footer">
     <div class="text-2-2">Фролов Владислав Александрович</div>
     <div class="text-2-3">02/02/1997</div>
