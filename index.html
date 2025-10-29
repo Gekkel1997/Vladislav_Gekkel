@@ -218,36 +218,36 @@
       margin: 0.5vw 0;
     }
 
-    /* ───── Две картины G и G1 как единое полотно ───── */
+    /* ───── Две картины G и G1 — единое полотно на всю ширину ───── */
     .portraits-images-wrapper {
       display: flex;
       justify-content: center;
-      align-items: stretch;
-      width: 100%;
-      margin: 3vw auto 0 auto;
-      gap: 0;
+      align-items: center;
+      width: 100vw;
+      height: auto;
+      margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .portrait-img {
-      width: 50%;
-      height: auto;
+      flex: 1 1 50%;
+      height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .portrait-img:first-child {
-      border-right: none;
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 600px) {
       .portraits-images-wrapper {
-        flex-direction: column;
+        flex-wrap: nowrap;
       }
-
       .portrait-img {
-        width: 100%;
+        flex: 1 1 50%;
         height: auto;
       }
     }
@@ -332,7 +332,7 @@
       <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
     </div>
 
-    <!-- Две картины G и G1 — единое полотно -->
+    <!-- Единое полотно G + G1 -->
     <div class="portraits-images-wrapper">
       <img src="https://i.postimg.cc/d1fKkCJ1/G-webp.webp" alt="G" class="portrait-img">
       <img src="https://i.postimg.cc/xCZSJm9Q/G1-webp.webp" alt="G1" class="portrait-img">
