@@ -215,7 +215,24 @@
       color: #000;
       line-height: 1.1;
       text-align: left;
-      margin: 0.5vw 0;
+      margin: 0.5vw 0 2vw 0;
+    }
+
+    .portrait-images {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0;
+      width: 96%;
+      margin-left: 2vw;
+    }
+
+    .portrait-images img {
+      width: 50%;
+      height: auto;
+      display: block;
+      object-fit: cover;
     }
 
     /* ───── Адаптивность ───── */
@@ -227,6 +244,14 @@
       .image-b2 {
         transform: scale(1.25) translate(-2vw, 4vw);
         margin-right: 1.5vw;
+      }
+
+      .portrait-images {
+        flex-direction: column;
+      }
+
+      .portrait-images img {
+        width: 100%;
       }
     }
   </style>
@@ -296,6 +321,11 @@
     <div class="portrait-texts">
       <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
       <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
+    </div>
+
+    <div class="portrait-images">
+      <img src="https://i.postimg.cc/cJVBz5Jx/pic9-jpeg.jpg" alt="Г">
+      <img src="https://i.postimg.cc/CKWs26K4/pic10-jpeg.jpg" alt="Г1">
     </div>
   </div>
 
