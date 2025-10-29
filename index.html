@@ -17,30 +17,20 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── БЛОК 1: ВЕРХНИЙ ───── */
-    .top-block {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .header {
-      font-size: clamp(0.5rem, 1vw, 1.3rem);
-      margin-left: 2vw;
-      margin-top: 1vw;
-    }
-
+    /* ───── Верхняя дополнительная линия ───── */
     .top-line {
       height: 1px;
       background-color: #000;
       margin-top: 7vh;
+      margin-left: 0;
+      margin-right: 0;
     }
 
+    /* ───── Бегущая строка ───── */
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      margin-top: 1vh; /* поднята ближе к верхней линии */
+      margin-top: 1vh;
       width: 100%;
     }
 
@@ -65,25 +55,23 @@
       padding-right: 2vw;
     }
 
+    /* ───── Дополнительная линия под бегущей строкой ───── */
     .bottom-line-marquee {
       height: 1px;
       background-color: #000;
       margin-top: 1vh;
-    }
-
-    /* ───── ОСНОВНОЙ БЛОК ───── */
-    .main-block {
-      width: 100%;
-    }
-
-    .line {
-      height: 1px;
-      background-color: #000;
-      margin-top: 10vh;
       margin-left: 0;
       margin-right: 0;
     }
 
+    /* ───── БЛОК 1 ───── */
+    .header {
+      font-size: clamp(0.5rem, 1vw, 1.3rem);
+      margin-left: 2vw;
+      margin-top: 1vw;
+    }
+
+    /* ───── Основной контент ───── */
     .section {
       display: flex;
       flex-direction: row;
@@ -98,14 +86,6 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-    }
-
-    .text-2,
-    .text-3 {
-      font-size: clamp(1.5rem, 5vw, 4rem);
-      font-style: italic;
-      line-height: 1.1;
-      margin: 0;
     }
 
     .description {
@@ -314,12 +294,9 @@
 </head>
 
 <body>
-
-  <!-- ───── ВЕРХНИЙ БЛОК ───── -->
   <section class="top-block">
     <div class="header">Gekkel Vladislav Aleksandrovich</div>
     <div class="top-line"></div>
-
     <div class="marquee-container">
       <div class="marquee-text">
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
@@ -334,19 +311,11 @@
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
       </div>
     </div>
-
     <div class="bottom-line-marquee"></div>
   </section>
 
-  <!-- ───── ОСНОВНОЙ КОНТЕНТ ───── -->
   <section class="main-block">
-    <div class="line"></div>
-
     <div class="section">
-      <div class="left-texts">
-        <div class="text-2">КТО ТАКОЙ</div>
-        <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
-      </div>
       <div class="description">
         Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.  
         Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
@@ -406,6 +375,5 @@
       </div>
     </div>
   </section>
-
 </body>
 </html>
