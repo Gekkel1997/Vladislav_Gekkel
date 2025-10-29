@@ -37,7 +37,7 @@
     .header {
       font-size: clamp(0.5rem, 1vw, 1.3rem);
       margin-left: 2vw;
-      margin-top: 1vw;
+      margin-top: 3.5vh; /* опущен ниже — между верхом страницы и первой линией */
     }
 
     .top-line {
@@ -285,6 +285,9 @@
 
     /* ───── Только мобильная адаптация ───── */
     @media (max-width: 600px) and (orientation: portrait) {
+      .header {
+        margin-top: 5vh;
+      }
       .text-2-1 {
         font-size: clamp(0.45rem, 1.8vw, 0.7rem);
       }
