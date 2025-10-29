@@ -218,22 +218,21 @@
       margin: 0.5vw 0;
     }
 
-    /* ───── Новое изображение G1 ───── */
-    .portrait-image {
+    /* ───── Две картины G и G1 ───── */
+    .portrait-images {
       display: flex;
-      justify-content: flex-end;
-      margin-right: 2vw;
-      margin-top: 2vw;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      margin-top: 3vw;
+      gap: 0;
     }
 
-    .portrait-image img {
-      width: 35%;
-      max-width: 500px;
+    .portrait-images img {
+      width: 50%;
       height: auto;
-      border: 1px solid #c0c0c0;
-      background-color: #fff;
-      padding: 1vw;
-      box-sizing: border-box;
+      display: block;
+      object-fit: cover;
     }
 
     /* ───── Адаптивность ───── */
@@ -247,8 +246,13 @@
         margin-right: 1.5vw;
       }
 
-      .portrait-image img {
-        width: 80%;
+      .portrait-images {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .portrait-images img {
+        width: 100%;
       }
     }
   </style>
@@ -319,8 +323,9 @@
       <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
     </div>
 
-    <!-- Новое изображение G1 -->
-    <div class="portrait-image">
+    <!-- Две картины G и G1 -->
+    <div class="portrait-images">
+      <img src="https://i.postimg.cc/d1fKkCJ1/G-webp.webp" alt="G">
       <img src="https://i.postimg.cc/xCZSJm9Q/G1-webp.webp" alt="G1">
     </div>
   </div>
