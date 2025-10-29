@@ -218,40 +218,6 @@
       margin: 0.5vw 0;
     }
 
-    /* ───── Две картины G и G1 — единое полотно на всю ширину ───── */
-    .portraits-images-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100vw;
-      height: auto;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .portrait-img {
-      flex: 1 1 50%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
-    }
-
-    @media (max-width: 600px) {
-      .portraits-images-wrapper {
-        flex-wrap: nowrap;
-      }
-      .portrait-img {
-        flex: 1 1 50%;
-        height: auto;
-      }
-    }
-
     /* ───── Адаптивность ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .text-2-1 {
@@ -330,12 +296,6 @@
     <div class="portrait-texts">
       <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
       <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
-    </div>
-
-    <!-- Единое полотно G + G1 -->
-    <div class="portraits-images-wrapper">
-      <img src="https://i.postimg.cc/d1fKkCJ1/G-webp.webp" alt="G" class="portrait-img">
-      <img src="https://i.postimg.cc/xCZSJm9Q/G1-webp.webp" alt="G1" class="portrait-img">
     </div>
   </div>
 
