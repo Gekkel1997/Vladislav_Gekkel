@@ -219,20 +219,33 @@
     }
 
     /* ───── Две картины G и G1 ───── */
-    .portrait-images {
+    .portraits-images-wrapper {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      justify-content: center;
+      align-items: flex-start;
       width: 100%;
-      margin-top: 3vw;
+      margin: 3vw auto;
       gap: 0;
+      padding: 0 2vw;
+      box-sizing: border-box;
     }
 
-    .portrait-images img {
+    .portrait-img {
       width: 50%;
       height: auto;
       display: block;
-      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .portraits-images-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .portrait-img {
+        width: 100%;
+        height: auto;
+      }
     }
 
     /* ───── Адаптивность ───── */
@@ -244,15 +257,6 @@
       .image-b2 {
         transform: scale(1.25) translate(-2vw, 4vw);
         margin-right: 1.5vw;
-      }
-
-      .portrait-images {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .portrait-images img {
-        width: 100%;
       }
     }
   </style>
@@ -292,6 +296,7 @@
     <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
   </div>
 
+  <!-- ───── Композиция из линии, текста и изображения ───── -->
   <div class="composition-wrapper">
     <div class="image-b2">
       <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
@@ -323,11 +328,12 @@
       <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
     </div>
 
-    <!-- Две картины G и G1 -->
-    <div class="portrait-images">
-      <img src="https://i.postimg.cc/d1fKkCJ1/G-webp.webp" alt="G">
-      <img src="https://i.postimg.cc/xCZSJm9Q/G1-webp.webp" alt="G1">
+    <!-- Две картины G и G1 — выровненные по высоте -->
+    <div class="portraits-images-wrapper">
+      <img src="https://i.postimg.cc/d1fKkCJ1/G-webp.webp" alt="G" class="portrait-img">
+      <img src="https://i.postimg.cc/xCZSJm9Q/G1-webp.webp" alt="G1" class="portrait-img">
     </div>
   </div>
+
 </body>
 </html>
