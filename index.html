@@ -12,6 +12,7 @@
       margin: 0;
       padding: 0;
       background-color: #fff;
+      border: clamp(4px, 1vw, 80px) solid #cccccc80;
       box-sizing: border-box;
       overflow-x: hidden;
       font-family: 'Oswald', sans-serif;
@@ -25,39 +26,16 @@
     }
 
     /* ───── Бегущая строка ───── */
-    .marquee-wrapper {
-      position: relative;
-      overflow: hidden;
-      margin-top: 0.7vh;
-      margin-bottom: 0.7vh;
-      width: calc(100% - 4vw);
-      margin-left: 2vw;
-      margin-right: 2vw;
-    }
-
-    .marquee-fade {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background: linear-gradient(to right, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgba(255, 255, 255, 0) 8%, 
-        rgba(255, 255, 255, 0) 92%, 
-        rgba(255, 255, 255, 1) 100%);
-    }
-
     .marquee-container {
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
+      margin: 2vh 0;
       width: 100%;
     }
 
     .marquee-text {
       display: inline-block;
-      animation: marquee 18s linear infinite;
+      animation: marquee 20s linear infinite;
       font-size: clamp(0.8rem, 2vw, 1.2rem);
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -73,7 +51,7 @@
     }
 
     .marquee-text span {
-      padding-right: 2vw; /* уменьшенный отступ между копиями */
+      padding-right: 4vw;
     }
 
     /* ───── БЛОК 1 ───── */
@@ -324,16 +302,15 @@
 
   <div class="top-line"></div>
 
-  <div class="marquee-wrapper">
-    <div class="marquee-container">
-      <div class="marquee-text">
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-      </div>
+  <div class="marquee-container">
+    <div class="marquee-text">
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
     </div>
-    <div class="marquee-fade"></div>
   </div>
 
   <div class="line"></div>
@@ -344,7 +321,61 @@
       <div class="text-3">МРАМОРНЫЙ ГРАННИК?</div>
     </div>
     <div class="description">
-      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. ...
+      Владислав Геккель — мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески.  
+      Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
+    </div>
+  </div>
+
+  <div class="image-container">
+    <img src="https://i.postimg.cc/kX9XCBzX/IMG-4156.jpg" alt="A">
+  </div>
+
+  <div class="info">
+    <div class="info-column">
+      <div class="info-text">Родился:</div>
+      <div class="info-bold">Россия / <br>Липецк</div>
+    </div>
+    <div class="info-column">
+      <div class="info-text">Родители:</div>
+      <div class="info-bold">Фролов Александр / <br>Геккель Марина</div>
+    </div>
+  </div>
+
+  <div class="image-b">
+    <img src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="B">
+  </div>
+
+  <div class="composition-wrapper">
+    <div class="image-b2">
+      <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
+      <div class="text-below">
+        <div class="left">Фролов Владислав Александрович</div>
+        <div class="right">02/02/1997</div>
+      </div>
+    </div>
+
+    <div class="text-block">
+      <div class="bottom-line"></div>
+      <div class="text-2-1">
+        Ещё с утробы матери я был заложником творческого мира. Пока моя мама была беременна мной, она заканчивала и защищала дипломную работу по хохломе — это русская народная роспись с характерными узорами из растительных мотивов.  
+        Отец, в свою очередь, научил меня работать руками.  
+        Никогда не учился держать кисть в руках, даже не задумывался об этом — просто с рождения внутренний голос и мой путь вели меня своим чередом.  
+        Получил профессию архитектора, понял, что всё, связанное со строительством, не моё, и в поисках себя начал исследовать жизнь.  
+        К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="portraits-section">
+    <div class="portraits-line"></div>
+    <div class="portrait-texts">
+      <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
+      <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
+    </div>
+    <div class="portrait-image">
+      <img src="https://i.postimg.cc/bYmV6c5K/IMG-4271-11zon.webp" alt="G">
     </div>
   </div>
 </body>
