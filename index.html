@@ -19,11 +19,6 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* 🔹 Смещение контента вниз после заголовка */
-    .content-shifted {
-      margin-top: 10vh;
-    }
-
     /* ───── БЛОК 1 ───── */
     .header {
       font-size: clamp(0.5rem, 1vw, 1.3rem);
@@ -31,10 +26,15 @@
       margin-top: 1vw;
     }
 
+    /* 🔹 Линия и всё, что ниже — опущено на 15vh (10vh старых + 5vh новых) */
+    .content-shift {
+      margin-top: 15vh;
+    }
+
     .line {
       height: 1px;
       background-color: #000;
-      margin: 5vh 2vw 0 2vw; /* 🔹 добавлено 5vh сверху */
+      margin: 5vh 2vw 0 2vw;
     }
 
     .section {
@@ -275,8 +275,8 @@
 <body>
   <div class="header">Gekkel Vladislav Aleksandrovich</div>
 
-  <!-- 🔹 Весь контент, начиная с линии, помещён в обертку -->
-  <div class="content-shifted">
+  <!-- 🔹 Всё ниже обернуто в .content-shift -->
+  <div class="content-shift">
     <div class="line"></div>
 
     <div class="section">
@@ -336,7 +336,7 @@
     <div class="portraits-section">
       <div class="portraits-line"></div>
       <div class="portrait-texts">
-        <div class="text-3-1">ИЗОБРАЖЕНИЕ ИСКУССТВА:</div>
+        <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
         <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
       </div>
       <div class="portrait-image">
