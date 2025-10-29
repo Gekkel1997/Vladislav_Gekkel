@@ -74,6 +74,13 @@
       margin-right: 0;
     }
 
+    /* ───── Контейнер с изображением ───── */
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
     /* ───── Изображение A ───── */
     .image-a {
       width: 100%;
@@ -82,10 +89,25 @@
       margin-top: 0; /* вплотную к линии */
     }
 
+    /* ───── Изображение B (наложенное) ───── */
+    .image-overlay {
+      position: absolute;
+      left: 5vw;
+      bottom: 10vh;
+      height: 40%;
+      width: auto;
+    }
+
     /* ───── Адаптация для мобильных ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .marquee-text {
         font-size: clamp(0.8rem, 4vw, 1.2rem);
+      }
+
+      .image-overlay {
+        left: 3vw;
+        bottom: 8vh;
+        height: 35%;
       }
     }
   </style>
@@ -115,6 +137,9 @@
     <div class="bottom-line-marquee"></div>
   </div>
 
-  <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
+  <div class="image-wrapper">
+    <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
+    <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
+  </div>
 </body>
 </html>
