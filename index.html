@@ -126,6 +126,9 @@
       padding: 1.5vw;
       box-sizing: border-box;
       transition: transform 0.3s ease, margin 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .image-b2 img {
@@ -154,15 +157,12 @@
       margin-top: 1vh;
     }
 
-    /* ───── Тексты под изображением B2 ───── */
+    /* ───── Тексты 2.2 и 2.3 под изображением B2 ───── */
     .image-b2-footer {
       display: flex;
       justify-content: space-between;
       margin-top: 0.8vw;
-      width: 33%; /* Совпадает с рамкой изображения */
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: 2vw; /* Выравнивание по композиции */
+      width: 100%;
       box-sizing: border-box;
     }
 
@@ -235,6 +235,12 @@
   <div class="composition-wrapper">
     <div class="image-b2">
       <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
+
+      <!-- Тексты 2.2 и 2.3 теперь встроены прямо под изображением -->
+      <div class="image-b2-footer">
+        <div class="text-2-2">Фролов Владислав Александрович</div>
+        <div class="text-2-3">02/02/1997</div>
+      </div>
     </div>
 
     <div class="text-block">
@@ -247,12 +253,6 @@
         К 27 годам, бросив всё нажитое — новую профессию, хорошую должность, управленческую деятельность — я начал творить! Изучать, пробовать, падать и вставать. Остался один на один с собой, чтобы обучиться и разобраться в своей технике черчения, назвав её «Мраморная графика».
       </div>
     </div>
-  </div>
-
-  <!-- ───── Тексты под рамкой изображения B2 ───── -->
-  <div class="image-b2-footer">
-    <div class="text-2-2">Фролов Владислав Александрович</div>
-    <div class="text-2-3">02/02/1997</div>
   </div>
 
   <div class="spacer"></div>
