@@ -81,11 +81,12 @@
       margin-top: 0;
     }
 
+    /* Изображение B (Overlay) — увеличено до 45% */
     .image-overlay {
       position: absolute;
       left: 8vw;
       bottom: 15vh;
-      height: 50%;
+      height: 45%;
       width: auto;
     }
 
@@ -111,20 +112,18 @@
         font-size: clamp(0.8rem, 4vw, 1.2rem);
       }
 
+      /* Возвращаем исходный размер изображения B на мобильных */
       .image-overlay {
         left: 5vw;
         bottom: 8vh;
         height: 45%;
       }
 
-      /* Текст остаётся в одну строку на мобильных */
       .text-on-image {
         font-size: 3.5vh;
         gap: 8vw;
         left: 7vw;
         bottom: 6vh;
-        flex-wrap: nowrap;
-        white-space: nowrap;
       }
     }
   </style>
