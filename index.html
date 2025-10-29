@@ -12,7 +12,7 @@
       margin: 0;
       padding: 0;
       background-color: #fff;
-      border: clamp(4px, 4vw, 80px) solid #cccccc80; /* Увеличено на +3vw */
+      border: clamp(4px, 1vw, 80px) solid #cccccc80;
       box-sizing: border-box;
       overflow-x: hidden;
       font-family: 'Oswald', sans-serif;
@@ -160,10 +160,6 @@
 
     /* ───── Только для телефона (вертикально) ───── */
     @media (max-width: 600px) and (orientation: portrait) {
-      body {
-        border: clamp(4px, 1vw, 80px) solid #cccccc80; /* Возвращаем прежнюю толщину */
-      }
-
       .text-2-1 {
         font-size: clamp(0.45rem, 1.8vw, 0.7rem);
       }
