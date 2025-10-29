@@ -26,28 +26,32 @@
     }
 
     /* ───── Бегущая строка ───── */
-    .marquee {
+    .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      box-sizing: border-box;
-      margin: 2vh 2vw;
+      margin: 2vh 0;
+      width: 100%;
     }
 
-    .marquee span {
+    .marquee-text {
       display: inline-block;
-      font-style: italic;
-      font-size: clamp(1rem, 3vw, 2rem);
-      color: #000;
-      animation: scroll-left 10s linear infinite;
+      animation: marquee 20s linear infinite;
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    @keyframes scroll-left {
+    @keyframes marquee {
       0% {
-        transform: translateX(100%);
+        transform: translateX(0%);
       }
       100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
       }
+    }
+
+    .marquee-text span {
+      padding-right: 4vw;
     }
 
     /* ───── БЛОК 1 ───── */
@@ -63,7 +67,7 @@
       margin: 10vh 2vw 0 2vw;
     }
 
-    /* ───── Основной контент под линией ───── */
+    /* ───── Основной контент ───── */
     .section {
       display: flex;
       flex-direction: row;
@@ -230,22 +234,18 @@
     }
 
     .text-3-1 {
-      font-family: 'Oswald', sans-serif;
       font-style: italic;
       font-size: clamp(1.6rem, 3.5vw, 3.5rem);
       color: #000;
       line-height: 1.1;
-      text-align: left;
       margin: 0.5vw 0;
     }
 
     .text-3-2 {
-      font-family: 'Oswald', sans-serif;
       font-style: italic;
       font-size: clamp(1rem, 2.5vw, 2rem);
       color: #000;
       line-height: 1.1;
-      text-align: left;
       margin: 0.5vw 0;
     }
 
@@ -262,11 +262,6 @@
 
     /* ───── Только мобильная адаптация ───── */
     @media (max-width: 600px) and (orientation: portrait) {
-      .marquee span {
-        font-size: clamp(0.7rem, 3vw, 1rem);
-        animation-duration: 7s;
-      }
-
       .text-2-1 {
         font-size: clamp(0.45rem, 1.8vw, 0.7rem);
       }
@@ -307,9 +302,15 @@
 
   <div class="top-line"></div>
 
-  <!-- 🔹 Новая бегущая строка -->
-  <div class="marquee">
-    <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+  <div class="marquee-container">
+    <div class="marquee-text">
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+    </div>
   </div>
 
   <div class="line"></div>
