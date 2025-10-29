@@ -19,24 +19,35 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── БЛОК 1 ───── */
     .header {
       font-size: clamp(0.5rem, 1vw, 1.3rem);
       margin-left: 2vw;
       margin-top: 1vw;
     }
 
-    /* 🔹 Линия и всё, что ниже — опущено на 15vh (10vh старых + 5vh новых) */
+    /* ───── Линии ───── */
+    .line,
+    .line-top {
+      height: 1px;
+      background-color: #000;
+      margin: 0 2vw;
+    }
+
+    /* 🔹 Новая верхняя линия (на 12vh выше первой) */
+    .line-top {
+      margin-top: calc(15vh - 12vh); /* отступ с учётом смещения */
+    }
+
+    /* 🔹 Всё содержимое, начиная с линии 1 */
     .content-shift {
       margin-top: 15vh;
     }
 
     .line {
-      height: 1px;
-      background-color: #000;
-      margin: 5vh 2vw 0 2vw;
+      margin-top: 5vh;
     }
 
+    /* ───── Основная структура ───── */
     .section {
       display: flex;
       flex-direction: row;
@@ -101,7 +112,6 @@
       font-size: clamp(0.6rem, 1.5vw, 0.9rem);
     }
 
-    /* ───── Изображение B ───── */
     .image-b {
       display: flex;
       justify-content: flex-end;
@@ -115,7 +125,6 @@
       display: block;
     }
 
-    /* ───── Композиция: линия 2 + текст 2.1 + изображение B2 ───── */
     .composition-wrapper {
       display: flex;
       justify-content: flex-end;
@@ -275,7 +284,10 @@
 <body>
   <div class="header">Gekkel Vladislav Aleksandrovich</div>
 
-  <!-- 🔹 Всё ниже обернуто в .content-shift -->
+  <!-- 🔹 Новая верхняя линия -->
+  <div class="line-top"></div>
+
+  <!-- 🔹 Всё содержимое, начиная с линии 1 -->
   <div class="content-shift">
     <div class="line"></div>
 
@@ -332,7 +344,6 @@
 
     <div class="spacer"></div>
 
-    <!-- ───── БЛОК 3: ПОРТРЕТЫ ───── -->
     <div class="portraits-section">
       <div class="portraits-line"></div>
       <div class="portrait-texts">
