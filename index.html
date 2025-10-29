@@ -30,7 +30,7 @@
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      margin: 1vh 0;
+      margin: 1vh 0; /* уменьшен отступ сверху и снизу */
       width: 100%;
     }
 
@@ -55,27 +55,20 @@
       padding-right: 2vw;
     }
 
-    /* ───── Верхняя и нижняя линии бегущей строки ───── */
-    .line-above-marquee,
-    .line-below-marquee {
+    /* ───── Новая нижняя линия под бегущей строкой ───── */
+    .under-marquee-line {
       height: 1px;
       background-color: #000;
-      width: 100%;
-    }
-
-    .line-above-marquee {
-      margin-top: 2vh;
-    }
-
-    .line-below-marquee {
-      margin-top: 2vh;
+      margin-top: 1vh;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     /* ───── БЛОК 1 ───── */
     .header {
       font-size: clamp(0.5rem, 1vw, 1.3rem);
       margin-left: 2vw;
-      margin-top: 3.5vh; /* Опущен текст — теперь по центру между верхом и первой линией */
+      margin-top: 1vw;
     }
 
     .line {
@@ -321,8 +314,6 @@
 
   <div class="top-line"></div>
 
-  <div class="line-above-marquee"></div>
-
   <div class="marquee-container">
     <div class="marquee-text">
       <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
@@ -338,7 +329,7 @@
     </div>
   </div>
 
-  <div class="line-below-marquee"></div>
+  <div class="under-marquee-line"></div>
 
   <div class="line"></div>
 
