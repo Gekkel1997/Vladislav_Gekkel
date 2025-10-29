@@ -126,12 +126,26 @@
       padding: 1.5vw;
       box-sizing: border-box;
       transition: transform 0.3s ease, margin 0.3s ease;
+      position: relative;
     }
 
     .image-b2 img {
       width: 100%;
       height: auto;
       display: block;
+    }
+
+    /* ───── Новые тексты под изображением B2 ───── */
+    .image-b2-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.8vw;
+    }
+
+    .text-2-2,
+    .text-2-3 {
+      font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+      color: #000;
     }
 
     .text-block {
@@ -210,6 +224,10 @@
   <div class="composition-wrapper">
     <div class="image-b2">
       <img src="https://i.postimg.cc/7Yb6mXtG/IMG-4159-1.jpg" alt="B2">
+      <div class="image-b2-footer">
+        <div class="text-2-2">Фролов Владислав Александрович</div>
+        <div class="text-2-3">02/02/1997</div>
+      </div>
     </div>
 
     <div class="text-block">
