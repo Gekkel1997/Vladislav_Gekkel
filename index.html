@@ -75,7 +75,123 @@
       width: 100vw;
       height: auto;
       display: block;
-      margin-top: 0.5vh; /* уменьшен отступ сверху */
+      margin-top: 0; /* теперь вплотную */
+    }
+
+    @media (max-width: 600px) and (orientation: portrait) {
+      .header {
+        margin-top: 5vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">Gekkel Vladislav Aleksandrovich</div>
+
+  <div class="marquee-block">
+    <div class="top-line"></div>
+
+    <div class="marquee-container">
+      <div class="marquee-text">
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      </div>
+    </div>
+
+    <div class="bottom-line-marquee"></div>
+  </div>
+
+  <!-- Изображение на всю ширину -->
+  <img src="https://i.postimg.cc/8kj3Lvrj/IMG-4290.jpg" alt="Fullwidth Image" class="fullwidth-image" />
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Gekkel Vladislav Aleksandrovich</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/P57BSL6r/IMG-4274-1.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    /* ───── ЕДИНЫЙ БЛОК (линия 1 + бегущая строка + линия 2) ───── */
+    .marquee-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .top-line {
+      height: 1px;
+      background-color: #000;
+      margin-top: 7vh;
+      width: 100%;
+    }
+
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 1vh;
+      width: 100%;
+    }
+
+    .marquee-text {
+      display: inline-block;
+      animation: marquee 40s linear infinite;
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-text span {
+      padding-right: 2vw;
+    }
+
+    .bottom-line-marquee {
+      height: 1px;
+      background-color: #000;
+      margin-top: 1vh;
+      width: 100%;
+    }
+
+    /* ───── Заголовок ───── */
+    .header {
+      font-size: clamp(0.5rem, 1vw, 1.3rem);
+      margin-left: 2vw;
+      margin-top: 3.5vh; /* опущен ниже */
+    }
+
+    /* ───── Изображение после второй линии ───── */
+    .fullwidth-image {
+      width: 100vw;
+      height: auto;
+      display: block;
+      margin-top: 0; /* теперь вплотную */
     }
 
     @media (max-width: 600px) and (orientation: portrait) {
