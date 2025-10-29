@@ -22,7 +22,32 @@
     .top-line {
       height: 1px;
       background-color: #000;
-      margin: 7vh 2vw 0 2vw; /* линия выше основной на 12vh */
+      margin: 7vh 2vw 0 2vw;
+    }
+
+    /* ───── Бегущая строка ───── */
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      margin: 2vh 2vw;
+    }
+
+    .marquee span {
+      display: inline-block;
+      font-style: italic;
+      font-size: clamp(1rem, 3vw, 2rem);
+      color: #000;
+      animation: scroll-left 10s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
     /* ───── БЛОК 1 ───── */
@@ -35,7 +60,7 @@
     .line {
       height: 1px;
       background-color: #000;
-      margin: 10vh 2vw 0 2vw; /* основная линия чуть ниже */
+      margin: 10vh 2vw 0 2vw;
     }
 
     /* ───── Основной контент под линией ───── */
@@ -46,7 +71,7 @@
       align-items: flex-end;
       flex-wrap: wrap;
       gap: 3vw;
-      margin: 2vw; /* 🔹 убран прежний отступ 15vh */
+      margin: 2vw;
     }
 
     .left-texts {
@@ -121,7 +146,7 @@
       justify-content: flex-end;
       align-items: flex-start;
       gap: 2vw;
-      margin: 2vw; /* 🔹 поднято к линии */
+      margin: 2vw;
       flex-wrap: wrap;
     }
 
@@ -237,6 +262,11 @@
 
     /* ───── Только мобильная адаптация ───── */
     @media (max-width: 600px) and (orientation: portrait) {
+      .marquee span {
+        font-size: clamp(0.7rem, 3vw, 1rem);
+        animation-duration: 7s;
+      }
+
       .text-2-1 {
         font-size: clamp(0.45rem, 1.8vw, 0.7rem);
       }
@@ -276,6 +306,12 @@
   <div class="header">Gekkel Vladislav Aleksandrovich</div>
 
   <div class="top-line"></div>
+
+  <!-- 🔹 Новая бегущая строка -->
+  <div class="marquee">
+    <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+  </div>
+
   <div class="line"></div>
 
   <div class="section">
