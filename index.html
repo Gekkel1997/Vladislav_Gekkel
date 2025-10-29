@@ -30,16 +30,16 @@
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      margin: 0.5vh 0; /* поднято ближе к верхней линии */
+      margin: 1vh 0;
       width: 100%;
     }
 
     .marquee-text {
       display: inline-block;
       animation: marquee 40s linear infinite;
-      font-size: clamp(1rem, 3vw, 2rem);
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.05em; /* уменьшен отступ между буквами */
     }
 
     @keyframes marquee {
@@ -52,7 +52,7 @@
     }
 
     .marquee-text span {
-      padding-right: 2vw;
+      padding-right: 2vw; /* уменьшен отступ между повторяющимися текстами */
     }
 
     /* ───── БЛОК 1 ───── */
@@ -307,7 +307,16 @@
 
   <div class="marquee-container">
     <div class="marquee-text">
-      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span><span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span><span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span><span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span><span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span><span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
     </div>
   </div>
 
@@ -369,7 +378,7 @@
   <div class="portraits-section">
     <div class="portraits-line"></div>
     <div class="portrait-texts">
-      <div class="text-3-1">ИЗОБРАЖИТЕЛЬНОЕ ИСКУССТВО:</div>
+      <div class="text-3-1">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО:</div>
       <div class="text-3-2">МРАМОРНАЯ ГРАФИКА</div>
     </div>
     <div class="portrait-image">
