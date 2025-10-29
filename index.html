@@ -89,37 +89,6 @@
       width: auto;
     }
 
-    /* ───── Блок информации ───── */
-    .info {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 5vw;
-      background-color: #fff;
-      padding: 5vh 3vw;
-      margin-top: 5vh;
-      box-sizing: border-box;
-    }
-
-    .info-column {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      font-size: clamp(1rem, 1.5vw, 1.5rem);
-      line-height: 1.4;
-    }
-
-    .info-text {
-      font-weight: 400;
-      color: #000;
-      margin-bottom: 0.5vh;
-    }
-
-    .info-bold {
-      font-weight: 600;
-      color: #000;
-    }
-
     /* ───── Адаптация для мобильных ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .marquee-text {
@@ -130,19 +99,6 @@
         left: 5vw;
         bottom: 8vh;
         height: 45%;
-      }
-
-      .info {
-        flex-direction: column;
-        align-items: center;
-        gap: 3vh;
-        padding: 4vh 5vw;
-      }
-
-      .info-column {
-        align-items: center;
-        text-align: center;
-        font-size: clamp(1rem, 4vw, 1.3rem);
       }
     }
   </style>
@@ -175,17 +131,6 @@
   <div class="image-wrapper">
     <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
     <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
-  </div>
-
-  <div class="info">
-    <div class="info-column">
-      <div class="info-text">Родился:</div>
-      <div class="info-bold">Россия / <br>Липецк</div>
-    </div>
-    <div class="info-column">
-      <div class="info-text">Родители:</div>
-      <div class="info-bold">Фролов Александр / <br>Геккель Марина</div>
-    </div>
   </div>
 </body>
 </html>
