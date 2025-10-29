@@ -220,19 +220,21 @@
 
     .portrait-images {
       display: flex;
-      flex-direction: row;
       justify-content: center;
       align-items: stretch;
       gap: 0;
       width: 96%;
       margin-left: 2vw;
+      overflow: hidden;
     }
 
     .portrait-images img {
       width: 50%;
       height: auto;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
+      image-rendering: high-quality;
+      -webkit-optimize-contrast: true;
     }
 
     /* ───── Адаптивность ───── */
