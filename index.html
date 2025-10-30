@@ -72,7 +72,7 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      margin-bottom: 10vh; /* чистое пространство под изображением */
+      margin-bottom: 10vh; /* чистое пространство под изображением A */
     }
 
     .image-a {
@@ -94,7 +94,7 @@
     /* ───── Тексты на изображении A ───── */
     .text-on-image {
       position: absolute;
-      bottom: 7vh;
+      bottom: 1vh; /* ← теперь на 1vh выше нижнего края изображения A */
       left: 8vw;
       display: flex;
       flex-direction: row;
@@ -102,10 +102,10 @@
       font-size: 4vh;
       font-family: 'Oswald', sans-serif;
       color: #000;
+      background-color: #fff; /* белый фон */
+      padding: 1vh 2vw;
       flex-wrap: nowrap;
       white-space: nowrap;
-      background: #fff; /* чистый белый фон */
-      padding: 2vh 2vw; /* внутренние отступы от краёв текста */
     }
 
     /* ───── Блоки для текстов ───── */
@@ -136,16 +136,12 @@
         font-size: 2vh;
         gap: 8vw;
         left: 7vw;
-        bottom: 6vh;
-        padding: 1.5vh 3vw;
+        bottom: 1vh; /* сохраняем тот же отступ на мобильных */
+        padding: 0.8vh 2vw;
       }
 
       .subtext {
         font-size: 2vh;
-      }
-
-      .image-wrapper {
-        margin-bottom: 8vh;
       }
     }
   </style>
