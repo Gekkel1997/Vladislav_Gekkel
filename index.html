@@ -106,13 +106,14 @@
       white-space: nowrap;
     }
 
-    /* Блок для "Родился" и подстрочного текста */
-    .text1-block {
+    /* ───── Блоки для текстов ───── */
+    .text1-block,
+    .text2-block {
       display: flex;
       flex-direction: column;
     }
 
-    .text1-block .subtext {
+    .subtext {
       font-weight: 600;
       line-height: 1.2;
     }
@@ -138,7 +139,7 @@
         bottom: 6vh;
       }
 
-      .text1-block .subtext {
+      .subtext {
         font-size: 2vh;
       }
     }
@@ -178,7 +179,10 @@
         <div class="text1">Родился:</div>
         <div class="subtext">Россия /<br>Липецк</div>
       </div>
-      <div class="text2">Родители:</div>
+      <div class="text2-block">
+        <div class="text2">Родители:</div>
+        <div class="subtext">Фролов Александр /<br>Геккель Марина</div>
+      </div>
     </div>
   </div>
 </body>
