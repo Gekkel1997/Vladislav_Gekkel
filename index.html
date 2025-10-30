@@ -125,20 +125,22 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── Блок Печать ───── */
-    .pechat-block {
-      width: 100%;
-      margin-top: 0.2vh;
+    /* ───── Текст 5 ───── */
+    .text-5-block {
+      position: relative;
+      margin-top: 20vh;
+      margin-right: 20vw;
+      text-align: right;
+      font-family: 'Oswald', sans-serif;
     }
 
-    .pechat-line {
-      height: 1px;
-      background-color: #000;
-      width: 100%;
+    .text-5 {
+      font-size: 2.4vh;
+      line-height: 1.4;
     }
 
-    .pechat-line + .pechat-line {
-      margin-top: 20vh; /* отступ между линиями */
+    .text-5 strong {
+      font-weight: 700;
     }
 
     /* ───── Адаптация для мобильных ───── */
@@ -172,12 +174,18 @@
         width: calc(100% - 5vw - 0.2vw);
       }
 
-      .pechat-block {
-        margin-top: 4vh;
+      .text-5-block {
+        margin-top: 6vh;
+        margin-right: 20vw;
       }
 
-      .pechat-line + .pechat-line {
-        margin-top: 2vh;
+      .text-5 {
+        font-size: 1.4vh;
+        line-height: 1.3;
+      }
+
+      .text-5 span:first-child {
+        font-size: 1.1vh;
       }
     }
   </style>
@@ -227,12 +235,12 @@
     Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
   </div>
 
-  <!-- Блок Печать -->
-  <div class="pechat-block">
-    <div class="pechat-line"></div>
-    <div class="pechat-line"></div>
+  <!-- Блок текста 5 -->
+  <div class="text-5-block">
+    <div class="text-5">
+      <span>Фролов Владислав Александрович</span><br>
+      <strong>02 / 02 / 1997</strong>
+    </div>
   </div>
 </body>
 </html>
-
-
