@@ -117,7 +117,8 @@
 
     /* ───── Текст 4 ───── */
     .text-4 {
-      margin: 2vh 0.2vw 1vh 8vw;
+      margin: 2vh 0.2vw 0 0.2vw;
+      margin-left: 8vw;
       width: calc(100% - 8vw - 0.2vw);
       font-size: 3vh;
       line-height: 1.55;
@@ -125,15 +126,37 @@
     }
 
     /* ───── Блок Печать ───── */
-    .pechat {
+    .pechat-block {
       width: 100%;
-      margin-top: 0;
+      margin-top: 6vh;
     }
 
     .pechat-line {
-      width: 100%;
       height: 1px;
       background-color: #000;
+      width: 100%;
+    }
+
+    .pechat-line + .pechat-line {
+      margin-top: 3vh; /* отступ между линиями */
+    }
+
+    /* ───── Текст 5 ───── */
+    .text-5-block {
+      position: relative;
+      text-align: right;
+      font-family: 'Oswald', sans-serif;
+      margin-top: 2vh;
+      margin-right: 20vw;
+    }
+
+    .text-5 {
+      font-size: 2.4vh;
+      line-height: 1.4;
+    }
+
+    .text-5 strong {
+      font-weight: 700;
     }
 
     /* ───── Адаптация для мобильных ───── */
@@ -165,6 +188,23 @@
         margin-top: 0.5vh;
         margin-left: 5vw;
         width: calc(100% - 5vw - 0.2vw);
+      }
+
+      .pechat-block {
+        margin-top: 4vh;
+      }
+
+      .pechat-line + .pechat-line {
+        margin-top: 2vh;
+      }
+
+      .text-5-block {
+        margin-right: 10vw;
+      }
+
+      .text-5 {
+        font-size: 1.4vh;
+        line-height: 1.3;
       }
     }
   </style>
@@ -215,9 +255,15 @@
   </div>
 
   <!-- Блок Печать -->
-  <div class="pechat">
+  <div class="pechat-block">
+    <div class="pechat-line"></div>
+    <div class="text-5-block">
+      <div class="text-5">
+        <span>Фролов Владислав Александрович</span><br>
+        <strong>02 / 02 / 1997</strong>
+      </div>
+    </div>
     <div class="pechat-line"></div>
   </div>
-
 </body>
 </html>
