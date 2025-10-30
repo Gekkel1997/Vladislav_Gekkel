@@ -118,7 +118,8 @@
     /* ───── Текст 4 ───── */
     .text-4 {
       margin: 2vh 0.2vw 0 0.2vw;
-      width: calc(100% - 0.4vw);
+      margin-left: 8vw; /* добавлен отступ, выравнивание с изображением B */
+      width: calc(100% - 8vw - 0.2vw);
       font-size: 2.4vh;
       line-height: 1.55;
       font-family: 'Oswald', sans-serif;
@@ -140,7 +141,7 @@
         font-size: 1.3vh;
         gap: 8vw;
         left: 5vw;
-        bottom: 1vh; /* было 0.7vh — опущено ещё на 1vh */
+        bottom: 1vh;
         padding: 0.4vh 0.8vw;
       }
 
@@ -150,7 +151,9 @@
 
       .text-4 {
         font-size: 1.5vh;
-        margin-top: 0.5vh; /* сдвинут вверх */
+        margin-top: 0.5vh;
+        margin-left: 5vw; /* адаптировано под мобильный — тот же уровень, что и overlay */
+        width: calc(100% - 5vw - 0.2vw);
       }
     }
   </style>
