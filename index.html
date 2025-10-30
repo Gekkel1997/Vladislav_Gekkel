@@ -128,15 +128,15 @@
     /* ───── Текст 5 ───── */
     .text-5 {
       margin-top: 8vh;
-      margin-right: 10vw;
+      margin-right: 20vw; /* немного левее (было 10vw) */
       text-align: right;
-      font-size: 2.3vh;
+      font-size: 2.6vh;
       font-family: 'Oswald', sans-serif;
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
-    .text-5 .date {
-      font-weight: 600;
+    .text-5 strong {
+      font-weight: 700;
     }
 
     /* ───── Адаптация для мобильных ───── */
@@ -172,18 +172,14 @@
 
       .text-5 {
         margin-top: 6vh;
-        margin-right: 5vw;
+        margin-right: 8vw;
         text-align: right;
-        line-height: 1.4;
-      }
-
-      .text-5 .name {
-        font-size: 1.2vh; /* уменьшен только основной текст */
-      }
-
-      .text-5 .date {
         font-size: 1.4vh;
-        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .text-5 span:first-child {
+        font-size: 1.2vh; /* уменьшено имя */
       }
     }
   </style>
@@ -234,8 +230,8 @@
   </div>
 
   <div class="text-5">
-    <div class="name">Фролов Владислав Александрович</div>
-    <div class="date">02 / 02 / 1997</div>
+    <span>Фролов Владислав Александрович</span><br>
+    <strong>02 / 02 / 1997</strong>
   </div>
 </body>
 </html>
