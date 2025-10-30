@@ -72,7 +72,7 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      margin-bottom: 10vh; /* ← добавлено чистое пространство под изображением */
+      margin-bottom: 10vh; /* чистое пространство под изображением */
     }
 
     .image-a {
@@ -95,16 +95,19 @@
     .text-on-image {
       position: absolute;
       bottom: 7vh;
-      left: 8vw; /* ← совпадает с началом изображения B */
+      left: 8vw;
       display: flex;
       flex-direction: row;
       gap: 10vw;
       font-size: 4vh;
       font-family: 'Oswald', sans-serif;
       color: #000;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
       flex-wrap: nowrap;
       white-space: nowrap;
+      background: rgba(255, 255, 255, 0.9); /* белый фон с небольшой прозрачностью */
+      padding: 2vh 2vw; /* отступы от краёв текста */
+      border-radius: 1vw; /* мягкие скруглённые углы */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* лёгкая тень */
     }
 
     /* ───── Блоки для текстов ───── */
@@ -125,19 +128,19 @@
         font-size: clamp(0.8rem, 4vw, 1.2rem);
       }
 
-      /* Возвращаем прежний размер и положение изображения B */
       .image-overlay {
         left: 5vw;
         bottom: 8vh;
         height: 45%;
       }
 
-      /* Уменьшенный масштаб текстов на телефоне */
       .text-on-image {
         font-size: 2vh;
         gap: 8vw;
         left: 7vw;
         bottom: 6vh;
+        padding: 1.5vh 3vw;
+        border-radius: 2vw;
       }
 
       .subtext {
@@ -145,7 +148,7 @@
       }
 
       .image-wrapper {
-        margin-bottom: 8vh; /* чуть меньше отступа для мобильных */
+        margin-bottom: 8vh;
       }
     }
   </style>
