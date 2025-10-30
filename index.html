@@ -118,7 +118,7 @@
     /* ───── Текст 4 ───── */
     .text-4 {
       margin: 2vh 0.2vw 0 0.2vw;
-      margin-left: 8vw; /* выравнивание с изображением B */
+      margin-left: 8vw;
       width: calc(100% - 8vw - 0.2vw);
       font-size: 2.4vh;
       line-height: 1.55;
@@ -127,12 +127,16 @@
 
     /* ───── Текст 5 ───── */
     .text-5 {
-      margin-top: 10vh; /* большой отступ вниз от текста 4 */
-      margin-right: 10vw; /* отступ от правого края */
-      text-align: right; /* выравнивание по правому краю */
-      font-size: 2.6vh;
+      margin-top: 8vh;
+      margin-right: 10vw;
+      text-align: right;
+      font-size: 2.3vh;
       font-family: 'Oswald', sans-serif;
-      line-height: 1.4;
+      line-height: 1.5;
+    }
+
+    .text-5 .date {
+      font-weight: 600;
     }
 
     /* ───── Адаптация для мобильных ───── */
@@ -162,13 +166,13 @@
       .text-4 {
         font-size: 1.5vh;
         margin-top: 0.5vh;
-        margin-left: 5vw; /* тот же уровень, что и overlay */
+        margin-left: 5vw;
         width: calc(100% - 5vw - 0.2vw);
       }
 
       .text-5 {
         font-size: 1.4vh;
-        margin-top: 5vh;
+        margin-top: 6vh;
         margin-right: 5vw;
         text-align: right;
       }
@@ -222,7 +226,7 @@
 
   <div class="text-5">
     Фролов Владислав Александрович<br>
-    02 / 02 / 1997
+    <span class="date">02 / 02 / 1997</span>
   </div>
 </body>
 </html>
