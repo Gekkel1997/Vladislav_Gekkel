@@ -117,10 +117,11 @@
 
     /* ───── Текст 4 ───── */
     .text-4 {
-      margin: 2vh 0.2vw 0 8vw;
-      width: calc(100% - 8.2vw);
-      font-size: 2.3vh; /* Увеличен размер шрифта на десктопе */
-      line-height: 1.5;
+      margin: 2vh 0.2vw 0 0.2vw;
+      margin-left: 8vw; /* добавлен отступ, выравнивание с изображением B */
+      width: calc(100% - 8vw - 0.2vw);
+      font-size: 2.4vh;
+      line-height: 1.55;
       font-family: 'Oswald', sans-serif;
     }
 
@@ -149,9 +150,10 @@
       }
 
       .text-4 {
-        font-size: 1.2vh;
-        margin-left: 5vw;
-        width: calc(100% - 5vw);
+        font-size: 1.5vh;
+        margin-top: 0.5vh;
+        margin-left: 5vw; /* адаптировано под мобильный — тот же уровень, что и overlay */
+        width: calc(100% - 5vw - 0.2vw);
       }
     }
   </style>
