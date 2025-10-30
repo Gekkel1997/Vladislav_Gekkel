@@ -72,6 +72,7 @@
       position: relative;
       width: 100%;
       overflow: hidden;
+      margin-bottom: 10vh; /* ← добавлено чистое пространство под изображением */
     }
 
     .image-a {
@@ -94,7 +95,7 @@
     .text-on-image {
       position: absolute;
       bottom: 7vh;
-      left: 8vw; /* ← теперь совпадает с началом изображения B */
+      left: 8vw; /* ← совпадает с началом изображения B */
       display: flex;
       flex-direction: row;
       gap: 10vw;
@@ -141,6 +142,10 @@
 
       .subtext {
         font-size: 2vh;
+      }
+
+      .image-wrapper {
+        margin-bottom: 8vh; /* чуть меньше отступа для мобильных */
       }
     }
   </style>
