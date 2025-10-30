@@ -171,10 +171,19 @@
       }
 
       .text-5 {
-        font-size: 1.4vh;
         margin-top: 6vh;
         margin-right: 5vw;
         text-align: right;
+        line-height: 1.4;
+      }
+
+      .text-5 .name {
+        font-size: 1.2vh; /* уменьшен только основной текст */
+      }
+
+      .text-5 .date {
+        font-size: 1.4vh;
+        font-weight: 600;
       }
     }
   </style>
@@ -225,8 +234,8 @@
   </div>
 
   <div class="text-5">
-    Фролов Владислав Александрович<br>
-    <span class="date">02 / 02 / 1997</span>
+    <div class="name">Фролов Владислав Александрович</div>
+    <div class="date">02 / 02 / 1997</div>
   </div>
 </body>
 </html>
