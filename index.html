@@ -1,184 +1,189 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gekkel Vladislav Aleksandrovich</title>
   <link rel="icon" type="image/png" href="https://i.postimg.cc/P57BSL6r/IMG-4274-1.png">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
+      background-color: #fff;
       box-sizing: border-box;
-    }
-
-    body {
-      background-color: black;
-      color: white;
-      font-family: 'Arial', sans-serif;
       overflow-x: hidden;
+      font-family: 'Oswald', sans-serif;
     }
 
-    .top-block {
-      position: relative;
-      width: 100%;
-    }
-
+    /* ───── Заголовок ───── */
     .header {
-      text-align: center;
-      font-size: 3.5vh;
+      font-size: clamp(0.5rem, 1vw, 1.3rem);
+      margin-left: 2vw;
       margin-top: 3.5vh;
     }
 
+    /* ───── Единый блок: линии и бегущая строка ───── */
     .marquee-block {
-      margin-top: 3vh;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 5vh;
     }
 
-    .line {
-      height: 2px;
-      background-color: white;
-      width: 100%;
+    .top-line {
+      height: 1px;
+      background-color: #000;
     }
 
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
-      position: relative;
+      margin-top: 1vh;
+      width: 100%;
     }
 
     .marquee-text {
       display: inline-block;
       animation: marquee 40s linear infinite;
-      font-size: 3vh;
-      font-weight: bold;
-    }
-
-    .marquee-text span {
-      padding-right: 4vw;
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     @keyframes marquee {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-text span {
+      padding-right: 2vw;
     }
 
     .bottom-line-marquee {
-      height: 2px;
-      background-color: white;
-      width: 100%;
+      height: 1px;
+      background-color: #000;
+      margin-top: 1vh;
     }
 
-    .main-image {
+    /* ───── Контейнер с изображением ───── */
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .image-a {
       width: 100%;
       height: auto;
       display: block;
       margin-top: 0;
     }
 
-    .image-b-container {
-      position: relative;
-      width: 53%;
-      margin: 0 auto;
-      margin-top: -8vh;
-    }
-
-    .image-b-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .info-text {
+    /* Изображение B (Overlay) — 53% и поднято на 8vh */
+    .image-overlay {
       position: absolute;
-      top: 5%;
-      left: 7vw;
-      font-size: 4vh;
-      font-weight: normal;
-      color: white;
-      display: flex;
-      gap: 15vw;
+      left: 8vw;
+      bottom: 23vh;
+      height: 53%;
+      width: auto;
     }
 
-    .info-column {
+    /* ───── Тексты на изображении A ───── */
+    .text-on-image {
+      position: absolute;
+      bottom: 7vh;
+      left: 8vw; /* ← теперь совпадает с началом изображения B */
+      display: flex;
+      flex-direction: row;
+      gap: 10vw;
+      font-size: 4vh;
+      font-family: 'Oswald', sans-serif;
+      color: #000;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    /* ───── Блоки для текстов ───── */
+    .text1-block,
+    .text2-block {
       display: flex;
       flex-direction: column;
-      font-weight: bold;
     }
 
-    .info-column div {
-      margin-top: 1vh;
+    .subtext {
+      font-weight: 600;
+      line-height: 1.2;
     }
 
-    @media (max-width: 768px) {
-      .info-text {
-        flex-direction: column;
+    /* ───── Адаптация для мобильных ───── */
+    @media (max-width: 600px) and (orientation: portrait) {
+      .marquee-text {
+        font-size: clamp(0.8rem, 4vw, 1.2rem);
+      }
+
+      /* Возвращаем прежний размер и положение изображения B */
+      .image-overlay {
         left: 5vw;
-        top: 3%;
+        bottom: 8vh;
+        height: 45%;
+      }
+
+      /* Уменьшенный масштаб текстов на телефоне */
+      .text-on-image {
+        font-size: 2vh;
+        gap: 8vw;
+        left: 7vw;
+        bottom: 6vh;
+      }
+
+      .subtext {
         font-size: 2vh;
       }
-
-      .info-text .info-column {
-        margin-top: 1.5vh;
-      }
-
-      .image-b-container {
-        width: 90%;
-        margin-top: -3vh;
-      }
     }
-
-    /* Белое пространство снизу */
-    .white-space {
-      background-color: white;
-      width: 100%;
-      height: 100vh;
-    }
-
   </style>
 </head>
+
 <body>
-  <div class="top-block">
-    <div class="header">Gekkel Vladislav Aleksandrovich</div>
+  <div class="header">Gekkel Vladislav Aleksandrovich</div>
 
-    <div class="marquee-block">
-      <div class="line"></div>
-      <div class="marquee-container">
-        <div class="marquee-text">
-          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-          <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        </div>
-      </div>
-      <div class="bottom-line-marquee"></div>
-    </div>
-  </div>
+  <div class="marquee-block">
+    <div class="top-line"></div>
 
-  <img src="IMG-4290.jpg" alt="A" class="main-image" />
-
-  <div class="image-b-container">
-    <img src="IMG-4290b.jpg" alt="B" />
-    <div class="info-text">
-      <div class="info-column">
-        <span>Родился:</span>
-        <div>Россия /</div>
-        <div>Липецк</div>
-      </div>
-      <div class="info-column">
-        <span>Родители:</span>
-        <div>Фролов Александр /</div>
-        <div>Геккель Марина</div>
+    <div class="marquee-container">
+      <div class="marquee-text">
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
       </div>
     </div>
+
+    <div class="bottom-line-marquee"></div>
   </div>
 
-  <!-- Белое пространство снизу -->
-  <div class="white-space"></div>
+  <div class="image-wrapper">
+    <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
+    <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
 
+    <div class="text-on-image">
+      <div class="text1-block">
+        <div class="text1">Родился:</div>
+        <div class="subtext">Россия /<br>Липецк</div>
+      </div>
+      <div class="text2-block">
+        <div class="text2">Родители:</div>
+        <div class="subtext">Фролов Александр /<br>Геккель Марина</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
