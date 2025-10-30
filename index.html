@@ -94,7 +94,7 @@
     /* ───── Тексты на изображении A ───── */
     .text-on-image {
       position: absolute;
-      bottom: 3vh; /* ← поднято на 2vh выше */
+      bottom: 3vh; /* поднято на 2vh выше */
       left: 8vw;
       display: flex;
       flex-direction: row;
@@ -132,16 +132,17 @@
         height: 45%;
       }
 
+      /* Белый фон + текст: уменьшен шрифт и отступы */
       .text-on-image {
-        font-size: 2vh;
-        gap: 8vw;
+        font-size: 1.5vh; /* уменьшен размер текста */
+        gap: 6vw;
         left: 7vw;
-        bottom: 3vh; /* сохраняем то же смещение */
-        padding: 0.8vh 2vw;
+        bottom: 3vh;
+        padding: 0.5vh 1.5vw; /* фон ближе к тексту */
       }
 
       .subtext {
-        font-size: 2vh;
+        font-size: 1.5vh;
       }
     }
   </style>
