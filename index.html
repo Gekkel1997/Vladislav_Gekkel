@@ -137,12 +137,19 @@
     .pechat-block {
       width: 100%;
       margin-top: 5vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .pechat-line {
+      width: 100%;
+      height: 1px;
+      background-color: #000;
     }
 
     .text-5-block {
-      position: relative;
-      margin-top: 10vh;
-      margin-right: 20vw;
+      margin: 5vh 20vw;
       text-align: right;
       font-family: 'Oswald', sans-serif;
     }
@@ -189,11 +196,11 @@
 
       .pechat-block {
         margin-top: 4vh;
+        align-items: center;
       }
 
       .text-5-block {
-        margin-top: 5vh;
-        margin-right: 15vw;
+        margin: 3vh 10vw;
       }
 
       .text-5 {
@@ -257,14 +264,16 @@
 
   <!-- Блок "Печать" -->
   <div class="pechat-block">
-    <div class="line"></div>
+    <div class="pechat-line"></div>
+
     <div class="text-5-block">
       <div class="text-5">
         <span>Фролов Владислав Александрович</span><br>
         <strong>02 / 02 / 1997</strong>
       </div>
     </div>
-    <div class="line"></div>
+
+    <div class="pechat-line"></div>
   </div>
 </body>
 </html>
