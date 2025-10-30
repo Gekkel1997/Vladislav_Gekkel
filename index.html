@@ -72,7 +72,6 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      margin-bottom: 10vh; /* чистое пространство под изображением A */
     }
 
     .image-a {
@@ -91,7 +90,7 @@
       width: auto;
     }
 
-    /* ───── Тексты на изображении A ───── */
+    /* ───── Белый блок с текстом ───── */
     .text-on-image {
       position: absolute;
       bottom: 3vh;
@@ -103,12 +102,11 @@
       font-family: 'Oswald', sans-serif;
       color: #000;
       background-color: #fff;
-      padding: 1vh 2vw;
+      padding: 1vh 1.5vw;
       flex-wrap: nowrap;
       white-space: nowrap;
     }
 
-    /* ───── Блоки для текстов ───── */
     .text1-block,
     .text2-block {
       display: flex;
@@ -132,13 +130,12 @@
         height: 45%;
       }
 
-      /* Белый фон + текст: уменьшен шрифт, уменьшены отступы и сдвинут влево */
       .text-on-image {
         font-size: 1.5vh;
-        gap: 6vw;
-        left: 5vw; /* ← теперь совпадает с левым краем изображения B */
-        bottom: 3vh;
-        padding: 0.5vh 1.5vw;
+        gap: 8vw;
+        left: 5vw;
+        bottom: 0.7vh; /* ← теперь отступ 0.7vh от нижнего края изображения A */
+        padding: 0.5vh 1vw; /* компактный белый фон */
       }
 
       .subtext {
