@@ -125,10 +125,23 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── Текст 5 ───── */
+    /* ───── Линии под текстами ───── */
+    .line {
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      margin-top: 2vh;
+    }
+
+    /* ───── Блок "Печать" ───── */
+    .pechat-block {
+      width: 100%;
+      margin-top: 5vh;
+    }
+
     .text-5-block {
       position: relative;
-      margin-top: 20vh;
+      margin-top: 10vh;
       margin-right: 20vw;
       text-align: right;
       font-family: 'Oswald', sans-serif;
@@ -174,9 +187,13 @@
         width: calc(100% - 5vw - 0.2vw);
       }
 
+      .pechat-block {
+        margin-top: 4vh;
+      }
+
       .text-5-block {
-        margin-top: 6vh;
-        margin-right: 20vw;
+        margin-top: 5vh;
+        margin-right: 15vw;
       }
 
       .text-5 {
@@ -235,12 +252,19 @@
     Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
   </div>
 
-  <!-- Блок текста 5 -->
-  <div class="text-5-block">
-    <div class="text-5">
-      <span>Фролов Владислав Александрович</span><br>
-      <strong>02 / 02 / 1997</strong>
+  <!-- Линия под текстом 4 -->
+  <div class="line"></div>
+
+  <!-- Блок "Печать" -->
+  <div class="pechat-block">
+    <div class="line"></div>
+    <div class="text-5-block">
+      <div class="text-5">
+        <span>Фролов Владислав Александрович</span><br>
+        <strong>02 / 02 / 1997</strong>
+      </div>
     </div>
+    <div class="line"></div>
   </div>
 </body>
 </html>
