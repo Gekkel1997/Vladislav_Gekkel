@@ -67,8 +67,8 @@
       margin-top: 1vh;
     }
 
-    /* ───── Контейнер с изображением ───── */
-    .image-wrapper {
+    /* ───── Единый блок с изображением и текстом ───── */
+    .image-block {
       position: relative;
       width: 100%;
       overflow: hidden;
@@ -78,10 +78,8 @@
       width: 100%;
       height: auto;
       display: block;
-      margin-top: 0;
     }
 
-    /* Изображение B (Overlay) — 53% и поднято на 8vh */
     .image-overlay {
       position: absolute;
       left: 8vw;
@@ -90,7 +88,6 @@
       width: auto;
     }
 
-    /* ───── Белый блок с текстом ───── */
     .text-on-image {
       position: absolute;
       bottom: 3vh;
@@ -134,8 +131,8 @@
         font-size: 1.5vh;
         gap: 8vw;
         left: 5vw;
-        bottom: 0.7vh; /* ← теперь отступ 0.7vh от нижнего края изображения A */
-        padding: 0.5vh 1vw; /* компактный белый фон */
+        bottom: 0.7vh;
+        padding: 0.5vh 1vw;
       }
 
       .subtext {
@@ -150,7 +147,6 @@
 
   <div class="marquee-block">
     <div class="top-line"></div>
-
     <div class="marquee-container">
       <div class="marquee-text">
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
@@ -165,14 +161,13 @@
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
       </div>
     </div>
-
     <div class="bottom-line-marquee"></div>
   </div>
 
-  <div class="image-wrapper">
+  <!-- Единый блок: Изображение A + Overlay + Текст -->
+  <div class="image-block">
     <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
     <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
-
     <div class="text-on-image">
       <div class="text1-block">
         <div class="text1">Родился:</div>
