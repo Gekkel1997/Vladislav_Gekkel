@@ -17,14 +17,12 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── Заголовок ───── */
     .header {
       font-size: clamp(0.5rem, 1vw, 1.3rem);
       margin-left: 2vw;
       margin-top: 3.5vh;
     }
 
-    /* ───── Единый блок: линии и бегущая строка ───── */
     .marquee-block {
       display: flex;
       flex-direction: column;
@@ -67,7 +65,6 @@
       margin-top: 1vh;
     }
 
-    /* ───── Единый блок с изображением и текстом ───── */
     .image-block {
       position: relative;
       width: 100%;
@@ -115,7 +112,6 @@
       line-height: 1.2;
     }
 
-    /* ───── Текст 4 ───── */
     .text-4 {
       margin: 2vh 0.2vw 0 0.2vw;
       margin-left: 8vw;
@@ -125,10 +121,9 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── Текст 5 и изображение C ───── */
     .text-5-block {
       position: relative;
-      margin-top: 20vh;
+      margin-top: 10vh;
       margin-right: 1vw;
       width: calc(100% - 1vw);
       text-align: right;
@@ -157,11 +152,10 @@
       width: 65%;
       height: 1px;
       background-color: #000;
-      margin-top: 4vh;
+      margin-top: 2vh;
       margin-left: 0;
     }
 
-    /* ───── Адаптация для мобильных (телефон вертикальный) ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .marquee-text {
         font-size: clamp(0.8rem, 4vw, 1.2rem);
@@ -193,7 +187,7 @@
       }
 
       .text-5-block {
-        margin-top: 6vh;
+        margin-top: 4vh;
         margin-right: 1vw;
         width: calc(100% - 1vw);
       }
@@ -213,6 +207,10 @@
         right: 2vw;
         bottom: 0.1;
         transform: translateY(0vh);
+      }
+
+      .bottom-line {
+        margin-top: 1vh;
       }
     }
   </style>
@@ -240,7 +238,6 @@
     <div class="bottom-line-marquee"></div>
   </div>
 
-  <!-- Единый блок: Изображение A + Overlay + Текст -->
   <div class="image-block">
     <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
     <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
@@ -262,7 +259,6 @@
     Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
   </div>
 
-  <!-- Блок текста 5 с изображением C -->
   <div class="text-5-block">
     <div class="text-5">
       <span>Фролов Владислав Александрович</span><br>
