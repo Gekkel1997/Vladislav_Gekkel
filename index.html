@@ -129,7 +129,7 @@
     .text-5-block {
       position: relative;
       margin-top: 20vh;
-      margin-right: 1vw; /* теперь отступ от правого края 1vw */
+      margin-right: 1vw;
       width: calc(100% - 1vw);
       text-align: right;
       font-family: 'Oswald', sans-serif;
@@ -138,7 +138,7 @@
     .text-5 {
       font-size: 2.4vh;
       line-height: 1.4;
-      margin-right: 14vw; /* сохраняем отступ от изображения */
+      margin-right: 15vw;
     }
 
     .text-5 strong {
@@ -151,6 +151,15 @@
       bottom: 0;
       width: 13vw;
       height: auto;
+    }
+
+    /* ───── Линия под блоком Текст 5 ───── */
+    .bottom-line {
+      width: 65%;
+      height: 1px;
+      background-color: #000;
+      margin-left: 0;
+      margin-top: 4vh;
     }
 
     /* ───── Адаптация для мобильных (телефон вертикальный) ───── */
@@ -186,14 +195,14 @@
 
       .text-5-block {
         margin-top: 6vh;
-        margin-right: 1vw; /* отступ 1vw на мобилках */
-        width: calc(100% - 1vw);
+        margin-right: 15vw;
+        width: calc(100% - 15vw);
       }
 
       .text-5 {
         font-size: 1.4vh;
         line-height: 1.3;
-        margin-right: 18vw;
+        margin-right: 20vw;
       }
 
       .text-5 span:first-child {
@@ -202,9 +211,14 @@
 
       .image-c {
         width: 16vw;
-        right: 1vw;
+        right: 3vw;
         bottom: 0;
         transform: translateY(0vh);
+      }
+
+      .bottom-line {
+        width: 65%;
+        margin-left: 0;
       }
     }
   </style>
@@ -262,5 +276,8 @@
     </div>
     <img class="image-c" src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="C">
   </div>
+
+  <!-- Линия под блоком Текст 5 -->
+  <div class="bottom-line"></div>
 </body>
 </html>
