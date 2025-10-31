@@ -129,7 +129,7 @@
     .text-5-block {
       position: relative;
       margin-top: 20vh;
-      margin-right: 10vw; /* расширен влево */
+      margin-right: 10vw; /* расширен влево (влияет на ширину блока) */
       width: calc(100% - 10vw);
       text-align: right;
       font-family: 'Oswald', sans-serif;
@@ -147,13 +147,13 @@
 
     .image-c {
       position: absolute;
-      right: 0.5vw;
+      right: 0.5vw; /* сдвинуто ближе к правому краю на десктопе */
       bottom: 0;
       width: 13vw;
       height: auto;
     }
 
-    /* ───── Адаптация для мобильных ───── */
+    /* ───── Адаптация для мобильных (телефон вертикальный) ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .marquee-text {
         font-size: clamp(0.8rem, 4vw, 1.2rem);
@@ -187,13 +187,13 @@
       .text-5-block {
         margin-top: 6vh;
         margin-right: 15vw;
-        width: calc(100% - 15vw);
+        width: calc(100% - 15vw); /* расширяется влево при необходимости */
       }
 
       .text-5 {
         font-size: 1.4vh;
         line-height: 1.3;
-        margin-right: 20vw; /* отступ между текстом и изображением */
+        margin-right: 20vw; /* отступ между текстом и изображением на мобилях */
       }
 
       .text-5 span:first-child {
@@ -203,7 +203,8 @@
       .image-c {
         width: 16vw;
         right: 3vw;
-        bottom: -2vh;
+        bottom: 0; /* нижние края совпадают с текстом */
+        transform: translateY(-1vh); /* поднять выше */
       }
     }
   </style>
