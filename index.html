@@ -129,9 +129,8 @@
     .text-5-block {
       position: relative;
       margin-top: 20vh;
-      margin-left: 8vw;
-      margin-right: 0;
-      width: calc(100% - 8vw);
+      margin-right: 10vw; /* расширен влево */
+      width: calc(100% - 10vw);
       text-align: right;
       font-family: 'Oswald', sans-serif;
     }
@@ -139,6 +138,7 @@
     .text-5 {
       font-size: 2.4vh;
       line-height: 1.4;
+      margin-right: 15vw; /* создаёт отступ между текстом и изображением */
     }
 
     .text-5 strong {
@@ -147,7 +147,7 @@
 
     .image-c {
       position: absolute;
-      right: 0;
+      right: 0.5vw;
       bottom: 0;
       width: 13vw;
       height: auto;
@@ -186,13 +186,14 @@
 
       .text-5-block {
         margin-top: 6vh;
-        margin-left: 5vw;
-        width: calc(100% - 5vw);
+        margin-right: 15vw;
+        width: calc(100% - 15vw);
       }
 
       .text-5 {
         font-size: 1.4vh;
         line-height: 1.3;
+        margin-right: 20vw; /* отступ между текстом и изображением */
       }
 
       .text-5 span:first-child {
@@ -201,7 +202,7 @@
 
       .image-c {
         width: 16vw;
-        right: 0;
+        right: 3vw;
         bottom: -2vh;
       }
     }
