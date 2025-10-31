@@ -38,29 +38,27 @@
     }
 
     .marquee-container {
-      display: flex;
       overflow: hidden;
       white-space: nowrap;
-      width: 100%;
-      position: relative;
       margin-top: 1vh;
+      width: 100%;
     }
 
     .marquee-text {
-      display: flex;
-      animation: marquee 20s linear infinite;
-    }
-
-    .marquee-text span {
-      margin-right: 2vw;
-      text-transform: uppercase;
+      display: inline-block;
+      animation: marquee 40s linear infinite;
       font-size: clamp(1.5rem, 4vw, 2.6rem);
+      text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
     @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-text span {
+      padding-right: 2vw;
     }
 
     .bottom-line-marquee {
@@ -127,7 +125,7 @@
       font-family: 'Oswald', sans-serif;
     }
 
-    /* ───── Текст 5 ───── */
+    /* ───── Текст 5 и изображение C ───── */
     .text-5-block {
       position: relative;
       margin-top: 20vh;
@@ -145,10 +143,18 @@
       font-weight: 700;
     }
 
+    .image-c {
+      position: absolute;
+      right: 2vw;
+      bottom: 0;
+      width: 10vw;
+      height: auto;
+    }
+
     /* ───── Адаптация для мобильных ───── */
     @media (max-width: 600px) and (orientation: portrait) {
-      .marquee-text span {
-        font-size: clamp(1.2rem, 5vw, 2rem);
+      .marquee-text {
+        font-size: clamp(0.8rem, 4vw, 1.2rem);
       }
 
       .image-overlay {
@@ -189,6 +195,12 @@
       .text-5 span:first-child {
         font-size: 1.1vh;
       }
+
+      .image-c {
+        width: 22vw;
+        right: 5vw;
+        bottom: -2vh;
+      }
     }
   </style>
 </head>
@@ -203,8 +215,10 @@
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-      </div>
-      <div class="marquee-text">
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
@@ -235,12 +249,13 @@
     Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
   </div>
 
-  <!-- Блок текста 5 -->
+  <!-- Блок текста 5 с изображением C -->
   <div class="text-5-block">
     <div class="text-5">
       <span>Фролов Владислав Александрович</span><br>
       <strong>02 / 02 / 1997</strong>
     </div>
+    <img class="image-c" src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="C">
   </div>
 </body>
 </html>
