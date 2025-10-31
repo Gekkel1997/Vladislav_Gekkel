@@ -48,13 +48,13 @@
 
     .marquee-text {
       display: flex;
-      animation: marquee 25s linear infinite;
+      animation: marquee 20s linear infinite;
     }
 
     .marquee-text span {
       margin-right: 2vw;
       text-transform: uppercase;
-      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      font-size: clamp(1.2rem, 3vw, 2rem);
       letter-spacing: 0.05em;
     }
 
@@ -148,10 +148,7 @@
     /* ───── Адаптация для мобильных ───── */
     @media (max-width: 600px) and (orientation: portrait) {
       .marquee-text span {
-        font-size: 1rem;
-      }
-      .marquee-text {
-        animation-duration: 15s;
+        font-size: clamp(1rem, 4vw, 1.6rem);
       }
 
       .image-overlay {
