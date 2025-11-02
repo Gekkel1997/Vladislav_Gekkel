@@ -18,11 +18,38 @@
     }
 
     .header {
-      display: block;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       width: 100%;
       font-size: clamp(0.5rem, 1vw, 1.3rem);
       margin-left: 2vw;
       margin-top: 3.5vh;
+    }
+
+    .header-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .subheader, .home-text {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(1rem, 2vw, 1.8rem);
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .subheader {
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .home-text {
+      right: 8vw;
+      text-align: right;
     }
 
     .marquee-block {
@@ -133,7 +160,7 @@
     .text-5 {
       position: absolute;
       right: calc(15vw + 2vh);
-      bottom: 0.3vh;
+      bottom: 3vh;
       text-align: right;
       font-size: 2.4vh;
       line-height: 1.4;
@@ -146,7 +173,7 @@
     .image-c {
       position: absolute;
       right: 3vh;
-      bottom: 0.3vh;
+      bottom: 3vh;
       width: 12vw;
       height: auto;
     }
@@ -201,7 +228,7 @@
       .image-c {
         width: 16vw;
         right: 2vh;
-        bottom: 0.3vh;
+        bottom: 3vh;
       }
 
       .bottom-line {
@@ -213,7 +240,15 @@
 </head>
 
 <body>
-  <div class="header">Gekkel Vladislav Aleksandrovich</div>
+  <div class="header">
+    <div class="header-name">
+      <span>Gekkel</span>
+      <span>Vladislav</span>
+      <span>Aleksandrovich</span>
+    </div>
+    <div class="subheader">ART</div>
+    <div class="home-text">HOME</div>
+  </div>
 
   <div class="marquee-block">
     <div class="top-line"></div>
