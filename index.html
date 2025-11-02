@@ -28,13 +28,7 @@
       margin-top: 3.5vh;
     }
 
-    .header-name {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-
-    .subheader, .home-text {
+    .subheader, .info-text {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -47,8 +41,8 @@
       transform: translate(-50%, -50%);
     }
 
-    .home-text {
-      right: 8vw;
+    .info-text {
+      right: 4vw;
       text-align: right;
     }
 
@@ -241,13 +235,8 @@
 
 <body>
   <div class="header">
-    <div class="header-name">
-      <span>Gekkel</span>
-      <span>Vladislav</span>
-      <span>Aleksandrovich</span>
-    </div>
-    <div class="subheader">ART</div>
-    <div class="home-text">HOME</div>
+    <div class="subheader" style="left: 50%; transform: translate(-50%, -50%);">ART</div>
+    <div class="info-text">INFO</div>
   </div>
 
   <div class="marquee-block">
