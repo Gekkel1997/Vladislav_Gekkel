@@ -73,6 +73,12 @@
       text-align: right;
     }
 
+    @media (max-width: 600px) and (orientation: portrait) {
+      .subheader, .info-text {
+        font-size: calc(clamp(1rem, 3vw, 2.8rem) + 1vh);
+      }
+    }
+
     .marquee-block {
       display: flex;
       flex-direction: column;
