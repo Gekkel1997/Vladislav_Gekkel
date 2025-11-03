@@ -23,7 +23,6 @@
       box-sizing: border-box;
     }
 
-    /* Закреплённый первый блок */
     .header {
       position: fixed;
       top: 0;
@@ -38,7 +37,7 @@
       background-color: #fff;
       z-index: 1000;
       overflow: hidden;
-      border-bottom: 1px solid #000; /* линия внизу блока */
+      border-bottom: 1px solid #000;
     }
 
     .header-text {
@@ -59,7 +58,6 @@
       }
     }
 
-    /* ART и INFO */
     .subheader, .info-text {
       position: absolute;
       top: 50%;
@@ -84,7 +82,7 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      margin-top: 10vh; /* отступ под фиксированный хедер */
+      margin-top: 10vh;
       overflow-x: hidden;
     }
 
@@ -128,6 +126,7 @@
       position: relative;
       width: 100%;
       overflow: hidden;
+      border-top: 1px solid #000; /* добавлена линия сверху */
     }
 
     .image-a {
