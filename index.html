@@ -52,6 +52,19 @@
       font-weight: 700;
     }
 
+    .header-text button {
+      background: none;
+      border: none;
+      font: inherit;
+      color: #000;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .header-text button:hover {
+      text-decoration: underline;
+    }
+
     @media (min-width: 1024px) {
       .header-text {
         font-size: 2vh;
@@ -289,7 +302,9 @@
 
 <body>
   <div class="header">
-    <div class="header-text"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></div>
+    <div class="header-text">
+      <button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></button>
+    </div>
     <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
     <div class="info-text">INFO</div>
   </div>
