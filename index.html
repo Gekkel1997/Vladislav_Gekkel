@@ -53,10 +53,11 @@
       }
     }
 
+    /* ART и INFO: фиксированный размер 3vh (убрали vw) */
     .subheader, .info-text {
       position: absolute;
       top: 50%;
-      font-size: clamp(1rem, 3vw, 2.8rem);
+      font-size: 3vh;
       font-family: 'Oswald', sans-serif;
       transform: translateY(-50%);
     }
@@ -71,12 +72,6 @@
     .info-text {
       right: 4vw;
       text-align: right;
-    }
-
-    @media (max-width: 600px) and (orientation: portrait) {
-      .subheader, .info-text {
-        font-size: calc(clamp(1rem, 3vw, 2.8rem) + 0.5vh);
-      }
     }
 
     .marquee-block {
@@ -218,6 +213,7 @@
     }
 
     @media (max-width: 600px) and (orientation: portrait) {
+      /* Если нужно — в телефоне портрет можно изменить, но ты просил убрать vw и сделать 3vh */
       .marquee-text {
         font-size: clamp(0.8rem, 4vw, 1.2rem);
       }
