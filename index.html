@@ -73,6 +73,19 @@
       width: auto;
     }
 
+    .subheader button {
+      background: none;
+      border: none;
+      font: inherit;
+      color: #000;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .subheader button:hover {
+      text-decoration: underline;
+    }
+
     .info-text {
       right: 3vw;
       text-align: right;
@@ -126,7 +139,7 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      border-top: 1px solid #000; /* добавлена линия сверху */
+      border-top: 1px solid #000;
     }
 
     .image-a {
@@ -277,7 +290,7 @@
 <body>
   <div class="header">
     <div class="header-text"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></div>
-    <div class="subheader">ART</div>
+    <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
     <div class="info-text">INFO</div>
   </div>
 
