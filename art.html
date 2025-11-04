@@ -140,6 +140,8 @@
       color: #000;
       border-bottom: 1px solid #000;
       margin-top: 0;
+      height: auto;
+      min-height: 50vh;
     }
 
     .block3-text {
@@ -150,9 +152,12 @@
 
     .block3 img {
       display: block;
-      width: 40%;
+      width: 30vw;
       height: auto;
-      margin-left: 0;
+      margin-left: 5vw;
+      border: 2px dashed red; /* показываем границы изображения */
+      aspect-ratio: 1986 / 2731;
+      object-fit: cover;
     }
 
     @media (max-width: 600px) and (orientation: portrait) {
@@ -172,7 +177,9 @@
       }
 
       .block3 img {
-        width: 80%;
+        width: 60vw;
+        height: auto;
+        margin-left: 5vw;
       }
     }
   </style>
