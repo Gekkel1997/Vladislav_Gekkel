@@ -144,22 +144,25 @@
       min-height: 80vh;
     }
 
+    /* Заголовок: теперь привязан к левому отступу .block3 (3vw) */
     .block3-text {
-      font-size: 4vh; /* немного увеличен размер шрифта */
+      font-size: 4vh;
       font-weight: 400;
       margin-bottom: 2vh;
       width: 100%;
       text-align: left;
-      margin-left: 5vw;
+      margin-left: 3vw; /* соответствует padding-left блока .block3 */
     }
 
+    /* Десктоп: изображения в одну строку, выровненные по левому краю блока */
     .block3-images {
       display: flex;
       flex-wrap: nowrap;
-      justify-content: center;
+      justify-content: flex-start; /* <-- выравниваем слева */
       gap: 2.5vw;
       align-items: flex-start;
       margin-top: 0;
+      padding-left: 3vw; /* <-- чтобы левая граница изображений совпадала с заголовком */
     }
 
     .block3-images .art-item {
@@ -180,15 +183,17 @@
       text-align: left;
       margin-top: 1vh;
       line-height: 1.4;
+      margin-left: 0;
     }
 
-    /* 📱 Адаптация только для телефонов в вертикальной ориентации */
+    /* 📱 Телефон (вертикально): сетка 2 в ряд, блоки тоже с отступом 3vw */
     @media (max-width: 600px) and (orientation: portrait) {
       .block3-images {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         justify-items: center;
         gap: 4vw;
+        padding-left: 0; /* центрируем сетку на мобильном */
       }
 
       .block3-images .art-item {
