@@ -154,7 +154,7 @@
       display: flex;
       align-items: center;
       height: 100%;
-      transform: translateY(-1.2vh);
+      transform: translateY(-2.2vh); /* поднят выше */
     }
 
     .block3-images {
@@ -163,7 +163,7 @@
       justify-content: center;
       gap: 2.5vw;
       align-items: flex-start;
-      margin-top: -2vh; /* поднято выше */
+      margin-top: -2vh;
     }
 
     .block3-images .art-item {
@@ -202,7 +202,7 @@
       }
       .block3-text {
         margin-left: -0.9vw;
-        transform: translateY(-1.6vh);
+        transform: translateY(-2.6vh); /* поднят выше для десктопа */
         font-size: 4.8vh;
       }
       .art-description {
@@ -210,11 +210,16 @@
       }
       .block3-images {
         gap: 1.5vw;
-        margin-top: -3vh; /* для десктопа поднято чуть выше */
+        margin-top: -3vh;
       }
     }
 
     @media (max-width: 600px) and (orientation: portrait) {
+      .block3-text {
+        font-size: 3.5vh;
+        transform: translateY(-1vh); /* чуть выше на телефоне */
+      }
+
       .block3-images {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
