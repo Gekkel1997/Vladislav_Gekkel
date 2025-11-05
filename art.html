@@ -153,8 +153,7 @@
       border-bottom: 1px solid #000;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      padding-left: 3vw;
+      align-items: center;
       padding-top: 3vh;
     }
 
@@ -165,44 +164,40 @@
       text-align: left;
       color: #000;
       font-family: 'Oswald', sans-serif;
+      align-self: flex-start;
     }
 
-    /* image styling: keep fixed width but ensure consistent bottom alignment */
     .block4 img {
       width: 22.5vw;
       height: auto;
       aspect-ratio: 1986 / 2731;
       object-fit: cover;
-      /* remove top margin so tops don't shift */
       margin-top: 0;
       margin-left: 0;
       border: 2px dashed red;
       display: block;
     }
 
-    /* align items by their bottom edges */
     .block4-images {
       display: flex;
       flex-wrap: nowrap;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 1.5vw;
-      /* align images to the end (bottom) so lower borders line up */
       align-items: flex-end;
       margin-top: 4vh;
+      width: 100%;
+      padding-left: 0;
     }
 
-    /* each vv-item is a column: image on top, description below; keep description outside the image flow */
     .vv-item {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      /* ensure items don't stretch and keep consistent image baseline */
     }
 
     .vv-description {
       font-size: 1.8vh;
       text-align: left;
-      /* small gap between image bottom and text */
       margin-top: 0.8vh;
       line-height: 1.4;
       color: #000;
