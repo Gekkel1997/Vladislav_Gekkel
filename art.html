@@ -145,12 +145,15 @@
     }
 
     .block3-text {
-      font-size: 4vh;
+      font-size: 4.5vh;
       font-weight: 400;
       margin-bottom: 2vh;
       width: 100%;
       text-align: left;
-      margin-left: 3vw; /* выровнен по левому краю изображений */
+      margin-left: 3vw;
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
 
     .block3-images {
@@ -184,7 +187,7 @@
 
     @media (min-width: 1024px) {
       .block3-text {
-        margin-left: 3vw; /* выравнивание с изображением 2.1 */
+        margin-left: 3vw;
       }
     }
 
@@ -226,7 +229,7 @@
 
   <div class="block2">COLLECTIONS ▼</div>
   <div class="block3">
-    <div class="block3-text">ДОБРЫМ БЫТЬ НЕ СТЫДНО</div>
+    <div class="block3-text" style="padding-left:3vw">ДОБРЫМ БЫТЬ НЕ СТЫДНО</div>
     <div class="block3-images">
       <div class="art-item">
         <img src="images/2.1.webp" alt="Artwork 1">
