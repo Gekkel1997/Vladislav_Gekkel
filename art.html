@@ -145,74 +145,14 @@
       min-height: 80vh;
     }
 
-    .block4 {
-      position: relative;
-      width: 100%;
-      height: 160vh;
-      background-color: #f2f2f2;
-      border-bottom: 1px solid #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 3vh;
-    }
-
-    .block4-text {
-      font-size: 5vh;
-      font-weight: 400;
-      margin-left: -0.9vw;
-      text-align: left;
-      color: #000;
-      font-family: 'Oswald', sans-serif;
-      align-self: flex-start;
-    }
-
-    .block4 img {
-      width: 22.5vw;
-      height: auto;
-      aspect-ratio: 1986 / 2731;
-      object-fit: cover;
-      margin-top: 0;
-      margin-left: 0;
-      border: 2px dashed red;
-      display: block;
-    }
-
-    .block4-images {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      gap: 1.5vw;
-      align-items: flex-end;
-      margin-top: 4vh;
-      width: 100%;
-      padding-left: 0;
-    }
-
-    .vv-item {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .vv-description {
-      font-size: 1.8vh;
-      text-align: left;
-      margin-top: 0.8vh;
-      line-height: 1.4;
-      color: #000;
-    }
-
     .block3-text {
       font-size: 4.5vh;
       font-weight: 400;
       margin-bottom: 2vh;
       width: 100%;
       text-align: left;
-      margin-left: 0vw;
       display: flex;
       align-items: center;
-      height: 100%;
       transform: translateY(-2.0vh);
     }
 
@@ -254,34 +194,62 @@
       margin-top: -2.4vh;
     }
 
-    @media (min-width: 1024px) {
-      .block2 {
-        padding-left: 2.1vw;
-        font-size: 1.8vh;
-      }
-      .block3-text {
-        margin-left: -0.9vw;
-        transform: translateY(-2.4vh);
-        font-size: 5vh;
-      }
-      .block4-text {
-        margin-left: -0.9vw;
-        font-size: 5vh;
-      }
-      .art-description {
-        font-size: 2vh;
-      }
-      .block3-images {
-        gap: 1.5vw;
-        margin-top: -3vh;
-      }
-      .block4-images {
-        gap: 1.5vw;
-        margin-top: 4vh;
-      }
+    .block4 {
+      position: relative;
+      width: 100%;
+      background-color: #f2f2f2;
+      border-bottom: 1px solid #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10vh;
+      padding-bottom: 5vh;
     }
 
-    @media (max-width: 600px) and (orientation: portrait) {
+    .block4-text {
+      font-size: 5vh;
+      font-weight: 400;
+      margin-top: 4vh;
+      text-align: left;
+      color: #000;
+      font-family: 'Oswald', sans-serif;
+      align-self: flex-start;
+    }
+
+    .block4 img {
+      width: 22.5vw;
+      height: auto;
+      aspect-ratio: 1986 / 2731;
+      object-fit: cover;
+      border: 2px dashed red;
+      display: block;
+    }
+
+    .block4-images {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 1.5vw;
+      align-items: flex-end;
+      margin-top: 4vh;
+      width: 100%;
+    }
+
+    .vv-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .vv-description {
+      font-size: 1.8vh;
+      text-align: left;
+      margin-top: 0.8vh;
+      line-height: 1.4;
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
       .block3-text {
         font-size: 3.5vh;
         transform: translateY(-1.7vh);
@@ -306,13 +274,34 @@
 
       .art-description {
         font-size: 1.4vh;
-        text-align: left;
-        margin-left: 0;
-        margin-top: 1vh;
       }
 
       .price {
         font-size: 1.6vh;
+      }
+
+      .block4-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        gap: 4vw;
+        width: 100%;
+      }
+
+      .block4 img {
+        width: 45vw;
+        height: auto;
+      }
+
+      .vv-description {
+        font-size: 1.6vh;
+        margin-top: 1vh;
+      }
+
+      .block4-text {
+        font-size: 3.5vh;
+        text-align: center;
+        align-self: center;
       }
     }
   </style>
@@ -328,35 +317,28 @@
   </div>
 
   <div class="block2">COLLECTIONS ▼</div>
+
   <div class="block3">
-    <div class="block3-text" style="padding-left:0vw">ДОБРЫМ БЫТЬ НЕ СТЫДНО</div>
+    <div class="block3-text">ДОБРЫМ БЫТЬ НЕ СТЫДНО</div>
     <div class="block3-images">
       <div class="art-item">
         <img src="images/2.1.webp" alt="Artwork 1">
-        <div class="art-description">
-          А.К.УЗЕНЮК<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30
-        </div>
+        <div class="art-description">А.К.УЗЕНЮК<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
         <div class="price">1 1994₽</div>
       </div>
       <div class="art-item">
         <img src="images/2.2.webp" alt="Artwork 2">
-        <div class="art-description">
-          А.М.ОВЕЧКИН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30
-        </div>
+        <div class="art-description">А.М.ОВЕЧКИН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
         <div class="price">1 1985₽</div>
       </div>
       <div class="art-item">
         <img src="images/2.3.webp" alt="Artwork 3">
-        <div class="art-description">
-          Г.О.ВИКТОРОВ<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30
-        </div>
+        <div class="art-description">Г.О.ВИКТОРОВ<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
         <div class="price">1 1996₽</div>
       </div>
       <div class="art-item">
         <img src="images/2.4.webp" alt="Artwork 4">
-        <div class="art-description">
-          А.Т.МОРГЕНШТЕРН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30
-        </div>
+        <div class="art-description">А.Т.МОРГЕНШТЕРН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
         <div class="price">1 1998₽</div>
       </div>
     </div>
