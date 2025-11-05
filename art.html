@@ -150,6 +150,38 @@
       height: 70vh;
       background-color: #f2f2f2;
       border-bottom: 1px solid #000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 3vw;
+      padding-top: 3vh;
+    }
+
+    .block4-text {
+      font-size: 5vh;
+      font-weight: 400;
+      margin-left: -0.9vw;
+      text-align: left;
+      color: #000;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .block4 img {
+      width: 22.5vw;
+      height: auto;
+      aspect-ratio: 1986 / 2731;
+      object-fit: cover;
+      margin-top: 4vh;
+      margin-left: 0;
+    }
+
+    .block4-images {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 1.5vw;
+      align-items: flex-start;
+      margin-top: 4vh;
     }
 
     .block3-text {
@@ -213,12 +245,20 @@
         transform: translateY(-2.4vh);
         font-size: 5vh;
       }
+      .block4-text {
+        margin-left: -0.9vw;
+        font-size: 5vh;
+      }
       .art-description {
         font-size: 2vh;
       }
       .block3-images {
         gap: 1.5vw;
         margin-top: -3vh;
+      }
+      .block4-images {
+        gap: 1.5vw;
+        margin-top: 4vh;
       }
     }
 
@@ -303,6 +343,14 @@
     </div>
   </div>
 
-  <div class="block4"></div>
+  <div class="block4">
+    <div class="block4-text">Коллекция 1-100 «В.В.ПУТИН»</div>
+    <div class="block4-images">
+      <img src="images/VV1.webp" alt="Artwork VV1">
+      <img src="images/VV4.webp" alt="Artwork VV4">
+      <img src="images/VV6.webp" alt="Artwork VV6">
+      <img src="images/VV8.webp" alt="Artwork VV8">
+    </div>
+  </div>
 </body>
 </html>
