@@ -209,11 +209,15 @@
     .block4-text {
       font-size: 5vh;
       font-weight: 400;
-      margin-top: 2vh; /* Подняли чуть выше */
+      margin-bottom: 2vh;
+      width: 100%;
       text-align: left;
       color: #000;
       font-family: 'Oswald', sans-serif;
-      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      transform: translateY(-2.0vh);
+      padding-left: 3vw;
     }
 
     .block4 img {
@@ -307,7 +311,7 @@
         text-align: left;
         align-self: flex-start;
         padding-left: 3vw;
-        margin-top: 1vh; /* Подняли чуть выше на телефоне */
+        transform: translateY(-1.7vh);
       }
     }
   </style>
