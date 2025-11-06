@@ -162,7 +162,7 @@
       justify-content: center;
       align-items: flex-start;
       margin-top: -2vh;
-      gap: 1.5vw; /* Отступы между изображениями только на десктопе */
+      gap: 1.5vw;
     }
 
     .block3-images .art-item {
@@ -249,7 +249,7 @@
       color: #000;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 768px) and (orientation: portrait) {
       .block3-text {
         font-size: 3.5vh;
         transform: translateY(-1.7vh);
@@ -284,8 +284,10 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         justify-items: center;
+        align-items: start;
         gap: 4vw;
         width: 100%;
+        padding: 0 3vw;
       }
 
       .block4 img {
@@ -296,6 +298,8 @@
       .vv-description {
         font-size: 1.6vh;
         margin-top: 1vh;
+        text-align: left;
+        align-self: flex-start;
       }
 
       .block4-text {
