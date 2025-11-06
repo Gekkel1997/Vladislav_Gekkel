@@ -191,7 +191,7 @@
       font-weight: 400;
       text-align: right;
       width: 100%;
-      margin-top: -2.4vh;
+      margin-top: -3.6vh; /* поднят на две строки выше относительно описания */
     }
 
     .block4 {
@@ -242,6 +242,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      position: relative;
     }
 
     .vv-description {
@@ -250,6 +251,17 @@
       margin-top: 0.8vh;
       line-height: 1.4;
       color: #000;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .vv-price {
+      font-size: 1.8vh;
+      font-weight: 400;
+      text-align: right;
+      width: 100%;
+      margin-top: -3.6vh; /* поднят на две строки выше относительно описания */
+      color: #000;
+      font-family: 'Oswald', sans-serif;
     }
 
     @media (max-width: 768px) and (orientation: portrait) {
@@ -281,6 +293,7 @@
 
       .price {
         font-size: 1.6vh;
+        margin-top: -3.6vh; /* поднят на две строки выше относительно описания */
       }
 
       .block4-images {
@@ -304,6 +317,12 @@
         margin-top: 1vh;
         text-align: left;
         align-self: flex-start;
+      }
+
+      .vv-price {
+        font-size: 1.6vh;
+        text-align: right;
+        margin-top: -3.6vh; /* поднят на две строки выше относительно описания */
       }
 
       .block4-text {
@@ -361,6 +380,7 @@
       <div class="vv-item">
         <img src="images/VV1.webp" alt="Artwork VV1">
         <div class="vv-description">В.В.ПУТИН №1<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2024г.<br>Стекло 21х30</div>
+        <div class="vv-price">NFT+<br>11 1952₽</div>
       </div>
       <div class="vv-item">
         <img src="images/VV4.webp" alt="Artwork VV4">
@@ -378,4 +398,3 @@
   </div>
 </body>
 </html>
-
