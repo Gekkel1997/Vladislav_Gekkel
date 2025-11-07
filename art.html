@@ -201,7 +201,7 @@
     .block4 {
       position: relative;
       width: 100%;
-      background: none; /* фон удалён */
+      background: none;
       border-bottom: 1px solid #000;
       display: flex;
       flex-direction: column;
@@ -256,6 +256,17 @@
       line-height: 1.4;
       color: #000;
       font-family: 'Oswald', sans-serif;
+    }
+
+    .block5 {
+      width: 100%;
+      background-color: #e6e6e6; /* нежно-серый фон */
+      position: relative;
+      margin-top: 0; /* убран отступ от блока 4 */
+      height: 30vh; /* пример высоты, можно корректировать */
+      border-bottom: 1px solid #000; /* нижняя линия */
+      box-sizing: border-box;
+      padding-bottom: 155vh; /* линия опущена на 80vh */
     }
 
     @media (max-width: 768px) and (orientation: portrait) {
@@ -387,5 +398,7 @@
       </div>
     </div>
   </div>
+
+  <div class="block5"></div>
 </body>
 </html>
