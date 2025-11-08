@@ -266,12 +266,11 @@
       height: auto;
       border-bottom: 1px solid #000;
       box-sizing: border-box;
-      padding: 3vh 3vw;
+      padding: 3vh 0;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      gap: 2vh;
     }
 
     .block5-text {
@@ -280,15 +279,17 @@
       color: #000;
       font-family: 'Oswald', sans-serif;
       text-align: left;
+      margin-bottom: 2vh;
+      padding-left: 3vw;
     }
 
     .block5-images {
       display: flex;
       flex-wrap: nowrap;
       justify-content: flex-start;
-      gap: 2vw;
       align-items: flex-start;
       width: 100%;
+      margin-left: 0;
     }
 
     .block5 img {
@@ -298,6 +299,7 @@
       object-fit: cover;
       display: block;
       border: 2px dashed red;
+      margin-right: 0;
     }
 
     @media (max-width: 768px) and (orientation: portrait) {
@@ -372,6 +374,7 @@
       .block5 img {
         width: 70vw;
         border: 2px dashed red;
+        margin-right: 0;
       }
     }
   </style>
