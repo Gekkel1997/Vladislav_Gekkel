@@ -263,15 +263,15 @@
       background-color: #e6e6e6;
       position: relative;
       margin-top: 0;
-      height: 30vh;
+      height: auto;
       border-bottom: 1px solid #000;
       box-sizing: border-box;
-      padding-bottom: 155vh;
+      padding: 3vh 3vw;
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      padding-left: 3vw;
-      padding-top: 1vh;
+      gap: 2vh;
     }
 
     .block5-text {
@@ -280,6 +280,24 @@
       color: #000;
       font-family: 'Oswald', sans-serif;
       text-align: left;
+    }
+
+    .block5-images {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 2vw;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .block5 img {
+      width: 25vw;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      border: 2px dashed red;
     }
 
     @media (max-width: 768px) and (orientation: portrait) {
@@ -350,6 +368,11 @@
         font-size: 3.5vh;
         text-align: left;
       }
+
+      .block5 img {
+        width: 70vw;
+        border: 2px dashed red;
+      }
     }
   </style>
 </head>
@@ -418,6 +441,11 @@
 
   <div class="block5">
     <div class="block5-text">ХОЛСТ И ДОРОГА ПУТНИКА..</div>
+    <div class="block5-images">
+      <img src="images/3.8.webp" alt="Холст и дорога путника">
+      <img src="images/3.4.webp" alt="Холст и дорога путника 2">
+      <img src="images/3.7.webp" alt="Холст и дорога путника 3">
+    </div>
   </div>
 </body>
 </html>
