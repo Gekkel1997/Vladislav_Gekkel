@@ -24,372 +24,59 @@
       box-sizing: border-box;
     }
 
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100vw;
-      height: 10vh;
-      font-size: clamp(0.5rem, 1vw, 1.3rem);
-      margin: 0;
-      background-color: #fff;
-      z-index: 1000;
-      overflow: hidden;
-      border-bottom: 1px solid #000;
-    }
+    .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
+    .header-text { position: absolute; left: 3vw; top: 50%; transform: translateY(-50%); font-size: 1vh; font-family: 'Oswald', sans-serif; text-align: left; line-height: 1.3; font-weight: 700; }
+    .header-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-align: left; }
+    .header-text button:hover { text-decoration: underline; }
 
-    .header-text {
-      position: absolute;
-      left: 3vw;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1vh;
-      font-family: 'Oswald', sans-serif;
-      text-align: left;
-      line-height: 1.3;
-      font-weight: 700;
-    }
+    @media (min-width: 1024px) { .header-text { font-size: 2vh; } }
 
-    .header-text button {
-      background: none;
-      border: none;
-      font: inherit;
-      color: #000;
-      cursor: pointer;
-      text-align: left;
-    }
+    .subheader, .info-text { position: absolute; top: 50%; font-size: 3vh; font-family: 'Oswald', sans-serif; transform: translateY(-50%); }
+    .subheader { left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; }
+    .subheader button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
+    .subheader button:hover { text-decoration: underline; }
+    .info-text { right: 3vw; text-align: right; }
+    .info-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
+    .info-text button:hover { text-decoration: underline; }
 
-    .header-text button:hover {
-      text-decoration: underline;
-    }
+    .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
-    @media (min-width: 1024px) {
-      .header-text {
-        font-size: 2vh;
-      }
-    }
+    .block3 { position: relative; width: 100%; padding: 3vh 3vw 3vh 3vw; font-family: 'Oswald', sans-serif; color: #000; border-bottom: 1px solid #000; margin-top: 0; height: auto; min-height: 80vh; }
+    .block3-text { font-size: 4.5vh; font-weight: 400; margin-bottom: 2vh; width: 100%; text-align: left; display: flex; align-items: center; transform: translateY(-2.0vh); }
+    .block3-images { display: flex; flex-wrap: nowrap; justify-content: center; align-items: flex-start; margin-top: -2vh; gap: 1.5vw; }
+    .block3-images .art-item { display: flex; flex-direction: column; align-items: flex-start; position: relative; }
+    .block3-images img { width: 22.5vw; height: auto; aspect-ratio: 1986 / 2731; object-fit: cover; }
+    .art-description { font-size: 1.8vh; text-align: left; margin-top: 1vh; line-height: 1.4; font-family: 'Oswald', sans-serif; color: #000; }
+    .price { font-size: 2vh; font-weight: 400; text-align: right; width: 100%; margin-top: -3.6vh; font-family: 'Oswald', sans-serif; color: #000; }
 
-    .subheader, .info-text {
-      position: absolute;
-      top: 50%;
-      font-size: 3vh;
-      font-family: 'Oswald', sans-serif;
-      transform: translateY(-50%);
-    }
+    .block4 { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 1vh; padding-bottom: 3vh; border-bottom: 1px solid #000; }
+    .block4-text { font-size: 5vh; font-weight: 400; margin-bottom: 1vh; width: 100%; text-align: left; color: #000; font-family: 'Oswald', sans-serif; display: flex; align-items: center; transform: none; padding-left: 3vw; }
+    .block4 img { width: 22.5vw; height: auto; aspect-ratio: 1986 / 2731; object-fit: cover; display: block; }
+    .block4-images { display: flex; flex-wrap: nowrap; justify-content: center; gap: 1.5vw; align-items: flex-start; margin-top: 1vh; width: 100%; }
+    .vv-item { display: flex; flex-direction: column; align-items: flex-start; position: relative; }
+    .vv-description { font-size: 1.8vh; text-align: left; margin-top: 1vh; line-height: 1.4; color: #000; font-family: 'Oswald', sans-serif; }
 
-    .subheader {
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      width: auto;
-    }
-
-    .subheader button {
-      background: none;
-      border: none;
-      font: inherit;
-      color: #000;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .subheader button:hover {
-      text-decoration: underline;
-    }
-
-    .info-text {
-      right: 3vw;
-      text-align: right;
-    }
-
-    .info-text button {
-      background: none;
-      border: none;
-      font: inherit;
-      color: #000;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .info-text button:hover {
-      text-decoration: underline;
-    }
-
-    .block2 {
-      position: relative;
-      width: 100%;
-      background: none;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 2vh 3vw;
-      font-size: 1.5vh;
-      border-bottom: 1px solid #000;
-      text-transform: uppercase;
-      margin-top: 10vh;
-    }
-
-    .block3 {
-      position: relative;
-      width: 100%;
-      background: none;
-      padding: 3vh 3vw 3vh 3vw;
-      font-family: 'Oswald', sans-serif;
-      color: #000;
-      border-bottom: 1px solid #000;
-      margin-top: 0;
-      height: auto;
-      min-height: 80vh;
-    }
-
-    .block3-text {
-      font-size: 4.5vh;
-      font-weight: 400;
-      margin-bottom: 2vh;
-      width: 100%;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      transform: translateY(-2.0vh);
-    }
-
-    .block3-images {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: flex-start;
-      margin-top: -2vh;
-      gap: 1.5vw;
-    }
-
-    .block3-images .art-item {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-    }
-
-    .block3-images img {
-      width: 22.5vw;
-      height: auto;
-      aspect-ratio: 1986 / 2731;
-      object-fit: cover;
-    }
-
-    .art-description {
-      font-size: 1.8vh;
-      text-align: left;
-      margin-top: 1vh;
-      line-height: 1.4;
-      font-family: 'Oswald', sans-serif;
-      color: #000;
-    }
-
-    .price {
-      font-size: 2vh;
-      font-weight: 400;
-      text-align: right;
-      width: 100%;
-      margin-top: -3.6vh;
-      font-family: 'Oswald', sans-serif;
-      color: #000;
-    }
-
-    .block4 {
-      position: relative;
-      width: 100%;
-      background: none;
-      border-bottom: 1px solid #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 1vh;
-      padding-bottom: 3vh;
-    }
-
-    .block4-text {
-      font-size: 5vh;
-      font-weight: 400;
-      margin-bottom: 1vh;
-      width: 100%;
-      text-align: left;
-      color: #000;
-      font-family: 'Oswald', sans-serif;
-      display: flex;
-      align-items: center;
-      transform: none;
-      padding-left: 3vw;
-    }
-
-    .block4 img {
-      width: 22.5vw;
-      height: auto;
-      aspect-ratio: 1986 / 2731;
-      object-fit: cover;
-      display: block;
-    }
-
-    .block4-images {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      gap: 1.5vw;
-      align-items: flex-start;
-      margin-top: 1vh;
-      width: 100%;
-    }
-
-    .vv-item {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-    }
-
-    .vv-description {
-      font-size: 1.8vh;
-      text-align: left;
-      margin-top: 1vh;
-      line-height: 1.4;
-      color: #000;
-      font-family: 'Oswald', sans-serif;
-    }
-
-    .block5 {
-      width: 100%;
-      background-color: #e6e6e6;
-      position: relative;
-      margin-top: 0;
-      height: auto;
-      border-bottom: 1px solid #000;
-      box-sizing: border-box;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding-bottom: 70vh;
-    }
-
-    .block5-text {
-      font-size: 5vh;
-      font-weight: 400;
-      color: #000;
-      font-family: 'Oswald', sans-serif;
-      text-align: left;
-      margin: 0;
-      padding-left: 3vw;
-      margin-top: 1vh;
-    }
-
-    .block5-images {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .block5 img {
-      width: 33.3333vw;
-      aspect-ratio: 1 / 1;
-      height: auto;
-      object-fit: cover;
-      display: block;
-      border: 2px dashed red;
-      margin: 0;
-    }
-
-    .art-text {
-      font-size: 1.8vh;
-      text-align: left;
-      margin-top: 0; /* Убрали отступ сверху */
-      line-height: 1.4;
-      font-family: 'Oswald', sans-serif;
-      color: #000;
-      padding-left: 3vw;
-    }
+    .block5 { width: 100%; background-color: #e6e6e6; position: relative; margin-top: 0; height: auto; border-bottom: 1px solid #000; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-bottom: 70vh; }
+    .block5-text { font-size: 5vh; font-weight: 400; color: #000; font-family: 'Oswald', sans-serif; text-align: left; margin: 0; padding-left: 3vw; margin-top: 1vh; }
+    .block5-images { display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; width: 100%; margin: 0; padding: 0; }
+    .block5 img { width: 33.3333vw; aspect-ratio: 1 / 1; height: auto; object-fit: cover; display: block; border: 2px dashed red; margin: 0; }
+    .art-text { font-size: 1.8vh; text-align: left; margin-top: 0; line-height: 1.4; font-family: 'Oswald', sans-serif; color: #000; padding-left: 3vw; }
 
     @media (max-width: 768px) and (orientation: portrait) {
-      .block3-text {
-        font-size: 3.5vh;
-        transform: translateY(-1.7vh);
-      }
-
-      .block3-images {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
-        gap: 4vw;
-      }
-
-      .block3-images .art-item {
-        width: 45vw;
-        align-items: flex-start;
-      }
-
-      .block3-images img {
-        width: 45vw;
-        height: auto;
-      }
-
-      .art-description {
-        font-size: 1.4vh;
-      }
-
-      .price {
-        font-size: 1.6vh;
-        margin-top: -3.6vh;
-      }
-
-      .block4-images {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
-        align-items: start;
-        gap: 4vw;
-        width: 100%;
-        padding: 0 3vw;
-        margin-top: 1vh;
-      }
-
-      .block4 img {
-        width: 45vw;
-        height: auto;
-      }
-
-      .vv-description {
-        font-size: 1.4vh;
-        margin-top: 1vh;
-        text-align: left;
-        align-self: flex-start;
-      }
-
-      .block4-text {
-        font-size: 3.5vh;
-        text-align: left;
-        align-self: flex-start;
-        padding-left: 3vw;
-        transform: none;
-        margin-top: 1vh;
-      }
-
-      .block5-text {
-        font-size: 3.5vh;
-        text-align: left;
-        margin-top: 1vh;
-      }
-
-      .block5 img {
-        width: 70vw;
-        border: 2px dashed red;
-        margin: 0;
-      }
+      .block3-text { font-size: 3.5vh; transform: translateY(-1.7vh); }
+      .block3-images { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; gap: 4vw; }
+      .block3-images .art-item { width: 45vw; align-items: flex-start; }
+      .block3-images img { width: 45vw; height: auto; }
+      .art-description { font-size: 1.4vh; }
+      .price { font-size: 1.6vh; margin-top: -3.6vh; }
+      .block4-images { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; align-items: start; gap: 4vw; width: 100%; padding: 0 3vw; margin-top: 1vh; }
+      .block4 img { width: 45vw; height: auto; }
+      .vv-description { font-size: 1.4vh; margin-top: 1vh; text-align: left; align-self: flex-start; }
+      .block4-text { font-size: 3.5vh; text-align: left; align-self: flex-start; padding-left: 3vw; transform: none; margin-top: 1vh; }
+      .block5-text { font-size: 3.5vh; text-align: left; margin-top: 1vh; }
+      .block5-images { flex-direction: column; gap: 2vh; }
+      .block5 img { width: 100vw; border: 2px dashed red; margin: 0; }
+      .art-text { font-size: 1.8vh; }
     }
   </style>
 </head>
@@ -407,70 +94,29 @@
   <div class="block3">
     <div class="block3-text">ДОБРЫМ БЫТЬ НЕ СТЫДНО</div>
     <div class="block3-images">
-      <div class="art-item">
-        <img src="images/2.1.webp" alt="Artwork 1">
-        <div class="art-description">А.К.УЗЕНЮК<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
-        <div class="price">1 1994₽</div>
-      </div>
-      <div class="art-item">
-        <img src="images/2.2.webp" alt="Artwork 2">
-        <div class="art-description">А.М.ОВЕЧКИН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
-        <div class="price">1 1985₽</div>
-      </div>
-      <div class="art-item">
-        <img src="images/2.3.webp" alt="Artwork 3">
-        <div class="art-description">Г.О.ВИКТОРОВ<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
-        <div class="price">1 1996₽</div>
-      </div>
-      <div class="art-item">
-        <img src="images/2.4.webp" alt="Artwork 4">
-        <div class="art-description">А.Т.МОРГЕНШТЕРН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
-        <div class="price">1 1998₽</div>
-      </div>
+      <div class="art-item"><img src="images/2.1.webp" alt="Artwork 1"><div class="art-description">А.К.УЗЕНЮК<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div><div class="price">1 1994₽</div></div>
+      <div class="art-item"><img src="images/2.2.webp" alt="Artwork 2"><div class="art-description">А.М.ОВЕЧКИН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div><div class="price">1 1985₽</div></div>
+      <div class="art-item"><img src="images/2.3.webp" alt="Artwork 3"><div class="art-description">Г.О.ВИКТОРОВ<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div><div class="price">1 1996₽</div></div>
+      <div class="art-item"><img src="images/2.4.webp" alt="Artwork 4"><div class="art-description">А.Т.МОРГЕНШТЕРН<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div><div class="price">1 1998₽</div></div>
     </div>
   </div>
 
   <div class="block4">
     <div class="block4-text">Коллекция 1-100 «В.В.ПУТИН»</div>
     <div class="block4-images">
-      <div class="vv-item">
-        <img src="images/VV1.webp" alt="Artwork VV1">
-        <div class="vv-description">В.В.ПУТИН №1<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2024г.<br>Стекло 21х30</div>
-        <div class="price">11 1952₽</div>
-      </div>
-      <div class="vv-item">
-        <img src="images/VV4.webp" alt="Artwork VV4">
-        <div class="vv-description">В.В.ПУТИН №4<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
-        <div class="price">5000₽</div>
-      </div>
-      <div class="vv-item">
-        <img src="images/VV6.webp" alt="Artwork VV6">
-        <div class="vv-description">В.В.ПУТИН №6<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
-        <div class="price">5000₽</div>
-      </div>
-      <div class="vv-item">
-        <img src="images/VV8.webp" alt="Artwork VV8">
-        <div class="vv-description">В.В.ПУТИН №8<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div>
-        <div class="price">5000₽</div>
-      </div>
+      <div class="vv-item"><img src="images/VV1.webp" alt="Artwork VV1"><div class="vv-description">В.В.ПУТИН №1<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2024г.<br>Стекло 21х30</div><div class="price">11 1952₽</div></div>
+      <div class="vv-item"><img src="images/VV4.webp" alt="Artwork VV4"><div class="vv-description">В.В.ПУТИН №4<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div><div class="price">5000₽</div></div>
+      <div class="vv-item"><img src="images/VV6.webp" alt="Artwork VV6"><div class="vv-description">В.В.ПУТИН №6<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div><div class="price">5000₽</div></div>
+      <div class="vv-item"><img src="images/VV8.webp" alt="Artwork VV8"><div class="vv-description">В.В.ПУТИН №8<br>КОЛЛЕКЦИЯ 1-100<br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21х30</div><div class="price">5000₽</div></div>
     </div>
   </div>
 
   <div class="block5">
     <div class="block5-text">ХОЛСТ И ДОРОГА ПУТНИКА..</div>
     <div class="block5-images">
-      <div class="art-item">
-        <img src="images/3.8.webp" alt="Холст и дорога путника">
-        <div class="art-text">Майк Вазовский<br>Россия, Акрил, 2025г.<br>Холст 40х40</div>
-      </div>
-      <div class="art-item">
-        <img src="images/3.4.webp" alt="Холст и дорога путника 2">
-        <div class="art-text">Сода ГОСТ 32802-2014<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
-      </div>
-      <div class="art-item">
-        <img src="images/3.7.webp" alt="Холст и дорога путника 3">
-        <div class="art-text">EMOJI<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
-      </div>
+      <div class="art-item"><img src="images/3.8.webp" alt="Холст и дорога путника"><div class="art-text">Майк Вазовский<br>Россия, Акрил, 2025г.<br>Холст 40х40</div></div>
+      <div class="art-item"><img src="images/3.4.webp" alt="Холст и дорога путника 2"><div class="art-text">Сода ГОСТ 32802-2014<br>Россия, Акрил, 2024г.<br>Холст 40х40</div></div>
+      <div class="art-item"><img src="images/3.7.webp" alt="Холст и дорога путника 3"><div class="art-text">EMOJI<br>Россия, Акрил, 2024г.<br>Холст 40х40</div></div>
     </div>
   </div>
 </body>
