@@ -19,7 +19,7 @@
     @media (min-width: 1024px) { .header-text { font-size: 2vh; } }
 
     .subheader, .info-text { position: absolute; top: 50%; font-size: 3vh; font-family: 'Oswald', sans-serif; transform: translateY(-50%); }
-    .subheader { left: 50%; transform: translate(-50%, 0); text-align: center; width: auto; }
+    .subheader { left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; }
     .subheader button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
     .subheader button:hover { text-decoration: underline; }
     .info-text { right: 3vw; text-align: right; }
@@ -29,11 +29,11 @@
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
     .block3 { position: relative; width: 100%; padding: 3vh 3vw 3vh 3vw; font-family: 'Oswald', sans-serif; color: #000; border-bottom: 1px solid #000; margin-top: 0; height: auto; min-height: 80vh; }
-    .block3-text { font-size: 4.5vh; font-weight: 400; width: 100%; text-align: left; display: flex; align-items: center; padding-left: 0vw; margin-bottom: 0; transform: none; }
+    .block3-text { font-size: 4.5vh; font-weight: 400; margin-bottom: 2vh; width: 100%; text-align: left; display: flex; align-items: center; transform: translateY(-2.0vh); }
     .block3-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-align: left; }
     .block3-text button:hover { text-decoration: underline; }
 
-    .block3-images { display: flex; flex-wrap: nowrap; justify-content: center; align-items: flex-start; margin-top: 0; gap: 1.5vw; }
+    .block3-images { display: flex; flex-wrap: nowrap; justify-content: center; align-items: flex-start; margin-top: -2vh; gap: 1.5vw; }
     .block3-images .art-item { display: flex; flex-direction: column; align-items: flex-start; position: relative; }
     .block3-images img { width: 22.5vw; height: auto; aspect-ratio: 1986 / 2731; object-fit: cover; }
     .art-description { font-size: 1.8vh; text-align: left; margin-top: 1vh; line-height: 1.4; font-family: 'Oswald', sans-serif; color: #000; }
@@ -50,7 +50,7 @@
 
     .vv-item img { display: block; width: 22.5vw; min-width: 150px; }
 
-    .block5 { width: 100%; background-color: transparent; position: relative; margin-top: 0; height: auto; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-bottom: 2vh; border-bottom: 1px solid #000; }
+    .block5 { width: 100%; background-color: transparent; position: relative; margin-top: 0; height: auto; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-bottom: 70vh; border-bottom: 1px solid #000; padding-bottom: 2vh; }
     .block5-text { font-size: 5vh; font-weight: 400; color: #000; font-family: 'Oswald', sans-serif; text-align: left; margin: 0; padding-left: 3vw; margin-top: 1vh; }
     .block5-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-align: left; }
     .block5-text button:hover { text-decoration: underline; }
@@ -59,7 +59,7 @@
     .art-text { font-size: 1.8vh; text-align: left; margin-top: 0; line-height: 1.4; font-family: 'Oswald', sans-serif; color: #000; padding-left: 3vw; }
 
     @media (max-width: 768px) and (orientation: portrait) {
-      .block3-text { font-size: 3.5vh; transform: none; padding-left: 0vw; }
+      .block3-text { font-size: 3.5vh; transform: translateY(-1.7vh); }
       .block3-images { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; gap: 4vw; }
       .block3-images .art-item { width: 45vw; align-items: flex-start; }
       .block3-images img { width: 45vw; height: auto; }
@@ -118,3 +118,4 @@
   <script></script>
 </body>
 </html>
+
