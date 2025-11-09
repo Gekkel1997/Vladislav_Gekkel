@@ -8,7 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
-    html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      box-sizing: border-box;
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+      font-family: 'Oswald', sans-serif;
+    }
+
     * { box-sizing: border-box; }
 
     .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
@@ -43,9 +54,6 @@
     .vv-item { display: flex; flex-direction: column; align-items: flex-start; position: relative; }
     .vv-description { font-size: 1.8vh; text-align: left; margin-top: 1vh; line-height: 1.4; color: #000; font-family: 'Oswald', sans-serif; }
 
-    /* FIX VV1 visibility on desktop */
-    .vv-item img { display: block; width: 22.5vw; min-width: 150px; }
-
     .block5 { width: 100%; background-color: transparent; position: relative; margin-top: 0; height: auto; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-bottom: 70vh; border-bottom: 1px solid #000; border-bottom-width: 1px; border-bottom-style: solid; padding-bottom: 2vh; }
     .block5-text { font-size: 5vh; font-weight: 400; color: #000; font-family: 'Oswald', sans-serif; text-align: left; margin: 0; padding-left: 3vw; margin-top: 1vh; }
     .block5-images { display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; width: 100%; margin: 0; padding: 0; }
@@ -73,7 +81,7 @@
 </head>
 <body>
   <div class="header">
-    <div class="header-text"><button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksандровich</strong></button></div>
+    <div class="header-text"><button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></button></div>
     <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
     <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
   </div>
@@ -112,3 +120,4 @@
   <script></script>
 </body>
 </html>
+
