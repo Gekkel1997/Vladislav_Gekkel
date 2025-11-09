@@ -49,15 +49,15 @@
 
     .block4 { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 1vh; padding-bottom: 3vh; border-bottom: 1px solid #000; }
     .block4-text { font-size: 5vh; font-weight: 400; margin-bottom: 1vh; width: 100%; text-align: left; color: #000; font-family: 'Oswald', sans-serif; display: flex; align-items: center; transform: none; padding-left: 3vw; }
-    .block4 img { width: 22.5vw; height: auto; aspect-ratio: 1986 / 2731; object-fit: cover; display: block; }
+    .block4 img { width: 22.5vw; height: auto; aspect-ratio: 1986 / 2731; object-fit: cover; display: block; border: none; }
     .block4-images { display: flex; flex-wrap: nowrap; justify-content: center; gap: 1.5vw; align-items: flex-start; margin-top: 1vh; width: 100%; }
     .vv-item { display: flex; flex-direction: column; align-items: flex-start; position: relative; }
     .vv-description { font-size: 1.8vh; text-align: left; margin-top: 1vh; line-height: 1.4; color: #000; font-family: 'Oswald', sans-serif; }
 
-    .block5 { width: 100%; background-color: transparent; position: relative; margin-top: 0; height: auto; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-bottom: 70vh; border-bottom: 1px solid #000; border-bottom-width: 1px; border-bottom-style: solid; }
+    .block5 { width: 100%; background-color: transparent; position: relative; margin-top: 0; height: auto; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-bottom: 70vh; border-bottom: 1px solid #000; border-bottom-width: 1px; border-bottom-style: solid; padding-bottom: 2vh; }
     .block5-text { font-size: 5vh; font-weight: 400; color: #000; font-family: 'Oswald', sans-serif; text-align: left; margin: 0; padding-left: 3vw; margin-top: 1vh; }
     .block5-images { display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; width: 100%; margin: 0; padding: 0; }
-    .block5 img { width: 33.3333vw; aspect-ratio: 1 / 1; height: auto; object-fit: cover; display: block; border: 2px dashed red; margin: 0; }
+    .block5 img { width: 33.3333vw; aspect-ratio: 1 / 1; height: auto; object-fit: cover; display: block; border: none; margin: 0; }
     .art-text { font-size: 1.8vh; text-align: left; margin-top: 0; line-height: 1.4; font-family: 'Oswald', sans-serif; color: #000; padding-left: 3vw; }
 
     @media (max-width: 768px) and (orientation: portrait) {
@@ -68,12 +68,12 @@
       .art-description { font-size: 1.4vh; }
       .price { font-size: 1.6vh; margin-top: -3.6vh; }
       .block4-images { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; align-items: start; gap: 4vw; width: 100%; padding: 0 3vw; margin-top: 1vh; }
-      .block4 img { width: 45vw; height: auto; }
+      .block4 img { width: 45vw; height: auto; border: none; }
       .vv-description { font-size: 1.4vh; margin-top: 1vh; text-align: left; align-self: flex-start; }
       .block4-text { font-size: 3.5vh; text-align: left; align-self: flex-start; padding-left: 3vw; transform: none; margin-top: 1vh; }
       .block5-text { font-size: 3.5vh; text-align: left; margin-top: 1vh; }
       .block5-images { flex-direction: column; gap: 0; }
-      .block5 img { width: 100vw; border: 2px dashed red; margin-bottom: 0.5vh; }
+      .block5 img { width: 100vw; border: none; margin-bottom: 0; }
       .art-text { font-size: 1.8vh; margin-top: 0; }
       .block5 { border-bottom: 1px solid #000; padding-bottom: 2vh; }
     }
@@ -111,10 +111,12 @@
   <div class="block5">
     <div class="block5-text">ХОЛСТ И ДОРОГА ПУТНИКА..</div>
     <div class="block5-images">
-      <div class="art-item"><img src="images/3.8.webp" alt="Холст и дорога путника"><div class="art-text">Майк Вазовский<br>Россия, Акрил, 2025г.<br>Холст 40х40</div></div>
+      <div class="art-item"><img src="images/3.8.webp" alt="Холст и дорога путника"><div class="art-text" style="margin-top:0;">Майк Вазовский<br>Россия, Акрил, 2025г.<br>Холст 40х40</div></div>
       <div class="art-item"><img src="images/3.4.webp" alt="Холст и дорога путника 2"><div class="art-text">Сода ГОСТ 32802-2014<br>Россия, Акрил, 2024г.<br>Холст 40х40</div></div>
       <div class="art-item"><img src="images/3.7.webp" alt="Холст и дорога путника 3"><div class="art-text">EMOJI<br>Россия, Акрил, 2024г.<br>Холст 40х40</div></div>
     </div>
   </div>
+
+  <script></script>
 </body>
 </html>
