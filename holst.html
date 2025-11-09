@@ -28,9 +28,11 @@
 
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
-    .image-container { width: 50vw; display: flex; flex-direction: column; justify-content: flex-start; margin: 0; border: 1px dashed blue; padding: 0; }
-    .image-container img { width: 100%; height: auto; display: block; margin: 0; }
+    .image-container { width: 50vw; display: flex; flex-direction: column; justify-content: flex-start; margin: 0; border: 1px dashed blue; padding: 0; position: relative; }
+    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; }
     .divider { position: relative; left: 0; width: 100vw; height: 1px; background-color: #000; margin: 0; }
+
+    .image-text { position: absolute; top: 50%; transform: translateY(-50%); right: -50vw; width: 50vw; padding: 1vh 2vw; font-size: 1.5vh; line-height: 1.4; }
   </style>
 </head>
 <body>
@@ -44,54 +46,67 @@
 
   <div class="image-container">
     <img src="images/3.1.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.1">
+    <div class="image-text">Борода - картина с историей<br>Россия, Акрил, 2024г.<br>Холст 66,6х66,6</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.2.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.2">
+    <div class="image-text">Носок №1 «BALENCIAGA»<br>Россия, Акрил, 2025г.<br>Холст 20х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.3.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.3">
+    <div class="image-text">Носок №2 «BALENCIAGA»<br>Россия, Акрил, 2025г.<br>Холст 20х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.4.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.4">
+    <div class="image-text">Сода ГОСТ 32802-2014 <br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.5.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.5">
+    <div class="image-text">Соль ГОСТ Р 51574-2000<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.6.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.6">
+    <div class="image-text">Беломорканал<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.7.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.7">
+    <div class="image-text">EMOJI<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.8.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.8">
+    <div class="image-text">Майк Вазовский<br>Россия, Акрил, 2025г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.9.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.9">
+    <div class="image-text">Барт Симпсон - старость<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.10.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.10">
+    <div class="image-text">Клоун Красти<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.11.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.11">
+    <div class="image-text">Мэйбл Пайнс<br>Россия, Акрил, 2024г.<br>Холст 40х40</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.12.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.12">
+    <div class="image-text">Арнольд, будь моим Валентином<br>или я тебе врежу!<br>Россия, Акрил, 2024г.<br>Холст 30х30</div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
     <img src="images/3.13.webp" alt="ХОЛСТ И ДОРОГА ПУТНИКА 3.13">
+    <div class="image-text">Арнольд, будь моим Валентином<br>или я тебе врежу!<br>Россия, Акрил, 2024г.<br>Холст 30х30</div>
     <div class="divider"></div>
   </div>
 
