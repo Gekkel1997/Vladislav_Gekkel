@@ -30,16 +30,17 @@
 
     .image-container { width: 50vw; display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; }
     .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; }
-    .divider { position: relative; left: 0; width: 100vw; height: 1px; background-color: #000; margin: 0; }
+    .divider { width: 100vw; position: relative; left: 0; height: 1px; background-color: #000; margin: 0; }
 
     .image-text { position: absolute; top: 50%; transform: translateY(-50%); right: -50vw; width: 50vw; padding: 1vh 2vw; font-size: 2.3vh; line-height: 1.4; }
     .image-text.large { font-size: 2.3vh; }
 
     @media (max-width: 768px) {
       .image-container { width: 100vw; }
-      .image-container img { width: 100vw; }
+      .image-container img { width: 100vw; aspect-ratio: 2 / 3; object-fit: cover; object-position: center; }
       .image-text { right: 0; width: 100vw; padding: 0 4vw 0 4vw; font-size: 1.8vh; position: relative; transform: none; top: auto; }
       .image-text.large { width: 100vw; position: relative; top: auto; transform: none; padding-bottom: 0; font-size: 1.8vh; }
+      .divider { width: 100vw; }
     }
   </style>
 </head>
@@ -117,7 +118,7 @@
     <div class="image-text">В.Р.ЦОЙ<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30<br><br>5 000₽</div>
     <div class="divider"></div>
   </div>
-    <div class="image-container">
+  <div class="image-container">
     <img src="images/1.13.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 13">
     <div class="image-text">А.Т.МОРГЕНШТЕ́РН<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30<br><br>10 000₽</div>
     <div class="divider"></div>
@@ -167,7 +168,7 @@
     <div class="image-text">ТО́ММИ КЭШ<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30<br><br>5 000₽</div>
     <div class="divider"></div>
   </div>
-    <div class="image-container">
+  <div class="image-container">
     <img src="images/1.23.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 23">
     <div class="image-text">МОРИА́РТИ<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30<br><br>5 000₽</div>
     <div class="divider"></div>
