@@ -37,7 +37,8 @@
 
     @media (max-width: 768px) {
       .image-container { width: 100vw; }
-      .image-container img { width: 100vw; aspect-ratio: 5 / 7; object-fit: cover; object-position: center; }
+      .image-block img { aspect-ratio: auto; object-fit: contain; }
+      .image-container img:not(.image-block img) { aspect-ratio: 5 / 7; object-fit: cover; object-position: center; }
       .image-text { right: 0; width: 100vw; padding: 0 4vw 0 4vw; font-size: 1.8vh; position: relative; transform: none; top: auto; }
       .image-text.large { width: 100vw; position: relative; top: auto; transform: none; padding-bottom: 0; font-size: 1.8vh; }
       .divider { width: 100vw; }
@@ -53,11 +54,15 @@
 
   <div class="block2">COLLECTIONS ▼</div>
 
-  <div class="image-container">
-    <img src="images/1.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 01">
-    <div class="image-text large">*ИНОСТРАННЫЙ АГЕНТ 2024<br><br>РОССИЯ<br>АКРИЛ, ХОЛСТ 70 х 70<br><br>140 000₽</div>
+  <!-- Первый блок с изображением 1 -->
+  <div class="image-block">
+    <div class="image-container">
+      <img src="images/1.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 01">
+      <div class="image-text large">*ИНОСТРАННЫЙ АГЕНТ 2024<br><br>РОССИЯ<br>АКРИЛ, ХОЛСТ 70 х 70<br><br>140 000₽</div>
+    </div>
     <div class="divider"></div>
   </div>
+
   <div class="image-container">
     <img src="images/1.0.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 0">
     <div class="image-text large">К.А.СОБЧА́К<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30<br><br>140 000₽</div>
