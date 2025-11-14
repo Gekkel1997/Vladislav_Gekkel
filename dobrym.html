@@ -29,18 +29,29 @@
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
     .image-container { width: 50vw; display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; }
-    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; }
+    .image-block img { width: 100%; object-fit: contain; object-position: top; display: block; margin: 0; }
+    .image-container img:not(.image-block img) { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; }
+
     .divider { width: 100vw; position: relative; left: 0; height: 1px; background-color: #000; margin: 0; }
 
     .image-text { position: absolute; top: 50%; transform: translateY(-50%); right: -50vw; width: 50vw; padding: 1vh 2vw; font-size: 2.3vh; line-height: 1.4; }
     .image-text.large { font-size: 2.3vh; }
 
+    .top-text { width: 40vw; text-align: right; font-size: 2vh; padding: 1vh 2vw; margin-bottom: 1vh; position: absolute; right: 0; z-index: 2; }
+
+    /* Только десктоп: поднять контейнер с изображением 1 к верху блока */
+    @media (min-width: 1024px) {
+      .image-block .image-container { position: relative; top: 0; }
+    }
+
     @media (max-width: 768px) {
       .image-container { width: 100vw; }
-      .image-block img { aspect-ratio: auto; object-fit: contain; }
+      .image-block img { aspect-ratio: auto; object-fit: contain; object-position: center; }
       .image-container img:not(.image-block img) { aspect-ratio: 5 / 7; object-fit: cover; object-position: center; }
+      .image-block .image-text { position: relative; top: -2rem; transform: none; margin-bottom: 1rem; }
       .image-text { right: 0; width: 100vw; padding: 0 4vw 0 4vw; font-size: 1.8vh; position: relative; transform: none; top: auto; }
       .image-text.large { width: 100vw; position: relative; top: auto; transform: none; padding-bottom: 0; font-size: 1.8vh; }
+      .top-text { width: 100vw; text-align: right; padding: 0 4vw; font-size: 1.8vh; margin-bottom: 1vh; position: relative; right: 0; }
       .divider { width: 100vw; }
     }
   </style>
@@ -56,6 +67,12 @@
 
   <!-- Первый блок с изображением 1 -->
   <div class="image-block">
+    <div class="top-text">
+      СЕРИЯ «ДОБРЫМ БЫТЬ НЕ СТЫДНО» НЕСЕТ<br>БЛАГОТВОРИТЕЛЬНЫЙ ХАРАКТЕР..<br>
+      ПУТИ К ОБЪЕДИНЕНИЮ, КОТОРОЕ ДАРИТ СВЕТ И ДОБРО МОЕГО МИРОВОЗЗРЕНИЯ..<br><br>
+      ПУТЬ МОЕГО ВДОХНОВЕНИЯ, ЭНЕРГЕТИКИ И ШЕПОТОВ ВНУТРЕННИХ<br>ГОЛОСОВ С САМИМ СОБОЙ.<br><br>
+      начало..
+    </div>
     <div class="image-container">
       <img src="images/1.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 01">
       <div class="image-text large">*ИНОСТРАННЫЙ АГЕНТ 2024<br><br>РОССИЯ<br>АКРИЛ, ХОЛСТ 70 х 70<br><br>140 000₽</div>
