@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>INFO — Gekkel Vladislav Aleksandrovich</title>
+  <title>Gekkel Vladislav Aleksandrovich</title>
   <link rel="icon" type="image/png" href="https://i.postimg.cc/P57BSL6r/IMG-4274-1.png">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
@@ -116,6 +116,200 @@
     .info-text button:hover {
       text-decoration: underline;
     }
+
+    .marquee-block {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 10vh;
+      overflow-x: hidden;
+    }
+
+    .top-line {
+      height: 1px;
+      background-color: #000;
+    }
+
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 1vh;
+      width: 100%;
+    }
+
+    .marquee-text {
+      display: inline-block;
+      animation: marquee 40s linear infinite;
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      will-change: transform;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-text span {
+      padding-right: 2vw;
+    }
+
+    .bottom-line-marquee {
+      height: 1px;
+      background-color: #000;
+      margin-top: 1vh;
+    }
+
+    .image-block {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid #000;
+    }
+
+    .image-a {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .image-overlay {
+      position: absolute;
+      left: 8vw;
+      bottom: 23vh;
+      height: 53%;
+      width: auto;
+    }
+
+    .text-on-image {
+      position: absolute;
+      bottom: 3vh;
+      left: 8vw;
+      display: flex;
+      flex-direction: row;
+      gap: 10vw;
+      font-size: 4vh;
+      font-family: 'Oswald', sans-serif;
+      color: #000;
+      background-color: #fff;
+      padding: 1vh 1.5vw;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      overflow-x: hidden;
+    }
+
+    .text1-block,
+    .text2-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .subtext {
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .text-4 {
+      margin: 2vh 0.2vw 0 0.2vw;
+      margin-left: 3vw;
+      width: calc(100% - 6vw);
+      font-size: 3vh;
+      line-height: 1.55;
+      font-family: 'Oswald', sans-serif;
+      overflow-wrap: break-word;
+    }
+
+    .pechat-block {
+      position: relative;
+      margin-top: 55vh;
+      width: 100%;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .text-5 {
+      position: absolute;
+      right: calc(15vw + 2vh);
+      bottom: 3vh;
+      text-align: right;
+      font-size: 2.4vh;
+      line-height: 1.4;
+    }
+
+    .text-5 strong {
+      font-weight: 700;
+    }
+
+    .image-c {
+      position: absolute;
+      right: 3vh;
+      bottom: 3vh;
+      width: 12vw;
+      height: auto;
+    }
+
+    .bottom-line {
+      width: 65%;
+      height: 1px;
+      background-color: #000;
+      margin-left: 0;
+      margin-top: 3vh;
+    }
+
+    @media (max-width: 600px) and (orientation: portrait) {
+      .subheader, .info-text {
+        font-size: calc(3vh - 0.2vh);
+      }
+
+      .marquee-text {
+        font-size: clamp(0.8rem, 4vw, 1.2rem);
+      }
+
+      .image-overlay {
+        left: 5vw;
+        bottom: 8vh;
+        height: 45%;
+      }
+
+      .text-on-image {
+        font-size: 1.3vh;
+        gap: 8vw;
+        left: 5vw;
+        bottom: 1vh;
+        padding: 0.4vh 0.8vw;
+      }
+
+      .subtext {
+        font-size: 1.3vh;
+      }
+
+      .text-4 {
+        font-size: 1.5vh;
+        margin-top: 0.5vh;
+        margin-left: 5vw;
+        width: calc(100% - 5vw - 0.2vw);
+      }
+
+      .pechat-block {
+        margin-top: 12vh;
+      }
+
+      .text-5 {
+        font-size: 1.2vh;
+        right: calc(20vw + 1vh);
+      }
+
+      .image-c {
+        width: 16vw;
+        right: 2vh;
+        bottom: 3vh;
+      }
+
+      .bottom-line {
+        width: 60%;
+        margin-top: 2.6vh;
+      }
+    }
   </style>
 </head>
 
@@ -127,5 +321,55 @@
     <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
     <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
   </div>
+
+  <div class="marquee-block">
+    <div class="top-line"></div>
+    <div class="marquee-container">
+      <div class="marquee-text">
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      </div>
+    </div>
+    <div class="bottom-line-marquee"></div>
+  </div>
+
+  <div class="image-block">
+    <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
+    <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
+    <div class="text-on-image">
+      <div class="text1-block">
+        <div class="text1">Родился:</div>
+        <div class="subtext">Россия /<br>Липецк</div>
+      </div>
+      <div class="text2-block">
+        <div class="text2">Родители:</div>
+        <div class="subtext">Фролов Александр /<br>Геккель Марина</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-4">
+    Владислав Геккель - мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы 
+    создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески. 
+    Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
+  </div>
+
+  <div class="pechat-block">
+    <div class="text-5">
+      <span>Фролов Владислав Александрович</span><br>
+      <strong>02 / 02 / 1997</strong>
+    </div>
+    <img class="image-c" src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="C">
+    <div class="bottom-line"></div>
+  </div>
 </body>
 </html>
+
