@@ -230,7 +230,7 @@
     .text-5 {
       position: absolute;
       right: calc(15vw + 2vh);
-      bottom: 3vh;
+      bottom: 0.5vh;
       text-align: right;
       font-size: 2.4vh;
       line-height: 1.4;
@@ -243,73 +243,17 @@
     .image-c {
       position: absolute;
       right: 3vh;
-      bottom: 3vh;
+      bottom: 0.5vh;
       width: 12vw;
       height: auto;
     }
 
     .bottom-line {
-      width: 100vw;
+      width: 100%;
       height: 1px;
       background-color: #000;
       margin-left: 0;
       margin-top: 3vh;
-    }
-
-    .after-bottom-block {
-      width: 100vw;
-      background-color: #f0f0f0;
-      position: relative;
-      margin-top: 0;
-      height: auto;
-      min-height: calc(1px + 1vh + 2.6vh + 4vh); /* такая же высота, как блок с бегущей строкой */
-    } {
-      width: 100vw;
-      background-color: #f0f0f0;
-      position: relative;
-      margin-top: 0;
-      padding-bottom: 10vh; /* блок растягивается до линии */
-    } {
-      width: 100vw;
-      background-color: #f0f0f0;
-      position: relative;
-      margin-top: 0; /* блок начинается впритык к предыдущему */
-      height: calc(6vh); /* высота блока определяется расстоянием от верхнего блока до линии */
-    }
-
-    .after-bottom-block::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: #000;
-      margin-top: 4vh; /* линия с отступом 4vh от верхнего края блока */
-    } {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: #000;
-      margin-top: 1vh; /* такой же отступ, как в блоке с бегущей строкой */
-    } {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #000;
-      margin-top: 15vh; /* линия опущена на 15vh */
-    }
-
-    .after-bottom-block::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #000;
     }
 
     @media (max-width: 600px) and (orientation: portrait) {
@@ -353,17 +297,17 @@
       .text-5 {
         font-size: 1.2vh;
         right: calc(20vw + 1vh);
-        bottom: 1.5vh;
+        bottom: 1vh;
       }
 
       .image-c {
         width: 16vw;
         right: 2vh;
-        bottom: 1.5vh;
+        bottom: 1vh;
       }
 
       .bottom-line {
-        width: 100vw;
+        width: 100%;
         margin-top: 2.6vh;
       }
     }
@@ -419,7 +363,7 @@
     Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
   </div>
 
-    <div class="pechat-block">
+  <div class="pechat-block">
     <div class="text-5">
       <span>Фролов Владислав Александрович</span><br>
       <strong>02 / 02 / 1997</strong>
@@ -427,8 +371,5 @@
     <img class="image-c" src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="C">
     <div class="bottom-line"></div>
   </div>
-
-  <div class="after-bottom-block"></div>
 </body>
 </html>
-
