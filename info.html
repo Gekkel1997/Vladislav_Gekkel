@@ -299,17 +299,31 @@
     .block-8 {
       width: 100%;
       height: auto;
-      margin-top: 0; /* убран отступ между Блоком 7 и изображением */
+      margin-top: 0;
       overflow: hidden;
+      position: relative;
     }
 
-    .block-8 img {
+    .desktop-fon {
+      display: block;
       width: 100%;
       height: auto;
-      display: block;
+    }
+
+    .mobile-fon {
+      display: none;
+      width: 100%;
+      height: auto;
     }
 
     @media (max-width: 600px) and (orientation: portrait) {
+      .desktop-fon {
+        display: none;
+      }
+      .mobile-fon {
+        display: block;
+      }
+
       .subheader, .info-text {
         font-size: calc(3vh - 0.2vh);
       }
@@ -399,16 +413,6 @@
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
-        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
       </div>
     </div>
     <div class="bottom-line-marquee"></div>
@@ -460,7 +464,8 @@
   </div>
 
   <div class="block-8">
-    <img src="images/fon.webp" alt="Фон">
+    <img class="desktop-fon" src="images/fon22.webp" alt="Фон для десктопа">
+    <img class="mobile-fon" src="images/fon.webp" alt="Фон для мобильных">
   </div>
 </body>
 </html>
