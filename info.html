@@ -263,7 +263,7 @@
       margin-top: 4vh;
     }
 
-    .block-6 {
+    .block-6, .block-7 {
       width: 100%;
       background-color: #f2f2f2;
       border-bottom: 1px solid #000;
@@ -272,20 +272,27 @@
       padding: 1vh 0;
     }
 
-    .block-6-buttons {
+    .block-6-buttons, .block-7-buttons {
       display: flex;
       justify-content: center;
       gap: 2vw;
       flex-wrap: wrap;
     }
 
-    .block-6-buttons button {
+    .block-6-buttons button, .block-7-buttons button {
       background: none;
       border: none;
       font: Arial, sans-serif;
       font-size: 2vh;
       cursor: pointer;
       text-align: center;
+      color: #000;
+    }
+
+    .block-7-text {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 2vh;
       color: #000;
     }
 
@@ -344,10 +351,14 @@
         margin-top: 2.6vh;
       }
 
-      .block-6-buttons button {
+      .block-6-buttons button, .block-7-buttons button {
         font-size: 1.2vh;
         font-family: Arial, sans-serif;
         color: #000;
+      }
+
+      .block-7-text {
+        font-size: 1.2vh;
       }
     }
   </style>
@@ -355,7 +366,7 @@
 <body>
   <div class="header">
     <div class="header-text">
-      <button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></button>
+      <button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksандрович</strong></button>
     </div>
     <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
     <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
@@ -365,6 +376,7 @@
     <div class="top-line"></div>
     <div class="marquee-container">
       <div class="marquee-text">
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
@@ -423,6 +435,10 @@
       <button>Политика конфиденциальности</button>
       <button>Условия обслуживания</button>
     </div>
+  </div>
+
+  <div class="block-7">
+    <div class="block-7-text">© 2025 Владислав Геккель. Все права защищены.</div>
   </div>
 </body>
 </html>
