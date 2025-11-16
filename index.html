@@ -256,6 +256,39 @@
       margin-top: 3vh;
     }
 
+    .final-line {
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      margin-top: 4vh;
+    }
+
+    .block-6 {
+      width: 100%;
+      background-color: #f2f2f2;
+      border-bottom: 1px solid #000;
+      margin-top: 0;
+      height: auto;
+      padding: 1vh 0;
+    }
+
+    .block-6-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2vw;
+      flex-wrap: wrap;
+    }
+
+    .block-6-buttons button {
+      background: none;
+      border: none;
+      font: Arial, sans-serif;
+      font-size: 2vh;
+      cursor: pointer;
+      text-align: center;
+      color: #000;
+    }
+
     @media (max-width: 600px) and (orientation: portrait) {
       .subheader, .info-text {
         font-size: calc(3vh - 0.2vh);
@@ -310,10 +343,15 @@
         width: 100%;
         margin-top: 2.6vh;
       }
+
+      .block-6-buttons button {
+        font-size: 1.2vh;
+        font-family: Arial, sans-serif;
+        color: #000;
+      }
     }
   </style>
 </head>
-
 <body>
   <div class="header">
     <div class="header-text">
@@ -327,6 +365,10 @@
     <div class="top-line"></div>
     <div class="marquee-container">
       <div class="marquee-text">
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
         <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
@@ -371,6 +413,16 @@
     <img class="image-c" src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="C">
     <div class="bottom-line"></div>
   </div>
+
+  <div class="block-6">
+    <div class="block-6-buttons">
+      <button>Часто задаваемые вопросы</button>
+      <button>Политика доставки</button>
+      <button>Политика возврата</button>
+      <button>Контакт</button>
+      <button>Политика конфиденциальности</button>
+      <button>Условия обслуживания</button>
+    </div>
+  </div>
 </body>
 </html>
-
