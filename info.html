@@ -8,72 +8,170 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
-    /* ... предыдущие стили ... */
-
-    .block-8 {
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      box-sizing: border-box;
+      overflow-x: hidden;
       width: 100%;
-      height: auto;
-      margin-top: 0;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 2vh;
-      padding: 2vh 0;
-      background-color: #f9f9f9;
+      max-width: 100%;
+      font-family: 'Oswald', sans-serif;
     }
+    * { box-sizing: border-box; }
 
-    .desktop-fon, .mobile-fon {
-      width: 90%;
-      max-width: 1200px;
-      border-radius: 1vh;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+    .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
+    .header-text { position: absolute; left: 3vw; top: 50%; transform: translateY(-50%); font-size: 1vh; font-family: 'Oswald', sans-serif; text-align: left; line-height: 1.3; font-weight: 700; }
+    .header-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-align: left; }
+    .header-text button:hover { text-decoration: underline; }
 
-    .inst-button, .tg-button {
-      width: 30%;
-      height: 30%;
-      margin: 1vh;
-    }
+    @media (min-width: 1024px) { .header-text { font-size: 2vh; } }
 
-    .inst-button img, .tg-button img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+    .subheader, .info-text { position: absolute; top: 50%; font-size: 3vh; font-family: 'Oswald', sans-serif; transform: translateY(-50%); }
+    .subheader { left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; }
+    .subheader button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
+    .subheader button:hover { text-decoration: underline; }
+
+    .info-text { right: 3vw; text-align: right; }
+    .info-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
+    .info-text button:hover { text-decoration: underline; }
+
+    .marquee-block { display: flex; flex-direction: column; width: 100%; margin-top: 10vh; overflow-x: hidden; }
+    .top-line { height: 1px; background-color: transparent; }
+    .marquee-container { overflow: hidden; white-space: nowrap; margin-top: 1vh; width: 100%; }
+    .marquee-text { display: inline-block; animation: marquee 40s linear infinite; font-size: clamp(1.5rem, 4vw, 2.6rem); text-transform: uppercase; letter-spacing: 0.05em; will-change: transform; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-text span { padding-right: 2vw; }
+    .bottom-line-marquee { height: 1px; background-color: transparent; margin-top: 1vh; }
+
+    .image-block { position: relative; width: 100%; overflow: hidden; border-top: 1px solid #000; }
+    .image-a { width: 100%; height: auto; display: block; }
+    .image-overlay { position: absolute; left: 8vw; bottom: 23vh; height: 53%; width: auto; }
+
+    .text-on-image { position: absolute; bottom: 3vh; left: 8vw; display: flex; flex-direction: row; gap: 10vw; font-size: 4vh; font-family: 'Oswald', sans-serif; color: #000; background-color: #fff; padding: 1vh 1.5vw; flex-wrap: nowrap; white-space: nowrap; overflow-x: hidden; }
+    .text1-block, .text2-block { display: flex; flex-direction: column; }
+    .subtext { font-weight: 600; line-height: 1.2; }
+
+    .text-4 { margin: 2vh 0.2vw 0 0.2vw; margin-left: 3vw; width: calc(100% - 6vw); font-size: 3vh; line-height: 1.55; font-family: 'Oswald', sans-serif; overflow-wrap: break-word; }
+
+    .pechat-block { position: relative; margin-top: 55vh; width: 100%; font-family: 'Oswald', sans-serif; }
+    .text-5 { position: absolute; right: calc(15vw + 2vh); bottom: 0.2vh; text-align: right; font-size: 2.4vh; line-height: 1.4; }
+    .text-5 strong { font-weight: 700; }
+    .image-c { position: absolute; right: 3vh; bottom: 0.2vh; width: 12vw; height: auto; }
+    .bottom-line { width: 100%; height: 1px; background-color: #000; margin-left: 0; margin-top: 3vh; }
+    .final-line { width: 100%; height: 1px; background-color: #000; margin-top: 4vh; }
+
+    .block-6, .block-7 { width: 100%; background-color: transparent; border-bottom: 1px solid #000; margin-top: 0; height: auto; padding: 1vh 0; }
+    .block-6-buttons, .block-7-buttons { display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; }
+    .block-6-buttons button, .block-7-buttons button { background: none; border: none; font: Arial, sans-serif; font-size: 2vh; cursor: pointer; text-align: center; color: #000; }
+    .block-7-text { text-align: center; font-family: Arial, sans-serif; font-size: 2vh; color: #000; }
+
+    .block-8 { width: 100%; height: auto; margin-top: 0; overflow: hidden; position: relative; }
+    .desktop-fon { display: block; width: 100%; height: auto; }
+    .mobile-fon { display: none; width: 100%; height: auto; }
+
+    .inst-button { position: absolute; right: 8vw; bottom: 4vh; width: 3vw; height: auto; cursor: pointer; background: none; border: none; padding: 0; }
+    .inst-button img { width: 100%; height: auto; display: block; }
+    .tg-button { position: absolute; right: 4vw; bottom: 4vh; width: 3vw; height: auto; cursor: pointer; background: none; border: none; padding: 0; }
+    .tg-button img { width: 100%; height: auto; display: block; }
 
     @media (max-width: 600px) and (orientation: portrait) {
-      .desktop-fon {
-        display: none;
-      }
-      .mobile-fon {
-        display: block;
-      }
-
-      .inst-button, .tg-button {
-        width: 50%;
-        height: 30%;
-        margin: 1vh;
-      }
+      .desktop-fon { display: none; }
+      .mobile-fon { display: block; }
+      .inst-button, .tg-button { width: 10vw; bottom: 3vh; }
+      .subheader, .info-text { font-size: calc(3vh - 0.2vh); }
+      .marquee-text { font-size: clamp(0.8rem, 4vw, 1.2rem); }
+      .image-overlay { left: 5vw; bottom: 8vh; height: 45%; }
+      .text-on-image { font-size: 1.3vh; gap: 8vw; left: 5vw; bottom: 1vh; padding: 0.4vh 0.8vw; }
+      .subtext { font-size: 1.3vh; }
+      .text-4 { font-size: 1.5vh; margin-top: 0.5vh; margin-left: 5vw; width: calc(100% - 5vw - 0.2vw); }
+      .pechat-block { margin-top: 12vh; }
+      .text-5 { font-size: 1.2vh; right: calc(20vw + 1vh); bottom: 0.5vh; }
+      .image-c { width: 16vw; right: 2vh; bottom: 0.5vh; }
+      .bottom-line { width: 100%; margin-top: 2.6vh; }
+      .block-6-buttons button, .block-7-buttons button { font-size: 1.2vh; font-family: Arial, sans-serif; color: #000; }
+      .block-7-text { font-size: 1.2vh; }
     }
   </style>
 </head>
 <body>
-  <!-- ... предыдущие блоки ... -->
+  <div class="header">
+    <div class="header-text">
+      <button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksандрович</strong></button>
+    </div>
+    <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
+    <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
+  </div>
+
+  <div class="marquee-block">
+    <div class="top-line"></div>
+    <div class="marquee-container">
+      <div class="marquee-text">
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+        <span>КТО ТАКОЙ МРАМОРНЫЙ ГРАННИК?</span>
+      </div>
+    </div>
+    <div class="bottom-line-marquee"></div>
+  </div>
+
+  <div class="image-block">
+    <img class="image-a" src="https://i.postimg.cc/RZYrkTtb/IMG-4290-1.jpg" alt="A">
+    <img class="image-overlay" src="https://i.postimg.cc/Z5HPnfH7/IMG-4301.jpg" alt="Overlay">
+    <div class="text-on-image">
+      <div class="text1-block">
+        <div class="text1">Родился:</div>
+        <div class="subtext">Россия /<br>Липецк</div>
+      </div>
+      <div class="text2-block">
+        <div class="text2">Родители:</div>
+        <div class="subtext">Фролов Александр /<br>Геккель Марина</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-4">
+    Владислав Геккель - мраморный гранник из Санкт-Петербурга, Россия. Он использует пипетки для распределения акриловой краски по холсту, чтобы 
+    создать свои объекты, которые он затем искажает, перетаскивая краску с помощью различных инструментов, таких как палочки и расчески. 
+    Он сочетает классическое абстрактное выражение мрамора с конкретными фигурами. Это приводит к тому, что сложные узоры бритвы крутятся по холсту, когда вы смотрите на него вблизи, которые затем принимают форму портрета, когда вы делаете несколько шагов назад.
+  </div>
+
+  <div class="pechat-block">
+    <div class="text-5">
+      <span>Фролов Владислав Александрович</span><br>
+      <strong>02 / 02 / 1997</strong>
+    </div>
+    <img class="image-c" src="https://i.postimg.cc/vZLTJ53p/IMG-4164-1.png" alt="C">
+    <div class="bottom-line"></div>
+  </div>
+
+  <div class="block-6">
+    <div class="block-6-buttons">
+      <button>Часто задаваемые вопросы</button>
+      <button>Политика доставки</button>
+      <button>Политика возврата</button>
+      <button>Контакт</button>
+      <button>Политика конфиденциальности</button>
+      <button>Условия обслуживания</button>
+    </div>
+  </div>
+
+  <div class="block-7">
+    <div class="block-7-text">© 2025 Владислав Геккель. Все права защищены.</div>
+  </div>
 
   <div class="block-8">
     <img class="desktop-fon" src="images/fon22.webp" alt="Фон для десктопа">
     <img class="mobile-fon" src="images/fon.webp" alt="Фон для мобильных">
-    <div>
-      <button class="inst-button">
-        <img src="images/inst.png" alt="Instagram кнопка">
-      </button>
-      <button class="tg-button">
-        <img src="images/tg.png" alt="Telegram кнопка">
-      </button>
-    </div>
+    <button class="tg-button">
+      <img src="images/inst.png" alt="Instagram кнопка">
+    </button>
+    <button class="inst-button">
+      <img src="images/tg.png" alt="Telegram кнопка">
+    </button>
   </div>
 </body>
 </html>
