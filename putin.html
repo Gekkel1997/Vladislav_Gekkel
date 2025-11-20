@@ -170,6 +170,36 @@
     }
 
     loadImagesBatch(0);
+      let touchStartX = 0;
+    let touchEndX = 0;
+
+    function handleGesture() {
+      const diffX = touchEndX - touchStartX;
+      const threshold = 50; // минимальное смещение для свайпа
+      if (Math.abs(diffX) < threshold) return;
+
+      if (diffX < 0) {
+        // свайп влево — следующее изображение
+        currentIndex = (currentIndex + 1) % images.length;
+        showModal(currentIndex);
+      } else {
+        // свайп вправо — предыдущее изображение
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showModal(currentIndex);
+      }
+    }
+
+    // только для мобильных: вешаем обработчики свайпа на модальное окно
+    modal.addEventListener('touchstart', e => {
+      if (window.innerWidth > 768) return; // десктоп — игнорируем
+      touchStartX = e.changedTouches[0].clientX;
+    });
+
+    modal.addEventListener('touchend', e => {
+      if (window.innerWidth > 768) return;
+      touchEndX = e.changedTouches[0].clientX;
+      handleGesture();
+    });
   </script>
 </body>
 </html>
