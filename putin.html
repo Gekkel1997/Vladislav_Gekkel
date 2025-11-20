@@ -78,7 +78,7 @@
 
     const row = document.getElementById('images-row');
 
-    function loadImagesBatch(index, batchSize = 3) {
+    function loadImagesBatch(index, batchSize = 9) {
       if (index >= images.length) return;
 
       const batch = images.slice(index, index + batchSize);
@@ -121,3 +121,4 @@
   </script>
 </body>
 </html>
+
