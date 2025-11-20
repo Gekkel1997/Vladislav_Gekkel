@@ -63,6 +63,9 @@
     .modal-content img { width: 100%; height: auto; }
     .close { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 2rem; cursor: pointer; }
     .caption { color: #fff; margin-top: 10px; }
+    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: #fff; background: rgba(0,0,0,0.3); border: none; cursor: pointer; padding: 0 10px; z-index: 10001; }
+    .prev { left: 10px; }
+    .next { right: 10px; }
   </style>
 </head>
 <body>
@@ -81,7 +84,9 @@
   <div id="modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
+      <button class="nav-btn prev">&#10094;</button>
       <img id="modal-img" src="">
+      <button class="nav-btn next">&#10095;</button>
       <div class="caption" id="modal-caption"></div>
     </div>
   </div>
@@ -97,17 +102,39 @@
     const modalImg = document.getElementById('modal-img');
     const captionText = document.getElementById('modal-caption');
     const closeBtn = document.querySelector('.close');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    let currentIndex = 0;
 
     closeBtn.onclick = () => modal.style.display = 'none';
     modal.onclick = e => { if(e.target === modal) modal.style.display = 'none'; };
 
-    function loadImagesBatch(index, batchSize = 3) {
+    function showModal(index) {
+      currentIndex = index;
+      modal.style.display = 'flex';
+      modalImg.src = images[currentIndex].src;
+      captionText.textContent = images[currentIndex].label;
+    }
+
+    prevBtn.onclick = e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showModal(currentIndex);
+    };
+
+    nextBtn.onclick = e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      showModal(currentIndex);
+    };
+
+    function loadImagesBatch(index, batchSize = 9) {
       if (index >= images.length) return;
 
       const batch = images.slice(index, index + batchSize);
       let loadedCount = 0;
 
-      batch.forEach(imgData => {
+      batch.forEach((imgData, i) => {
         const container = document.createElement('div');
         container.className = 'image-container';
 
@@ -122,12 +149,7 @@
         container.appendChild(image);
         row.appendChild(container);
 
-        // открытие модального окна по клику
-        container.onclick = () => {
-          modal.style.display = 'flex';
-          modalImg.src = image.src;
-          captionText.textContent = imgData.label;
-        };
+        container.onclick = () => showModal(index + i);
 
         image.onload = () => {
           image.style.opacity = '1';
