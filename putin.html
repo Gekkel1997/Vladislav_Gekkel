@@ -29,7 +29,7 @@
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
     .images-row { display: flex; flex-direction: row; flex-wrap: wrap; margin: 0; padding: 0; }
-    .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; }
+    .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
     .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease; }
     .image-label { text-align: center; margin-top: 0; font-size: 1.5vh; }
 
@@ -56,6 +56,13 @@
       .image-container { width: calc(100% / 3); }
       .image-container img { aspect-ratio: auto; object-fit: contain; object-position: center; }
     }
+
+    /* Модальное окно */
+    .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
+    .modal-content { position: relative; max-width: 90%; max-height: 90%; text-align: center; }
+    .modal-content img { width: 100%; height: auto; }
+    .close { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 2rem; cursor: pointer; }
+    .caption { color: #fff; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -70,15 +77,31 @@
   <div class="images-row" id="images-row">
   </div>
 
+  <!-- Модальное окно -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modal-img" src="">
+      <div class="caption" id="modal-caption"></div>
+    </div>
+  </div>
+
   <script>
     const images = [];
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 20; i++) {
       images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
     }
 
     const row = document.getElementById('images-row');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const captionText = document.getElementById('modal-caption');
+    const closeBtn = document.querySelector('.close');
 
-    function loadImagesBatch(index, batchSize = 9) {
+    closeBtn.onclick = () => modal.style.display = 'none';
+    modal.onclick = e => { if(e.target === modal) modal.style.display = 'none'; };
+
+    function loadImagesBatch(index, batchSize = 3) {
       if (index >= images.length) return;
 
       const batch = images.slice(index, index + batchSize);
@@ -98,6 +121,13 @@
 
         container.appendChild(image);
         row.appendChild(container);
+
+        // открытие модального окна по клику
+        container.onclick = () => {
+          modal.style.display = 'flex';
+          modalImg.src = image.src;
+          captionText.textContent = imgData.label;
+        };
 
         image.onload = () => {
           image.style.opacity = '1';
@@ -121,4 +151,3 @@
   </script>
 </body>
 </html>
-
