@@ -29,9 +29,28 @@
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
     .images-row { display: flex; flex-direction: row; flex-wrap: wrap; margin: 0; padding: 0; }
-    .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; }
-    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; }
+    .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; }
+    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease; }
     .image-label { text-align: center; margin-top: 0; font-size: 1.5vh; }
+
+    .loading-placeholder {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      background-color: #000;
+      border-radius: 50%;
+      animation: pulse 1s infinite;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+      100% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; }
+    }
 
     @media (max-width: 768px) {
       .image-container { width: calc(100% / 3); }
@@ -49,87 +68,40 @@
   <div class="block2">COLLECTIONS ▼</div>
 
   <div class="images-row">
-    <div class="image-container">
-      <img src="images/VP1.webp" alt="VP1" loading="lazy">
-      <div class="image-label">ВВП - 1</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP2.webp" alt="VP2" loading="lazy">
-      <div class="image-label">ВВП - 2</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP3.webp" alt="VP3" loading="lazy">
-      <div class="image-label">ВВП - 3</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP4.webp" alt="VP4" loading="lazy">
-      <div class="image-label">ВВП - 4</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP5.webp" alt="VP5" loading="lazy">
-      <div class="image-label">ВВП - 5</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP6.webp" alt="VP6" loading="lazy">
-      <div class="image-label">ВВП - 6</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP7.webp" alt="VP7" loading="lazy">
-      <div class="image-label">ВВП - 7</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP8.webp" alt="VP8" loading="lazy">
-      <div class="image-label">ВВП - 8</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP9.webp" alt="VP9" loading="lazy">
-      <div class="image-label">ВВП - 9</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP10.webp" alt="VP10" loading="lazy">
-      <div class="image-label">ВВП - 10</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP11.webp" alt="VP11" loading="lazy">
-      <div class="image-label">ВВП - 11</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP12.webp" alt="VP12" loading="lazy">
-      <div class="image-label">ВВП - 12</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP13.webp" alt="VP13" loading="lazy">
-      <div class="image-label">ВВП - 13</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP14.webp" alt="VP14" loading="lazy">
-      <div class="image-label">ВВП - 14</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP15.webp" alt="VP15" loading="lazy">
-      <div class="image-label">ВВП - 15</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP16.webp" alt="VP16" loading="lazy">
-      <div class="image-label">ВВП - 16</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP17.webp" alt="VP17" loading="lazy">
-      <div class="image-label">ВВП - 17</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP18.webp" alt="VP18" loading="lazy">
-      <div class="image-label">ВВП - 18</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP19.webp" alt="VP19" loading="lazy">
-      <div class="image-label">ВВП - 19</div>
-    </div>
-    <div class="image-container">
-      <img src="images/VP20.webp" alt="VP20" loading="lazy">
-      <div class="image-label">ВВП - 20</div>
-    </div>
-  </div>
+    <!-- Все изображения с lazy loading и пульсирующей точкой -->
+    <script>
+      const images = [];
+      for (let i = 1; i <= 20; i++) {
+        images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
+      }
+      const row = document.createElement('div');
+      row.className = 'images-row';
+      images.forEach(img => {
+        const container = document.createElement('div');
+        container.className = 'image-container';
 
+        const placeholder = document.createElement('div');
+        placeholder.className = 'loading-placeholder';
+        container.appendChild(placeholder);
+
+        const image = document.createElement('img');
+        image.src = img.src;
+        image.alt = img.label;
+        image.loading = 'lazy';
+        image.onload = () => {
+          image.style.opacity = '1';
+          placeholder.style.display = 'none';
+        };
+        container.appendChild(image);
+
+        const label = document.createElement('div');
+        label.className = 'image-label';
+        label.textContent = img.label;
+        container.appendChild(label);
+
+        row.appendChild(container);
+      });
+      document.body.appendChild(row);
+    </script>
 </body>
 </html>
