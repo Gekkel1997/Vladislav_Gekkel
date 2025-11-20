@@ -97,6 +97,33 @@
       images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
     }
 
+    // заменяем изображение для VP1 в модальном окне на VV1
+    const vvMap = {
+      0: { src: 'images/VV1.webp', label: 'VV1' },
+      1: { src: 'images/VV2.webp', label: 'VV2' },
+      2: { src: 'images/VV3.webp', label: 'VV3' },
+      3: { src: 'images/VV4.webp', label: 'VV4' },
+      4: { src: 'images/VV5.webp', label: 'VV5' },
+      5: { src: 'images/VV6.webp', label: 'VV6' },
+      6: { src: 'images/VV7.webp', label: 'VV7' },
+      7: { src: 'images/VV8.webp', label: 'VV8' },
+      8: { src: 'images/VV9.webp', label: 'VV9' },
+      9: { src: 'images/VV10.webp', label: 'VV10' },
+      10: { src: 'images/VV11.webp', label: 'VV11' },
+      11: { src: 'images/VV12.webp', label: 'VV12' },
+      12: { src: 'images/VV13.webp', label: 'VV13' },
+      13: { src: 'images/VV14.webp', label: 'VV14' },
+      14: { src: 'images/VV15.webp', label: 'VV15' },
+      15: { src: 'images/VV16.webp', label: 'VV16' },
+      16: { src: 'images/VV17.webp', label: 'VV17' },
+      17: { src: 'images/VV18.webp', label: 'VV18' },
+      18: { src: 'images/VV19.webp', label: 'VV19' },
+      19: { src: 'images/VV20.webp', label: 'VV20' }
+    };
+    for (let i = 1; i <= 20; i++) {
+      images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
+    }
+
     const row = document.getElementById('images-row');
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modal-img');
@@ -112,8 +139,15 @@
     function showModal(index) {
       currentIndex = index;
       modal.style.display = 'flex';
-      modalImg.src = images[currentIndex].src;
-      captionText.textContent = images[currentIndex].label;
+
+      // если для этого индекса есть специальное изображение VV
+      if (vvMap[currentIndex]) {
+        modalImg.src = vvMap[currentIndex].src;
+        captionText.textContent = vvMap[currentIndex].label;
+      } else {
+        modalImg.src = images[currentIndex].src;
+        captionText.textContent = images[currentIndex].label;
+      }
     }
 
     prevBtn.onclick = e => {
