@@ -72,43 +72,52 @@
 
   <script>
     const images = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 100; i++) {
       images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
     }
 
     const row = document.getElementById('images-row');
 
-    function loadImageSequentially(index) {
+    function loadImagesBatch(index, batchSize = 3) {
       if (index >= images.length) return;
 
-      const imgData = images[index];
-      const container = document.createElement('div');
-      container.className = 'image-container';
+      const batch = images.slice(index, index + batchSize);
+      let loadedCount = 0;
 
-      const placeholder = document.createElement('div');
-      placeholder.className = 'loading-placeholder';
-      container.appendChild(placeholder);
+      batch.forEach(imgData => {
+        const container = document.createElement('div');
+        container.className = 'image-container';
 
-      const image = document.createElement('img');
-      image.src = imgData.src;
-      image.alt = imgData.label;
-      image.loading = 'lazy';
-      image.onload = () => {
-        image.style.opacity = '1';
-        placeholder.style.display = 'none';
-        loadImageSequentially(index + 1); // загружаем следующее сразу после загрузки текущего
-      };
-      container.appendChild(image);
+        const placeholder = document.createElement('div');
+        placeholder.className = 'loading-placeholder';
+        container.appendChild(placeholder);
 
-      const label = document.createElement('div');
-      label.className = 'image-label';
-      label.textContent = imgData.label;
-      container.appendChild(label);
+        const image = document.createElement('img');
+        image.alt = imgData.label;
+        image.loading = 'lazy';
 
-      row.appendChild(container);
+        container.appendChild(image);
+        row.appendChild(container);
+
+        image.onload = () => {
+          image.style.opacity = '1';
+          placeholder.style.display = 'none';
+          loadedCount++;
+          if (loadedCount === batch.length) {
+            loadImagesBatch(index + batchSize, batchSize);
+          }
+        };
+
+        image.src = imgData.src;
+
+        const label = document.createElement('div');
+        label.className = 'image-label';
+        label.textContent = imgData.label;
+        container.appendChild(label);
+      });
     }
 
-    loadImageSequentially(0);
+    loadImagesBatch(0);
   </script>
 </body>
 </html>
