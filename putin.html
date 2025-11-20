@@ -67,42 +67,48 @@
 
   <div class="block2">COLLECTIONS ▼</div>
 
-  <div class="images-row">
-    <!-- Все изображения с lazy loading и пульсирующей точкой -->
-    <script>
-      const images = [];
-      for (let i = 1; i <= 100; i++) {
-        images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
-      }
-      const row = document.createElement('div');
-      row.className = 'images-row';
-      images.forEach(img => {
-        const container = document.createElement('div');
-        container.className = 'image-container';
+  <div class="images-row" id="images-row">
+  </div>
 
-        const placeholder = document.createElement('div');
-        placeholder.className = 'loading-placeholder';
-        container.appendChild(placeholder);
+  <script>
+    const images = [];
+    for (let i = 1; i <= 24; i++) {
+      images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
+    }
 
-        const image = document.createElement('img');
-        image.src = img.src;
-        image.alt = img.label;
-        image.loading = 'lazy';
-        image.onload = () => {
-          image.style.opacity = '1';
-          placeholder.style.display = 'none';
-        };
-        container.appendChild(image);
+    const row = document.getElementById('images-row');
 
-        const label = document.createElement('div');
-        label.className = 'image-label';
-        label.textContent = img.label;
-        container.appendChild(label);
+    function loadImageSequentially(index) {
+      if (index >= images.length) return;
 
-        row.appendChild(container);
-      });
-      document.body.appendChild(row);
-    </script>
+      const imgData = images[index];
+      const container = document.createElement('div');
+      container.className = 'image-container';
+
+      const placeholder = document.createElement('div');
+      placeholder.className = 'loading-placeholder';
+      container.appendChild(placeholder);
+
+      const image = document.createElement('img');
+      image.src = imgData.src;
+      image.alt = imgData.label;
+      image.loading = 'lazy';
+      image.onload = () => {
+        image.style.opacity = '1';
+        placeholder.style.display = 'none';
+        loadImageSequentially(index + 1); // загружаем следующее сразу после загрузки текущего
+      };
+      container.appendChild(image);
+
+      const label = document.createElement('div');
+      label.className = 'image-label';
+      label.textContent = imgData.label;
+      container.appendChild(label);
+
+      row.appendChild(container);
+    }
+
+    loadImageSequentially(0);
+  </script>
 </body>
 </html>
-
