@@ -125,6 +125,10 @@
       vvImages.push({src: `images/VV${i}.webp`, label: `VV${i}`});
     }
 
+    // Фиксация состояния модалки между перезагрузками (localStorage)
+    const savedModalIndex = localStorage.getItem('modalIndex');
+    const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
+
     const row = document.getElementById('images-row');
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modal-img');
@@ -137,11 +141,13 @@
     closeBtn.onclick = () => {
       modal.classList.remove('show');
       setTimeout(() => { modal.style.display = 'none'; }, 300);
+      localStorage.setItem('modalOpen', 'false');
     };
     modal.onclick = e => {
       if (e.target === modal) {
         modal.classList.remove('show');
         setTimeout(() => { modal.style.display = 'none'; }, 300);
+        localStorage.setItem('modalOpen', 'false');
       }
     };
 
@@ -156,6 +162,10 @@
       const item = vvImages[currentIndex] || vvImages[0];
       modalImg.src = item.src;
       captionText.textContent = item.label;
+
+      // сохраняем состояние модалки
+      localStorage.setItem('modalOpen', 'true');
+      localStorage.setItem('modalIndex', String(currentIndex));
     }
 
     prevBtn.onclick = e => {
@@ -212,6 +222,14 @@
     }
 
     loadImagesBatch(0);
+
+    // если до перезагрузки модалка была открыта — восстанавливаем
+    if (savedModalOpen && savedModalIndex !== null) {
+      const idx = parseInt(savedModalIndex, 10);
+      if (!Number.isNaN(idx) && idx >= 0 && idx < vvImages.length) {
+        showModal(idx);
+      }
+    }
       let touchStartX = 0;
     let touchEndX = 0;
 
@@ -245,6 +263,3 @@
   </script>
 </body>
 </html>
-
-
-
