@@ -74,6 +74,9 @@
     const images = Array.from({length:20}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
     const vvImages = Array.from({length:20}, (_, i) => {
       if(i===0) return {src: `images/VV1.webp`, label: `В.В.ПУТИН №1\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2024г.\nСтекло 21 х 30\n\n11 1952₽`};
+      if(i===1) return {src: `images/VV2.webp`, label: `В.В.ПУТИН №2\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2024г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===2) return {src: `images/VV3.webp`, label: `В.В.ПУТИН №3\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===3) return {src: `images/VV4.webp`, label: `В.В.ПУТИН №4\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
       return {src: `images/VV${i+1}.webp`, label: `VV${i+1}`};
     });
 
