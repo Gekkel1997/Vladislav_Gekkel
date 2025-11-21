@@ -8,7 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
-    html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
+    html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
+    body.modal-open { overflow: hidden; } /* блокируем прокрутку */
     * { box-sizing: border-box; }
 
     .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
@@ -33,24 +34,9 @@
     .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease; }
     .image-label { text-align: center; margin-top: 0; font-size: 1.5vh; }
 
-    .loading-placeholder {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 12px;
-      height: 12px;
-      background-color: #000;
-      border-radius: 50%;
-      animation: pulse 1s infinite;
-      z-index: 1;
-    }
+    .loading-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background-color: #000; border-radius: 50%; animation: pulse 1s infinite; z-index: 1; }
 
-    @keyframes pulse {
-      0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; }
-      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
-      100% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; }
-    }
+    @keyframes pulse { 0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; } 100% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; } }
 
     @media (max-width: 768px) {
       .image-container { width: calc(100% / 3); }
@@ -58,24 +44,8 @@
     }
 
     /* Модальное окно */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 10000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.96);
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .modal.show {
-      display: flex;
-      opacity: 1;
-    }
+    .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.96); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+    .modal.show { display: flex; opacity: 1; }
     .modal-content { position: relative; width: auto; height: 100vh; max-width: 100%; text-align: center; display: flex; flex-direction: column; justify-content: center; padding: 0 2vw; box-sizing: border-box; }
 
     @media (max-width: 768px) {
@@ -119,13 +89,11 @@
       images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
     }
 
-    // VV — версии для модального окна
     const vvImages = [];
     for (let i = 1; i <= 20; i++) {
       vvImages.push({src: `images/VV${i}.webp`, label: `VV${i}`});
     }
 
-    // Фиксация состояния модалки между перезагрузками (localStorage)
     const savedModalIndex = localStorage.getItem('modalIndex');
     const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
 
@@ -138,15 +106,18 @@
     const nextBtn = document.querySelector('.next');
     let currentIndex = 0;
 
+    function disableScroll() { document.body.classList.add('modal-open'); }
+    function enableScroll() { document.body.classList.remove('modal-open'); }
+
     closeBtn.onclick = () => {
       modal.classList.remove('show');
-      setTimeout(() => { modal.style.display = 'none'; }, 300);
+      setTimeout(() => { modal.style.display = 'none'; enableScroll(); }, 300);
       localStorage.setItem('modalOpen', 'false');
     };
     modal.onclick = e => {
       if (e.target === modal) {
         modal.classList.remove('show');
-        setTimeout(() => { modal.style.display = 'none'; }, 300);
+        setTimeout(() => { modal.style.display = 'none'; enableScroll(); }, 300);
         localStorage.setItem('modalOpen', 'false');
       }
     };
@@ -154,66 +125,43 @@
     function showModal(index) {
       currentIndex = index;
       modal.style.display = 'flex';
-      requestAnimationFrame(() => {
-        modal.classList.add('show');
-      });
+      requestAnimationFrame(() => modal.classList.add('show'));
+      disableScroll();
 
-      // в модальном окне всегда показываем VV
       const item = vvImages[currentIndex] || vvImages[0];
       modalImg.src = item.src;
       captionText.textContent = item.label;
 
-      // сохраняем состояние модалки
       localStorage.setItem('modalOpen', 'true');
       localStorage.setItem('modalIndex', String(currentIndex));
     }
 
-    prevBtn.onclick = e => {
-      e.stopPropagation();
-      currentIndex = (currentIndex - 1 + vvImages.length) % vvImages.length;
-      showModal(currentIndex);
-    };
-
-    nextBtn.onclick = e => {
-      e.stopPropagation();
-      currentIndex = (currentIndex + 1) % vvImages.length;
-      showModal(currentIndex);
-    };
+    prevBtn.onclick = e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + vvImages.length) % vvImages.length; showModal(currentIndex); };
+    nextBtn.onclick = e => { e.stopPropagation(); currentIndex = (currentIndex + 1) % vvImages.length; showModal(currentIndex); };
 
     function loadImagesBatch(index, batchSize = 9) {
       if (index >= images.length) return;
-
       const batch = images.slice(index, index + batchSize);
       let loadedCount = 0;
-
       batch.forEach((imgData, i) => {
         const container = document.createElement('div');
         container.className = 'image-container';
-
         const placeholder = document.createElement('div');
         placeholder.className = 'loading-placeholder';
         container.appendChild(placeholder);
-
         const image = document.createElement('img');
         image.alt = imgData.label;
         image.loading = 'lazy';
-
         container.appendChild(image);
         row.appendChild(container);
-
         container.onclick = () => showModal(index + i);
-
         image.onload = () => {
           image.style.opacity = '1';
           placeholder.style.display = 'none';
           loadedCount++;
-          if (loadedCount === batch.length) {
-            loadImagesBatch(index + batchSize, batchSize);
-          }
+          if (loadedCount === batch.length) loadImagesBatch(index + batchSize, batchSize);
         };
-
         image.src = imgData.src;
-
         const label = document.createElement('div');
         label.className = 'image-label';
         label.textContent = imgData.label;
@@ -223,44 +171,15 @@
 
     loadImagesBatch(0);
 
-    // если до перезагрузки модалка была открыта — восстанавливаем
     if (savedModalOpen && savedModalIndex !== null) {
       const idx = parseInt(savedModalIndex, 10);
-      if (!Number.isNaN(idx) && idx >= 0 && idx < vvImages.length) {
-        showModal(idx);
-      }
-    }
-      let touchStartX = 0;
-    let touchEndX = 0;
-
-    function handleGesture() {
-      const diffX = touchEndX - touchStartX;
-      const threshold = 50; // минимальное смещение для свайпа
-      if (Math.abs(diffX) < threshold) return;
-
-      if (diffX < 0) {
-        // свайп влево — следующее изображение
-        currentIndex = (currentIndex + 1) % vvImages.length;
-        showModal(currentIndex);
-      } else {
-        // свайп вправо — предыдущее изображение
-        currentIndex = (currentIndex - 1 + vvImages.length) % vvImages.length;
-        showModal(currentIndex);
-      }
+      if (!Number.isNaN(idx) && idx >= 0 && idx < vvImages.length) showModal(idx);
     }
 
-    // только для мобильных: вешаем обработчики свайпа на модальное окно
-    modal.addEventListener('touchstart', e => {
-      if (window.innerWidth > 768) return; // десктоп — игнорируем
-      touchStartX = e.changedTouches[0].clientX;
-    });
-
-    modal.addEventListener('touchend', e => {
-      if (window.innerWidth > 768) return;
-      touchEndX = e.changedTouches[0].clientX;
-      handleGesture();
-    });
+    let touchStartX = 0, touchEndX = 0;
+    function handleGesture() { const diffX = touchEndX - touchStartX; if (Math.abs(diffX) < 50) return; currentIndex = diffX < 0 ? (currentIndex + 1) % vvImages.length : (currentIndex - 1 + vvImages.length) % vvImages.length; showModal(currentIndex); }
+    modal.addEventListener('touchstart', e => { if (window.innerWidth > 768) return; touchStartX = e.changedTouches[0].clientX; });
+    modal.addEventListener('touchend', e => { if (window.innerWidth > 768) return; touchEndX = e.changedTouches[0].clientX; handleGesture(); });
   </script>
 </body>
 </html>
-
