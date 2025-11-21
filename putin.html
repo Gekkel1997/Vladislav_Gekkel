@@ -9,7 +9,7 @@
 
   <style>
     html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
-    body.modal-open { overflow: hidden; } /* блокируем прокрутку */
+    body.modal-open { overflow: hidden; position: fixed; width: 100%; } /* блокируем прокрутку полностью */
     * { box-sizing: border-box; }
 
     .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
@@ -106,8 +106,16 @@
     const nextBtn = document.querySelector('.next');
     let currentIndex = 0;
 
-    function disableScroll() { document.body.classList.add('modal-open'); }
-    function enableScroll() { document.body.classList.remove('modal-open'); }
+    function disableScroll() {
+      document.body.style.top = `-${window.scrollY}px`;
+      document.body.classList.add('modal-open');
+    }
+    function enableScroll() {
+      const scrollY = document.body.style.top;
+      document.body.classList.remove('modal-open');
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
 
     closeBtn.onclick = () => {
       modal.classList.remove('show');
