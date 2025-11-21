@@ -74,9 +74,6 @@
     const images = Array.from({length:20}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
     const vvImages = Array.from({length:20}, (_, i) => ({src: `images/VV${i+1}.webp`, label: `VV${i+1}`}));
 
-    const savedModalIndex = parseInt(localStorage.getItem('modalIndex'), 10);
-    const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
-
     const row = document.getElementById('images-row');
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modal-img');
@@ -138,7 +135,15 @@
       row.appendChild(container);
     });
 
-    if(savedModalOpen && !isNaN(savedModalIndex) && savedModalIndex>=0 && savedModalIndex<vvImages.length) showModal(savedModalIndex);
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedModalIndex = parseInt(localStorage.getItem('modalIndex'), 10);
+      const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
+      if(savedModalOpen && !isNaN(savedModalIndex) && savedModalIndex>=0 && savedModalIndex<vvImages.length){
+        if(window.innerWidth <= 768){
+          setTimeout(()=>showModal(savedModalIndex), 50);
+        }
+      }
+    });
 
     let touchStartX=0, touchCurrentX=0, isSwiping=false;
     modal.addEventListener('touchstart', e=>{ if(window.innerWidth>768) return; touchStartX=e.changedTouches[0].clientX; isSwiping=true; });
