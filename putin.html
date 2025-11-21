@@ -91,7 +91,27 @@
 
     closeBtn.onclick = modal.onclick = e => { if(e.target===modal||e.target===closeBtn){ modal.classList.remove('show'); setTimeout(()=>{ modal.style.display='none'; enableScroll(); },300); localStorage.setItem('modalOpen','false'); } };
 
-    function showModal(index){ currentIndex=index; modal.style.display='flex'; requestAnimationFrame(()=>modal.classList.add('show')); disableScroll(); const item=vvImages[currentIndex]||vvImages[0]; modalImg.src=item.src; captionText.textContent=item.label; localStorage.setItem('modalOpen','true'); localStorage.setItem('modalIndex',String(currentIndex)); }
+    function preloadAdjacent(index) {
+      [index-1,index+1].forEach(i=>{
+        if(vvImages[i]){
+          const img=new Image();
+          img.src=vvImages[i].src;
+        }
+      });
+    }
+
+    function showModal(index){
+      currentIndex=index;
+      modal.style.display='flex';
+      requestAnimationFrame(()=>modal.classList.add('show'));
+      disableScroll();
+      const item=vvImages[currentIndex]||vvImages[0];
+      modalImg.src=item.src;
+      captionText.textContent=item.label;
+      localStorage.setItem('modalOpen','true');
+      localStorage.setItem('modalIndex',String(currentIndex));
+      preloadAdjacent(currentIndex);
+    }
 
     prevBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex-1+vvImages.length)%vvImages.length; showModal(currentIndex); };
     nextBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex+1)%vvImages.length; showModal(currentIndex); };
