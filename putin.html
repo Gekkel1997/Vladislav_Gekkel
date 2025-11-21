@@ -29,7 +29,7 @@
 
     .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
     .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
-    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease, transform 0.3s ease; }
     .image-label { text-align: center; margin-top: 0; font-size: 1.5vh; }
 
     .loading-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background-color: #000; border-radius: 50%; animation: pulse 1s infinite; z-index: 1; }
@@ -40,7 +40,7 @@
     .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.96); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
     .modal.show { display: flex; opacity: 1; }
     .modal-content { position: relative; width: auto; height: 100vh; max-width: 100%; text-align: center; display: flex; flex-direction: column; justify-content: center; padding: 0 2vw; box-sizing: border-box; }
-    .modal-content img { max-height: 100vh; width: auto; max-width: 100%; margin: 0 auto; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .modal-content img { max-height: 100vh; width: auto; max-width: 100%; margin: 0 auto; }
     @media (max-width: 768px) { .modal-content { height: auto; max-height: 100vh; padding: 10vw; } }
     .close { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 2rem; cursor: pointer; }
     .caption { color: #fff; margin-top: 10px; }
@@ -92,7 +92,12 @@
     closeBtn.onclick = modal.onclick = e => { if(e.target===modal||e.target===closeBtn){ modal.classList.remove('show'); setTimeout(()=>{ modal.style.display='none'; enableScroll(); },300); localStorage.setItem('modalOpen','false'); } };
 
     function preloadAdjacent(index) {
-      [index-1,index+1].forEach(i=>{ if(vvImages[i]){ const img=new Image(); img.src=vvImages[i].src; } });
+      [index-1,index+1].forEach(i=>{
+        if(vvImages[i]){
+          const img=new Image();
+          img.src=vvImages[i].src;
+        }
+      });
     }
 
     function showModal(index){
@@ -115,22 +120,11 @@
 
     if(savedModalOpen && !isNaN(savedModalIndex) && savedModalIndex>=0 && savedModalIndex<vvImages.length) showModal(savedModalIndex);
 
-    // Плавный свайп на мобильных
     let touchStartX=0, touchCurrentX=0, isSwiping=false;
-    modal.addEventListener('touchstart', e=>{ if(window.innerWidth>768) return; touchStartX=e.changedTouches[0].clientX; isSwiping=true; modalImg.style.transition='none'; });
+    modal.addEventListener('touchstart', e=>{ if(window.innerWidth>768) return; touchStartX=e.changedTouches[0].clientX; isSwiping=true; });
     modal.addEventListener('touchmove', e=>{ if(!isSwiping||window.innerWidth>768) return; touchCurrentX=e.changedTouches[0].clientX; modalImg.style.transform=`translateX(${touchCurrentX-touchStartX}px)`; });
-    modal.addEventListener('touchend', e=>{
-      if(!isSwiping||window.innerWidth>768) return;
-      const diffX=e.changedTouches[0].clientX-touchStartX;
-      modalImg.style.transition='transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
-      if(Math.abs(diffX)>window.innerWidth*0.2){
-        currentIndex=diffX<0?(currentIndex+1)%vvImages.length:(currentIndex-1+vvImages.length)%vvImages.length;
-        showModal(currentIndex);
-      } else {
-        modalImg.style.transform='translateX(0)';
-      }
-      isSwiping=false;
-    });
+    modal.addEventListener('touchend', e=>{ if(!isSwiping||window.innerWidth>768) return; const diffX=e.changedTouches[0].clientX-touchStartX; modalImg.style.transform='translateX(0)'; if(Math.abs(diffX)>window.innerWidth*0.2){ currentIndex=diffX<0?(currentIndex+1)%vvImages.length:(currentIndex-1+vvImages.length)%vvImages.length; showModal(currentIndex); } isSwiping=false; });
   </script>
 </body>
 </html>
+
