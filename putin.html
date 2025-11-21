@@ -72,6 +72,12 @@
     .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: #fff; background: rgba(0,0,0,0.3); border: none; cursor: pointer; padding: 0 10px; z-index: 10001; }
     .prev { left: 10px; }
     .next { right: 10px; }
+
+    /* Скрывать навигацию и крестик пока модалка не показана */
+    .nav-btn { display: none; }
+    .modal.show .nav-btn { display: block; }
+    .close { display: none; }
+    .modal.show .close { display: block; }
   </style>
 </head>
 <body>
@@ -117,6 +123,12 @@
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
     let currentIndex = 0;
+
+    // Убедиться, что модалка скрыта при загрузке страницы
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+    modalImg.src = '';
+
 
     closeBtn.onclick = () => {
       modal.classList.remove('show');
