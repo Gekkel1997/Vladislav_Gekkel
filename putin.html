@@ -31,7 +31,7 @@
 
     .images-row { display: flex; flex-direction: row; flex-wrap: wrap; margin: 0; padding: 0; }
     .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
-    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease; }
+    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease, transform 0.3s ease; }
     .image-label { text-align: center; margin-top: 0; font-size: 1.5vh; }
 
     .loading-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background-color: #000; border-radius: 50%; animation: pulse 1s infinite; z-index: 1; }
@@ -184,10 +184,32 @@
       if (!Number.isNaN(idx) && idx >= 0 && idx < vvImages.length) showModal(idx);
     }
 
-    let touchStartX = 0, touchEndX = 0;
-    function handleGesture() { const diffX = touchEndX - touchStartX; if (Math.abs(diffX) < 50) return; currentIndex = diffX < 0 ? (currentIndex + 1) % vvImages.length : (currentIndex - 1 + vvImages.length) % vvImages.length; showModal(currentIndex); }
-    modal.addEventListener('touchstart', e => { if (window.innerWidth > 768) return; touchStartX = e.changedTouches[0].clientX; });
-    modal.addEventListener('touchend', e => { if (window.innerWidth > 768) return; touchEndX = e.changedTouches[0].clientX; handleGesture(); });
+    let touchStartX = 0, touchCurrentX = 0;
+    let isSwiping = false;
+
+    modal.addEventListener('touchstart', e => {
+      if (window.innerWidth > 768) return;
+      touchStartX = e.changedTouches[0].clientX;
+      isSwiping = true;
+    });
+
+    modal.addEventListener('touchmove', e => {
+      if (!isSwiping || window.innerWidth > 768) return;
+      touchCurrentX = e.changedTouches[0].clientX;
+      const diffX = touchCurrentX - touchStartX;
+      modalImg.style.transform = `translateX(${diffX}px)`;
+    });
+
+    modal.addEventListener('touchend', e => {
+      if (!isSwiping || window.innerWidth > 768) return;
+      const diffX = e.changedTouches[0].clientX - touchStartX;
+      modalImg.style.transform = 'translateX(0)';
+      if (Math.abs(diffX) > window.innerWidth * 0.2) {
+        currentIndex = diffX < 0 ? (currentIndex + 1) % vvImages.length : (currentIndex - 1 + vvImages.length) % vvImages.length;
+        showModal(currentIndex);
+      }
+      isSwiping = false;
+    });
   </script>
 </body>
 </html>
