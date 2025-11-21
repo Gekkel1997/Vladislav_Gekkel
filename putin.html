@@ -58,7 +58,24 @@
     }
 
     /* Модальное окно */
-    .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal.show {
+      display: flex;
+      opacity: 1;
+    }
     .modal-content { position: relative; width: auto; height: 100vh; max-width: 100%; text-align: center; display: flex; flex-direction: column; justify-content: center; }
     .modal-content img { max-height: 100vh; width: auto; max-width: 100%; height: auto; margin: 0 auto; }
     .close { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 2rem; cursor: pointer; }
@@ -112,12 +129,23 @@
     const nextBtn = document.querySelector('.next');
     let currentIndex = 0;
 
-    closeBtn.onclick = () => modal.style.display = 'none';
-    modal.onclick = e => { if(e.target === modal) modal.style.display = 'none'; };
+    closeBtn.onclick = () => {
+      modal.classList.remove('show');
+      setTimeout(() => { modal.style.display = 'none'; }, 300);
+    };
+    modal.onclick = e => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+        setTimeout(() => { modal.style.display = 'none'; }, 300);
+      }
+    };
 
     function showModal(index) {
       currentIndex = index;
       modal.style.display = 'flex';
+      requestAnimationFrame(() => {
+        modal.classList.add('show');
+      });
 
       // в модальном окне всегда показываем VV
       const item = vvImages[currentIndex] || vvImages[0];
