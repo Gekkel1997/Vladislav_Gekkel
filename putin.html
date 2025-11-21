@@ -9,7 +9,7 @@
 
   <style>
     html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
-    body.modal-open { overflow: hidden; position: fixed; width: 100%; } /* блокируем прокрутку полностью */
+    body.modal-open { overflow: hidden; position: fixed; width: 100%; }
     * { box-sizing: border-box; }
 
     .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
@@ -29,7 +29,7 @@
 
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
-    .images-row { display: flex; flex-direction: row; flex-wrap: wrap; margin: 0; padding: 0; }
+    .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
     .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
     .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease, transform 0.3s ease; }
     .image-label { text-align: center; margin-top: 0; font-size: 1.5vh; }
@@ -44,20 +44,15 @@
     }
 
     /* Модальное окно */
-    .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.96); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+    .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.96); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; overflow: hidden; }
     .modal.show { display: flex; opacity: 1; }
-    .modal-content { position: relative; width: auto; height: 100vh; max-width: 100%; text-align: center; display: flex; flex-direction: column; justify-content: center; padding: 0 2vw; box-sizing: border-box; }
+    .modal-content { position: relative; width: 100%; height: 100%; max-width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center; overflow: hidden; }
+    .modal-track { display: flex; flex-direction: row; transition: transform 0.3s ease; }
+    .modal-slide { min-width: 80%; margin: 0 10px; display: flex; flex-direction: column; align-items: center; }
+    .modal-slide img { width: 100%; height: auto; max-height: 90vh; object-fit: contain; border-radius: 4px; }
+    .modal-slide .caption { color: #fff; margin-top: 10px; text-align: center; }
 
-    @media (max-width: 768px) {
-      .modal-content { height: auto; max-height: 100vh; padding: 10vw; }
-      .modal-content img { max-height: 100vh; width: auto; max-width: 100%; height: auto; margin: 0 auto; }
-    }
-    .modal-content img { max-height: 100vh; width: auto; max-width: 100%; height: auto; margin: 0 auto; }
-    .close { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 2rem; cursor: pointer; }
-    .caption { color: #fff; margin-top: 10px; }
-    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #fff; background: none; border: none; cursor: pointer; padding: 0 5px; z-index: 10001; }
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    .close { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 2rem; cursor: pointer; z-index: 1001; }
   </style>
 </head>
 <body>
@@ -69,147 +64,69 @@
 
   <div class="block2">COLLECTIONS ▼</div>
 
-  <div class="images-row" id="images-row">
-  </div>
+  <div class="images-row" id="images-row"></div>
 
   <!-- Модальное окно -->
   <div id="modal" class="modal">
+    <span class="close">&times;</span>
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <button class="nav-btn prev">&#10094;</button>
-      <img id="modal-img" src="">
-      <button class="nav-btn next">&#10095;</button>
-      <div class="caption" id="modal-caption"></div>
+      <div class="modal-track" id="modal-track"></div>
     </div>
   </div>
 
   <script>
     const images = [];
-    for (let i = 1; i <= 20; i++) {
-      images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
-    }
-
+    for (let i = 1; i <= 20; i++) images.push({src: `images/VP${i}.webp`, label: `ВВП - ${i}`});
     const vvImages = [];
-    for (let i = 1; i <= 20; i++) {
-      vvImages.push({src: `images/VV${i}.webp`, label: `VV${i}`});
-    }
-
-    const savedModalIndex = localStorage.getItem('modalIndex');
-    const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
+    for (let i = 1; i <= 20; i++) vvImages.push({src: `images/VV${i}.webp`, label: `VV${i}`});
 
     const row = document.getElementById('images-row');
     const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modal-img');
-    const captionText = document.getElementById('modal-caption');
+    const track = document.getElementById('modal-track');
     const closeBtn = document.querySelector('.close');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
     let currentIndex = 0;
-
-    function disableScroll() {
-      document.body.style.top = `-${window.scrollY}px`;
-      document.body.classList.add('modal-open');
-    }
-    function enableScroll() {
-      const scrollY = document.body.style.top;
-      document.body.classList.remove('modal-open');
-      document.body.style.top = '';
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
-    }
-
-    closeBtn.onclick = () => {
-      modal.classList.remove('show');
-      setTimeout(() => { modal.style.display = 'none'; enableScroll(); }, 300);
-      localStorage.setItem('modalOpen', 'false');
-    };
-    modal.onclick = e => {
-      if (e.target === modal) {
-        modal.classList.remove('show');
-        setTimeout(() => { modal.style.display = 'none'; enableScroll(); }, 300);
-        localStorage.setItem('modalOpen', 'false');
-      }
-    };
 
     function showModal(index) {
       currentIndex = index;
-      modal.style.display = 'flex';
-      requestAnimationFrame(() => modal.classList.add('show'));
-      disableScroll();
-
-      const item = vvImages[currentIndex] || vvImages[0];
-      modalImg.src = item.src;
-      captionText.textContent = item.label;
-
-      localStorage.setItem('modalOpen', 'true');
-      localStorage.setItem('modalIndex', String(currentIndex));
+      track.innerHTML = '';
+      const slide = document.createElement('div');
+      slide.className = 'modal-slide';
+      const img = document.createElement('img');
+      img.src = vvImages[index].src;
+      const caption = document.createElement('div');
+      caption.className = 'caption';
+      caption.textContent = vvImages[index].label;
+      slide.appendChild(img);
+      slide.appendChild(caption);
+      track.appendChild(slide);
+      modal.classList.add('show');
+      document.body.classList.add('modal-open');
     }
 
-    prevBtn.onclick = e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + vvImages.length) % vvImages.length; showModal(currentIndex); };
-    nextBtn.onclick = e => { e.stopPropagation(); currentIndex = (currentIndex + 1) % vvImages.length; showModal(currentIndex); };
+    closeBtn.onclick = () => { modal.classList.remove('show'); document.body.classList.remove('modal-open'); };
+    modal.onclick = e => { if (e.target === modal) { modal.classList.remove('show'); document.body.classList.remove('modal-open'); } };
 
-    function loadImagesBatch(index, batchSize = 9) {
-      if (index >= images.length) return;
-      const batch = images.slice(index, index + batchSize);
-      let loadedCount = 0;
-      batch.forEach((imgData, i) => {
-        const container = document.createElement('div');
-        container.className = 'image-container';
-        const placeholder = document.createElement('div');
-        placeholder.className = 'loading-placeholder';
-        container.appendChild(placeholder);
-        const image = document.createElement('img');
-        image.alt = imgData.label;
-        image.loading = 'lazy';
-        container.appendChild(image);
-        row.appendChild(container);
-        container.onclick = () => showModal(index + i);
-        image.onload = () => {
-          image.style.opacity = '1';
-          placeholder.style.display = 'none';
-          loadedCount++;
-          if (loadedCount === batch.length) loadImagesBatch(index + batchSize, batchSize);
-        };
-        image.src = imgData.src;
-        const label = document.createElement('div');
-        label.className = 'image-label';
-        label.textContent = imgData.label;
-        container.appendChild(label);
-      });
-    }
-
-    loadImagesBatch(0);
-
-    if (savedModalOpen && savedModalIndex !== null) {
-      const idx = parseInt(savedModalIndex, 10);
-      if (!Number.isNaN(idx) && idx >= 0 && idx < vvImages.length) showModal(idx);
-    }
-
-    let touchStartX = 0, touchCurrentX = 0;
-    let isSwiping = false;
-
-    modal.addEventListener('touchstart', e => {
-      if (window.innerWidth > 768) return;
-      touchStartX = e.changedTouches[0].clientX;
-      isSwiping = true;
+    images.forEach((imgData, i) => {
+      const container = document.createElement('div');
+      container.className = 'image-container';
+      const image = document.createElement('img');
+      image.src = imgData.src;
+      const label = document.createElement('div');
+      label.className = 'image-label';
+      label.textContent = imgData.label;
+      container.appendChild(image);
+      container.appendChild(label);
+      container.onclick = () => showModal(i);
+      row.appendChild(container);
     });
 
-    modal.addEventListener('touchmove', e => {
-      if (!isSwiping || window.innerWidth > 768) return;
-      touchCurrentX = e.changedTouches[0].clientX;
-      const diffX = touchCurrentX - touchStartX;
-      modalImg.style.transform = `translateX(${diffX}px)`;
-    });
-
-    modal.addEventListener('touchend', e => {
-      if (!isSwiping || window.innerWidth > 768) return;
-      const diffX = e.changedTouches[0].clientX - touchStartX;
-      modalImg.style.transform = 'translateX(0)';
-      if (Math.abs(diffX) > window.innerWidth * 0.2) {
-        currentIndex = diffX < 0 ? (currentIndex + 1) % vvImages.length : (currentIndex - 1 + vvImages.length) % vvImages.length;
-        showModal(currentIndex);
-      }
-      isSwiping = false;
-    });
+    // Свайп для мобильной карусели
+    let startX = 0, isSwiping = false;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isSwiping = true; });
+    track.addEventListener('touchmove', e => { if (!isSwiping) return; const diff = e.touches[0].clientX - startX; track.style.transform = `translateX(${ -currentIndex * 100 + diff / window.innerWidth * 100 }%)`; });
+    track.addEventListener('touchend', e => { if (!isSwiping) return; const diff = e.changedTouches[0].clientX - startX; if (diff < -window.innerWidth * 0.1) currentIndex = (currentIndex + 1) % vvImages.length;
+      else if (diff > window.innerWidth * 0.1) currentIndex = (currentIndex - 1 + vvImages.length) % vvImages.length;
+      showModal(currentIndex); track.style.transform = 'translateX(0)'; isSwiping = false; });
   </script>
 </body>
 </html>
