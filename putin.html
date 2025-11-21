@@ -89,15 +89,17 @@
     function disableScroll() { document.body.style.top = `-${window.scrollY}px`; document.body.classList.add('modal-open'); }
     function enableScroll() { const scrollY = document.body.style.top; document.body.classList.remove('modal-open'); document.body.style.top = ''; window.scrollTo(0, parseInt(scrollY||'0')*-1); }
 
-    closeBtn.onclick = modal.onclick = e => { if(e.target===modal||e.target===closeBtn){ modal.classList.remove('show'); setTimeout(()=>{ modal.style.display='none'; enableScroll(); },300); localStorage.setItem('modalOpen','false'); } };
+    function closeModal() {
+      modal.classList.remove('show');
+      setTimeout(()=>{ modal.style.display='none'; enableScroll(); },300);
+      localStorage.setItem('modalOpen','false');
+    }
+
+    closeBtn.onclick = () => closeModal();
+    modal.onclick = e => { if(window.innerWidth <= 768 && e.target === modal) closeModal(); };
 
     function preloadAdjacent(index) {
-      [index-1,index+1].forEach(i=>{
-        if(vvImages[i]){
-          const img=new Image();
-          img.src=vvImages[i].src;
-        }
-      });
+      [index-1,index+1].forEach(i=>{ if(vvImages[i]){ const img=new Image(); img.src=vvImages[i].src; } });
     }
 
     function showModal(index){
@@ -116,7 +118,25 @@
     prevBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex-1+vvImages.length)%vvImages.length; showModal(currentIndex); };
     nextBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex+1)%vvImages.length; showModal(currentIndex); };
 
-    images.forEach((imgData,i)=>{ const container=document.createElement('div'); container.className='image-container'; const placeholder=document.createElement('div'); placeholder.className='loading-placeholder'; container.appendChild(placeholder); const image=document.createElement('img'); image.alt=imgData.label; image.loading='lazy'; container.appendChild(image); container.onclick=()=>showModal(i); image.onload=()=>{ image.style.opacity='1'; placeholder.style.display='none'; }; image.src=imgData.src; const label=document.createElement('div'); label.className='image-label'; label.textContent=imgData.label; container.appendChild(label); row.appendChild(container); });
+    images.forEach((imgData,i)=>{
+      const container=document.createElement('div');
+      container.className='image-container';
+      const placeholder=document.createElement('div');
+      placeholder.className='loading-placeholder';
+      container.appendChild(placeholder);
+      const image=document.createElement('img');
+      image.alt=imgData.label;
+      image.loading='lazy';
+      container.appendChild(image);
+      container.onclick=()=>showModal(i);
+      image.onload=()=>{ image.style.opacity='1'; placeholder.style.display='none'; };
+      image.src=imgData.src;
+      const label=document.createElement('div');
+      label.className='image-label';
+      label.textContent=imgData.label;
+      container.appendChild(label);
+      row.appendChild(container);
+    });
 
     if(savedModalOpen && !isNaN(savedModalIndex) && savedModalIndex>=0 && savedModalIndex<vvImages.length) showModal(savedModalIndex);
 
@@ -127,4 +147,3 @@
   </script>
 </body>
 </html>
-
