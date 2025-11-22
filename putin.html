@@ -39,7 +39,13 @@
 
     .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.96); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; overflow-y: auto; }
     .modal.show { display: flex; opacity: 1; }
-    .modal-content { position: relative; width: auto; max-width: 100%; text-align: center; display: flex; flex-direction: column; justify-content: center; padding: 0 2vw; box-sizing: border-box; pointer-events: none; max-height: 100vh; overflow-y: auto; }
+    .modal-content { position: relative; width: 90%; max-width: 1200px; text-align: left; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 2vw; padding: 0 2vw; box-sizing: border-box; pointer-events: none; max-height: 100vh; overflow-y: auto; }
+    .modal-image-wrapper { flex: 1 1 60%; display: flex; justify-content: center; align-items: center; }
+    .modal-text-wrapper { flex: 1 1 40%; color: #fff; }
+    .modal-content img { max-height: 100vh; width: 100%; height: auto; max-width: 100%; margin: 0 auto; transition: opacity 0.3s ease; pointer-events: auto; }
+    @media (max-width: 768px) { .modal-content { flex-direction: column; width: 100%; max-width: 100%; padding: 7vw; margin-top: 6vh; justify-content: flex-start; text-align: center; }
+      .modal-image-wrapper, .modal-text-wrapper { flex: 0 0 auto; width: 100%; }
+    }
     .modal-content img { max-height: 100vh; width: auto; max-width: 100%; margin: 0 auto; transition: opacity 0.3s ease; pointer-events: auto; }
     @media (max-width: 768px) { .modal-content { height: auto; max-height: 100vh; padding: 7vw; margin-top: 6vh; justify-content: flex-start; } }
     .close { position: absolute; top: 2vw; right: 2vw; color: #fff; font-size: 2rem; cursor: pointer; pointer-events: auto; }
@@ -60,19 +66,24 @@
 
   <div class="images-row" id="images-row"></div>
 
-  <div id="modal" class="modal">
+    <div id="modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <button class="nav-btn prev">&#10094;</button>
-      <img id="modal-img" src="">
+      <div class="modal-image-wrapper">
+        <img id="modal-img" src="">
+      </div>
+      <div class="modal-text-wrapper">
+        <div class="caption" id="modal-caption"></div>
+      </div>
       <button class="nav-btn next">&#10095;</button>
-      <div class="caption" id="modal-caption"></div>
     </div>
+  </div>
   </div>
 
   <script>
-    const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
-    const vvImages = Array.from({length:22}, (_, i) => {
+    const images = Array.from({length:20}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
+    const vvImages = Array.from({length:20}, (_, i) => {
       if(i===0) return {src: `images/VV1.webp`, label: `В.В.ПУТИН №1\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2024г.\nСтекло 21 х 30\n\n11 1952₽`};
       if(i===1) return {src: `images/VV2.webp`, label: `В.В.ПУТИН №2\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
       if(i===2) return {src: `images/VV3.webp`, label: `В.В.ПУТИН №3\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
@@ -180,4 +191,3 @@
   </script>
 </body>
 </html>
-
