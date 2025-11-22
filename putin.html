@@ -26,14 +26,12 @@
     .info-text { right: 3vw; text-align: right; }
 
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
-    .block2 button { font-size: 2vh; background: none; border: none; font: inherit; cursor: pointer; text-transform: uppercase; padding: 2vh 3vw; }
+    .block2 button { font-size: 2vh; background: none; border: none; font: inherit; cursor: pointer; text-transform: uppercase; }
     .block2 button:hover { text-decoration: underline; }
-    @media (max-width: 768px) { .block2 button { font-size: 1.5vh; padding: 1.5vh 2vw; } }
+    @media (max-width: 768px) { .block2 button { font-size: 1.5vh; } }
 
     .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border: 1px solid #000; z-index: 100; width: 100%; height: calc(2vh + 4vh); display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
-    .dropdown button { display: inline-block; margin: 0; padding: 2vh 3vw; font-size: 2vh; background: none; border: none; cursor: pointer; text-transform: uppercase; }
-    .dropdown button:hover { text-decoration: underline; }
-    @media (max-width: 768px) { .dropdown button { font-size: 1.5vh; padding: 1.5vh 2vw; } }
+    .dropdown button { display: inline-block; margin: 0; text-align: center; font-size: 1.5vh; background: none; border: none; cursor: pointer; }
 
     .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
     .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
@@ -219,6 +217,7 @@
   </script>
 </body>
 </html>
+
 
 
 
