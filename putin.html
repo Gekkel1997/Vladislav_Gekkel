@@ -9,7 +9,7 @@
 
   <style>
     html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
-    body.modal-open { overflow: hidden; position: fixed; width: 100%; }
+    body.modal-open { overflow: hidden; }
     * { box-sizing: border-box; }
 
     .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
@@ -47,7 +47,7 @@
     @media (max-width: 768px) { .modal-content { flex-direction: column; width: 100%; max-width: 100%; padding: 7vw; margin-top: 6vh; justify-content: flex-start; text-align: center; }
       .modal-image-wrapper, .modal-text-wrapper { flex: 0 0 auto; width: 100%; }
     }
-
+    
     @media (max-width: 768px) { .modal-content { height: auto; max-height: 100vh; padding: 7vw; margin-top: 6vh; justify-content: flex-start; } }
     .close { position: absolute; top: 2vw; right: 2vw; color: #fff; font-size: 2rem; cursor: pointer; pointer-events: auto; }
     .caption { color: #fff; margin-top: 1vh; white-space: pre-line; text-align: center; font-size: 3vh; }
@@ -81,53 +81,116 @@
       <button class="nav-btn next">&#10095;</button>
     </div>
   </div>
+  </div>
 
   <script>
-    // Когда модалка открыта, фиксируем страницу
     const images = Array.from({length:20}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
-    const vvImages = Array.from({length:20}, (_, i) => ({src: `images/VV${i+1}.webp`, label: `VV${i+1}`}));
+    const vvImages = Array.from({length:20}, (_, i) => {
+      if(i===0) return {src: `images/VV1.webp`, label: `В.В.ПУТИН №1\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2024г.\nСтекло 21 х 30\n\n11 1952₽`};
+      if(i===1) return {src: `images/VV2.webp`, label: `В.В.ПУТИН №2\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===2) return {src: `images/VV3.webp`, label: `В.В.ПУТИН №3\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===3) return {src: `images/VV4.webp`, label: `В.В.ПУТИН №4\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===4) return {src: `images/VV5.webp`, label: `А.Г.ЛУКАШЕНКО №5\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1954₽`};
+      if(i===5) return {src: `images/VV6.webp`, label: `В.В.ПУТИН №6\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===6) return {src: `images/VV7.webp`, label: `В.В.ПУТИН №7\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===7) return {src: `images/VV8.webp`, label: `В.В.ПУТИН №8\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===8) return {src: `images/VV9.webp`, label: `В.В.ПУТИН №9\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===9) return {src: `images/VV10.webp`, label: `В.В.ПУТИН №10\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===10) return {src: `images/VV11.webp`, label: `СИ ЦЗИНЬПИН №11\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1953₽`};
+      if(i===11) return {src: `images/VV12.webp`, label: `В.В.ПУТИН №12\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===12) return {src: `images/VV13.webp`, label: `В.В.ПУТИН №13\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===13) return {src: `images/VV14.webp`, label: `В.В.ПУТИН №14\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===14) return {src: `images/VV15.webp`, label: `В.В.ПУТИН №15\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1952₽`};
+      if(i===15) return {src: `images/VV16.webp`, label: `В.В.ПУТИН №16\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===16) return {src: `images/VV17.webp`, label: `В.В.ПУТИН №17\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===17) return {src: `images/VV18.webp`, label: `В.В.ЖИРИНОВСКИЙ №18\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1946₽`};
+      if(i===18) return {src: `images/VV19.webp`, label: `В.В.ПУТИН №19\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===19) return {src: `images/VV20.webp`, label: `В.В.ПУТИН №20\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      if(i===20) return {src: `images/VV21.webp`, label: `Е.В.ПРИГОЖИН №21\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1961₽`};
+      if(i===21) return {src: `images/VV22.webp`, label: `В.В.ПУТИН №22\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+      
+      return {src: `images/VV${i+1}.webp`, label: `VV${i+1}`};
+    });
 
     const row = document.getElementById('images-row');
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modal-img');
     const captionText = document.getElementById('modal-caption');
     const closeBtn = document.querySelector('.close');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
     let currentIndex = 0;
 
     function disableScroll() { document.body.classList.add('modal-open'); }
     function enableScroll() { document.body.classList.remove('modal-open'); }
 
-    function showModal(index){
-      currentIndex=index;
-      modal.style.display='flex';
-      modalImg.src=vvImages[currentIndex].src;
-      captionText.innerHTML=vvImages[currentIndex].label;
-      requestAnimationFrame(()=>{ modal.classList.add('show'); });
-      disableScroll();
-    }
-
-    function closeModal(){
+    function closeModal() {
       modal.classList.remove('show');
       setTimeout(()=>{ modal.style.display='none'; enableScroll(); },300);
+      localStorage.setItem('modalOpen','false');
     }
 
     closeBtn.onclick = () => closeModal();
     modal.onclick = e => { if(window.innerWidth <= 768 && e.target === modal) closeModal(); };
 
+    function preloadAdjacent(index) {
+      [index-1,index+1].forEach(i=>{ if(vvImages[i]){ const img=new Image(); img.src=vvImages[i].src; } });
+    }
+
+    function showModal(index){
+      currentIndex=index;
+      modal.style.display='flex';
+      modalImg.style.opacity='0';
+      requestAnimationFrame(()=>{
+        modal.classList.add('show');
+        modalImg.src=vvImages[currentIndex].src;
+        captionText.innerHTML=vvImages[currentIndex].label;
+        modalImg.onload = ()=>{ modalImg.style.opacity='1'; };
+      });
+      disableScroll();
+      localStorage.setItem('modalOpen','true');
+      localStorage.setItem('modalIndex',String(currentIndex));
+      preloadAdjacent(currentIndex);
+    }
+
+    prevBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex-1+vvImages.length)%vvImages.length; showModal(currentIndex); };
+    nextBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex+1)%vvImages.length; showModal(currentIndex); };
+
     images.forEach((imgData,i)=>{
       const container=document.createElement('div');
       container.className='image-container';
+      const placeholder=document.createElement('div');
+      placeholder.className='loading-placeholder';
+      container.appendChild(placeholder);
       const image=document.createElement('img');
       image.alt=imgData.label;
-      image.src=imgData.src;
+      image.loading='lazy';
       container.appendChild(image);
+      container.onclick=()=>showModal(i);
+      image.onload=()=>{ image.style.opacity='1'; placeholder.style.display='none'; };
+      image.src=imgData.src;
       const label=document.createElement('div');
       label.className='image-label';
       label.textContent=imgData.label;
       container.appendChild(label);
-      container.onclick=()=>showModal(i);
       row.appendChild(container);
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedModalIndex = parseInt(localStorage.getItem('modalIndex'), 10);
+      const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
+      if(savedModalOpen && !isNaN(savedModalIndex) && savedModalIndex>=0 && savedModalIndex<vvImages.length){
+        if(window.innerWidth <= 768){
+          setTimeout(()=>showModal(savedModalIndex), 50);
+        }
+      }
+    });
+
+    let touchStartX=0, touchCurrentX=0, isSwiping=false;
+    modal.addEventListener('touchstart', e=>{ if(window.innerWidth>768) return; touchStartX=e.changedTouches[0].clientX; isSwiping=true; });
+    modal.addEventListener('touchmove', e=>{ if(!isSwiping||window.innerWidth>768) return; touchCurrentX=e.changedTouches[0].clientX; });
+    modal.addEventListener('touchend', e=>{ if(!isSwiping||window.innerWidth>768) return; const diffX=e.changedTouches[0].clientX-touchStartX; if(Math.abs(diffX)>window.innerWidth*0.2){ currentIndex=diffX<0?(currentIndex+1)%vvImages.length:(currentIndex-1+vvImages.length)%vvImages.length; showModal(currentIndex); } isSwiping=false; });
   </script>
 </body>
 </html>
+
