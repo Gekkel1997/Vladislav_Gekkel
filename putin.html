@@ -30,6 +30,9 @@
     .block2 button:hover { text-decoration: underline; }
     @media (max-width: 768px) { .block2 button { font-size: 1.5vh; } }
 
+    .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border: 1px solid #000; z-index: 100; width: 100%; height: calc(2vh + 4vh); /* соответствует .block2 */ display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
+    .dropdown button { display: inline-block; margin: 0; text-align: center; font-size: 1.5vh; background: none; border: none; cursor: pointer; }
+
     .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
     .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
     .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease, transform 0.4s ease; }
@@ -66,7 +69,14 @@
     <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
   </div>
 
-  <div class="block2"><button>COLLECTIONS ▼</button></div>
+  <div class="block2" id="collection-block">
+    <button id="collection-btn">COLLECTIONS ▼</button>
+    <div class="dropdown" id="collection-dropdown">
+      <button>Button 1</button>
+      <button>Button 2</button>
+      <button>Button 3</button>
+    </div>
+  </div>
 
   <div class="images-row" id="images-row"></div>
 
@@ -85,6 +95,13 @@
   </div>
 
   <script>
+    const collectionBtn = document.getElementById('collection-btn');
+    const collectionDropdown = document.getElementById('collection-dropdown');
+
+    collectionBtn.addEventListener('click', () => {
+      collectionDropdown.style.display = collectionDropdown.style.display === 'flex' ? 'none' : 'flex';
+    });
+
     const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
     const vvImages = Array.from({length:22}, (_, i) => {
       if(i===0) return {src: `images/VV1.webp`, label: `В.В.ПУТИН №1\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2024г.\nСтекло 21 х 30\n\n11 1952₽`};
@@ -194,6 +211,7 @@
   </script>
 </body>
 </html>
+
 
 
 
