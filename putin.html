@@ -26,8 +26,9 @@
     .info-text { right: 3vw; text-align: right; }
 
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
-    @media (min-width: 1024px) { .block2 { font-size: 2vh; } }
-    
+    .block2 button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-transform: uppercase; font-size: 3vh; }
+    .block2 button:hover { text-decoration: underline; }
+
     .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
     .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
     .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease, transform 0.4s ease; }
@@ -65,11 +66,11 @@
     <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
   </div>
 
-  <div class="block2">COLLECTIONS ▼</div>
+  <div class="block2"><button onclick="alert('COLLECTIONS clicked')">COLLECTIONS ▼</button></div>
 
   <div class="images-row" id="images-row"></div>
 
-    <div id="modal" class="modal">
+  <div id="modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <button class="nav-btn prev">&#10094;</button>
@@ -82,7 +83,7 @@
       <button class="nav-btn next">&#10095;</button>
     </div>
   </div>
-  </div>
+
 
   <script>
     const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
@@ -194,6 +195,7 @@
   </script>
 </body>
 </html>
+
 
 
 
