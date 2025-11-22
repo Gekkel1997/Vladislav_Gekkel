@@ -30,7 +30,7 @@
     .block2 button:hover { text-decoration: underline; }
     @media (max-width: 768px) { .block2 button { font-size: 1.5vh; } }
 
-    .dropdown { display: none; position: absolute; top: 100%; left: 3vw; right: 3vw; background-color: #fff; border: 1px solid #000; z-index: 100; height: calc(2vh + 4vh); display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
+    .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border: 1px solid #000; z-index: 100; width: 100%; height: calc(2vh + 4vh); display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
     .dropdown button { display: inline-block; margin: 0; text-align: center; font-size: 1.5vh; background: none; border: none; cursor: pointer; }
 
     .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
@@ -106,7 +106,6 @@
     window.addEventListener('load', () => {
       collectionDropdown.style.display = 'none';
     });
-
 
     const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
     const vvImages = Array.from({length:22}, (_, i) => {
@@ -217,6 +216,7 @@
   </script>
 </body>
 </html>
+
 
 
 
