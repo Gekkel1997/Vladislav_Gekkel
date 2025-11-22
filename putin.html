@@ -25,9 +25,10 @@
     .subheader button:hover, .info-text button:hover { text-decoration: underline; }
     .info-text { right: 3vw; text-align: right; }
 
-    .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
-    .block2 button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-transform: uppercase; font-size: 3vh; }
+    .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
+    .block2 button { font-size: 3vh; background: none; border: none; font: inherit; cursor: pointer; text-transform: uppercase; }
     .block2 button:hover { text-decoration: underline; }
+    @media (max-width: 768px) { .block2 button { font-size: 1.5vh; } }
 
     .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
     .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
@@ -49,8 +50,7 @@
     @media (max-width: 768px) { .modal-content { flex-direction: column; width: 100%; max-width: 100%; padding: 7vw; margin-top: 6vh; justify-content: flex-start; text-align: center; }
       .modal-image-wrapper, .modal-text-wrapper { flex: 0 0 auto; width: 100%; }
     }
-    
-    @media (max-width: 768px) { .modal-content { height: auto; max-height: 100vh; padding: 7vw; margin-top: 6vh; justify-content: flex-start; } }
+
     .close { position: absolute; top: 2vw; right: 2vw; color: #fff; font-size: 2rem; cursor: pointer; pointer-events: auto; }
     .caption { color: #fff; margin-top: 1vh; white-space: pre-line; text-align: center; font-size: 3vh; }
     @media (max-width: 768px) { .caption { font-size: 1.5vh; } }
@@ -66,7 +66,7 @@
     <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
   </div>
 
-  <div class="block2"><button onclick="alert('COLLECTIONS clicked')">COLLECTIONS ▼</button></div>
+  <div class="block2"><button>COLLECTIONS ▼</button></div>
 
   <div class="images-row" id="images-row"></div>
 
@@ -83,7 +83,6 @@
       <button class="nav-btn next">&#10095;</button>
     </div>
   </div>
-
 
   <script>
     const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
@@ -195,6 +194,7 @@
   </script>
 </body>
 </html>
+
 
 
 
