@@ -8,93 +8,62 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
-    html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
-    body.modal-open { overflow: hidden; }
+    html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
     * { box-sizing: border-box; }
 
     .header { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; width: 100vw; height: 10vh; font-size: clamp(0.5rem, 1vw, 1.3rem); margin: 0; background-color: #fff; z-index: 1000; overflow: hidden; border-bottom: 1px solid #000; }
-    .header-text { position: absolute; left: 3vw; top: 50%; transform: translateY(-50%); font-size: 1vh; text-align: left; line-height: 1.3; font-weight: 700; }
+    .header-text { position: absolute; left: 3vw; top: 50%; transform: translateY(-50%); font-size: 1vh; font-family: 'Oswald', sans-serif; text-align: left; line-height: 1.3; font-weight: 700; }
     .header-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-align: left; }
     .header-text button:hover { text-decoration: underline; }
 
     @media (min-width: 1024px) { .header-text { font-size: 2vh; } }
 
-    .subheader, .info-text { position: absolute; top: 50%; font-size: 3vh; transform: translateY(-50%); }
+    .subheader, .info-text { position: absolute; top: 50%; font-size: 3vh; font-family: 'Oswald', sans-serif; transform: translateY(-50%); }
     .subheader { left: 50%; transform: translate(-50%, -50%); text-align: center; width: auto; }
-    .subheader button, .info-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
-    .subheader button:hover, .info-text button:hover { text-decoration: underline; }
+    .subheader button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
+    .subheader button:hover { text-decoration: underline; }
     .info-text { right: 3vw; text-align: right; }
+    .info-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
+    .info-text button:hover { text-decoration: underline; }
 
-    .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; border-bottom: 1px solid #000; border-top: none; text-transform: uppercase; margin-top: 10vh; }
-    .block2 button { font-size: 2vh; background: none; border: none; font: inherit; cursor: pointer; text-transform: uppercase; color: #000; }
-    .block2 button:hover { text-decoration: underline; }
+    .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; font-size: 1.5vh; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
 
-    @media (max-width: 768px) {
-      .block2 button { font-size: 1.5vh; color: #000; }
-      .dropdown { flex-direction: column; align-items: flex-start; height: auto; padding: 1vh 7vw; }
-      .dropdown button { width: 100%; text-align: left; padding: 0.4vh 5vw; font-size: 1.5vh; }
-      .putin-btn { font-size: 1.5vh !important; }
+    .image-container { width: 50vw; display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; }
+    .image-block img { width: 100%; object-fit: contain; object-position: top; display: block; margin: 0; }
+    .image-container img:not(.image-block img) { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; margin: 0; }
+
+    .divider { width: 100vw; position: relative; left: 0; height: 1px; background-color: #000; margin: 0; }
+
+    .image-text { position: absolute; top: 50%; transform: translateY(-50%); right: -50vw; width: 50vw; padding: 1vh 2vw; font-size: 2.3vh; line-height: 1.4; }
+    .image-text.large { font-size: 2.3vh; }
+
+    .top-text { width: 45vw; text-align: right; font-size: 2.2vh; padding: 1vh 2vw; margin-top: 5vh; position: absolute; right: 0; z-index: 2; }
+
+    /* Только десктоп: поднять контейнер с изображением 1 к верху блока */
+    @media (min-width: 1024px) {
+      .image-block .image-container { position: relative; top: 0; }
     }
 
-    .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border-top: 1px solid #000; border-left: none; border-right: none; border-bottom: 1px solid #000; z-index: 100; width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
-    .dropdown button { display: block; margin: 0; text-align: left; background: none; border: none; cursor: pointer; color: #000; }
-
-    .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
-    .image-container { width: calc(100% / 3); display: flex; flex-direction: column; justify-content: flex-start; margin: 0; padding: 0; position: relative; cursor: pointer; }
-    .image-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 0; opacity: 0; transition: opacity 0.5s ease, transform 0.4s ease; }
-    .image-label { text-align: center; margin-top: 1vh; font-size: 1.5vh; }
-    @media (min-width: 1024px) { .image-label { font-size: 3vh; } }
-
-    .loading-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background-color: #000; border-radius: 50%; animation: pulse 1s infinite; z-index: 1; }
-    @keyframes pulse { 0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; } 100% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; } }
-
-    .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.96); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; overflow-y: auto; }
-    .modal.show { display: flex; opacity: 1; }
-    .modal-content { position: relative; width: 90%; max-width: 1200px; text-align: left; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 2vw; padding: 0 2vw; box-sizing: border-box; pointer-events: none; max-height: 100vh; overflow-y: auto; }
-    .modal-image-wrapper { flex: 1 1 60%; display: flex; justify-content: center; align-items: center; }
-    .modal-text-wrapper { flex: 1 1 40%; color: #fff; }
-    .modal-content img { max-height: 96vh; width: auto; max-width: 100%; margin: 0 auto; transition: opacity 0.3s ease; pointer-events: auto; }
-
-    .close { position: absolute; top: 2vw; right: 2vw; color: #fff; font-size: 2rem; cursor: pointer; pointer-events: auto; }
-    .caption { color: #fff; margin-top: 1vh; white-space: pre-line; text-align: center; font-size: 3vh; }
-    @media (max-width: 768px) { .caption { font-size: 1.5vh; } }
-    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #fff; background: none; border: none; cursor: pointer; padding: 0; z-index: 10001; pointer-events: auto; }
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    @media (max-width: 768px) {
+      .image-container { width: 100vw; }
+      .image-block img { aspect-ratio: auto; object-fit: contain; object-position: center; }
+      .image-container img:not(.image-block img) { aspect-ratio: 5 / 7; object-fit: cover; object-position: center; }
+      .image-block .image-text { position: relative; top: -2rem; transform: none; margin-bottom: 1rem; }
+      .image-text { right: 0; width: 100vw; padding: 0 4vw 0 4vw; font-size: 1.8vh; position: relative; transform: none; top: auto; }
+      .image-text.large { width: 100vw; position: relative; top: auto; transform: none; padding-bottom: 0; font-size: 1.8vh; }
+      .top-text { width: 100vw; text-align: right; padding: 0 4vw; font-size: 1.8vh; margin-bottom: 1vh; position: relative; right: 0; margin-top: 2vh; }
+      .divider { width: 100vw; }
+    }
   </style>
 </head>
 <body>
   <div class="header">
     <div class="header-text"><button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></button></div>
     <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
-    <div class="info-text"><button onclick="window.location.href='index.html#bottom'">INFO</button></div>
+    <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
   </div>
 
-  <div class="block2" id="collection-block">
-    <button id="collection-btn">COLLECTIONS ▼</button>
-    <button class="putin-btn" style="margin-left:1vw; font-size:2.5vh; text-transform:none;" onclick="window.location.href='putin.html'">КОЛЛЕКЦИЯ 1-100 «В.В.ПУТИН»</button>
-    <div class="dropdown" id="collection-dropdown">
-      <button onclick="window.location.href='dobrym.html'">ДОБРЫМ БЫТЬ НЕ СТЫДНО</button>
-      <button onclick="window.location.href='putin.html'">Коллекция 1-100 «В.В.ПУТИН»</button>
-      <button onclick="window.location.href='holst.html'">ХОЛСТ И ДОРОГА ПУТНИКА..</button>
-    </div>
-  </div>
-
-  <div class="images-row" id="images-row"></div>
-
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <button class="nav-btn prev">&#10094;</button>
-      <div class="modal-image-wrapper">
-        <img id="modal-img" src="">
-      </div>
-      <div class="modal-text-wrapper">
-        <div class="caption" id="modal-caption"></div>
-      </div>
-      <button class="nav-btn next">&#10095;</button>
-    </div>
-  </div>
+  <div class="block2">COLLECTIONS ▼</div>
 
   <!-- Первый блок с изображением 1 -->
   <div class="image-block">
@@ -232,20 +201,5 @@
     <div class="divider"></div>
   </div>
 
-  
-  <script>
-    const collectionBtn = document.getElementById('collection-btn');
-    const collectionDropdown = document.getElementById('collection-dropdown');
-
-    collectionBtn.addEventListener('click', () => {
-      collectionDropdown.style.display = collectionDropdown.style.display === 'flex' ? 'none' : 'flex';
-    });
-
-    window.addEventListener('load', () => {
-      collectionDropdown.style.display = 'none';
-    });
-  </script>
 </body>
 </html>
-
-
