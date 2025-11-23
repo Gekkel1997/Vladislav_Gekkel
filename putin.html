@@ -112,134 +112,137 @@
   </div>
 
   <script>
-    const collectionBtn = document.getElementById('collection-btn');
-    const collectionDropdown = document.getElementById('collection-dropdown');
+const collectionBtn = document.getElementById('collection-btn');
+const collectionDropdown = document.getElementById('collection-dropdown');
 
-    collectionBtn.addEventListener('click', () => {
-      collectionDropdown.style.display = collectionDropdown.style.display === 'flex' ? 'none' : 'flex';
-    });
+collectionBtn.addEventListener('click', () => {
+  collectionDropdown.style.display = collectionDropdown.style.display === 'flex' ? 'none' : 'flex';
+});
 
-    window.addEventListener('load', () => {
-      collectionDropdown.style.display = 'none';
-    });
+window.addEventListener('load', () => {
+  collectionDropdown.style.display = 'none';
+});
 
-    if(window.innerWidth <= 768){
-      collectionBtn.style.color = '#000';
-      Array.from(collectionDropdown.getElementsByTagName('button')).forEach(btn => btn.style.color = '#000');
-    }
+if(window.innerWidth <= 768){
+  collectionBtn.style.color = '#000';
+  Array.from(collectionDropdown.getElementsByTagName('button')).forEach(btn => btn.style.color = '#000');
+}
 
+// Генерируем vvImages (массив для модалки)
+const vvImages = Array.from({length:22}, (_, i) => {
+  switch(i){
+    case 0: return {src: `images/VV1.webp`, label: `В.В.ПУТИН №1\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2024г.\nСтекло 21 х 30\n\n11 1952₽`};
+    case 1: return {src: `images/VV2.webp`, label: `В.В.ПУТИН №2\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 2: return {src: `images/VV3.webp`, label: `В.В.ПУТИН №3\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 3: return {src: `images/VV4.webp`, label: `В.В.ПУТИН №4\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 4: return {src: `images/VV5.webp`, label: `А.Г.ЛУКАШЕНКО №5\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1954₽`};
+    case 5: return {src: `images/VV6.webp`, label: `В.В.ПУТИН №6\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 6: return {src: `images/VV7.webp`, label: `В.В.ПУТИН №7\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 7: return {src: `images/VV8.webp`, label: `В.В.ПУТИН №8\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 8: return {src: `images/VV9.webp`, label: `В.В.ПУТИН №9\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 9: return {src: `images/VV10.webp`, label: `В.В.ПУТИН №10\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 10: return {src: `images/VV11.webp`, label: `СИ ЦЗИНЬПИН №11\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1953₽`};
+    case 11: return {src: `images/VV12.webp`, label: `В.В.ПУТИН №12\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 12: return {src: `images/VV13.webp`, label: `В.В.ПУТИН №13\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 13: return {src: `images/VV14.webp`, label: `В.В.ПУТИН №14\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 14: return {src: `images/VV15.webp`, label: `В.В.ПУТИН №15\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1952₽`};
+    case 15: return {src: `images/VV16.webp`, label: `В.В.ПУТИН №16\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 16: return {src: `images/VV17.webp`, label: `В.В.ПУТИН №17\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 17: return {src: `images/VV18.webp`, label: `В.В.ЖИРИНОВСКИЙ №18\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1946₽`};
+    case 18: return {src: `images/VV19.webp`, label: `В.В.ПУТИН №19\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 19: return {src: `images/VV20.webp`, label: `В.В.ПУТИН №20\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    case 20: return {src: `images/VV21.webp`, label: `Е.В.ПРИГОЖИН №21\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1961₽`};
+    case 21: return {src: `images/VV22.webp`, label: `В.В.ПУТИН №22\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
+    default: return {src: `images/VV${i+1}.webp`, label: `VV${i+1}`};
+  }
+});
 
-    const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
-    const vvImages = Array.from({length:22}, (_, i) => {
-      if(i===0) return {src: `images/VV1.webp`, label: `В.В.ПУТИН №1\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2024г.\nСтекло 21 х 30\n\n11 1952₽`};
-      if(i===1) return {src: `images/VV2.webp`, label: `В.В.ПУТИН №2\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===2) return {src: `images/VV3.webp`, label: `В.В.ПУТИН №3\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===3) return {src: `images/VV4.webp`, label: `В.В.ПУТИН №4\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===4) return {src: `images/VV5.webp`, label: `А.Г.ЛУКАШЕНКО №5\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1954₽`};
-      if(i===5) return {src: `images/VV6.webp`, label: `В.В.ПУТИН №6\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===6) return {src: `images/VV7.webp`, label: `В.В.ПУТИН №7\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===7) return {src: `images/VV8.webp`, label: `В.В.ПУТИН №8\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===8) return {src: `images/VV9.webp`, label: `В.В.ПУТИН №9\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===9) return {src: `images/VV10.webp`, label: `В.В.ПУТИН №10\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===10) return {src: `images/VV11.webp`, label: `СИ ЦЗИНЬПИН №11\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1953₽`};
-      if(i===11) return {src: `images/VV12.webp`, label: `В.В.ПУТИН №12\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===12) return {src: `images/VV13.webp`, label: `В.В.ПУТИН №13\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===13) return {src: `images/VV14.webp`, label: `В.В.ПУТИН №14\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===14) return {src: `images/VV15.webp`, label: `В.В.ПУТИН №15\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1952₽`};
-      if(i===15) return {src: `images/VV16.webp`, label: `В.В.ПУТИН №16\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===16) return {src: `images/VV17.webp`, label: `В.В.ПУТИН №17\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===17) return {src: `images/VV18.webp`, label: `В.В.ЖИРИНОВСКИЙ №18\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1946₽`};
-      if(i===18) return {src: `images/VV19.webp`, label: `В.В.ПУТИН №19\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===19) return {src: `images/VV20.webp`, label: `В.В.ПУТИН №20\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      if(i===20) return {src: `images/VV21.webp`, label: `Е.В.ПРИГОЖИН №21\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n1 1961₽`};
-      if(i===21) return {src: `images/VV22.webp`, label: `В.В.ПУТИН №22\n\nКОЛЛЕКЦИЯ 1-100\nРОССИЯ, АКРИЛ, 2025г.\nСтекло 21 х 30\n\n5000₽`};
-      
-      return {src: `images/VV${i+1}.webp`, label: `VV${i+1}`};
-    });
+const row = document.getElementById('images-row');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const captionText = document.getElementById('modal-caption');
+const closeBtn = document.querySelector('.close');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+let currentIndex = 0;
 
-    const row = document.getElementById('images-row');
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modal-img');
-    const captionText = document.getElementById('modal-caption');
-    const closeBtn = document.querySelector('.close');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    let currentIndex = 0;
+function disableScroll() { document.body.classList.add('modal-open'); }
+function enableScroll() { document.body.classList.remove('modal-open'); }
 
-    function disableScroll() { document.body.classList.add('modal-open'); }
-    function enableScroll() { document.body.classList.remove('modal-open'); }
+function closeModal() {
+  modal.classList.remove('show');
+  setTimeout(()=>{ modal.style.display='none'; enableScroll(); },300);
+  localStorage.setItem('modalOpen','false');
+}
 
-    function closeModal() {
-      modal.classList.remove('show');
-      setTimeout(()=>{ modal.style.display='none'; enableScroll(); },300);
-      localStorage.setItem('modalOpen','false');
-    }
+closeBtn.onclick = () => closeModal();
+modal.onclick = e => { if(e.target === modal) closeModal(); };
 
-    closeBtn.onclick = () => closeModal();
-    modal.onclick = e => { if(window.innerWidth <= 768 && e.target === modal) closeModal(); };
+function preloadAdjacent(index) {
+  [index-1,index+1].forEach(i=>{ if(vvImages[i]){ const img=new Image(); img.src=vvImages[i].src; } });
+}
 
-    function preloadAdjacent(index) {
-      [index-1,index+1].forEach(i=>{ if(vvImages[i]){ const img=new Image(); img.src=vvImages[i].src; } });
-    }
+function showModal(index){
+  currentIndex = index;
+  modal.style.display = 'flex';
+  modalImg.style.opacity = '0';
+  requestAnimationFrame(()=>{
+    modal.classList.add('show');
+    modalImg.src = vvImages[currentIndex].src;
+    captionText.innerHTML = vvImages[currentIndex].label;
+    modalImg.onload = () => { modalImg.style.opacity='1'; };
+  });
+  disableScroll();
+  localStorage.setItem('modalOpen','true');
+  localStorage.setItem('modalIndex', String(currentIndex));
+  preloadAdjacent(currentIndex);
+}
 
-    function showModal(index){
-      currentIndex=index;
-      modal.style.display='flex';
-      modalImg.style.opacity='0';
-      requestAnimationFrame(()=>{
-        modal.classList.add('show');
-        modalImg.src=vvImages[currentIndex].src;
-        captionText.innerHTML=vvImages[currentIndex].label;
-        modalImg.onload = ()=>{ modalImg.style.opacity='1'; };
-      });
-      disableScroll();
-      localStorage.setItem('modalOpen','true');
-      localStorage.setItem('modalIndex',String(currentIndex));
-      preloadAdjacent(currentIndex);
-    }
+prevBtn.onclick = e => { e.stopPropagation(); showModal((currentIndex - 1 + vvImages.length) % vvImages.length); };
+nextBtn.onclick = e => { e.stopPropagation(); showModal((currentIndex + 1) % vvImages.length); };
 
-    prevBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex-1+vvImages.length)%vvImages.length; showModal(currentIndex); };
-    nextBtn.onclick=e=>{ e.stopPropagation(); currentIndex=(currentIndex+1)%vvImages.length; showModal(currentIndex); };
+// Рендер изображений
+vvImages.forEach((imgData,i)=>{
+  const container = document.createElement('div');
+  container.className = 'image-container';
+  const placeholder = document.createElement('div');
+  placeholder.className = 'loading-placeholder';
+  container.appendChild(placeholder);
+  const image = document.createElement('img');
+  image.alt = imgData.label;
+  image.loading = 'lazy';
+  image.src = imgData.src;
+  container.appendChild(image);
+  const label = document.createElement('div');
+  label.className = 'image-label';
+  label.textContent = imgData.label;
+  container.appendChild(label);
+  container.onclick = () => showModal(i);
+  image.onload = () => { image.style.opacity='1'; placeholder.style.display='none'; };
+  row.appendChild(container);
+});
 
-    images.forEach((imgData,i)=>{
-      const container=document.createElement('div');
-      container.className='image-container';
-      const placeholder=document.createElement('div');
-      placeholder.className='loading-placeholder';
-      container.appendChild(placeholder);
-      const image=document.createElement('img');
-      image.alt=imgData.label;
-      image.loading='lazy';
-      container.appendChild(image);
-      container.onclick=()=>showModal(i);
-      image.onload=()=>{ image.style.opacity='1'; placeholder.style.display='none'; };
-      image.src=imgData.src;
-      const label=document.createElement('div');
-      label.className='image-label';
-      label.textContent=imgData.label;
-      container.appendChild(label);
-      row.appendChild(container);
-    });
+// Восстановление состояния модалки при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+  const savedModalIndex = parseInt(localStorage.getItem('modalIndex'), 10);
+  const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
+  if(savedModalOpen && !isNaN(savedModalIndex) && savedModalIndex>=0 && savedModalIndex<vvImages.length){
+    setTimeout(()=>showModal(savedModalIndex), 50);
+  }
+});
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedModalIndex = parseInt(localStorage.getItem('modalIndex'), 10);
-      const savedModalOpen = localStorage.getItem('modalOpen') === 'true';
-      if(savedModalOpen && !isNaN(savedModalIndex) && savedModalIndex>=0 && savedModalIndex<vvImages.length){
-        if(window.innerWidth <= 768){
-          setTimeout(()=>showModal(savedModalIndex), 50);
-        }
-      }
-    });
-
-    let touchStartX=0, touchCurrentX=0, isSwiping=false;
-    modal.addEventListener('touchstart', e=>{ if(window.innerWidth>768) return; touchStartX=e.changedTouches[0].clientX; isSwiping=true; });
-    modal.addEventListener('touchmove', e=>{ if(!isSwiping||window.innerWidth>768) return; touchCurrentX=e.changedTouches[0].clientX; });
-    modal.addEventListener('touchend', e=>{ if(!isSwiping||window.innerWidth>768) return; const diffX=e.changedTouches[0].clientX-touchStartX; if(Math.abs(diffX)>window.innerWidth*0.2){ currentIndex=diffX<0?(currentIndex+1)%vvImages.length:(currentIndex-1+vvImages.length)%vvImages.length; showModal(currentIndex); } isSwiping=false; });
-  </script>
-</body>
-</html>
-
-
-
-
+// Свайп для мобильных
+let touchStartX=0, isSwiping=false;
+modal.addEventListener('touchstart', e => { if(window.innerWidth>768) return; touchStartX=e.changedTouches[0].clientX; isSwiping=true; });
+modal.addEventListener('touchmove', e => { if(!isSwiping||window.innerWidth>768) return; e.preventDefault(); });
+modal.addEventListener('touchend', e => {
+  if(!isSwiping||window.innerWidth>768) return;
+  const diffX = e.changedTouches[0].clientX - touchStartX;
+  if(Math.abs(diffX) > window.innerWidth*0.2){
+    currentIndex = diffX < 0 ? (currentIndex + 1) % vvImages.length : (currentIndex - 1 + vvImages.length) % vvImages.length;
+    showModal(currentIndex);
+  }
+  isSwiping=false;
+});
+</script>
 
