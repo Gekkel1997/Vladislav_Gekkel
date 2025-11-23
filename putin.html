@@ -64,6 +64,14 @@
     .modal-text-wrapper { flex: 1 1 40%; color: #fff; }
     .modal-content img { max-height: 96vh; width: auto; max-width: 100%; margin: 0 auto; transition: opacity 0.3s ease; pointer-events: auto; }
 
+    @media (max-width: 768px) {
+  .modal-content img {
+    max-width: 80%; /* уменьшает ширину изображения на телефоне */
+    height: auto;    /* сохраняет пропорции */
+  }
+}
+
+
     .close { position: absolute; top: 2vw; right: 2vw; color: #fff; font-size: 2rem; cursor: pointer; pointer-events: auto; }
 
     @media (max-width: 768px) {
@@ -238,6 +246,7 @@
   </script>
 </body>
 </html>
+
 
 
 
