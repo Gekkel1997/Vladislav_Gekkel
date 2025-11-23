@@ -30,6 +30,8 @@
     .block2 button:hover { text-decoration: underline; }
     @media (max-width: 768px) { .block2 button { font-size: 1.5vh; color: #000; }
       .dropdown button { font-size: 1.5vh; }
+      .putin-btn { font-size: 1.5vh !important; }
+      .dropdown button { font-size: 1.5vh; }
     }
 
     .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border-top: 1px solid #000; border-left: none; border-right: none; border-bottom: 1px solid #000; z-index: 100; width: 100%; height: calc(2vh + 4vh); display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
@@ -73,7 +75,7 @@
 
     <div class="block2" id="collection-block">
     <button id="collection-btn">COLLECTIONS ▼</button>
-    <button style="margin-left:1vw; font-size:2vh; text-transform:none;" onclick="window.location.href='putin.html'">Коллекция 1-100 «В.В.ПУТИН»</button>
+    <button class="putin-btn" style="margin-left:1vw; font-size:2vh; text-transform:none;" onclick="window.location.href='putin.html'">Коллекция 1-100 «В.В.ПУТИН»</button>
     <div class="dropdown" id="collection-dropdown">
       <button onclick="window.location.href='dobrym.html'">ДОБРЫМ БЫТЬ НЕ СТЫДНО</button>
       <button onclick="window.location.href='putin.html'">Коллекция 1-100 «В.В.ПУТИН»</button>
@@ -115,9 +117,6 @@
       collectionBtn.style.color = '#000';
       Array.from(collectionDropdown.getElementsByTagName('button')).forEach(btn => btn.style.color = '#000');
     }
-
-    // ... остальной твой JS код для изображений и модалки без изменений ... 
-
 
     const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
     const vvImages = Array.from({length:22}, (_, i) => {
@@ -228,5 +227,6 @@
   </script>
 </body>
 </html>
+
 
 
