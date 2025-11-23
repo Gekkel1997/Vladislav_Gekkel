@@ -28,20 +28,15 @@
     .block2 { position: relative; width: 100%; display: flex; align-items: center; justify-content: flex-start; padding: 2vh 3vw; border-bottom: 1px solid #000; border-top: none; text-transform: uppercase; margin-top: 10vh; }
     .block2 button { font-size: 2vh; background: none; border: none; font: inherit; cursor: pointer; text-transform: uppercase; color: #000; }
     .block2 button:hover { text-decoration: underline; }
-    @media (max-width: 768px) { .block2 button { font-size: 1.5vh; color: #000; }
-      .dropdown { flex-direction: column; align-items: flex-start; height: auto; padding: 1vh 3vw; }
-      .dropdown button { width: 100%; text-align: left; padding: 0.5vh 0; font-size: 1.5vh; }
-      .putin-btn { font-size: 1.5vh !important; }
-      .dropdown button { font-size: 1.5vh; }
-    }
-
-    .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border-top: 1px solid #000; border-left: none; border-right: none; border-bottom: 1px solid #000; z-index: 100; width: 100%; height: calc(2vh + 4vh); display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
-    .dropdown button { display: block; margin: 0; text-align: left; background: none; border: none; cursor: pointer; color: #000; }
 
     @media (max-width: 768px) {
-      .dropdown { flex-direction: column; align-items: flex-start; height: auto; padding: 1vh 3vw; }
-      .dropdown button { width: 100%; text-align: left; padding: 0.5vh 0; }
+      .block2 button { font-size: 1.5vh; color: #000; }
+      .dropdown { flex-direction: column; align-items: flex-start; height: auto; padding: 1vh 6vw; }
+      .dropdown button { width: 100%; text-align: left; padding: 0.5vh 0; font-size: 1.5vh; }
+      .putin-btn { font-size: 1.5vh !important; }
     }
+
+    .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border-top: 1px solid #000; border-left: none; border-right: none; border-bottom: 1px solid #000; z-index: 100; width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
     .dropdown button { display: block; margin: 0; text-align: left; background: none; border: none; cursor: pointer; color: #000; }
 
     .images-row { display: flex; flex-wrap: wrap; margin: 0; padding: 0; }
@@ -53,17 +48,12 @@
     .loading-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background-color: #000; border-radius: 50%; animation: pulse 1s infinite; z-index: 1; }
     @keyframes pulse { 0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; } 100% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; } }
 
-    @media (max-width: 768px) { .image-container { width: calc(100% / 3); } .image-container img { aspect-ratio: 1 / 1; object-fit: contain; } }
-
     .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.96); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; overflow-y: auto; }
     .modal.show { display: flex; opacity: 1; }
     .modal-content { position: relative; width: 90%; max-width: 1200px; text-align: left; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 2vw; padding: 0 2vw; box-sizing: border-box; pointer-events: none; max-height: 100vh; overflow-y: auto; }
     .modal-image-wrapper { flex: 1 1 60%; display: flex; justify-content: center; align-items: center; }
     .modal-text-wrapper { flex: 1 1 40%; color: #fff; }
     .modal-content img { max-height: 96vh; width: auto; max-width: 100%; margin: 0 auto; transition: opacity 0.3s ease; pointer-events: auto; }
-    @media (max-width: 768px) { .modal-content { flex-direction: column; width: 100%; max-width: 100%; padding: 7vw; margin-top: 6vh; justify-content: flex-start; text-align: center; }
-      .modal-image-wrapper, .modal-text-wrapper { flex: 0 0 auto; width: 100%; }
-    }
 
     .close { position: absolute; top: 2vw; right: 2vw; color: #fff; font-size: 2rem; cursor: pointer; pointer-events: auto; }
     .caption { color: #fff; margin-top: 1vh; white-space: pre-line; text-align: center; font-size: 3vh; }
@@ -77,12 +67,12 @@
   <div class="header">
     <div class="header-text"><button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></button></div>
     <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
-    <div class="info-text"><button onclick="window.location.href='info.html'">INFO</button></div>
+    <div class="info-text"><button onclick="window.location.href='index.html#bottom'">INFO</button></div>
   </div>
 
-    <div class="block2" id="collection-block">
+  <div class="block2" id="collection-block">
     <button id="collection-btn">COLLECTIONS ▼</button>
-    <button class="putin-btn" style="margin-left:1vw; font-size:2.5vh; text-transform:none;" onclick="window.location.href='putin.html'">КОЛЛЕКЦИЯ 1-100 «В.В.ПУТИН»</button>
+    <button class="putin-btn" style="margin-left:1vw; font-size:2.5vh; text-transform:none;" onclick="window.location.href='putin.html'">Коллекция 1-100 «В.В.ПУТИН»</button>
     <div class="dropdown" id="collection-dropdown">
       <button onclick="window.location.href='dobrym.html'">ДОБРЫМ БЫТЬ НЕ СТЫДНО</button>
       <button onclick="window.location.href='putin.html'">Коллекция 1-100 «В.В.ПУТИН»</button>
@@ -114,16 +104,15 @@
       collectionDropdown.style.display = collectionDropdown.style.display === 'flex' ? 'none' : 'flex';
     });
 
-    // Закрываем dropdown при загрузке и обновлении страницы
     window.addEventListener('load', () => {
       collectionDropdown.style.display = 'none';
     });
 
-    // Меняем цвет кнопок на черный для телефона
     if(window.innerWidth <= 768){
       collectionBtn.style.color = '#000';
       Array.from(collectionDropdown.getElementsByTagName('button')).forEach(btn => btn.style.color = '#000');
     }
+
 
     const images = Array.from({length:22}, (_, i) => ({src: `images/VP${i+1}.webp`, label: `ВВП - ${i+1}`}));
     const vvImages = Array.from({length:22}, (_, i) => {
@@ -234,6 +223,7 @@
   </script>
 </body>
 </html>
+
 
 
 
