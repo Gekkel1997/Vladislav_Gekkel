@@ -41,6 +41,13 @@
     .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border-top: 1px solid #000; border-bottom: 1px solid #000; z-index: 100; width: 100%; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
     .dropdown button { display: block; margin: 0; text-align: left; background: none; border: none; cursor: pointer; color: #000; }
 
+
+    .block-6, .block-7 { width: 100%; background-color: transparent; border-top: 1px solid #000; margin-top: auto; padding: 1vh 0; }
+    .block-6-buttons, .block-7-buttons { display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; }
+    .block-6-buttons button, .block-7-buttons button { background: none; border: none; font: Arial, sans-serif; font-size: 1.2vh; cursor: pointer; text-align: center; color: #000; }
+    .block-7-text { text-align: center; font-family: Arial, sans-serif; font-size: 1.2vh; color: #000; }
+
+
   </style>
 </head>
 <body>
@@ -59,6 +66,22 @@
       <button onclick="window.location.href='holst.html'">ХОЛСТ И ДОРОГА ПУТНИКА..</button>
     </div>
   </div>
+
+    <div class="block-6">
+    <div class="block-6-buttons">
+      <button>Часто задаваемые вопросы</button>
+      <button>Политика доставки</button>
+      <button>Политика возврата</button>
+      <button>Контакт</button>
+      <button>Политика конфиденциальности</button>
+      <button>Условия обслуживания</button>
+    </div>
+  </div>
+
+  <div class="block-7">
+    <div class="block-7-text">© 2025 Владислав Геккель. Все права защищены.</div>
+  </div>
+
 
   <script>
     const collectionBtn = document.getElementById('collection-btn');
