@@ -7,7 +7,6 @@
   <link rel="icon" type="image/png" href="https://i.postimg.cc/P57BSL6r/IMG-4274-1.png">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
-
   <style>
     html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
     * { box-sizing: border-box; }
@@ -24,7 +23,6 @@
     .subheader button, .info-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
     .subheader button:hover, .info-text button:hover { text-decoration: underline; }
     .info-text { right: 3vw; text-align: right; }
-    .info-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
     .info-text button:hover { text-decoration: underline; }
 
     .block2 { position: relative; width: 100%; display: flex; align-items: center; padding: 2vh 3vw; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
@@ -41,12 +39,15 @@
     .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border-top: 1px solid #000; border-bottom: 1px solid #000; z-index: 100; width: 100%; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
     .dropdown button { display: block; margin: 0; text-align: left; background: none; border: none; cursor: pointer; color: #000; }
 
+    .new-block { width: 100%; height: 70vh; display: flex; }
+    .new-block > div { flex: 1; font-size: 2vh; color: #000; position: relative; }
+    .new-block .left { background-color: #f2f2f2; border-right: 1px solid #000; padding: 2vh 2vw; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+    .new-block .right { background-color: #e0e0e0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 2vh 2vw; }
 
     .block-6, .block-7 { width: 100%; background-color: transparent; border-top: 1px solid #000; margin-top: auto; padding: 1vh 0; }
     .block-6-buttons, .block-7-buttons { display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; }
     .block-6-buttons button, .block-7-buttons button { background: none; border: none; font: Arial, sans-serif; font-size: 1.2vh; cursor: pointer; text-align: center; color: #000; }
     .block-7-text { text-align: center; font-family: Arial, sans-serif; font-size: 1.2vh; color: #000; }
-
 
   </style>
 </head>
@@ -67,7 +68,16 @@
     </div>
   </div>
 
-    <div class="block-6">
+  <div class="new-block">
+    <div class="left">ПОЛИТИКА ДОСТАВКИ</div>
+    <div class="right">
+      Стоимость доставки<br>
+      Мы отправляем международные заказы с помощью DHL Express, а заказы из Австралии и Новой Зеландии — с помощью Auspost Express (за исключением оригинальных произведений искусства, которые отправляются исключительно с помощью DHL Express). Стоимость доставки не включает таможенные пошлины и сборы и оплачивается покупателем, если не указано иное. Стоимость доставки, а также импортные налоги и сборы оплачиваются Werner Bronkhorst только для оригинальных произведений искусства.<br><br>
+      Стоимость доставки смотрите в описании товара.
+    </div>
+  </div>
+
+  <div class="block-6">
     <div class="block-6-buttons">
       <button>Часто задаваемые вопросы</button>
       <button>Политика доставки</button>
@@ -81,7 +91,6 @@
   <div class="block-7">
     <div class="block-7-text">© 2025 Владислав Геккель. Все права защищены.</div>
   </div>
-
 
   <script>
     const collectionBtn = document.getElementById('collection-btn');
@@ -102,4 +111,3 @@
   </script>
 </body>
 </html>
-
