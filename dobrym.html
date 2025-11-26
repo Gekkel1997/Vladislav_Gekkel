@@ -246,19 +246,21 @@
 
 // выравнивания переходных страниц на конкретное изображение
   window.addEventListener('load', () => {
-    const hash = window.location.hash; // #G1.2, #G1.6, #1.13 или #G1.16
+    const hash = window.location.hash; // #g1, #g2, #g3, #g4
     if (hash) {
       const el = document.querySelector(hash);
       if (el) {
-        el.scrollIntoView({
-          behavior: 'instant',   // можно 'smooth' для плавной прокрутки
-          block: 'center',       // центр по вертикали
-          inline: 'center'       // центр по горизонтали (если нужно)
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const elementTop = el.getBoundingClientRect().top + window.pageYOffset;
+        const scrollPosition = elementTop - (window.innerHeight / 2) + (el.offsetHeight / 2) - headerHeight / 2;
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'instant' // можно 'smooth' для плавной прокрутки
         });
       }
     }
   });
-  </script>
+</script>
 </body>
 </html>
 
