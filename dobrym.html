@@ -58,8 +58,8 @@
       .image-block .image-container { position: relative; top: 0; }
     }
     
-    #G1.2, #G1.6, #G1.13, #G1.16 {
-  scroll-margin-top: 20vh; /* высота шапки */
+    #G2, #G6, #G13, #G16 {
+  scroll-margin-top: 10vh; /* высота шапки */
 }
 
     @media (max-width: 768px) {
@@ -114,7 +114,7 @@
   <div class="image-container">
     <img src="images/1.1.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 1">
     <div class="image-text">П.В.ДУ́РОВ<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30</div>
-    <div id="G1.2"></div>
+    <div id="G2"></div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
@@ -135,7 +135,7 @@
   <div class="image-container">
     <img src="images/1.5.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 5">
     <div class="image-text">Д.В.МИЛО́ХИН<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30</div>
-    <div id="G1.6"></div>
+    <div id="G6"></div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
@@ -171,7 +171,7 @@
   <div class="image-container">
     <img src="images/1.12.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 12">
     <div class="image-text">В.Р.ЦОЙ<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30</div>
-    <div id="G1.13"></div>
+    <div id="G13"></div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
@@ -187,7 +187,7 @@
   <div class="image-container">
     <img src="images/1.15.webp" alt="ДОБРЫМ БЫТЬ НЕ СТЫДНО 15">
     <div class="image-text">Ю.Н.ХОЙ<br><br>РОССИЯ, АКРИЛ, 2025г.<br>Стекло 21 х 30</div>
-    <div id="G1.16"></div>
+    <div id="G16"></div>
     <div class="divider"></div>
   </div>
   <div class="image-container">
@@ -248,24 +248,7 @@
       collectionBtn.style.color = '#000';
       Array.from(collectionDropdown.getElementsByTagName('button')).forEach(btn => btn.style.color = '#000');
     }
-
-// выравнивания переходных страниц на конкретное изображение
-  window.addEventListener('load', () => {
-    const hash = window.location.hash; // #g1, #g2, #g3, #g4
-    if (hash) {
-      const el = document.querySelector(hash);
-      if (el) {
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        const elementTop = el.getBoundingClientRect().top + window.pageYOffset;
-        const scrollPosition = elementTop - (window.innerHeight / 2) + (el.offsetHeight / 2) - headerHeight / 2;
-        window.scrollTo({
-          top: scrollPosition,
-          behavior: 'instant' // можно 'smooth' для плавной прокрутки
-        });
-      }
-    }
-  });
-</script>
+   </script>
 </body>
 </html>
 
