@@ -243,6 +243,21 @@
       collectionBtn.style.color = '#000';
       Array.from(collectionDropdown.getElementsByTagName('button')).forEach(btn => btn.style.color = '#000');
     }
+
+// выравнивания переходных страниц на конкретное изображение
+  window.addEventListener('load', () => {
+    const hash = window.location.hash; // #G1.2, #G1.6, #1.13 или #G1.16
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({
+          behavior: 'instant',   // можно 'smooth' для плавной прокрутки
+          block: 'center',       // центр по вертикали
+          inline: 'center'       // центр по горизонтали (если нужно)
+        });
+      }
+    }
+  });
   </script>
 </body>
 </html>
