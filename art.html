@@ -93,6 +93,18 @@
       .art-text { font-size: 1.4vh; margin-top: 0; padding-left: 5vw;}
       .block5 { border-bottom: 1px solid #000; padding-bottom: 2vh; }
     }
+
+      
+     .block-100, .block-101 { width: 100%; background-color: transparent; border-bottom: 1px solid #000; margin-top: 0; height: auto; padding: 1vh 0; }
+     .block-100-buttons, .block-101-buttons { display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; }
+     .block-100-buttons button, .block-101-buttons button { background: none; border: none; font: Arial, sans-serif; font-size: 2vh; cursor: pointer; text-align: center; color: #000; }
+     .block-101-text { text-align: center; font-family: Arial, sans-serif; font-size: 2vh; color: #000; }
+
+      @media (max-width: 600px) and (orientation: portrait) {
+      .block-100-buttons button, .block-101-buttons button { font-size: 1.2vh; font-family: Arial, sans-serif; color: #000; }
+      .block-101-text { font-size: 1.2vh; }
+
+    
   </style>
 </head>
 <body>
@@ -159,7 +171,23 @@
         <img src="images/3.7.webp" alt="Холст и дорога путника 3"><div class="art-text">EMOJI<br>РОССИЯ, АКРИЛ, 2024г.<br>Холст 40 х 40</div><div class="price5">30 000₽</div></div>
       
     </div>
+
+      <div class="block-100">
+    <div class="block-100-buttons">
+      <button><s>Часто задаваемые вопросы</s></button>
+      <button>Политика доставки</button>
+      <button><s>Политика возврата</s></button>
+      <button>Контакт</button>
+      <button><s>Политика конфиденциальности</s></button>
+      <button>Заказать работу</button>
+    </div>
   </div>
+
+  <div class="block-101">
+    <div class="block-101-text">© 2025 Владислав Геккель. Все права защищены.</div>
+  </div>
+  </div>
+  
 
   <script>
     const collectionBtn = document.getElementById('collection-btn');
@@ -180,6 +208,7 @@
   </script>
 </body>
 </html>
+
 
 
 
