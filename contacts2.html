@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>МРАМОРНЫЙ ГРАННИК</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/P57BSL6r/IMG-4274-1.png">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    html, body { margin: 0; padding: 0; background-color: #fff; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; width: 100%; max-width: 100%; font-family: 'Oswald', sans-serif; }
+    * { box-sizing: border-box; }
+
+    .header { position: fixed; top: 0; left: 0; width: 100vw; height: 10vh; display: flex; flex-direction: column; align-items: flex-start; background-color: #fff; border-bottom: 1px solid #000; z-index: 1000; }
+    .header-text { position: absolute; left: 3vw; top: 50%; transform: translateY(-50%); font-size: 1vh; font-weight: 700; line-height: 1.3; }
+    .header-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-align: left; }
+    .header-text button:hover { text-decoration: underline; }
+
+    @media (min-width: 1024px) { .header-text { font-size: 2vh; } }
+
+    .subheader, .info-text { position: absolute; top: 50%; transform: translateY(-50%); font-size: 3vh; }
+    .subheader { left: 50%; transform: translate(-50%, -50%); text-align: center; }
+    .subheader button, .info-text button { background: none; border: none; font: inherit; color: #000; cursor: pointer; text-decoration: none; }
+    .subheader button:hover, .info-text button:hover { text-decoration: underline; }
+    .info-text { right: 3vw; text-align: right; }
+    .info-text button:hover { text-decoration: underline; }
+
+    .block2 { position: relative; width: 100%; display: flex; align-items: center; padding: 2vh 3vw; border-bottom: 1px solid #000; text-transform: uppercase; margin-top: 10vh; }
+    .block2 button { font-size: 2vh; background: none; border: none; font: inherit; cursor: pointer; text-transform: uppercase; color: #000; }
+    .block2 button:hover { text-decoration: underline; }
+    
+    @media (max-width: 768px) {
+      .block2 button { font-size: 1.5vh; padding-left: 1.5vw; }
+      .dropdown { flex-direction: column; align-items: flex-start; height: auto; padding: 1vh 7vw; }
+      .dropdown button { width: 100%; text-align: left; padding: 0.4vh 5vw; font-size: 1.5vh; }
+      .putin-btn { font-size: 1.5vh !important; }
+    }
+
+    .dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; border-top: 1px solid #000; border-bottom: 1px solid #000; z-index: 100; width: 100%; align-items: center; justify-content: flex-start; gap: 1vw; padding: 0 1vw; }
+    .dropdown button { display: block; margin: 0; text-align: left; background: none; border: none; cursor: pointer; color: #000; }
+
+    .new-block { width: 100%; height: auto;; display: flex; border-bottom: 1px solid #000; }
+    .new-block > div { flex: 0 0 50%; font-size: 2vh; color: #000; position: relative; }
+    .left-title { font-family: Arial, sans-serif; font-size: 2.7vh; text-transform: uppercase; cursor: default;}
+    .new-block .left { font-family: Arial, sans-serif; border-right: 1px solid #000; padding: 2vh 3.5vw; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+    .new-block .right { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 2vh 2vw; font-size: 2.2vh; }
+
+    .block-6, .block-7 { width: 100%; background-color: transparent; border-bottom: 1px solid #000; margin-top: 0; height: auto; padding: 1vh 0; }
+    .block-6-buttons, .block-7-buttons { display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; }
+    .block-6-buttons button, .block-7-buttons button { background: none; border: none; font: Arial, sans-serif; font-size: 2vh; cursor: pointer; text-align: center; color: #000; }
+    .block-7-text { text-align: center; font-family: Arial, sans-serif; font-size: 2vh; color: #000; }
+
+      @media (max-width: 600px) and (orientation: portrait) {
+      .block-6-buttons button, .block-7-buttons button { font-size: 1.3vh; font-family: Arial, sans-serif; color: #000; }
+      .block-7-text { font-size: 1.3vh; }
+      .new-block { flex-direction: column; }
+      .new-block .left { border-right: none; border-bottom: 1px solid #000; width: 100%; }
+      .new-block .right { width: 100%; padding-left: 5vw; font-size: 1.8vh; }
+      .block-7-text { font-size: 1.2vh; }
+      .left-title { font-size: 1.8vh; padding-left: 1.4vw;}
+     }
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-text"><button onclick="window.location.href='index.html'"><strong>Gekkel<br>Vladislav<br>Aleksandrovich</strong></button></div>
+    <div class="subheader"><button onclick="window.location.href='art.html'">ART</button></div>
+    <div class="info-text"><button onclick="window.location.href='index.html#bottom'">INFO</button></div>
+  </div>
+
+  <div class="block2" id="collection-block">
+    <button id="collection-btn">INFO ▼</button>
+    <button class="putin-btn" style="margin-left:1vw; font-size:2.5vh; text-transform:none;" onclick="window.location.href='zakaz3.html'">ЗАКАЗАТЬ РАБОТУ</button>
+    <div class="dropdown" id="collection-dropdown">
+      <button><s>Часто задаваемые вопросы.</s></button>
+      <button onclick="window.location.href='dostavka1.html'">Политика доставки.</button>
+      <button><s>Политика возврата.</s></button>
+      <button onclick="window.location.href='holst.html'">Контакт.</button>
+      <button><s>Политика конфиденциальности.</s></button>
+      <button onclick="window.location.href='zakaz3.html'">Заказать работу.</button>
+    </div>
+  </div>
+
+  <div class="new-block">
+    <div class="left"><span class="left-title">ЗАКАЗАТЬ РАБОТУ</span></div>
+    <div class="right">
+
+      <strong>Стоимость обговаривается в момент заказа и зависит от сложности работы.</strong><br> 
+      <strong>Приблизительная цена:</strong><br>
+      55,5 см - от 55.000₽<br><br>
+      66,6 см - от 76.000₽<br><br>
+      77,7 см - от 97.000₽<br><br>
+      88,8 см - от 118.000₽<br><br>
+      <strong>🚚 + ДОСТАВКА</strong>
+      <br>
+      <i>*предоплата 50%</i>
+      <i>*работы не исправляются</i>
+      <i>*полная анонимность заказчика</i><br>
+
+      <strong>Способы оплаты</strong><br>
+      Банковские карты<br>
+      Система быстрых платежей (СБП)<br>
+      Банковским переводом
+    </div>
+  </div>
+
+  <div class="block-6">
+    <div class="block-6-buttons">
+      <button><s>Часто задаваемые вопросы</s></button>
+      <button onclick="window.location.href='dostavka1.html'">Политика доставки</button>
+      <button><s>Политика возврата</s></button>
+      <button>Контакт</button>
+      <button><s>Политика конфиденциальности</s></button>
+      <button onclick="window.location.href='zakaz3.html'">Заказать работу</button>
+    </div>
+  </div>
+
+  <div class="block-7">
+    <div class="block-7-text">© 2025 Владислав Геккель. Все права защищены.</div>
+  </div>
+
+  <script>
+    const collectionBtn = document.getElementById('collection-btn');
+    const collectionDropdown = document.getElementById('collection-dropdown');
+
+    collectionBtn.addEventListener('click', () => {
+      collectionDropdown.style.display = collectionDropdown.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    window.addEventListener('load', () => {
+      collectionDropdown.style.display = 'none';
+    });
+
+    if(window.innerWidth <= 768){
+      collectionBtn.style.color = '#000';
+      Array.from(collectionDropdown.getElementsByTagName('button')).forEach(btn => btn.style.color = '#000');
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
